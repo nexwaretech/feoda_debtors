@@ -1,0 +1,46 @@
+<manifest projecttype="ACCOUNTCUSTOMIZATION">
+  <projectname>nexware_feoda</projectname>
+  <frameworkversion>1.0</frameworkversion>
+  <dependencies>
+    <features>
+      <feature required="true">SERVERSIDESCRIPTING</feature>
+      <feature required="false">CRM</feature>
+      <feature required="false">CREATESUITEBUNDLES</feature>
+      <feature required="false">MULTILANGUAGE</feature>
+      <feature required="false">EXPREPORTS</feature>
+      <feature required="false">ADVRECEIVING</feature>
+      <feature required="false">MULTILOCINVT</feature>
+      <feature required="false">INVENTORY</feature>
+      <feature required="false">EXTREMELIST</feature>
+      <feature required="false">MAILMERGE</feature>
+      <feature required="true">CUSTOMRECORDS</feature>
+      <feature required="false">PAYABLES</feature>
+      <feature required="false">WEBSERVICES</feature>
+      <feature required="true">ADVANCEDPRINTING</feature>
+      <feature required="true">CLASSES</feature>
+      <feature required="true">LOCATIONS</feature>
+      <feature required="true">ACCOUNTINGPERIODS</feature>
+      <feature required="true">DEPARTMENTS</feature>
+      <feature required="true">ACCOUNTING</feature>
+      <feature required="true">WORKFLOW</feature>
+      <feature required="true">ITEMOPTIONS</feature>
+      <feature required="true">BILLINGWORKCENTER</feature>
+      <feature required="true">MULTPRICE</feature>
+      <feature required="true">SUBSIDIARIES</feature>
+      <feature required="true">OPPORTUNITIES</feature>
+      <feature required="true">JOBS</feature>
+      <feature required="true">RECEIVABLES</feature>
+      <feature required="true">UNITSOFMEASURE</feature>
+      <feature required="true">ADVSHIPPING</feature>
+      <feature required="true">CUSTOMTRANSACTIONS</feature>
+      <feature required="true">GROSSPROFIT</feature>
+      <feature required="true">GLAUDITNUMBERING</feature>
+      <feature required="true">BUSINESS</feature>
+      <feature required="true">SALESORDERS</feature>
+      <feature required="true">MULTICURRENCY</feature>
+    </features>
+    <objects>
+      <object>custform_xw_statement_scripted</object>
+    </objects>
+  </dependencies>
+</manifest>

@@ -1,0 +1,24 @@
+<customlist scriptid="customlist_xw_filevalues">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>File Values</name>
+  <customvalues>
+    <customvalue scriptid="val_48061_4553194_773">
+      <isinactive>F</isinactive>
+      <value>Processed</value>
+    </customvalue>
+    <customvalue scriptid="val_48062_4553194_262">
+      <isinactive>F</isinactive>
+      <value>Not Processed</value>
+    </customvalue>
+    <customvalue scriptid="val_48063_4553194_418">
+      <isinactive>F</isinactive>
+      <value>Processing</value>
+    </customvalue>
+    <customvalue scriptid="val_323519_4553194_sb1_244">
+      <isinactive>F</isinactive>
+      <value>Cancelled</value>
+    </customvalue>
+  </customvalues>
+</customlist>

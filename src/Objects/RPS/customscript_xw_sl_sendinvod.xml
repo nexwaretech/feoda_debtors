@@ -1,0 +1,25 @@
+<suitelet scriptid="customscript_xw_sl_sendinvod">
+  <description></description>
+  <isinactive>F</isinactive>
+  <name>nexWare_SL | SendInvoiceEmailOnDemand</name>
+  <notifyadmins>F</notifyadmins>
+  <notifyemails></notifyemails>
+  <notifyowner>T</notifyowner>
+  <notifyuser>F</notifyuser>
+  <scriptfile>[/SuiteScripts/RPS/XW_SL_SendInvoiceEmailOnDemand.js]</scriptfile>
+  <scriptdeployments>
+    <scriptdeployment scriptid="customdeploy_xw_sl_sendinvod">
+      <allemployees>T</allemployees>
+      <allpartners>F</allpartners>
+      <allroles>T</allroles>
+      <audslctrole></audslctrole>
+      <eventtype></eventtype>
+      <isdeployed>T</isdeployed>
+      <isonline>F</isonline>
+      <loglevel>DEBUG</loglevel>
+      <runasrole>ADMINISTRATOR</runasrole>
+      <status>RELEASED</status>
+      <title>nexWare_SL | SendInvoiceEmailOnDemand</title>
+    </scriptdeployment>
+  </scriptdeployments>
+</suitelet>

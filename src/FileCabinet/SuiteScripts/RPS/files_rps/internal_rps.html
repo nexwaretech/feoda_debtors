@@ -1,0 +1,1301 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link href="${FILES.rpscss}" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" media="screen" href="${FILES.bootstrapdatetimepickermincss}">
+	<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript" src="${FILES.bootstrapdatetimepickerminjs}"></script>
+
+	<script>
+	$(document).ready(function(){
+	    $("div").remove(".uir-page-title-firstline");
+	    $("td").remove(".uir-header-buttons");
+	    
+	});
+	</script>
+</head>
+<style>
+	.bootstrap{
+		min-width: 1300px;
+	}
+	.btn-primary{
+		background-color: #8a1918 !important;	
+		border-color:  #8a1918 !important;
+	}
+	.bootstrap .pay-sched-tbl{
+	    border: 1px solid #ddd;
+	}
+	.bootstrap .pay-sched-tbl tr th{
+		background-color: #fff !important;
+		border: 0!important;
+		border-bottom: 3px solid #8a1918!important;
+		font-weight: 600;
+	}
+	.bootstrap .pay-sched-tbl tr th:last-child,
+	.bootstrap .pay-sched-tbl tr td:last-child{
+		text-align: right !important;
+	}
+	.table-container {
+	    height: 25em;
+	}
+	.bootstrap hr {
+	    margin-top: 4px;
+	    margin-bottom: 15px;
+	    border: 0;
+	    border-top: 2px solid #8a1918;
+	    width: 98%;
+	}
+	table.pay-sched-tbl {
+	    display: flex;
+	    flex-flow: column;
+	    height: 100%;
+	    width: 100%;
+	}
+	table.pay-sched-tbl thead {
+	    /* head takes the height it requires, 
+	    and it's not scaled when table is resized */
+	    flex: 0 0 auto;
+	    width: calc(100% - 0.9em);
+	}
+	table.pay-sched-tbl thead tr th{
+		border-bottom: 0 !important;
+	}
+	table.pay-sched-tbl tbody {
+	    /* body takes all the remaining available space */
+	    flex: 1 1 auto;
+	    display: block;
+	    overflow-y: scroll;
+	    border-top: 2px solid #8a1918;
+	}
+	table.pay-sched-tbl tbody tr {
+	    width: 100%;
+	}
+	table.pay-sched-tbl thead,
+	table.pay-sched-tbl tbody tr {
+	    display: table;
+	    table-layout: fixed;
+	}
+	.bootstrap .radio label::after{
+		background-color: #8a1918 !important;
+	}	
+	.bootstrap .checkbox label::after{
+		color: #8a1918 !important;
+	}	
+	.bootstrap .radio input[type="radio"]:checked + label::before,
+	.bootstrap .checkbox input[type="checkbox"]:checked + label::before
+	{
+		border-color: #8a1918 !important;
+	}
+	.bootstrap .btn-default{
+		background-color: #fff !important;
+	}
+</style>
+<body>
+<div id="rps" class="bootstrap">
+	<div class="panel panel-default">
+		<div class="panel-heading" style="background-color: #fff;border-bottom: 0px;">
+			<div class="row">
+				<div class="col-md-8">
+					<h3 style="font-weight: 600">Generate Recurring Payment Schedule</h3>
+				</div>
+				<div class="col-md-4" style="height: 60px;">
+					<div class="row">
+						<div class="col-md-6">
+							<br/><h6 style="font-weight: 600">${formdata.debtor}</h6>
+						</div>
+						<div class="col-md-6">
+							<br/><h6 style="font-weight: 600">${formdata.invoice}</h6>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel-heading" style="background-color: #fff;border-bottom: 0px;">  
+			<div class="row">
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-xs-3">
+							<div class="form-group" style="max-width: 180px;">
+								<h6 style="margin-bottom: 15px;font-weight: 600">Payment Schedule:</h6>
+								<!-- <select id="pay-method" name="pay-method" class="selectpicker form-control btn-group-xs input-group-xs" v-model="pay_method">
+									<option value=""></option>
+									<option v-for="option in method_to_pay" v-bind:value="option.id">
+									{{ option.text }}
+									</option>
+								</select> -->
+								<button class="btn btn-sm btn-block" type="button" style="margin-bottom: 15px;" v-bind:class="((pay_method == '1')?'btn-primary':'btn-default')"
+								v-on:click="pay_method='1'"> Credit Card </button>
+								<button class="btn btn-sm btn-block" type="button" v-bind:class="((pay_method == '2')?'btn-primary':'btn-default')" v-on:click="pay_method='2'"> Bank Account </button>
+							</div>
+						</div>
+						<div class="col-xs-9"   style="border-right: 2px solid #8a1918;border-left: 2px solid #8a1918;min-height: 130px;">
+							<div id = "credit-card-method" v-if="pay_method == '1'">
+								<div class="row" v-if="use_cc_dflt_opt">
+									<div class="col-md-12">
+										<div class="form-group">
+												<input type="checkbox" id="cc_exist" v-model="cc_exist">
+												<label for="cc_exist">Use existing credit card: <span> <strong>({{ (use_cc_dflt_opt)?use_cc_dflt_opt.cc_number:'' }})</strong></span></label>
+										</div>
+									</div>
+								</div>
+								<div class="row" v-if="!cc_exist">
+									<div class="col-md-2">
+										<div class="form-group">
+											<label class="control-label">Card type:</label>
+											<div class="row">
+											  <div class="col-xs-12">
+											  <input type="radio" name="card-type" id="card-type-master" value="4" style="margin-top: 17px;" v-model="cc_type">
+												    <label for="card-type-master" style="cursor: pointer;">
+												      <img src="${IMAGES['ccmastercardpng']}" style="display: inline-block;width: 100%;max-width: 55px;">
+												    </label>
+											  </div>
+											  <div class="col-xs-12">
+											    <input type="radio" name="card-type" id="card-type-visa" value="5" style="margin-top: 17px;" v-model="cc_type">
+											    <label for="card-type-visa" style="cursor: pointer;">
+											      <img src="${IMAGES['ccvisapng']}" style="display: inline-block;width: 100%;max-width: 55px;">
+											    </label>
+											  </div>
+											</div>										
+										</div>
+									</div>
+									<div class="col-md-5">
+										<div class="form-group">
+											<label class="control-label">Card Name:</label>
+											<input type="text" class="form-control input-xs" placeholder="Name on Card" v-model="cc_name" autocomplete="off" v-bind:required="(pay_method == '1')?true:false">
+										</div>
+										<div class="form-group">
+											<label class="control-label">Card No.:</label>
+											<input type="text" class="form-control input-xs" placeholder="Card Number" v-model="cc_no" autocomplete="off" v-on:keypress="isNumber(event, {count:18, value: cc_no})" v-bind:required="(pay_method == '1')?true:false">
+										</div>
+									</div>
+									<div class="col-md-5">
+										<div class="form-group" style="margin-bottom: 37px;">
+											<label class="control-label">Expiration:</label>
+											<div class="row">
+											  <div class="col-xs-4">
+												  <select class="form-control input-xs" v-model="cc_exp_month" v-bind:required="(pay_method == '1')?true:false">
+													<option value="">MM</option>
+													<option value="01">01</option>
+													<option value="02">02</option>
+													<option value="03">03</option>
+													<option value="04">04</option>
+													<option value="05">05</option>
+													<option value="06">06</option>
+													<option value="07">07</option>
+													<option value="08">08</option>
+													<option value="09">09</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+												  </select>
+											  </div>
+											  <div class="col-xs-5">
+												  <select class="form-control input-xs" v-model="cc_exp_year" v-bind:required="(pay_method == '1')?true:false">
+													<option value="">YYYY</option>
+													<option v-for="y in cc_years" v-bind:value="y">{{ y }}</option>
+												  </select>
+											  </div>
+											</div>
+										</div>
+										
+										<div class="form-group" v-if="!cc_exist">
+											<span style="font-size: 11px;font-style: italic;display: block;text-align: left;margin-bottom: 5px;margin-top: 5px;">New Credit Card will be set as default</span>
+										</div>
+										<!-- Removed CVV from fields -->
+										<!--  
+										<div class="form-group">
+											<label class="control-label">CVV:</label>
+											<input type="password" class="form-control input-xs" placeholder="CVV" autocomplete="off" v-model="cc_cvv" v-on:keypress="isNumber(event, {count:3, value: cc_cvv})" v-bind:required="(pay_method == '1')?true:false">
+										</div>
+										-->
+									</div>
+								</div>
+								<!--  
+								<div class="row" v-if="!cc_exist">
+									
+								</div>
+								-->
+							</div>
+							<div id = "eft-method" v-if="pay_method == '2'">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="control-label">Name:</label>
+											<input type="text" class="form-control input-xs" placeholder="Account Name" v-model="ba_name" autocomplete="off" v-bind:required="(pay_method == '2')?true:false">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="control-label">BSB No.:</label>
+											<input type="text" class="form-control input-xs" placeholder="BSB Number" autocomplete="off" v-model="ba_bsb_no" v-on:keydown.ctrl="checkPress(event)" v-on:keypress="isNumber(event, {count:5, value: ba_bsb_no})" v-bind:required="(pay_method == '2')?true:false">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="control-label">Account No.:</label>
+											<input type="text" class="form-control input-xs" placeholder="Account Number" autocomplete="off" v-model="ba_account" v-on:keydown.ctrl="checkPress(event)" v-on:keypress="isNumber(event, {count:8, value: ba_account})" v-bind:required="(pay_method == '2')?true:false">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div class="row">
+									<div class="col-md-1">
+										<label>Contact:</label>
+									</div>
+									<div class="col-md-3">
+										<select class="form-control input-xs" v-model="selected_contact">
+											<option value=""></option>
+											<option v-for="(value, key) in contacts" v-bind:value="key">{{ value }}</option>
+										</select>
+									</div>
+									<div class="col-md-3">
+										<p class="text-right"><label>Contribution %:</label></p>
+									</div>
+									<div class="col-md-3">
+										<vue-numeric v-model="contrib_percent" class="form-control input-xs" v-bind:max="100" autocomplete="off" v-bind:required="(pay_method == '1')?true:false" style="max-width:250px"></vue-numeric>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label>Invoice Amount</label>
+								<vue-numeric v-model="inv_amt" disabled="disabled" read-only="true" precision="2" separator=","  read-only-class="form-control input-xs num-input" style="max-width:150px"></vue-numeric>
+							</div>
+							<div class="form-group">
+								<label>Invoice Remaining</label>
+								<vue-numeric v-model="inv_rem" disabled="disabled" read-only="true" precision="2" separator=","  read-only-class="form-control input-xs num-input" style="max-width:150px"></vue-numeric>
+							</div>
+							<div class="form-group">
+								<label>Amount Payable</label>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label>Opening Balance</label>
+								<vue-numeric v-model="open_bal" disabled="disabled" read-only="true" precision="2" separator=","  read-only-class="form-control input-xs num-input" style="max-width:150px"></vue-numeric>
+							</div>
+							<div class="form-group">
+								<label>Current Balance</label>
+								<vue-numeric v-model="total_receivable" disabled="disabled" read-only="true" precision="2" separator=","  read-only-class="form-control input-xs num-input" style="max-width:150px"></vue-numeric>
+							</div>
+							<div class="form-group">
+								<vue-numeric v-model="remaining_amt" precision="2" separator=","  class="form-control input-xs num-input" style="max-width:150px"></vue-numeric>
+							</div>
+						</div>
+					</div>					
+				</div>
+			</div>
+		</div>
+		<hr/>
+		<div class="panel-body">
+			<div class="row">
+				<!-- OLD -->
+					<div class="col-xs-7" style="display: none;">
+						
+						<div class="form-group row">
+							<label class="col-xs-3" for="sched_start">Start Date:</label>
+							<div class="col-xs-4">
+								<input type="date" v-model="sched_start" class="form-control input-xs"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-3">
+								
+								<!--<div class="radio" style="margin-bottom: 15px;">
+								  <input type="radio" id="daily" name="mode" value="daily" v-model="mode">
+								  <label for="daily">Daily</label>
+								</div>-->
+								<div style="display: none;">
+									<div class="radio" style="margin-bottom: 15px;">
+										<input type="radio" id="weekly" name="mode" value="weekly"
+											v-model="mode"> <label for="weekly">Weekly</label>
+									</div>
+									<div class="radio" style="margin-bottom: 15px;">
+										<input type="radio" id="monthly" name="mode" value="monthly"
+											v-model="mode"> <label for="monthly">Monthly</label>
+									</div>
+								</div>
+								<div class="radio" v-for="option in pay_mode" style="margin-bottom: 15px;">
+									<input type="radio" v-bind:value="option" v-model="pay_sched" v-bind:id="'pay_mode-'+option.id"><label v-bind:for="'pay_mode-'+option.id">{{ option.text }}</label>
+								</div>
+							</div>
+							<div class="col-xs-9">
+								<div style="width: 100%;border: 1px solid #ddd;padding: 10px;">
+									<!-- WEEKLY  -->
+									<template v-if="mode === 'weekly'">
+										<!--<label style="display: block;margin-bottom: 10px;">
+											Recur every <input class="num-input form-control input-xs" style="display:inline-block;width:50px;" v-model="weekly_recurring" type="text"/> week(s) on:
+										</label>-->
+										<div class="row">
+										  <template v-for="day in days">
+										  		<div class="col-xs-6">
+													<div class="radio" style="margin-bottom: 15px;">
+														<input type="radio" v-bind:value="['weekly_'+day.toLowerCase()]" v-model="dayOnWeek" v-bind:id="'weekly_'+day.toLowerCase()"> 
+														<label v-bind:for="'weekly_'+day.toLowerCase()">{{ day }}</label>
+													</div>
+												</div>
+										  </template>
+										</div>
+									</template>
+									<!-- MONTHLY  -->
+									<template v-if="mode === 'monthly'">
+										<div class="radio has-input-xs" style="margin-bottom: 15px;">
+										  <input type="radio" id="monthly_day" name="monthly_mode" value="month_day" v-model="monthly_mode">
+										  <label for="monthly_day">
+									  		Day <input class="num-input form-control input-xs" type="text" v-model="monthly_date_day" style="display:inline-block;width:50px;" /> of every <input class="num-input form-control input-xs" type="text" v-model="monthly_date_interval" style="display:inline-block;width:50px;" /> months
+										  </label>
+										</div>
+										<div class="radio has-input-xs" style="margin-bottom: 15px;">
+										  <input type="radio" id="monthly_pos" name="monthly_mode"  value="month_pos" v-model="monthly_mode">
+										  <label for="monthly_pos">									  	
+										  		The <select v-model="monthly_week_pos" class="form-control input-xs" style="display:inline-block;width:80px;">
+										  			  <option v-for="option in week_pos" v-bind:value="option">
+										  				{{ option }}
+										  			  </option>
+										  			</select>
+										  			<select v-model="monthly_day" class="form-control input-xs" style="display:inline-block;width:150px;">
+										  			  <option v-for="option in days" v-bind:value="option">
+										  				{{ option }}
+										  			  </option>
+										  			</select>
+										  		of every
+										  			<!--<input class="num-input form-control input-xs" type="number" v-model="monthly_pos_interval" style="display:inline-block;width:50px;"/>-->
+										  		month									  	
+										  </label>
+										</div>
+									</template>
+									<!-- YEARLY  -->
+									<template v-if="mode === 'yearly'">
+									
+									</template>
+								</div>
+							</div>
+						</div>
+						<div class="recurrence_range">
+							<h6>Recurrence Range:</h6>
+							<div class="row">
+								<!-- <div class="col-xs-6">
+									<div class="form-group row">
+										<label class="col-xs-3" for="sched_start" style="padding-top: 5px;"> Start: </label>
+										<div class="col-xs-9">
+											<input type="date" v-model="sched_start" class="form-control input-xs"/>
+										</div>
+									</div>
+								</div> -->
+								<div class="col-xs-6">
+									<div style="margin-left: 15px;margin-bottom: 15px;margin-top: 0px;">
+									  <input type="radio" id="end_date" name="endby" value="end_date" v-model="endby">
+									  <label for="end_date">
+										End After <input  type="date" v-model="sched_end" class="form-control input-xs" style="display:inline-block;width:200px;"/>
+									  </label>
+									</div>
+									<div style="margin-bottom: 15px;">
+									  <input type="radio" id="end_occur" name="endby"  value="end_occur" v-model="endby">
+									  <label for="end_occur">
+									  	End After <input v-bind:disabled="endby!='end_occur'" class="num-input form-control input-xs" style="display:inline-block;width:50px;" v-model="sched_occur" type="text"/> occurrences
+									  </label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!-- OLD -->
+				<div class="col-xs-6">
+					<h6 style="margin-bottom: 15px;font-weight: 600">Payment Schedule:</h6>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="sched_start">Frequency:</label>
+								<select class="selectpicker form-control btn-group-xs input-group-xs" style="width:200px;" v-model="pay_sched">
+									<option v-for="option in pay_mode" v-bind:value="option">{{ option.text }}</option>
+								</select>
+							</div>
+							<h6>Recurrence Range:</h6>
+							<div style="margin-bottom: 15px;margin-top: 0px;">
+							  <input type="radio" id="end_date" name="endby" value="end_date" v-model="endby">
+							  <label for="end_date">
+								End Date <input v-bind:disabled="endby!='end_date'" type="text" v-model="sched_end" class="form-control input-xs" style="display:inline-block;width:200px;" name="enddate" id="enddate" placeholder="dd/mm/yyyy" />
+							  </label>
+							</div>
+						</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="sched_start">Start Date:</label>
+									<input type="text" v-model="sched_start" class="form-control input-xs" style="max-width:200px;" id ="startdate" name="startdate" placeholder="dd/mm/yyyy"/>
+								</div>
+								<h6>&nbsp;</h6>
+								<div style="margin-bottom: 15px;">
+								  <input type="radio" id="end_occur" name="endby"  value="end_occur" v-model="endby">
+								  <label for="end_occur"> 
+								  	End After <input v-bind:disabled="endby!='end_occur'" class="num-input form-control input-xs" style="display:inline-block;width:50px;" v-model="sched_occur" type="text" /> occurrences
+								  </label>
+								</div>
+							</div>
+					</div>
+					<div class="row" style="margin-bottom: 10px;margin-top: 20px;">
+						<div class="col-xs-10 text-center">
+							<button class="btn btn-primary btn-sm" v-on:click="generateSched" type="button">  Generate Schedule</button>
+							<button class="btn btn-primary btn-sm" type="button" v-on:click="sched=[]">&nbsp;<i class="fa fa-refresh"></i>&nbsp;</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					
+					<div class="table-container">
+						<table class="table table-striped pay-sched-tbl" style="max-width: 600px;">
+							<thead>
+								<tr>
+									<th style="border-bottom: 0 !important;text-align: center;">Date</th>
+									<th style="border-bottom: 0 !important;text-align: center !important;">Amount</th>
+								</tr>
+							</thead>
+							<tbody>
+							<template v-for="sch in sched">
+								<tr>
+									<td style="text-align: center;">{{ sch.proc_date }}</td>
+									<td style="text-align: center;text-align: center !important;"><vue-numeric v-model="sch.amount" disabled="disabled" read-only="true" precision="2" separator=","  read-only-class="form-control input-xs num-input" style="max-width:150px"></vue-numeric></td>
+								</tr>
+							</template>	
+							</tbody>					
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 40px;">
+				<div class="col-xs-12 text-center" v-if="sched && sched.length">
+					<button class="btn btn-primary btn-sm" type="submit" style="min-width: 130px;"><i class="fa fa-save"></i> Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="https://unpkg.com/accounting-js"></script>
+<script src="https://unpkg.com/vue-numeric"></script>
+<script>
+  Vue.use(VueNumeric.default)
+</script>
+
+<!-- Include jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<script>
+$(function() {
+	var start_date_input=$('input[name="startdate"]');
+	start_date_input.datepicker({
+        format: 'dd/mm/yyyy',
+        todayHighlight: true,
+        autoclose: true,
+        onSelect: function(dateText) {
+           console.log("Selected date: " + dateText);
+          }
+    })
+
+    start_date_input.datepicker()
+    .on('changeDate', function(e) {
+        // `e` here contains the extra attributes
+        app.sched_start = moment(e.date).format('DD/MM/YYYY');
+    });
+	
+	var end_date_input=$('input[name="enddate"]');
+	end_date_input.datepicker({
+	    format: 'dd/mm/yyyy',
+	    todayHighlight: true,
+	    autoclose: true,
+	    onSelect: function(dateText) {
+	       console.log("Selected date: " + dateText);
+	      }
+	})
+	
+	end_date_input.datepicker()
+	.on('changeDate', function(e) {
+	    // `e` here contains the extra attributes
+	    app.sched_end = moment(e.date).format('DD/MM/YYYY');
+	});
+});
+</script>
+<script>
+	var payment_modes = [{"text":"Weekly","id":"2","config":"{ \"mode\": \"weekly\",\r\n\"weekly_recurring\": 0,\r\n\"occurrence_count\": 40,\r\n\"weekly_friday\": \"T\",\r\n\"recurrence_end\": \"end_occur\"\r\n}"},{"text":"Fortnightly","id":"3","config":"{ \"mode\": \"weekly\",\r\n\"weekly_recurring\": 1,\r\n\"occurrence_count\": 20,\r\n\"weekly_friday\": \"T\",\r\n\"recurrence_end\": \"end_occur\"\r\n}"},{"text":"Monthly","id":"1","config":"{\"mode\":\"monthly\",\"occurrence_count\":10,\"monthly_mode\":\"month_pos\",\"recurrence_end\":\"end_occur\",\"monthly_date\":1,\"monthly_date_interval\":0,\"monthly_day\":\"Friday\",\"monthly_pos_interval\":0,\"monthly_week\":\"last\"}"}];
+	
+	app = new Vue({
+	  el: '#rps',
+	  data: {
+		mode: 'weekly',
+		daily_mode: 'interval',
+		monthly_mode: 'month_day',
+		endby: 'end_date',
+		daily_interval_days: 0,
+		days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+		week_pos: ['first', 'second', 'third', 'fourth', 'last'],
+		monthly_week_pos: 'first',
+		monthly_day: 'Monday',
+		monthly_date_day: 1,
+		monthly_date_interval: 0,
+		monthly_pos_interval: 0,
+		sched_end: '',
+		sched_start: '',
+		sched_occur: 0,
+		dayOnWeek:[],
+		weekly_recurring:0,
+		pay_sched: payment_modes[0],
+		sched : [],
+		pay_mode: payment_modes, 
+		recurr_type: ${formdata.sched_pay},
+		pay_method: '1',
+		method_to_pay: ${formdata.pay_methods},
+		remaining_amt: ${formdata.total_receivable},
+		init_remaining_amt: ${formdata.total_receivable},
+		contrib_percent: 100,
+		inv_amt: ${formdata.total_amount},
+		inv_rem: ${formdata.total_remain},
+		open_bal: ${formdata.opening_balance},
+		total_receivable: ${formdata.total_receivable},
+		cc_years: [],
+		cc_type: '4',
+		cc_no: '',
+		cc_name: '',
+		cc_exp_month: '',
+		cc_exp_year: '',
+		selected_contact: '',
+		cc_cvv: '',
+		ba_name: '',
+		ba_account: '',
+		ba_bsb_no: '',
+		contrib_percent_changed: false,
+		debtor_details: eval(${formdata.debtor_details}),
+		contacts: eval(${formdata.contacts}),
+		use_cc_dflt_opt: eval(${formdata.use_cc_dflt_opt}),
+		cc_exist: false,
+		valid_start_date: false
+	  },
+	  created: function(){
+		  console.log('created this', this);
+		  
+		  var curYear = moment().year();
+		  this.cc_years= [];
+		  for(var i=0;i<12;i++){ this.cc_years.push(curYear); curYear+=1}
+		  
+		  var keys = Object.keys(this.contacts);
+		  for(var i = 0; i < keys.length; i++)
+		  {
+			  var key = keys[i]
+			  console.log(this.contacts[key]);
+		  }
+	  },
+	  computed: {
+		isEFT: function(){
+			if(this.pay_method == 1){
+				return false;
+			}
+			return true;
+		}
+	  },
+	  watch: {
+		pay_sched: function(sched){
+			console.log('pay_sched', sched);
+			var sched_config = JSON.parse(sched.config);
+			console.log('this', this);
+			this.mode = sched_config.mode;
+			
+			if(sched_config.mode ==  'daily') {
+				this.daily_mode = sched_config.daily_every;
+				this.endby = sched_config.recurrence_end;
+			}
+			
+			if(sched_config.mode ==  'weekly') {
+				this.weekly_recurring = sched_config.weekly_recurring;
+				this.endby = sched_config.recurrence_end;
+				this.sched_occur = parseInt(sched_config.occurrence_count);
+				this.sched_end = sched_config.sched_end;
+				this.dayOnWeek =[];
+				this.days.forEach(function(d){
+					if(sched_config['weekly_'+d.toLowerCase()] && sched_config['weekly_'+d.toLowerCase()] === 'T' ) {
+						this.dayOnWeek.push('weekly_'+d.toLowerCase());
+					}
+				}.bind(this));
+			}
+			
+			if(sched_config.mode ==  'monthly') {
+				console.log('monthly');
+				this.monthly_mode = sched_config.monthly_mode;
+				this.endby = sched_config.recurrence_end;
+				this.sched_end = sched_config.sched_end;
+
+				this.monthly_date_day = sched_config.monthly_date;
+				this.monthly_date_interval = sched_config.monthly_date_interval;
+				this.monthly_day = sched_config.monthly_day;
+				
+				this.monthly_pos_interval = sched_config.monthly_pos_interval;
+				this.monthly_week_pos = sched_config.monthly_week;
+				this.sched_occur = parseInt(sched_config.occurrence_count);
+			}
+		},
+		dayOnWeek: function(val){
+			if(this.dayOnWeek.length > 1){
+				alert('Must select a single day');
+			}
+		},
+		
+		sched_start: function(val){
+			console.log(val);
+		},
+		pay_method: function(val){
+			console.log(val);
+			this.sched =[];
+		}
+	  },
+	  mounted: function(){},
+	  methods:{
+		generateSched: function(){
+
+
+			if(this.dayOnWeek.length > 1 && this.pay_sched.id != '1' ){
+				alert('Multiple day is not allowed!');
+				return false;
+			}
+			
+			console.log('this.sched_start: ' + this.sched_start);
+
+			var args = {
+				pay_method: this.pay_method,
+				mode: this.mode,
+				sched_start: moment(this.sched_start, 'D/M/Y').format('YYYY-MM-DD'),
+				sched_end: moment(this.sched_end, 'D/M/Y').format('YYYY-MM-DD'),
+				daily_every: this.daily_mode,
+				recurrence_end: this.endby,
+				daily_interval_days: this.daily_interval_days,
+				occurrence_count: this.sched_occur,
+				weekly_recurring: this.weekly_recurring,
+				monthly_mode: this.monthly_mode,
+				monthly_date: this.monthly_date_day,
+				monthly_date_interval: this.monthly_date_interval,
+				days: this.days,
+				week_post: this.week_pos,
+				monthly_week: this.monthly_week_pos,
+				monthly_day: this.monthly_day,
+				monthly_pos_interval: this.monthly_pos_interval,
+				amount: (this.remaining_amt * (this.contrib_percent/100))
+			};
+			
+			this.dayOnWeek.forEach(function(day){
+				args[day.toLowerCase()] = 'T';
+			});
+			
+			this.sched =[];
+			console.log('app', this);
+			this.sched = this.processSched(args);
+			nlapiSetFieldValue('gen_rps', JSON.stringify(this.sched));
+			nlapiSetFieldValue('pay_meth_dtls', JSON.stringify({
+					cc_type: this.cc_type,
+					cc_no: this.cc_no,
+					cc_name: this.cc_name,
+					cc_exp_month: this.cc_exp_month,
+					cc_exp_year: this.cc_exp_year,
+					//cc_cvv: this.cc_cvv,
+					cc_zip: this.cc_zip,
+					cc_street: this.cc_street,
+					ba_name: this.ba_name,
+					ba_account: this.ba_account,
+					ba_bsb_no: this.ba_bsb_no,
+					pay_sched: this.pay_sched.text,
+					contrib: this.contrib_percent
+			}));
+			nlapiSetFieldValue('used_config', JSON.stringify(args));
+			nlapiSetFieldValue('pay_meth', this.pay_method);
+			nlapiSetFieldValue('method_pay', this.pay_sched.id);
+			nlapiSetFieldValue('cc_existing', this.cc_exist);
+			nlapiSetFieldValue('selected_contact', this.selected_contact);
+		},
+		getWeekPositionMonth: function(date){
+			mDayStart = moment(date).startOf('month');
+			mDayEnd = moment(date).endOf('month');
+			
+		},
+		processSched: function(args){
+			console.log('processSched',args);
+			var days = args.days;
+			var week_post = args.week_post;
+			var sched = [];
+		
+			if(args.mode == 'daily'){
+				var startingday = moment(args.sched_start);
+				var endday = moment(args.sched_end);
+				
+				var daily_interval_days = parseInt(args.daily_interval_days);
+				
+				if(!args.daily_interval_days) {
+					daily_interval_days = 1;
+				}
+				
+				if(args.daily_every === 'interval') {					
+					if(args.recurrence_end === 'end_date') {
+
+						var indexer = 0;
+
+						sched.push({
+							indx: indexer,
+							proc_date:  startingday.format('LL')
+						});
+						
+						var runningday = startingday.add(daily_interval_days, 'days');
+						indexer+=1;
+						
+						while(runningday.isSameOrBefore(endday)){
+							sched.push({
+								indx: indexer,
+								proc_date:  runningday.format('LL')
+							});
+							
+							indexer+=1;
+							runningday.add(daily_interval_days, 'days');
+						}
+					}
+					
+					if(args.recurrence_end === 'end_occur') {
+						var runningday = startingday;
+						
+						for (var int = 0; int < args.occurrence_count; int++) {
+							sched.push({
+								indx: int,
+								proc_date:  runningday.format('LL')
+							});
+							
+							runningday.add(daily_interval_days, 'days');
+						}
+					}
+				}
+			
+				if(args.daily_every === 'weekdays') {
+					if(args.recurrence_end === 'end_date'){
+						var runningday = startingday;
+
+						if(runningday.day() == 0){ //SUNDAY
+							runningday = runningday.day(1);
+						}
+						
+						if(runningday.day() == 6){ //SATURDAY START
+							runningday = runningday.day(8);
+						}
+						
+						var indexer = 0;
+
+						sched.push({
+							indx: indexer,
+							proc_date:  startingday.format('LL')
+						});
+						
+						var runningday = startingday.add(1, 'days');
+						indexer+=1;
+						
+						while(runningday.isSameOrBefore(endday)){
+							
+							if(runningday.day() == 0){ //SUNDAY
+								runningday = runningday.day(1);
+							}
+							
+							if(runningday.day() == 6){ //SATURDAY START
+								runningday = runningday.day(8);
+							}
+							
+							sched.push({
+								indx: indexer,
+								proc_date:  runningday.format('LL')
+							});
+							
+							indexer+=1;
+							runningday.add(1, 'days');
+						}
+					}
+					
+					if(args.recurrence_end === 'end_occur'){
+						var runningday = startingday;
+						
+						for (var int = 0; int < args.occurrence_count; int++) {
+
+							if(runningday.day() == 0){ //SUNDAY
+								runningday = runningday.day(1);
+							}
+							
+							if(runningday.day() == 6){ //SATURDAY START
+								runningday = runningday.day(8);
+							}
+							
+							sched.push({
+								indx: int,
+								proc_date:  runningday.format('LL')
+							});
+							
+							runningday.add(1, 'days');
+						}
+					}
+				}
+			}
+			
+			if(args.mode === 'weekly'){
+				console.log('weekly', args);
+				var startingday = moment(args.sched_start);
+				var endday = moment(args.sched_end);
+				
+				var week_interval = parseInt(args.weekly_recurring);
+				
+				if(!args.weekly_recurring) {
+					week_interval = 0;
+				}
+				
+								
+				if(args.recurrence_end === 'end_date') {
+					var runningday = startingday;
+					var indexer = 0;
+					
+					var day_hit = [];
+					var dayinside = 0;
+					
+					days.forEach(function(day, index){
+						if(args['weekly_'+day.toLowerCase()] && args['weekly_'+day.toLowerCase()] === 'T') {
+							day_hit.push(index);
+							
+							if(runningday.day() <= index){
+								dayinside+=1;
+							}
+						}
+					});
+					
+					/*if(dayinside < day_hit.length){
+						runningday.add(1, 'weeks');
+					}*/
+					
+					if(args.pay_method == 1) {
+						day_hit = [];
+						day_hit.push(startingday.day());
+					}					
+					
+					if(args.pay_method == 2){
+						day_hit = [];
+						day_hit.push(moment().day('Friday').day());
+					}
+					
+					var run = true;
+					while(run){
+						
+						day_hit.forEach(function(hit){
+							if(runningday.day(hit).isAfter(endday)){
+								run = false;
+							} else {
+								sched.push({
+									indx: indexer,
+									proc_date:  runningday.day(hit).format('LL')
+								});
+								
+								indexer+=1;
+							}
+						});
+						runningday.add(1, 'weeks');
+						runningday.add(week_interval, 'weeks');
+					}
+				}
+				
+				if(args.recurrence_end === 'end_occur'){
+					
+					var runningday = startingday;
+					var indexer = 0;
+					
+					var day_hit = [];
+					var dayinside = 0;
+					
+					//Checking configuration settings & recording multiple instance
+					days.forEach(function(day, index){
+						if(args['weekly_'+day.toLowerCase()] && args['weekly_'+day.toLowerCase()] === 'T') {
+							day_hit.push(moment().day(day).day());
+							
+							if(runningday.day() <= index){
+								dayinside+=1;
+							}
+						}
+					});
+					
+					if(args.pay_method == 1) {
+						day_hit = [];
+						day_hit.push(startingday.day());
+					}					
+					
+					if(args.pay_method == 2){
+						day_hit = [];
+						day_hit.push(moment().day('Friday').day());
+					}
+					
+					//If the days doesnt fit in
+					/*
+					if(dayinside < day_hit.length){
+						runningday.add(1, 'weeks');
+						runningday.day(0);
+					}*/
+					
+					for (var int = 0; int < args.occurrence_count; int++) {
+						
+						day_hit.forEach(function(hit){
+							sched.push({
+								indx: indexer,
+								proc_date:  runningday.day(hit).format('LL')
+							});
+								
+							indexer+=1;
+						});
+						runningday.add(1, 'weeks');
+						
+						runningday.add(week_interval, 'weeks');
+					}
+				}
+			}
+		
+			if(args.mode === 'monthly'){
+				var startingday = moment(args.sched_start);
+				var endday = moment(args.sched_end);
+				
+				if(args.pay_method == 1){
+					args.monthly_mode = "month_day";
+					args.monthly_date = startingday.date();
+				}					
+				
+				if(args.pay_method == 2){
+					args.monthly_week = "fourth";
+					args.monthly_day = "Friday";
+					args.monthly_mode = "month_pos";
+				}
+				
+				if(args.recurrence_end === 'end_date'){
+					var month_interval = parseInt(args.monthly_interval);
+					if(!args.monthly_interval) {
+						month_interval = 0;
+					}
+				
+					var runningday = startingday;
+					var indexer = 0;
+					args.monthly_week = args.monthly_week.toLowerCase();
+					
+					
+					var run  = true;
+					while(run){	
+						if(runningday.isAfter(endday)){
+							run = false;
+						} else {
+							
+							if(args.monthly_mode === "month_pos") {
+								//1ST
+								if(week_post.indexOf(args.monthly_week) === 0){
+									
+									//runningday = runningday.startOf('month');
+									
+									console.log('1ST Week, monthly_day: '+args.monthly_day)
+									runningday.startOf('month');
+									var before = moment(runningday.format('LL'));
+									
+									console.log('day', args.monthly_day);
+									
+									runningday = moment(new Date(runningday.day(
+										moment().day(args.monthly_day.toLowerCase()).day()
+									).format('LL')));
+									
+									console.log('before: '+before.format('LL'));
+									
+									if(before.isAfter(runningday)) {
+										runningday = before.add(1, 'weeks');
+										runningday = moment(new Date(runningday.day(
+											moment().day(args.monthly_day.toLowerCase()).day()
+										).format('LL')));
+									}
+									
+									console.log('date: ', runningday.format('LL'))
+								}
+								
+								//2ND
+								if(week_post.indexOf(args.monthly_week) === 1){
+									runningday = runningday.startOf('month');
+									runningday.add(1, 'weeks');
+									runningday = moment(runningday.day(
+										moment().day(args.monthly_day.toLowerCase()).day()
+									).format('LL'));
+								}
+
+								//3RD
+								if(week_post.indexOf(args.monthly_week) === 2){
+									runningday = runningday.startOf('month');
+									runningday.add(2, 'weeks');
+									runningday = moment(runningday.day(
+										moment().day(args.monthly_day.toLowerCase()).day()
+									).format('LL'));
+								}
+								
+								//4TH
+								if(week_post.indexOf(args.monthly_week) === 3){
+									runningday = runningday.startOf('month');
+									// 092418 gpandes - fix for incorrect friday being set when first day of the month is a saturday
+									if(runningday.day() == 6)
+									{
+										runningday.add(1, 'day');
+									}
+									runningday.add(3, 'weeks');
+									runningday = moment(runningday.day(
+										moment().day(args.monthly_day.toLowerCase()).day()
+									).format('LL'));
+									
+									if(indexer == 0){
+										//console.log('start '+startingday.format('LL')+' running: '+runningday.format('LL'))
+										if(runningday.isBefore(moment(args.sched_start))){
+											runningday.add('1', 'months');
+											
+											runningday = runningday.startOf('month');
+											runningday.add(3, 'weeks');
+											runningday = moment(runningday.day(
+												moment().day(args.monthly_day.toLowerCase()).day()
+											).format('LL'));
+											
+										}
+									}
+								}
+								
+								//LAST
+								if(week_post.indexOf(args.monthly_week) === 4){
+									runningday = runningday.endOf('month');
+									
+									/*
+									runningday = moment(runningday.day(
+										days.map(function(e){ return e.toLowerCase()}).indexOf(args.monthly_day.toLowerCase())
+									).format('LL'));*/
+									
+									var before = moment(runningday.format('L'));
+									
+									runningday = moment(new Date(runningday.day(
+										moment().day(args.monthly_day.toLowerCase()).day()
+									).format('LL')));
+									
+									console.log('before: '+before.format('LL'));
+									
+									if(runningday.isAfter(before, 'month')) {
+										runningday = before.subtract(1, 'weeks');
+										runningday = moment(new Date(runningday.day(
+											moment().day(args.monthly_day.toLowerCase()).day()
+										).format('LL')));
+									}
+								}
+								
+								sched.push({
+									indx: indexer,
+									proc_date:  runningday.format('LL')
+								});
+							}
+							
+							if(args.monthly_mode === "month_day") {
+								//runningday.date(args.monthly_date);
+								var schedDate = moment(args.sched_start);
+								schedDate.add(indexer + month_interval, 'months');
+								sched.push({
+									indx: indexer,
+									proc_date:  schedDate.format('LL')
+								});
+							}
+
+							indexer+=1;
+							runningday.add(1+month_interval, 'months');
+						}
+					}
+				}
+				
+				if(args.recurrence_end === 'end_occur'){
+										
+					if(args.monthly_mode === "month_day") {
+						var runningday = startingday;
+						var indexer = 0;
+						
+						console.log('running: '+runningday.format('LL')+' '+moment(runningday.format('LL')).date(args.monthly_date).format('LL'));
+						if(runningday.isAfter(moment(runningday.format('LL')).date(args.monthly_date))){
+							runningday.add('1', 'months')
+						}
+						
+						for (var int = 0; int < args.occurrence_count; int++) {
+							runningday.date(args.monthly_date);
+							var schedDate = moment(args.sched_start);
+							schedDate.add(indexer + args.monthly_date_interval, 'months');
+							sched.push({
+								indx: indexer,
+								proc_date:  schedDate.format('LL')
+							});
+							indexer+=1;
+							runningday.add(1+parseFloatOrZero(args.monthly_date_interval), 'months');
+						}
+					}
+					
+					if(args.monthly_mode === "month_pos") {
+						var indexer = 0;
+						
+						var runningday = startingday;
+						
+						for (var int = 0; int < args.occurrence_count; int++) {
+						
+							//1ST
+							if(week_post.indexOf(args.monthly_week) === 0){
+								
+								//runningday = runningday.startOf('month');
+								
+								console.log('1ST Week, monthly_day: '+args.monthly_day)
+								runningday.startOf('month');
+								var before = moment(runningday.format('LL'));
+								
+								console.log('day', args.monthly_day);
+								
+								runningday = moment(new Date(runningday.day(
+									moment().day(args.monthly_day.toLowerCase()).day()
+								).format('LL')));
+								
+								console.log('before: '+before.format('LL'));
+								
+								if(before.isAfter(runningday)) {
+									runningday = before.add(1, 'weeks');
+									runningday = moment(new Date(runningday.day(
+										moment().day(args.monthly_day.toLowerCase()).day()
+									).format('LL')));
+								}
+								
+								console.log('date: ', runningday.format('LL'))
+							}
+							
+							//2ND
+							if(week_post.indexOf(args.monthly_week) === 1){
+								runningday = runningday.startOf('month');
+								runningday.add(1, 'weeks');
+								runningday = moment(runningday.day(
+									moment().day(args.monthly_day.toLowerCase()).day()
+								).format('LL'));
+							}
+
+							//3RD
+							if(week_post.indexOf(args.monthly_week) === 2){
+								runningday = runningday.startOf('month');
+								runningday.add(2, 'weeks');
+								runningday = moment(runningday.day(
+									moment().day(args.monthly_day.toLowerCase()).day()
+								).format('LL'));
+							}
+							
+							//4TH
+							if(week_post.indexOf(args.monthly_week) === 3){
+								
+								runningday = runningday.startOf('month');
+								// 092418 gpandes - fix for incorrect friday being set when first day of the month is a saturday
+								if(runningday.day() == 6)
+								{
+									runningday.add(1, 'day');
+								}
+								runningday.add(3, 'weeks');
+								runningday = moment(runningday.day(
+									moment().day(args.monthly_day.toLowerCase()).day()
+								).format('LL'));
+								
+								//console.log('index: '+int+' start: '+moment(args.sched_start).format('LL')+'  end: '+runningday.format('LL'));
+								if(int == 0){
+									if(runningday.isBefore(moment(args.sched_start))){
+										runningday.add('1', 'months');
+										
+										runningday = runningday.startOf('month');
+										runningday.add(3, 'weeks');
+										runningday = moment(runningday.day(
+											moment().day(args.monthly_day.toLowerCase()).day()
+										).format('LL'));
+										
+									}
+								}
+							}
+							
+							//LAST
+							if(week_post.indexOf(args.monthly_week) === 4){
+								runningday = runningday.endOf('month');
+								
+								/*
+								runningday = moment(runningday.day(
+									days.map(function(e){ return e.toLowerCase()}).indexOf(args.monthly_day.toLowerCase())
+								).format('LL'));*/
+								
+								var before = moment(runningday.format('L'));
+								
+								runningday = moment(new Date(runningday.day(
+									moment().day(args.monthly_day.toLowerCase()).day()
+								).format('LL')));
+								
+								console.log('before: '+before.format('LL'));
+								
+								if(runningday.isAfter(before, 'month')) {
+									runningday = before.subtract(1, 'weeks');
+									runningday = moment(new Date(runningday.day(
+										moment().day(args.monthly_day.toLowerCase()).day()
+									).format('LL')));
+								}
+							}
+							
+							sched.push({
+								indx: indexer,
+								proc_date:  runningday.format('LL')
+							});
+						
+							indexer+=1;
+							//console.log('runningday added by: '+(1+parseFloatOrZero(args.monthly_pos_interval))+' months',runningday.format('LL'));
+
+							runningday.add((1+parseFloatOrZero(args.monthly_pos_interval)), 'months');
+						}
+					}
+				}
+			
+			}
+			
+			var ea_rrow = args.amount/sched.length;
+			
+			for(int =0;int <sched.length;int++){
+				sched[int].amount= ea_rrow.toFixed(2);
+			}
+			
+			return sched;
+		},
+		applySched: function(){
+			console.log('apply', this.sched);
+		},
+		isNumber: function(e, args){
+			if(isNaN(parseInt(e.key))){
+				e.preventDefault();
+			}
+			
+			if(args && args.value && args.value.length > args.count){
+				e.preventDefault();
+			}
+			console.log('args: ' + JSON.stringify(args));
+		},
+		checkPress: function(e){
+			if(e.key == 'v' || e.key == 'V'){
+				e.preventDefault();
+			}
+		}
+	  }
+	});
+	
+	function parseFloatOrZero(a){a=parseFloat(a);return isNaN(a)?0:a}
+
+</script>
+</body>
+</html>

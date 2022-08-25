@@ -1,0 +1,24 @@
+<customlist scriptid="customlist_xw_payscheduletype">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>Payment Schedule Type</name>
+  <customvalues>
+    <customvalue scriptid="val_38913_4553194_sb1_236">
+      <isinactive>F</isinactive>
+      <value>Weekly </value>
+    </customvalue>
+    <customvalue scriptid="val_38914_4553194_sb1_361">
+      <isinactive>F</isinactive>
+      <value>Fortnightly</value>
+    </customvalue>
+    <customvalue scriptid="val_38915_4553194_sb1_204">
+      <isinactive>F</isinactive>
+      <value>Monthly</value>
+    </customvalue>
+    <customvalue scriptid="val_116431_t2498425_129">
+      <isinactive>F</isinactive>
+      <value>Pay In Full</value>
+    </customvalue>
+  </customvalues>
+</customlist>

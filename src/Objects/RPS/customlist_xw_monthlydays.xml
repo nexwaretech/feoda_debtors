@@ -1,0 +1,36 @@
+<customlist scriptid="customlist_xw_monthlydays">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>List of days (MS-M)</name>
+  <customvalues>
+    <customvalue scriptid="val_38883_4553194_sb1_892">
+      <isinactive>F</isinactive>
+      <value>Sunday</value>
+    </customvalue>
+    <customvalue scriptid="val_38884_4553194_sb1_487">
+      <isinactive>F</isinactive>
+      <value>Monday</value>
+    </customvalue>
+    <customvalue scriptid="val_38885_4553194_sb1_295">
+      <isinactive>F</isinactive>
+      <value>Tuesday</value>
+    </customvalue>
+    <customvalue scriptid="val_38886_4553194_sb1_583">
+      <isinactive>F</isinactive>
+      <value>Wednesday</value>
+    </customvalue>
+    <customvalue scriptid="val_38887_4553194_sb1_989">
+      <isinactive>F</isinactive>
+      <value>Thursday</value>
+    </customvalue>
+    <customvalue scriptid="val_38888_4553194_sb1_320">
+      <isinactive>F</isinactive>
+      <value>Friday</value>
+    </customvalue>
+    <customvalue scriptid="val_38889_4553194_sb1_568">
+      <isinactive>F</isinactive>
+      <value>Saturday</value>
+    </customvalue>
+  </customvalues>
+</customlist>

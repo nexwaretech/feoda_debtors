@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="" />
+      <meta name="author" content="" />
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+      <title>${COMPANY.name}</title>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+      <script
+              src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+              integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+              crossorigin="anonymous"
+      ></script>
+      <script
+              src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+              integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+              crossorigin="anonymous"
+      ></script>
+
+      <!-- Bootstrap CSS -->
+      <link
+         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap"
+         rel="stylesheet"
+         />
+      <link
+         rel="stylesheet"
+         href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+         crossorigin="anonymous"
+         />
+      <link
+         rel="stylesheet"
+         href="${FILES.rpscss}"
+         />
+
+
+   </head>
+   <body>
+      <div class="top-section" id="rps">
+         <header>
+            <div class="container-fluid header-wrapper shadow p-3 mb-5 bg-white">
+               <div class="row">
+                  <div class="col-lg logo item-center">
+                     <img
+                        src="${IMAGES['logocompanypng']}"
+                        alt="header-logo"
+                        />
+                  </div>
+                  <div class="col-lg title item-center">
+                     <div>
+                        <span style="color: black">SET UP FEE SCHEDULE</span>
+                     </div>
+                  </div>
+                  <div class="col-lg contact-us item-center">
+                     <div>
+                        <h3>CONTACT US</h3>
+                        <div class="email flex">
+                           <img
+                              src="${IMAGES['iconemailpng']}"
+                              alt="email-icon"
+                              />
+                           <p>
+                              email us at <a href="${COMPANY.email}">${COMPANY.email}</a>
+                           </p>
+                        </div>
+                        <div class="phone flex">
+                           <img
+                               src="${IMAGES['iconphonepng']}"
+                               alt="phone-icon"
+                              />
+                           <p>${COMPANY.phone}</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </header>
+         <div class="progress-container">
+            <p>FORM COMPLETE</p>
+            <div class="progress-wrapper">
+               <div class="progress">
+                  <div
+                     class="progress-bar"
+                     role="progressbar"
+                     v-bind:style="{ width: getProgressPercent() + '%' }"
+                     aria-valuenow="getProgressPercent()"
+                     aria-valuemin="0"
+                     aria-valuemax="100"
+                     >
+                     <div class="current-percent">
+                        <span>{{getProgressPercent()}}&#37;</span>
+                        <div class="arrow-down"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="main">
+            <div class="row">
+               <div class="col-lg-3 sidebar-wrapper">
+                  <div class="sidebar">
+                     <p class="process-title">SET UP PROCESS</p>
+                     <ul class="StepProgress">
+                        <li class="StepProgress-item start-item is-done">
+                           <div class="item-wrapper">
+                              <div class="icon">
+                                 <img
+                                    src="${IMAGES['startbuttonwhitepng']}"
+                                    alt="Start Icon"
+                                    />
+                              </div>
+                              <strong>START</strong>
+                           </div>
+                        </li>
+                        <li class="status-line is-done">
+                           <div class="line"></div>
+                        </li>
+                        <li class="StepProgress-item payment-method-item is-done">
+                           <div class="item-wrapper">
+                              <div class="icon">
+                                 <img
+                                    src="${IMAGES['paymentmethodiconwhitepng']}"
+                                    alt="Payment Method Icon"
+                                    />
+                              </div>
+                              <strong>PAYMENT METHOD</strong>
+                           </div>
+                        </li>
+                        <li class="status-line is-done" v-bind:class="[currentStep() == 2 ? 'radius-btm-right' : '']">
+                           <div class="line"></div>
+                        </li>
+                        <li
+                           class="StepProgress-item card-detail-item"
+                           v-bind:class="[checkStep('2') ? 'is-done': '', currentStep() == 2 ? 'current' : '']"
+                           >
+                           <div class="item-wrapper">
+                              <div class="icon">
+                                 <img
+                                    src="${IMAGES['carddetailsicongreenpng']}"
+                                    alt="Card Detail Icon"
+                                    v-if="!checkStep('2')"
+                                    />
+                                 <img
+                                    src="${IMAGES['carddetailsiconwhitepng']}"
+                                    alt="Card Detail Icon"
+                                    v-if="checkStep('2')"
+                                    />
+                              </div>
+                              <strong>ENTER CARD DETAILS</strong>
+                           </div>
+                        </li>
+                        <li
+                           class="status-line"
+                           v-bind:class="[currentStep() == 3 ? 'radius-btm-right' : '', currentStep() == 2 ? 'radius-top-right' : '', checkStep('2') ? 'is-done' : '']"
+                           >
+                           <div class="line"></div>
+                        </li>
+                        <li
+                           class="StepProgress-item frequency-item"
+                           v-bind:class="[checkStep('3') ? 'is-done': '', currentStep() == 3 ? 'current' : '']"
+                           >
+                           <div class="item-wrapper">
+                              <div class="icon">
+                                 <img
+                                    src="${IMAGES['selectfrequencyicongreenpng']}"
+                                    alt="Frequency Icon"
+                                    v-if="!checkStep('3')"
+                                    />
+                                 <img
+                                    src="${IMAGES['selectfrequencyiconwhitepng']}"
+                                    alt="Frequency Icon"
+                                    v-if="checkStep('3')"
+                                    />
+                              </div>
+                              <strong>SELECT FREQUENCY</strong>
+                           </div>
+                        </li>
+                        <li
+                           class="status-line"
+                           v-bind:class="[currentStep() == 4 ? 'radius-btm-right' : '', currentStep() == 3 ? 'radius-top-right' : '', checkStep('3') ? 'is-done' : '']"
+                           >
+                           <div class="line"></div>
+                        </li>
+                        <li
+                           class="StepProgress-item start-date-item"
+                           v-bind:class="[checkStep('4') ? 'is-done': '', currentStep() == 4 ? 'current' : '']"
+                           >
+                           <div class="item-wrapper">
+                              <div class="icon">
+                                 <img
+                                    src="${IMAGES['startdateicongreenpng']}"
+                                    alt="Start Date Icon"
+                                    v-if="!checkStep('4')"
+                                    />
+                                 <img
+                                    src="${IMAGES['startdateiconwhitepng']}"
+                                    alt="Start Date Icon"
+                                    v-if="checkStep('4')"
+                                    />
+                              </div>
+                              <strong>CHOOSE START DATE</strong>
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="col-lg-9 shadow radius-22 page-content">
+                  <div class="row">
+                     <div class="col-md-8">
+                        <div class="title-section">
+                           <div class="title-wrapper">
+                              <div class="title">
+                                 <img
+                                    src="${IMAGES['calendariconfieldheadlinewhitepng']}"
+                                    alt="calendar"
+                                    />
+                                 <p>FEE SCHEDULING</p>
+                              </div>
+                           </div>
+                           <div>
+                              <p class="page-content-title">Payment Method Type:</p>
+                              <div class="card-type-radio">
+                                 <label>
+                                    <input type="radio" name="paymentType" value="1" v-model="pay_method" />
+                                    <div>
+                                       <p>Credit Card</p>
+                                    </div>
+                                 </label>
+                                 <label>
+                                    <input type="radio" name="paymentType" value="2" v-model="pay_method" />
+                                    <div>
+                                       <p>Bank Account</p>
+                                    </div>
+                                 </label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="payment-info">
+                           <img
+                              src="${IMAGES['parentsicongreenpng']}"
+                              alt="Parents Icon"
+                              />
+                           <div class="payment-info-content">
+                              <p><span>Name:</span> ${formdata.debtor}</p>
+                              <p><span>Family Code:</span> ${formdata.family_code}</p>
+                              <p><span>Invoice:</span> ${formdata.invoice}</p>
+                              <p>
+                                 <span>REMAINING AMOUNT:</span>
+                                 &#36;{{remaining_amt}}
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <hr />
+                  <div class="enter-card-detail" v-if="pay_method === '1'" id="credit-method">
+                     <div class="text-section">
+                        <div class="card-detail bg-white">
+                           <div class="card-detail-title">
+                              <p class="page-content-title">Enter Card Details:</p>
+															<div v-if="use_cc_dflt_opt">
+																<div class="tabbed" style="margin-top: 10px;">
+																	<input type="checkbox" id="cc_exist" v-model="cc_exist">
+																	<label for="cc_exist" style="font-size: 12px;">Use existing credit card: <span>
+																			<strong> ({{
+																				(use_cc_dflt_opt)?use_cc_dflt_opt.cc_number:'' }}) </strong>
+																	</span></label>
+																</div>
+															</div>
+                              <p class="card-detail-hint" v-if="!cc_exist">New Credit Card will be set as default.</p>
+                           </div>
+                           <div class="card-detail-content" v-if="!cc_exist">
+                              <div class="row align-center">
+                                 <h2 class="col-md-3">Card Type:</h2>
+                                 <div class="col-md-9 card-type-radio">
+                                    <label class="align-center">
+                                    <input type="radio" name="card-type" v-model="cc_type" id="card-type-master" value="4" />
+                                    <img
+                                       src="${IMAGES['ccmastercardpng']}"
+                                       />
+                                    </label>
+                                    <label class="align-center">
+                                    <input type="radio" name="card-type" v-model="cc_type" id="card-type-visa" value="5" />
+                                    <img
+                                       src="${IMAGES['ccvisapng']}"
+                                       />
+                                    </label>
+                                 </div>
+                              </div>
+                              <div class="row align-center">
+                                 <h2 class="col-md-3">Card Name:</h2>
+                                 <div class="col-md-9">
+                                    <div class="card-inputbox">
+                                       <input
+                                          class="form-control"
+                                          type="text"
+                                          placeholder="Name on Card"
+                                          autocomplete="off"
+                                          v-model="cc_name"
+                                          v-bind:required="(pay_method == '1')?true:false"
+                                          />
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row align-center">
+                                 <h2 class="col-md-3">Card Number:</h2>
+                                 <div class="col-md-9">
+                                    <div class="card-inputbox">
+                                       <input
+                                          class="form-control"
+                                          type="text"
+                                          placeholder="Card Number"
+                                          v-model="cc_no"
+                                          placeholder="Card Number"
+                                          autocomplete="off"
+                                          v-bind:required="(pay_method == '1')?true:false"
+                                          v-on:keypress="isNumber($event, {count:18, value: cc_no})"
+                                          />
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row align-center">
+                                 <h2 class="col-md-3">Expiration:</h2>
+                                 <div class="col-md-9">
+                                    <div class="select-date bg-white">
+                                       <select v-model="cc_exp_month" v-bind:required="(pay_method == '1')?true:false">
+                                          <option value="" selected>MM</option>
+                                          <option value="1">01</option>
+                                          <option value="2">02</option>
+                                          <option value="3">03</option>
+                                          <option value="4">04</option>
+                                          <option value="5">05</option>
+                                          <option value="6">06</option>
+                                          <option value="7">07</option>
+                                          <option value="8">08</option>
+                                          <option value="9">09</option>
+                                          <option value="10">10</option>
+                                          <option value="11">11</option>
+                                          <option value="12">12</option>
+                                       </select>
+                                       <select v-model="cc_exp_year" v-bind:required="(pay_method == '1')?true:false">
+                                          <option value="">YYYY</option>
+                                          <option v-for="y in cc_years" v-bind:value="y">{{ y }}</option>
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="enter-card-detail" v-if="pay_method === '2'" id="bank-account-method">
+                     <div class="text-section">
+                        <div class="card-detail bg-white">
+                           <div class="card-detail-title">
+                              <p class="page-content-title">Bank account details:</p>
+                           </div>
+                           <div class="card-detail-content">
+                              <div class="row align-center">
+                                 <h2 class="col-md-3">Name:</h2>
+                                 <div class="col-md-9">
+                                    <div class="card-inputbox">
+                                       <input
+                                          class="form-control"
+                                          type="text"
+                                          placeholder="Account Name"
+                                          autocomplete="off"
+                                          v-model="ba_name"
+                                          />
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row align-center">
+                                 <h2 class="col-md-3">BSB No.:</h2>
+                                 <div class="col-md-9">
+                                    <div class="card-inputbox">
+                                       <input
+                                          class="form-control"
+                                          type="text"
+                                          placeholder="Card Number"
+                                          v-model="ba_bsb_no"
+                                          autocomplete="off"
+                                          v-on:keydown.ctrl="checkPress($event)"
+                                          v-on:keypress="isNumber($event, {count:5, value: ba_bsb_no})"
+                                          />
+                                    </div>
+                                    <br />
+                                    <span
+                                       style="
+                                       font-size: 11px;
+                                       font-style: italic;
+                                       display: block;
+                                       text-align: left;
+                                       margin-bottom: 5px;
+                                       margin-top: 5px;
+                                       "
+                                       >
+                                    6 digits required for BSB no.
+                                    </span>
+                                 </div>
+                              </div>
+                              <div class="row align-center">
+                                 <h2 class="col-md-3">Account No.:</h2>
+                                 <div class="col-md-9">
+                                    <div class="card-inputbox">
+                                       <input
+                                          class="form-control"
+                                          type="text"
+                                          placeholder="Account Number"
+                                          autocomplete="off"
+                                          v-model="ba_account"
+                                          v-on:keydown.ctrl="checkPress($event)"
+                                          v-on:keypress="isNumber($event, {count:8, value: ba_account})"
+                                          />
+                                    </div>
+                                    <br />
+                                    <span
+                                       style="
+                                       font-size: 11px;
+                                       font-style: italic;
+                                       display: block;
+                                       text-align: left;
+                                       margin-bottom: 5px;
+                                       margin-top: 5px;
+                                       "
+                                       >
+                                    Maximum of 9 digits required for account no.
+                                    </span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <hr />
+                  <div class="select-frequency">
+                     <p class="page-content-title">Select Frequency:</p>
+                     <div class="frequency-radio-wrapper">
+                        <div class="frequency-radio">
+                           <div class="form-check" v-for="option in pay_mode" v-if="option.id != 4">
+                              <input
+                                 type="radio"
+                                 v-model="pay_sched"
+                                 v-bind:id="'pay_mode-'+option.id"
+                                 class="form-check-input"
+                                 v-bind:value="option"
+                                 />
+                              <label v-bind:for="'pay_mode-'+option.id" class="form-check-label"> {{ option.text }} </label>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <hr />
+                  <div class="choose-start-date">
+                     <p class="page-content-title">Choose a start date:</p>
+                     <div v-if="pay_method == 1" class="start-date-wrapper">
+                        <!--<input id="sched_start_date" type="text" v-model="sched_start">-->
+                        <!--<div id="sched_start_date" class="cal1"></div>-->
+                        <span v-if="pay_sched.id ==4" class="notes">Full payment processing.</span>
+                        <clndr
+                           v-model="sched_start"
+                           v-bind:start="sched_start"
+                           v-bind:pay_method="pay_method"
+                           v-if="pay_sched.id != 4"
+                           @trig="evaluateSched"
+                           ></clndr>
+                     </div>
+                     <div v-if="pay_method == 2" class="start-date-wrapper">
+                        <span v-if="pay_sched.id ==3" class="notes">Fortnightly direct debits are processed on Fridays</span>
+                        <span v-if="pay_sched.id ==2" class="notes">Weekly direct debits are processed on Fridays</span>
+                        <span v-if="pay_sched.id ==1" class="notes"
+                           >Monthly payments are made on the 4th Friday of the month.</span
+                           >
+                        <span v-if="pay_sched.id ==4" class="notes">Full payment processing.</span>
+                        <clndr
+                           v-model="sched_start"
+                           v-bind:start="sched_start"
+                           v-bind:pay_method="pay_method"
+                           v-if="pay_sched.id!=1 && pay_sched.id != 4"
+                           @trig="evaluateSched"
+                           ></clndr>
+                     </div>
+                  </div>
+                  <div class="button-wrapper">
+                     <button
+                        v-if="checkStep(4)"
+                        type="button"
+                        class="btn btn-success submit-deposit shadow"
+                        v-on:click="genShow('review-modal')"
+                        >
+                     Submit
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div
+            class="modal fade"
+            id="review-modal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="reviewModalLabel"
+            aria-hidden="true"
+            data-backdrop="static"
+            data-keyboard="false"
+            >
+            <!-- MODAL START -->
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="reviewModalLabel"><i class="fa fa-file-text-o"></i> Schedule Review</h5>
+                     <button type="button" class="close" data-dismiss="modal">
+                     <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                     </button>
+                  </div>
+                  <div class="modal-body" style="padding: 0px">
+                     <div style="padding-left: 15px; padding-right: 15px; border-bottom: 1px solid #eee">
+                        <div class="row" style="margin: 0; padding: 20px 10px">
+                           <div class="col-xs-12">
+                              <div style="display: inline-block; margin-right: 20px; font-size: 13px">
+                                 <span style="font-weight: 600"> Payment Method: </span>
+                                 <span> {{ (pay_method == 2)?'Bank Account':'Credit Card' }} </span>
+                              </div>
+                              <div style="display: inline-block; margin-right: 20px; font-size: 13px">
+                                 <span style="font-weight: 600">Frequency: </span><span>{{ pay_sched.text }}</span>
+                              </div>
+                              <div style="display: inline-block; font-size: 13px">
+                                 <span style="font-weight: 600">Starting On: </span
+                                    ><span>{{ moment(sched_start).format('LL') }}</span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="table-container">
+                        <table class="table table-striped pay-sched-tbl" style="font-size: 13px">
+                           <thead>
+                              <tr>
+                                 <th style="border-bottom: 0 !important; font-size: 13px; font-weight: 600; text-align: center">
+                                    Date
+                                 </th>
+                                 <th style="border-bottom: 0 !important; font-size: 13px; font-weight: 600; text-align: center">
+                                    Amount
+                                 </th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <template v-for="sch in sched">
+                                 <tr>
+                                    <td style="text-align: center">{{ sch.proc_date }}</td>
+                                    <td style="text-align: center">{{ sch.amount }}</td>
+                                 </tr>
+                              </template>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="modal-footer" style="padding-top: 5px; padding-bottom: 10px">
+                     <span
+                        style="
+                        font-size: 11px;
+                        font-style: italic;
+                        display: block;
+                        text-align: center;
+                        margin-bottom: 5px;
+                        margin-top: 5px;
+                        "
+                        >An email of the schedule will be sent once confirmed</span
+                        >
+                     <div class="row">
+                        <div class="col-md-12 text-center">
+                           <!--<button type="button" class="btn btn-primary" style="min-width:130px;margin-right: 20px;"  data-toggle="modal" data-target="#success-modal"><i class="fa fa-check"></i> Confirm</button>-->
+                           <!--<button type="button" class="btn btn-primary" style="min-width:130px;margin-right: 20px;" v-on:click="submitForm"><i class="fa fa-check"></i> Confirm</button>-->
+                           <button
+                              type="button"
+                              class="btn btn-success"
+                              style="min-width: 130px; border-radius: 22px"
+                              v-on:click="submitForm"
+                              >
+                           Please Confirm
+                           </button>
+                           <!-- <button type="button" class="btn btn-default" style="min-width:130px;"  data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button> -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="load-mask preloader" style="display: none; z-index: 9999999">
+            <img
+               src="${IMAGES['preloadergif']}"
+               />
+         </div>
+      </div>
+      <footer>
+         <p>&#169; 2020 FEODA Pty Ltd</p>
+         <div class="footer-logo">
+            <span>Powered by:</span>
+            <img
+               src="${IMAGES['footerlogopng']}"
+               alt="footer-logo"
+               />
+         </div>
+      </footer>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/clndr/1.4.7/clndr.min.js"></script>
+      <script src="https://unpkg.com/accounting-js"></script>
+      <script src="https://unpkg.com/vue-numeric"></script>
+      <script>
+         Vue.use(VueNumeric.default);
+      </script>
+      <script type="text/template" id="clndr-template">
+         <div class="clndr cal1">
+         	<input type="hidden" ref="start" v-bind:value="start" v-on:input="start = $event.target.value">
+         	<div class="clndr-controls">
+         		<div class="clndr-previous-button">&lsaquo;</div>
+         		<div class="month"><%= month %></div>
+         		<div class="clndr-next-button">&rsaquo;</div>
+         	</div>
+         	<div class="clndr-grid">
+         		<div class="days-of-the-week">
+         		<% _.each(daysOfTheWeek, function (day) { %>
+         			<div class="header-day well"><%= day %></div>
+         		<% }); %>
+         			<div class="days">
+         			<% _.each(days, function (day) { %>
+         				<div class="<%= day.classes %>"><%= day.day %></div>
+         			<% }); %>
+         			</div>
+         		</div>
+         	</div>
+         </div>
+      </script>
+      <script>
+         $(document).ready(function () {
+           $('#div__body form[name=main_form]').css('cssText', 'padding: 0px !important;');
+           $('#div__body').css('cssText', 'background-color:#fff;padding: 0px !important;');
+         });
+      </script>
+      <script>
+         var payment_modes = [{"text":"Weekly","id":"2","config":"{ \"mode\": \"weekly\",\r\n\"weekly_recurring\": 0,\r\n\"occurrence_count\": 40,\r\n\"weekly_friday\": \"T\",\r\n\"recurrence_end\": \"end_occur\"\r\n}"},{"text":"Fortnightly","id":"3","config":"{ \"mode\": \"weekly\",\r\n\"weekly_recurring\": 1,\r\n\"occurrence_count\": 20,\r\n\"weekly_friday\": \"T\",\r\n\"recurrence_end\": \"end_occur\"\r\n}"},{"text":"Monthly","id":"1","config":"{\"mode\":\"monthly\",\"occurrence_count\":10,\"monthly_mode\":\"month_pos\",\"recurrence_end\":\"end_occur\",\"monthly_date\":1,\"monthly_date_interval\":0,\"monthly_day\":\"Friday\",\"monthly_pos_interval\":0,\"monthly_week\":\"last\"}"}, {"text":"Full Payment","id":"4","config":"{ \"mode\": \"Full Payment\"}"}];
+         
+         app = new Vue({
+           el: '#rps',
+           components:{
+         	'clndr':{
+         		template: $('#clndr-template').html(),
+         		props:['start', 'valid_start','pay_method'],
+         		data: function(){
+         			return {
+         				start: this.start,
+         				pay_method: this.pay_method,
+         				valid_start: this.valid_start
+         			}
+         		},
+         		mounted: function(){
+         
+         			console.log('cal start', moment(this.start).format('LL'))
+         
+         			calIns =$(this['$el']).clndr({
+         				showAdjacentMonths: false,
+         				trackSelectedDate: true,
+         				selectedDate: null,
+         				constraints: {
+         					endDate: new Date(moment(this.start).endOf('month').format('LL')),
+         					startDate: new Date(moment(this.start).format('LL')),
+         					//startDate: new Date('January 5, 2018'),
+         				}, clickEvents: {
+         					click: function (target){
+         						var isValid=false;
+         						console.log(target)
+         
+         						if(this.pay_method == 1){
+         							if([moment().day('Saturday').day(), moment().day('Sunday').day()]
+         								.indexOf(target.date.day()) == -1){
+         								this.$emit('input', target.date.format('LL'));
+         								isValid = true;
+         							} else {
+         								alert('Please choose any weekday as the preferred start date');
+         							}
+         						}
+         
+         						if(this.pay_method == 2){
+         							if([moment().day('Friday').day()].indexOf(target.date.day()) > -1){
+         								this.$emit('input', target.date.format('LL'));
+         								isValid = true;
+         							} else {
+         								alert('Please choose any Friday as the preferred start date');
+         							}
+         						}
+         
+         						this.$emit('trig', isValid);
+         					}.bind(this)
+         				}
+         			});
+         		}
+         	}
+           },
+           data: {
+         	  mode: 'weekly',
+         	  daily_mode: 'interval',
+         	  monthly_mode: 'month_day',
+         	  endby: 'end_date',
+         	  daily_interval_days: 0,
+         	  days: [//'Sunday',
+         	  'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'//, 'Saturday'
+         	  ],
+         	  week_pos: ['first', 'second', 'third', 'fourth', 'last'],
+         	  monthly_week_pos: 'first',
+         	  monthly_day: 'Monday',
+         	  monthly_date_day: 1,
+         	  monthly_date_interval: 0,
+         	  monthly_pos_interval: 0,
+         	  sched_end: '',
+         	  calendar_start: new Date(),
+         	  sched_start:new Date(),
+         		  /*	console.log('moment', moment().format('LL'));
+         		  if(moment().isBefore(moment(new Date(moment().year(),2,0)))){
+         			  console.log('Before the FEB this year', moment(new Date(moment().year(),1,1)).format('LL'));
+         			  return moment(new Date(moment().year(),1,1)).format('LL');
+         		  } else{
+         			  return moment().add(1, 'y').month(1).day(1).format('LL');
+         		  }*/
+         	  sched_occur: 0,
+         	  dayOnWeek:['weekly_friday'],
+         	  weekly_recurring:0,
+         	  pay_sched: '',
+         	  sched : [],
+         	  pay_mode: payment_modes,
+         	  recurr_type: ${formdata.sched_pay},
+         	  pay_method: '1',
+         	  method_to_pay: ${formdata.pay_methods},
+         	  remaining_amt: ${formdata.total_receivable},
+         	  cc_years: [],
+         	  cc_type: 4,
+         	  cc_no: '',
+         	  cc_name: '',
+         	  cc_exp_month: '',
+         	  cc_exp_year: '',
+         	  cc_cvv: '',
+         	  ba_name: '',
+         	  ba_account: '',
+         	  ba_bsb_no: '',
+         	  curr_bsb: eval(${formdata.debtor_details}).acctNum,
+         	  debtor_details: eval(${formdata.debtor_details}),
+         	  use_cc_dflt_opt: eval(${formdata.use_cc_dflt_opt}),
+         	  cc_exist: false,
+         	  bsb_exist: false,
+         	  valid_start_date: false,
+         	  processed: false
+           },
+           created: function(){
+         	console.log('this', this);
+         	var curYear = moment().year();
+         	this.cc_years= [];
+         	for(var i=0;i<12;i++){ this.cc_years.push(curYear); curYear+=1}
+           },
+           computed: {
+         isEFT: function(){
+         if(this.pay_method == 1){
+         	return false;
+         }
+         return true;
+         }
+           },
+           watch: {
+         	pay_sched: function(sched){
+         		if(sched == '')
+         		{
+         			return;
+         		}
+         		console.log('pay_sched', sched);
+         		console.log('pay method', this.pay_method);
+         		var sched_config = JSON.parse(sched.config);
+         		if(sched_config.mode ==  'weekly' && this.pay_method == 2)
+         		{
+         			this.sched_start = this.calendar_start;
+         		}
+         		console.log('this', this);
+         		this.mode = sched_config.mode;
+         
+         		if(sched_config.mode ==  'daily') {
+         			this.daily_mode = sched_config.daily_every;
+         			this.endby = sched_config.recurrence_end;
+         		}
+         
+         		if(sched_config.mode ==  'weekly') {
+         			this.weekly_recurring = sched_config.weekly_recurring;
+         			this.endby = sched_config.recurrence_end;
+         			this.sched_occur = parseInt(sched_config.occurrence_count);
+         			this.sched_end = sched_config.sched_end;
+         			this.dayOnWeek =[];
+         			this.days.forEach(function(d){
+         				if(sched_config['weekly_'+d.toLowerCase()] && sched_config['weekly_'+d.toLowerCase()] === 'T' ) {
+         					this.dayOnWeek.push('weekly_'+d.toLowerCase());
+         				}
+         			}.bind(this));
+         		}
+         
+         		if(sched_config.mode ==  'monthly') {
+         			console.log('monthly');
+         			this.monthly_mode = sched_config.monthly_mode;
+         			this.endby = sched_config.recurrence_end;
+         			this.sched_end = sched_config.sched_end;
+         
+         			this.monthly_date_day = sched_config.monthly_date;
+         			this.monthly_date_interval = sched_config.monthly_date_interval;
+         			this.monthly_day = sched_config.monthly_day;
+         
+         			this.monthly_pos_interval = sched_config.monthly_pos_interval;
+         			this.monthly_week_pos = sched_config.monthly_week;
+         			this.sched_occur = parseInt(sched_config.occurrence_count);
+         		}
+         	},
+         	dayOnWeek: function(val){},
+         	sched_start: function(dateis){
+         		if(dateis){
+         			console.log('dateis', dateis);
+         		}
+         	},
+         	pay_method: function(val){
+         		this.sched = [];
+         		this.pay_sched = "";
+         	}
+           },
+           mounted: function(){},
+           methods:{
+         	evaluateSched: function(compEval){ this.valid_start_date = compEval; },
+         	generateSched: function(){
+         		if(this.dayOnWeek.length > 1 && this.pay_sched.id != '1' ){
+         			alert('Multiple day is not allowed!');
+         			return false;
+         		}
+         
+         		var args = {
+         			pay_method: this.pay_method,
+         			mode: this.mode,
+         			sched_start: this.sched_start,
+         			sched_end: this.sched_end,
+         			daily_every: this.daily_mode,
+         			recurrence_end: this.endby,
+         			daily_interval_days: this.daily_interval_days,
+         			occurrence_count: this.sched_occur,
+         			weekly_recurring: this.weekly_recurring,
+         			monthly_mode: this.monthly_mode,
+         			monthly_date: this.monthly_date_day,
+         			monthly_date_interval: this.monthly_date_interval,
+         			days: this.days,
+         			week_post: this.week_pos,
+         			monthly_week: this.monthly_week_pos,
+         			monthly_day: this.monthly_day,
+         			monthly_pos_interval: this.monthly_pos_interval,
+         			amount: this.remaining_amt
+         		};
+         
+         		this.dayOnWeek.forEach(function(day){
+         			args[day.toLowerCase()] = 'T';
+         		});
+         
+         		this.sched =[];
+         		console.log('app', this);
+         		console.log('args', args);
+         		console.log('this.pay_sched.text: ', this.pay_sched.text);
+         		this.sched = this.processSched(args);
+         		nlapiSetFieldValue('gen_rps', JSON.stringify(this.sched));
+         		nlapiSetFieldValue('pay_meth_dtls', JSON.stringify({
+         				cc_type: this.cc_type,
+         				cc_no: this.cc_no,
+         				cc_name: this.cc_name,
+         				cc_exp_month: this.cc_exp_month,
+         				cc_exp_year: this.cc_exp_year,
+         				cc_cvv: this.cc_cvv,
+         				cc_zip: this.cc_zip,
+         				cc_street: this.cc_street,
+         				ba_name: this.ba_name,
+         				ba_account: this.ba_account,
+         				ba_bsb_no: this.ba_bsb_no,
+         				bsb_exist: this.bsb_exist,
+         				pay_sched: this.pay_sched.text
+         		}));
+         		console.log('sched: ' + JSON.stringify(this.sched));
+         		nlapiSetFieldValue('used_config', JSON.stringify(args));
+         		nlapiSetFieldValue('pay_meth', this.pay_method);
+         		nlapiSetFieldValue('method_pay', this.pay_sched.id);
+         		nlapiSetFieldValue('cc_existing', this.cc_exist);
+         	},
+         	submitForm: function(){
+         		if(!this.processed)
+         		{
+               $('.preloader').css('display', 'block');
+         			var nsForm = $('form')[0];
+         			nsForm.submit();
+         			this.processed = true;
+         		}
+         
+         	},
+         	getWeekPositionMonth: function(date){
+         		mDayStart = moment(date).startOf('month');
+         		mDayEnd = moment(date).endOf('month');
+         
+         	},
+         	processSched: function(args){
+         		console.log('processSched',args);
+         		var days = args.days;
+         		var week_post = args.week_post;
+         		var sched = [];
+         
+         		if(args.mode == 'daily'){
+         			var startingday = moment(args.sched_start);
+         			var endday = moment(args.sched_end);
+         
+         			var daily_interval_days = parseInt(args.daily_interval_days);
+         
+         			if(!args.daily_interval_days) {
+         				daily_interval_days = 1;
+         			}
+         
+         			if(args.daily_every === 'interval') {
+         				if(args.recurrence_end === 'end_date') {
+         
+         					var indexer = 0;
+         
+         					sched.push({
+         						indx: indexer,
+         						proc_date:  startingday.format('LL')
+         					});
+         
+         					var runningday = startingday.add(daily_interval_days, 'days');
+         					indexer+=1;
+         
+         					while(runningday.isSameOrBefore(endday)){
+         						sched.push({
+         							indx: indexer,
+         							proc_date:  runningday.format('LL')
+         						});
+         
+         						indexer+=1;
+         						runningday.add(daily_interval_days, 'days');
+         					}
+         				}
+         
+         				if(args.recurrence_end === 'end_occur') {
+         					var runningday = startingday;
+         
+         					for (var int = 0; int < args.occurrence_count; int++) {
+         						sched.push({
+         							indx: int,
+         							proc_date:  runningday.format('LL')
+         						});
+         
+         						runningday.add(daily_interval_days, 'days');
+         					}
+         				}
+         			}
+         
+         			if(args.daily_every === 'weekdays') {
+         				if(args.recurrence_end === 'end_date'){
+         					var runningday = startingday;
+         
+         					if(runningday.day() == 0){ //SUNDAY
+         						runningday = runningday.day(1);
+         					}
+         
+         					if(runningday.day() == 6){ //SATURDAY START
+         						runningday = runningday.day(8);
+         					}
+         
+         					var indexer = 0;
+         
+         					sched.push({
+         						indx: indexer,
+         						proc_date:  startingday.format('LL')
+         					});
+         
+         					var runningday = startingday.add(1, 'days');
+         					indexer+=1;
+         
+         					while(runningday.isSameOrBefore(endday)){
+         
+         						if(runningday.day() == 0){ //SUNDAY
+         							runningday = runningday.day(1);
+         						}
+         
+         						if(runningday.day() == 6){ //SATURDAY START
+         							runningday = runningday.day(8);
+         						}
+         
+         						sched.push({
+         							indx: indexer,
+         							proc_date:  runningday.format('LL')
+         						});
+         
+         						indexer+=1;
+         						runningday.add(1, 'days');
+         					}
+         				}
+         
+         				if(args.recurrence_end === 'end_occur'){
+         					var runningday = startingday;
+         
+         					for (var int = 0; int < args.occurrence_count; int++) {
+         
+         						if(runningday.day() == 0){ //SUNDAY
+         							runningday = runningday.day(1);
+         						}
+         
+         						if(runningday.day() == 6){ //SATURDAY START
+         							runningday = runningday.day(8);
+         						}
+         
+         						sched.push({
+         							indx: int,
+         							proc_date:  runningday.format('LL')
+         						});
+         
+         						runningday.add(1, 'days');
+         					}
+         				}
+         			}
+         		}
+         
+         		if(args.mode === 'weekly'){
+         			console.log('weekly', args);
+         			var startingday = moment(args.sched_start);
+         			var endday = moment(args.sched_end);
+         
+         			var week_interval = parseInt(args.weekly_recurring);
+         
+         			if(!args.weekly_recurring) {
+         				week_interval = 0;
+         			}
+         
+         
+         			if(args.recurrence_end === 'end_date') {
+         				var runningday = startingday;
+         				var indexer = 0;
+         
+         				var day_hit = [];
+         				var dayinside = 0;
+         
+         				days.forEach(function(day, index){
+         					if(args['weekly_'+day.toLowerCase()] && args['weekly_'+day.toLowerCase()] === 'T') {
+         						day_hit.push(index);
+         
+         						if(runningday.day() <= index){
+         							dayinside+=1;
+         						}
+         					}
+         				});
+         
+         				/*if(dayinside < day_hit.length){
+         					runningday.add(1, 'weeks');
+         				}*/
+         
+         				if(args.pay_method == 1) {
+         					day_hit = [];
+         					day_hit.push(startingday.day());
+         				}
+         
+         				if(args.pay_method == 2){
+         					day_hit = [];
+         					day_hit.push(moment().day('Friday').day());
+         				}
+         
+         				var run = true;
+         				while(run){
+         
+         					day_hit.forEach(function(hit){
+         						if(runningday.day(hit).isAfter(endday)){
+         							run = false;
+         						} else {
+         							sched.push({
+         								indx: indexer,
+         								proc_date:  runningday.day(hit).format('LL')
+         							});
+         
+         							indexer+=1;
+         						}
+         					});
+         					runningday.add(1, 'weeks');
+         					runningday.add(week_interval, 'weeks');
+         				}
+         			}
+         
+         			if(args.recurrence_end === 'end_occur'){
+         
+         				var runningday = startingday;
+         				var indexer = 0;
+         
+         				var day_hit = [];
+         				var dayinside = 0;
+         
+         				//Checking configuration settings & recording multiple instance
+         				days.forEach(function(day, index){
+         					if(args['weekly_'+day.toLowerCase()] && args['weekly_'+day.toLowerCase()] === 'T') {
+         						day_hit.push(moment().day(day).day());
+         
+         						if(runningday.day() <= index){
+         							dayinside+=1;
+         						}
+         					}
+         				});
+         
+         				if(args.pay_method == 1) {
+         					day_hit = [];
+         					day_hit.push(startingday.day());
+         				}
+         
+         				if(args.pay_method == 2){
+         					day_hit = [];
+         					day_hit.push(moment().day('Friday').day());
+         				}
+         
+         				//If the days doesnt fit in
+         				/*
+         				if(dayinside < day_hit.length){
+         					runningday.add(1, 'weeks');
+         					runningday.day(0);
+         				}*/
+         
+         				for (var int = 0; int < args.occurrence_count; int++) {
+         
+         					day_hit.forEach(function(hit){
+         						sched.push({
+         							indx: indexer,
+         							proc_date:  runningday.day(hit).format('LL')
+         						});
+         
+         						indexer+=1;
+         					});
+         					runningday.add(1, 'weeks');
+         
+         					runningday.add(week_interval, 'weeks');
+         				}
+         			}
+         		}
+         
+         		if(args.mode === 'monthly'){
+         			var startingday = moment(args.sched_start);
+         			var endday = moment(args.sched_end);
+         
+         			if(args.pay_method == 1){
+         				args.monthly_mode = "month_day";
+         				args.monthly_date = startingday.date();
+         			}
+         
+         			if(args.pay_method == 2){
+         				args.monthly_week = "fourth";
+         				args.monthly_day = "Friday";
+         				args.monthly_mode = "month_pos";
+         			}
+         
+         			if(args.recurrence_end === 'end_date'){
+         				var month_interval = parseInt(args.monthly_interval);
+         				if(!args.monthly_interval) {
+         					month_interval = 0;
+         				}
+         
+         				var runningday = startingday;
+         				var indexer = 0;
+         				args.monthly_week = args.monthly_week.toLowerCase();
+         
+         				var run  = true;
+         				while(run){
+         					if(runningday.isAfter(endday)){
+         						run = false;
+         					} else {
+         						if(args.monthly_mode === "month_pos") {
+         							//1ST
+         							if(week_post.indexOf(args.monthly_week) === 0){
+         
+         								//runningday = runningday.startOf('month');
+         
+         								console.log('1ST Week, monthly_day: '+args.monthly_day)
+         								runningday.startOf('month');
+         								var before = moment(runningday.format('LL'));
+         
+         								console.log('day', args.monthly_day);
+         
+         								runningday = moment(new Date(runningday.day(
+         									moment().day(args.monthly_day.toLowerCase()).day()
+         								).format('LL')));
+         
+         								console.log('before: '+before.format('LL'));
+         
+         								if(before.isAfter(runningday)) {
+         									runningday = before.add(1, 'weeks');
+         									runningday = moment(new Date(runningday.day(
+         										moment().day(args.monthly_day.toLowerCase()).day()
+         									).format('LL')));
+         								}
+         
+         								console.log('date: ', runningday.format('LL'))
+         							}
+         
+         							//2ND
+         							if(week_post.indexOf(args.monthly_week) === 1){
+         								runningday = runningday.startOf('month');
+         								runningday.add(1, 'weeks');
+         								runningday = moment(runningday.day(
+         									moment().day(args.monthly_day.toLowerCase()).day()
+         								).format('LL'));
+         							}
+         
+         							//3RD
+         							if(week_post.indexOf(args.monthly_week) === 2){
+         								runningday = runningday.startOf('month');
+         								runningday.add(2, 'weeks');
+         								runningday = moment(runningday.day(
+         									moment().day(args.monthly_day.toLowerCase()).day()
+         								).format('LL'));
+         							}
+         
+         							//4TH
+         							if(week_post.indexOf(args.monthly_week) === 3){
+         								runningday = runningday.startOf('month');
+         								// 092418 gpandes - fix for incorrect friday being set when first day of the month is a saturday
+         								if(runningday.day() == 6)
+         								{
+         									runningday.add(1, 'day');
+         								}
+         								runningday.add(3, 'weeks');
+         								runningday = moment(runningday.day(
+         									moment().day(args.monthly_day.toLowerCase()).day()
+         								).format('LL'));
+         
+         								if(indexer == 0){
+         									//console.log('start '+startingday.format('LL')+' running: '+runningday.format('LL'))
+         									if(runningday.isBefore(moment(args.sched_start))){
+         										runningday.add('1', 'months');
+         
+         										runningday = runningday.startOf('month');
+         										runningday.add(3, 'weeks');
+         										runningday = moment(runningday.day(
+         											moment().day(args.monthly_day.toLowerCase()).day()
+         										).format('LL'));
+         
+         									}
+         								}
+         							}
+         
+         							//LAST
+         							if(week_post.indexOf(args.monthly_week) === 4){
+         								runningday = runningday.endOf('month');
+         
+         								/*
+         								runningday = moment(runningday.day(
+         									days.map(function(e){ return e.toLowerCase()}).indexOf(args.monthly_day.toLowerCase())
+         								).format('LL'));*/
+         
+         								var before = moment(runningday.format('L'));
+         
+         								runningday = moment(new Date(runningday.day(
+         									moment().day(args.monthly_day.toLowerCase()).day()
+         								).format('LL')));
+         
+         								console.log('before: '+before.format('LL'));
+         
+         								if(runningday.isAfter(before, 'month')) {
+         									runningday = before.subtract(1, 'weeks');
+         									runningday = moment(new Date(runningday.day(
+         										moment().day(args.monthly_day.toLowerCase()).day()
+         									).format('LL')));
+         								}
+         							}
+         
+         							sched.push({
+         								indx: indexer,
+         								proc_date:  runningday.format('LL')
+         							});
+         						}
+         
+         						if(args.monthly_mode === "month_day") {
+         							//runningday.date(args.monthly_date);
+         							var schedDate = moment(args.sched_start);
+         							schedDate.add(indexer + month_interval, 'months');
+         							sched.push({
+         								indx: indexer,
+         								proc_date:  schedDate.format('LL')
+         							});
+         						}
+         
+         						indexer+=1;
+         						runningday.add(1+month_interval, 'months');
+         					}
+         				}
+         			}
+         
+         			if(args.recurrence_end === 'end_occur'){
+         
+         				if(args.monthly_mode === "month_day") {
+         					//var runningday = startingday;
+         					var indexer = 0;
+         					/*
+         					console.log('running: '+runningday.format('LL')+' '+moment(runningday.format('LL')).date(args.monthly_date).format('LL'));
+         					if(runningday.isAfter(moment(runningday.format('LL')).date(args.monthly_date))){
+         						runningday.add('1', 'months')
+         					}
+         					*/
+         					for (var int = 0; int < args.occurrence_count; int++) {
+         						var runningday = moment(args.sched_start);
+         						runningday.add(indexer + parseFloatOrZero(args.monthly_date_interval), 'months');
+         						//runningday.date(args.monthly_date);
+         						sched.push({
+         							indx: indexer,
+         							proc_date:  runningday.format('LL')
+         						});
+         						indexer+=1;
+         						//runningday.add(1+parseFloatOrZero(args.monthly_date_interval), 'months');
+         					}
+         				}
+         
+         				if(args.monthly_mode === "month_pos") {
+         					var indexer = 0;
+         
+         					var runningday = startingday;
+         
+         					for (var int = 0; int < args.occurrence_count; int++) {
+         
+         						//1ST
+         						if(week_post.indexOf(args.monthly_week) === 0){
+         
+         							//runningday = runningday.startOf('month');
+         
+         							console.log('1ST Week, monthly_day: '+args.monthly_day)
+         							runningday.startOf('month');
+         							var before = moment(runningday.format('LL'));
+         
+         							console.log('day', args.monthly_day);
+         
+         							runningday = moment(new Date(runningday.day(
+         								moment().day(args.monthly_day.toLowerCase()).day()
+         							).format('LL')));
+         
+         							console.log('before: '+before.format('LL'));
+         
+         							if(before.isAfter(runningday)) {
+         								runningday = before.add(1, 'weeks');
+         								runningday = moment(new Date(runningday.day(
+         									moment().day(args.monthly_day.toLowerCase()).day()
+         								).format('LL')));
+         							}
+         
+         							console.log('date: ', runningday.format('LL'))
+         						}
+         
+         						//2ND
+         						if(week_post.indexOf(args.monthly_week) === 1){
+         							runningday = runningday.startOf('month');
+         							runningday.add(1, 'weeks');
+         							runningday = moment(runningday.day(
+         								moment().day(args.monthly_day.toLowerCase()).day()
+         							).format('LL'));
+         						}
+         
+         						//3RD
+         						if(week_post.indexOf(args.monthly_week) === 2){
+         							runningday = runningday.startOf('month');
+         							runningday.add(2, 'weeks');
+         							runningday = moment(runningday.day(
+         								moment().day(args.monthly_day.toLowerCase()).day()
+         							).format('LL'));
+         						}
+         
+         						//4TH
+         						if(week_post.indexOf(args.monthly_week) === 3){
+         
+         							runningday = runningday.startOf('month');
+         							// 092418 gpandes - fix for incorrect friday being set when first day of the month is a saturday
+         							if(runningday.day() == 6)
+         							{
+         								runningday.add(1, 'day');
+         							}
+         							runningday.add(3, 'weeks');
+         							runningday = moment(runningday.day(
+         								moment().day(args.monthly_day.toLowerCase()).day()
+         							).format('LL'));
+         
+         							//console.log('index: '+int+' start: '+moment(args.sched_start).format('LL')+'  end: '+runningday.format('LL'));
+         							if(int == 0){
+         								if(runningday.isBefore(moment(args.sched_start))){
+         									runningday.add('1', 'months');
+         
+         									runningday = runningday.startOf('month');
+         									runningday.add(3, 'weeks');
+         									runningday = moment(runningday.day(
+         										moment().day(args.monthly_day.toLowerCase()).day()
+         									).format('LL'));
+         
+         								}
+         							}
+         						}
+         
+         						//LAST
+         						if(week_post.indexOf(args.monthly_week) === 4){
+         							runningday = runningday.endOf('month');
+         
+         							/*
+         							runningday = moment(runningday.day(
+         								days.map(function(e){ return e.toLowerCase()}).indexOf(args.monthly_day.toLowerCase())
+         							).format('LL'));*/
+         
+         							var before = moment(runningday.format('L'));
+         
+         							runningday = moment(new Date(runningday.day(
+         								moment().day(args.monthly_day.toLowerCase()).day()
+         							).format('LL')));
+         
+         							console.log('before: '+before.format('LL'));
+         
+         							if(runningday.isAfter(before, 'month')) {
+         								runningday = before.subtract(1, 'weeks');
+         								runningday = moment(new Date(runningday.day(
+         									moment().day(args.monthly_day.toLowerCase()).day()
+         								).format('LL')));
+         							}
+         						}
+         
+         						sched.push({
+         							indx: indexer,
+         							proc_date:  runningday.format('LL')
+         						});
+         
+         						indexer+=1;
+         						//console.log('runningday added by: '+(1+parseFloatOrZero(args.monthly_pos_interval))+' months',runningday.format('LL'));
+         
+         						runningday.add((1+parseFloatOrZero(args.monthly_pos_interval)), 'months');
+         					}
+         				}
+         			}
+         
+         		}
+         
+         		var ea_rrow = args.amount/sched.length;
+         
+         		for(int =0;int <sched.length;int++){
+         			sched[int].amount= ea_rrow.toFixed(2);
+         		}
+         
+         		this.sched_start = sched[0].proc_date
+         		return sched;
+         	},
+         	applySched: function(){
+         		console.log('apply', this.sched);
+         	},
+         	isNumber: function(e, args){
+         
+         		if(isNaN(parseInt(e.key))){
+         			e.preventDefault();
+         		}
+         
+         		if(args && args.value && args.value.length > args.count){
+         			e.preventDefault();
+         		}
+         	},
+         	checkPress: function(e){
+         		if(e.key == 'v' || e.key == 'V'){
+         			e.preventDefault();
+         		}
+         	},
+         	genShow: function(modalId){
+         		if(this.pay_sched.id == 4)
+         		{
+         			var willSubmit = confirm('Are you sure you want to submit form?');
+         			if(willSubmit)
+         			{
+         				var args = {
+         						pay_method: this.pay_method,
+         						mode: this.mode,
+         						sched_start: this.sched_start,
+         						sched_end: this.sched_end,
+         						daily_every: this.daily_mode,
+         						recurrence_end: this.endby,
+         						daily_interval_days: this.daily_interval_days,
+         						occurrence_count: this.sched_occur,
+         						weekly_recurring: this.weekly_recurring,
+         						monthly_mode: this.monthly_mode,
+         						monthly_date: this.monthly_date_day,
+         						monthly_date_interval: this.monthly_date_interval,
+         						days: this.days,
+         						week_post: this.week_pos,
+         						monthly_week: this.monthly_week_pos,
+         						monthly_day: this.monthly_day,
+         						monthly_pos_interval: this.monthly_pos_interval,
+         						amount: this.remaining_amt
+         					};
+         
+         					this.dayOnWeek.forEach(function(day){
+         						args[day.toLowerCase()] = 'T';
+         					});
+         
+         					nlapiSetFieldValue('pay_meth_dtls', JSON.stringify({
+         							cc_type: this.cc_type,
+         							cc_no: this.cc_no,
+         							cc_name: this.cc_name,
+         							cc_exp_month: this.cc_exp_month,
+         							cc_exp_year: this.cc_exp_year,
+         							cc_cvv: this.cc_cvv,
+         							cc_zip: this.cc_zip,
+         							cc_street: this.cc_street,
+         							ba_name: this.ba_name,
+         							ba_account: this.ba_account,
+         							ba_bsb_no: this.ba_bsb_no,
+         							bsb_exist: this.bsb_exist,
+         							pay_sched: this.pay_sched.text
+         					}));
+         					nlapiSetFieldValue('used_config', JSON.stringify(args));
+         					nlapiSetFieldValue('pay_meth', this.pay_method);
+         					nlapiSetFieldValue('method_pay', this.pay_sched.id);
+         					nlapiSetFieldValue('cc_existing', this.cc_exist);
+         
+         				this.submitForm();
+         			}
+         		}
+         		else
+         		{
+         			this.generateSched();
+         			$('#'+modalId).modal('toggle');
+         		}
+         
+         	},
+         	checkStep: function(step){
+         
+         		if(step == 2) {
+         			if(this.pay_method == 1){
+         				if(this.cc_exist){
+         					return true;
+         				}
+         
+         				if(this.check(['cc_type',
+         				'cc_no',
+         				'cc_name',
+         				'cc_exp_month',
+         				'cc_exp_year']).length){
+         					return false
+         				};
+         
+         				if(this.cc_no.length < 13)
+         				{
+         					return false;
+         				}
+         			}
+         
+         			if(this.pay_method == 2){
+         				if(this.bsb_exist)
+         				{
+         					return true;
+         				}
+         				if(this.check(['ba_name', 'ba_account', 'ba_bsb_no']).length)
+         				{
+         					return false;
+         				}
+         				if(this.ba_bsb_no.length < 6)
+         				{
+         					return false;
+         				}
+         			}
+         		}
+         
+         		if(step == 3){
+         			if(!this.checkStep('2')){ return false; }
+         			if(this.check(['pay_sched']).length){
+         				return false;
+         			}
+         		}
+         
+         		if(step == 4){
+         			if(!this.checkStep('3')){ return false; }
+         			if(this.pay_sched.id == 4)
+         			{
+         				return true;
+         			}
+         
+         			var currDate = new Date();
+         			currDate.setHours(0,0,0,0);
+         			var sched_start_date = new Date(this.sched_start);
+         			if(this.check(['sched_start']).length || currDate.getTime() > sched_start_date.getTime()){
+         				return false;
+         			}
+         			if(!this.valid_start_date && this.pay_method == 1) {
+         				return false;
+         			}
+         		}
+         
+         		return true;
+         },
+         getProgressPercent: function () {
+         var completed = 25;
+         for(var i = 2; i <= 4; i ++) {
+         if(this.checkStep(i)) completed += 25;
+         }
+         
+         return completed;
+         },
+         currentStep: function() {
+         if(!this.checkStep('2')) return 2;
+         if(this.checkStep('2') && !this.checkStep('3')) return 3;
+         if(this.checkStep('2') && this.checkStep('3') && !this.checkStep('4')) return 4;
+         if(this.checkStep('2') && this.checkStep('3') && this.checkStep('4')) return 5;
+         },
+         	check: function(args){
+         		var is_not_valid = [];
+         		if(Array.isArray(args)){
+         			args.forEach(function(v){
+         				if(this[v] === null || this[v] == ''){
+         					is_not_valid.push(v);
+         				}
+         			}.bind(this));
+         		}
+         		return is_not_valid;
+         	}
+           }
+         });
+         
+         function parseFloatOrZero(a){a=parseFloat(a);return isNaN(a)?0:a}
+      </script>
+   </body>
+</html>
