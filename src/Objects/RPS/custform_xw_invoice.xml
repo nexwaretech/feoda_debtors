@@ -375,11 +375,6 @@
           <neverEmpty>F</neverEmpty>
           <columns>
             <column>
-              <id>JOB</id>
-              <label>Project</label>
-              <visible>F</visible>
-            </column>
-            <column>
               <id>ITEM</id>
               <label>Item</label>
               <visible>T</visible>

@@ -80,8 +80,8 @@ function runScript(record, search, email, runtime, render, format, lib, lib_emai
 
         var objInvoices = {};
         objInvoices[context.key] = JSON.parse(context.value);
-        objInvoices = lib.searchContacts(objInvoices);
-
+        objInvoices = lib.searchContacts(objInvoices, true);
+ log.debug(LOG_TITLE, 'objInvoices '+ JSON.stringify(objInvoices));
 
         for (let invoice in objInvoices)
         {

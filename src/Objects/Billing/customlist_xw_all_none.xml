@@ -1,0 +1,16 @@
+<customlist scriptid="customlist_xw_all_none">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>All None</name>
+  <customvalues>
+    <customvalue scriptid="val_116037_t2498425_105">
+      <isinactive>F</isinactive>
+      <value>All</value>
+    </customvalue>
+    <customvalue scriptid="val_116038_t2498425_640">
+      <isinactive>F</isinactive>
+      <value>None</value>
+    </customvalue>
+  </customvalues>
+</customlist>

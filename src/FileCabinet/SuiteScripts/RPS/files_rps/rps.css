@@ -668,7 +668,7 @@ input[type="radio"]:checked {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  background: url(./assets/image/down_arrow.png) right no-repeat;
+  background: url(./images_shared/down_arrow.png) right no-repeat;
   padding: 5px 25px 5px 18px;
   font-size: 12px;
   letter-spacing: 1px;

@@ -1,18 +1,45 @@
-<mapreducescript scriptid="customscript_xw_mr_newinvemlwoopb">
+<mapreducescript scriptid="customscript_xw_mr_invoice">
   <description></description>
   <isinactive>F</isinactive>
-  <name>nexWare_MR | SendNewInvEMLWithoutOB</name>
+  <name>nexWare_MR | Generate Annual Invoice</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
-  <scriptfile>[/SuiteScripts/RPS/XW_MR_SendInvoiceEmailOnDemand.js]</scriptfile>
+  <scriptfile>[/SuiteScripts/Billing/XW_MR_GenerateAnnualInvoice.js]</scriptfile>
   <scriptcustomfields>
-    <scriptcustomfield scriptid="custscript_xw_mr_pr_invwoopbss">
+    <scriptcustomfield scriptid="custscript_xw_mr_pr_myearstu">
       <accesslevel>2</accesslevel>
       <applyformatting>F</applyformatting>
       <checkspelling>F</checkspelling>
       <defaultchecked>F</defaultchecked>
-      <defaultselection>[scriptid=customsearch_xw_invoicewoob]</defaultselection>
+      <defaultselection></defaultselection>
+      <defaultvalue></defaultvalue>
+      <description></description>
+      <displayheight></displayheight>
+      <displaytype>NORMAL</displaytype>
+      <displaywidth></displaywidth>
+      <dynamicdefault></dynamicdefault>
+      <fieldtype>CLOBTEXT</fieldtype>
+      <help></help>
+      <isformula>F</isformula>
+      <ismandatory>F</ismandatory>
+      <label>Customer</label>
+      <linktext></linktext>
+      <maxlength></maxlength>
+      <maxvalue></maxvalue>
+      <minvalue></minvalue>
+      <onparentdelete></onparentdelete>
+      <searchlevel>2</searchlevel>
+      <selectrecordtype></selectrecordtype>
+      <setting></setting>
+      <storevalue>T</storevalue>
+    </scriptcustomfield>
+    <scriptcustomfield scriptid="custscript_xw_mr_pr_binstructss">
+      <accesslevel>2</accesslevel>
+      <applyformatting>F</applyformatting>
+      <checkspelling>F</checkspelling>
+      <defaultchecked>F</defaultchecked>
+      <defaultselection></defaultselection>
       <defaultvalue></defaultvalue>
       <description></description>
       <displayheight></displayheight>
@@ -23,7 +50,7 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>Invoice Saved Search</label>
+      <label>Billing Instructions</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>
@@ -34,7 +61,34 @@
       <setting></setting>
       <storevalue>T</storevalue>
     </scriptcustomfield>
-    <scriptcustomfield scriptid="custscript_xw_mr_pr_invintid">
+    <scriptcustomfield scriptid="custscript_xw_mr_pr_faminvform">
+      <accesslevel>2</accesslevel>
+      <applyformatting>F</applyformatting>
+      <checkspelling>F</checkspelling>
+      <defaultchecked>F</defaultchecked>
+      <defaultselection></defaultselection>
+      <defaultvalue></defaultvalue>
+      <description></description>
+      <displayheight></displayheight>
+      <displaytype>NORMAL</displaytype>
+      <displaywidth></displaywidth>
+      <dynamicdefault></dynamicdefault>
+      <fieldtype>SELECT</fieldtype>
+      <help></help>
+      <isformula>F</isformula>
+      <ismandatory>F</ismandatory>
+      <label>Invoice Form</label>
+      <linktext></linktext>
+      <maxlength></maxlength>
+      <maxvalue></maxvalue>
+      <minvalue></minvalue>
+      <onparentdelete>NO_ACTION</onparentdelete>
+      <searchlevel>2</searchlevel>
+      <selectrecordtype>-171</selectrecordtype>
+      <setting></setting>
+      <storevalue>T</storevalue>
+    </scriptcustomfield>
+    <scriptcustomfield scriptid="custscript_xw_mr_pr_debtor">
       <accesslevel>2</accesslevel>
       <applyformatting>F</applyformatting>
       <checkspelling>F</checkspelling>
@@ -50,7 +104,7 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>Invoice Internal ID</label>
+      <label>Debtor</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>
@@ -61,81 +115,27 @@
       <setting></setting>
       <storevalue>T</storevalue>
     </scriptcustomfield>
-    <scriptcustomfield scriptid="custscript_xw_mr_pr_invpdftpl3">
-      <accesslevel>2</accesslevel>
-      <applyformatting>F</applyformatting>
-      <checkspelling>F</checkspelling>
-      <defaultchecked>F</defaultchecked>
-      <defaultselection>[scriptid=custtmpl_xw_invoice]</defaultselection>
-      <defaultvalue></defaultvalue>
-      <description></description>
-      <displayheight></displayheight>
-      <displaytype>NORMAL</displaytype>
-      <displaywidth></displaywidth>
-      <dynamicdefault></dynamicdefault>
-      <fieldtype>SELECT</fieldtype>
-      <help></help>
-      <isformula>F</isformula>
-      <ismandatory>F</ismandatory>
-      <label>nexWare_MR_PR | Invoice PDF Template</label>
-      <linktext></linktext>
-      <maxlength></maxlength>
-      <maxvalue></maxvalue>
-      <minvalue></minvalue>
-      <onparentdelete>NO_ACTION</onparentdelete>
-      <searchlevel>2</searchlevel>
-      <selectrecordtype>-387</selectrecordtype>
-      <setting></setting>
-      <storevalue>T</storevalue>
-    </scriptcustomfield>
-    <scriptcustomfield scriptid="custscript_xw_mr_pr_stmtform3">
-      <accesslevel>2</accesslevel>
-      <applyformatting>F</applyformatting>
-      <checkspelling>F</checkspelling>
-      <defaultchecked>F</defaultchecked>
-      <defaultselection></defaultselection>
-      <defaultvalue></defaultvalue>
-      <description></description>
-      <displayheight></displayheight>
-      <displaytype>NORMAL</displaytype>
-      <displaywidth></displaywidth>
-      <dynamicdefault></dynamicdefault>
-      <fieldtype>SELECT</fieldtype>
-      <help></help>
-      <isformula>F</isformula>
-      <ismandatory>F</ismandatory>
-      <label>nexWare_MR_PR | Scripted Statement Form</label>
-      <linktext></linktext>
-      <maxlength></maxlength>
-      <maxvalue></maxvalue>
-      <minvalue></minvalue>
-      <onparentdelete>NO_ACTION</onparentdelete>
-      <searchlevel>2</searchlevel>
-      <selectrecordtype>-171</selectrecordtype>
-      <setting></setting>
-      <storevalue>T</storevalue>
-    </scriptcustomfield>
   </scriptcustomfields>
   <scriptdeployments>
-    <scriptdeployment scriptid="customdeploy_xw_mr_newinvemlwoopb">
+    <scriptdeployment scriptid="customdeploy_xw_mr_invoice">
       <buffersize>1</buffersize>
       <concurrencylimit>1</concurrencylimit>
-      <custscript_xw_mr_pr_invintid></custscript_xw_mr_pr_invintid>
-      <custscript_xw_mr_pr_invpdftpl3>[scriptid=custtmpl_xw_invoice]</custscript_xw_mr_pr_invpdftpl3>
-      <custscript_xw_mr_pr_invwoopbss>[scriptid=customsearch_xw_invoicewoob]</custscript_xw_mr_pr_invwoopbss>
-      <custscript_xw_mr_pr_stmtform3></custscript_xw_mr_pr_stmtform3>
+      <custscript_xw_mr_pr_binstructss>[scriptid=customsearch_xw_billing_instruction]</custscript_xw_mr_pr_binstructss>
+      <custscript_xw_mr_pr_debtor></custscript_xw_mr_pr_debtor>
+      <custscript_xw_mr_pr_faminvform>[scriptid=custform_xw_invoice]</custscript_xw_mr_pr_faminvform>
+      <custscript_xw_mr_pr_myearstu></custscript_xw_mr_pr_myearstu>
       <isdeployed>T</isdeployed>
       <loglevel>DEBUG</loglevel>
       <queueallstagesatonce>T</queueallstagesatonce>
       <runasrole>ADMINISTRATOR</runasrole>
       <status>NOTSCHEDULED</status>
-      <title>Send New Invoice Email Without Open Bal</title>
+      <title>nexWare_MR | Generate Annual Invoice</title>
       <yieldaftermins>60</yieldaftermins>
       <recurrence>
         <single>
           <repeat></repeat>
-          <startdate>2019-01-25</startdate>
-          <starttime>06:00:00Z</starttime>
+          <startdate>2022-09-23</startdate>
+          <starttime>08:00:00Z</starttime>
         </single>
       </recurrence>
     </scriptdeployment>

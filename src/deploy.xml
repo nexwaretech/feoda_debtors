@@ -3,21 +3,11 @@
         <path>~/AccountConfiguration/*</path>
     </configuration>
     <files>
-        <!--
-       <path>~/FileCabinet/SuiteScripts/RPS/lib_rps.js</path>
-        <path>~/FileCabinet/SuiteScripts/RPS/XW_SL_InternalGeneratePaymentSchedule.js</path
-         -->
-
-        <path>~/FileCabinet/SuiteScripts/RPS/*</path>
-        <path>~/FileCabinet/SuiteScripts/lib_shared/*</path>
-       <path>~/FileCabinet/SuiteScripts/RPS/files_rps/*</path>
-       <path>~/FileCabinet/SuiteScripts/images_shared/*</path>
-
+        <path>~/FileCabinet/*</path>
     </files>
 
     <objects>
-
-    <path>~/Objects/RPS/*</path>
+    <path>~/Objects/*</path>
 
    </objects>
 

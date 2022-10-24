@@ -1,0 +1,56 @@
+<customlist scriptid="customlist_xw_months">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>Months</name>
+  <customvalues>
+    <customvalue scriptid="val_116410_t2498425_730">
+      <isinactive>F</isinactive>
+      <value>Jan</value>
+    </customvalue>
+    <customvalue scriptid="val_116411_t2498425_118">
+      <isinactive>F</isinactive>
+      <value>Feb</value>
+    </customvalue>
+    <customvalue scriptid="val_116412_t2498425_313">
+      <isinactive>F</isinactive>
+      <value>Mar</value>
+    </customvalue>
+    <customvalue scriptid="val_116413_t2498425_617">
+      <isinactive>F</isinactive>
+      <value>Apr</value>
+    </customvalue>
+    <customvalue scriptid="val_116414_t2498425_800">
+      <isinactive>F</isinactive>
+      <value>May</value>
+    </customvalue>
+    <customvalue scriptid="val_116415_t2498425_937">
+      <isinactive>F</isinactive>
+      <value>Jun</value>
+    </customvalue>
+    <customvalue scriptid="val_116416_t2498425_846">
+      <isinactive>F</isinactive>
+      <value>Jul</value>
+    </customvalue>
+    <customvalue scriptid="val_116417_t2498425_648">
+      <isinactive>F</isinactive>
+      <value>Aug</value>
+    </customvalue>
+    <customvalue scriptid="val_116418_t2498425_221">
+      <isinactive>F</isinactive>
+      <value>Sep</value>
+    </customvalue>
+    <customvalue scriptid="val_116419_t2498425_348">
+      <isinactive>F</isinactive>
+      <value>Oct</value>
+    </customvalue>
+    <customvalue scriptid="val_116420_t2498425_812">
+      <isinactive>F</isinactive>
+      <value>Nov</value>
+    </customvalue>
+    <customvalue scriptid="val_116421_t2498425_537">
+      <isinactive>F</isinactive>
+      <value>Dec</value>
+    </customvalue>
+  </customvalues>
+</customlist>

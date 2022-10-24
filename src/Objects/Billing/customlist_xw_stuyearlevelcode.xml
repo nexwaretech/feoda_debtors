@@ -1,0 +1,32 @@
+<customlist scriptid="customlist_xw_stuyearlevelcode">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>STE - Year/Level Code</name>
+  <customvalues>
+    <customvalue scriptid="val_222277_4553194_326">
+      <isinactive>F</isinactive>
+      <value>Y07</value>
+    </customvalue>
+    <customvalue scriptid="val_222278_4553194_662">
+      <isinactive>F</isinactive>
+      <value>Y08</value>
+    </customvalue>
+    <customvalue scriptid="val_222279_4553194_947">
+      <isinactive>F</isinactive>
+      <value>Y09</value>
+    </customvalue>
+    <customvalue scriptid="val_222280_4553194_634">
+      <isinactive>F</isinactive>
+      <value>Y10</value>
+    </customvalue>
+    <customvalue scriptid="val_222281_4553194_456">
+      <isinactive>F</isinactive>
+      <value>Y11</value>
+    </customvalue>
+    <customvalue scriptid="val_222282_4553194_430">
+      <isinactive>F</isinactive>
+      <value>Y12</value>
+    </customvalue>
+  </customvalues>
+</customlist>

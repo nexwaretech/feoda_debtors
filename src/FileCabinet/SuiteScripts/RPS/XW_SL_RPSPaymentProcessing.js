@@ -324,16 +324,7 @@ function createABAFile(objParams) {
     fill: '0',
   });
 
-  var recordNum = arrData.length;
-  //    recordNum = fillData({
-  //        justified : 'RIGHT',
-  //        data : recordNum,
-  //        reqdLength : 6,
-  //        fill : '0'
-  //     });
-  //    contents += '7' + traceBSB + '            ' + amount + amount + '0000000000' + '                        ' +
-  //    recordNum;
-
+  var recordNum = arrData.length
   //-- last transaction line
   var lastLineTitle = eftABARec.getValue('custrecord_xw_eftbankaccname');
   lastLineTitle = fillData({
@@ -585,7 +576,7 @@ function displayTransSublist(objParams) {
     toDate = toField.defaultValue;
   }
 
-  var arrData = getData({
+  var arrData = lib.searchBankPaymentInvoicesToProcess({
     fromDate: fromDate,
     toDate: toDate,
   });
@@ -682,152 +673,6 @@ function displayTransSublist(objParams) {
   return form;
 }
 
-function getData(objParams) {
-  var fromDate = objParams.fromDate;
-  var toDate = objParams.toDate;
-
-  var operator;
-  var filterValues;
-
-  if (fromDate && toDate) {
-    operator = SEARCHMDL.Operator.WITHIN;
-    filterValues = [fromDate, toDate];
-  } else if (fromDate && !toDate) {
-    operator = SEARCHMDL.Operator.ONORAFTER;
-    filterValues = fromDate;
-  } else if (!fromDate && toDate) {
-    operator = SEARCHMDL.Operator.ONORBEFORE;
-    filterValues = toDate;
-  } else {
-    return null;
-  }
-
-  var arrFilters = [];
-  arrFilters.push(
-    SEARCHMDL.createFilter({
-      name: 'custrecord_xw_rpsrecprocdate',
-      join: 'custrecord_xw_rpsrecrpsid',
-      operator: operator,
-      values: filterValues,
-    })
-  );
-
-  var ss = lib.SAVED_SEARCH.dd_processing;
-  var searchObj = SEARCHMDL.load({
-    id: ss,
-  });
-
-  var arrData = [];
-  var totalAmount = 0;
-
-  searchObj.filters = searchObj.filters.concat(arrFilters);
-
-  var objResultset = searchObj.run();
-  var intSearchIndex = 0;
-  var objResultSlice = null;
-  var maxSearchReturn = 1000;
-  var arrReturnSearchResults = [];
-
-  var maxResults = searchObj.maxResults || 0;
-
-  do {
-    var start = intSearchIndex;
-    var end = intSearchIndex + maxSearchReturn;
-
-    if (maxResults && maxResults <= end) {
-      end = maxResults;
-    }
-
-    objResultSlice = objResultset.getRange(start, end);
-
-    if (!objResultSlice) {
-      break;
-    }
-
-    arrReturnSearchResults = arrReturnSearchResults.concat(objResultSlice);
-    intSearchIndex = intSearchIndex + objResultSlice.length;
-
-    if (maxResults && maxResults == intSearchIndex) {
-      break;
-    }
-  } while (objResultSlice.length >= maxSearchReturn);
-
-  if (arrReturnSearchResults && arrReturnSearchResults.length > 0) {
-    for (var searchIdx = 0; searchIdx < arrReturnSearchResults.length; searchIdx++) {
-      var r = arrReturnSearchResults[searchIdx];
-      var objBodyData = {};
-      var bsb = r.getValue(r.columns[0]);
-      objBodyData.bsb = bsb.slice(0, 3) + '-' + bsb.slice(3);
-
-      var accountNum = r.getValue(r.columns[1]);
-      if (accountNum.length > 9) {
-        accountNum = accountNum.replace(/-/g, '');
-      }
-
-      objBodyData.accountNum = accountNum;
-
-      var amount = r.getValue(r.columns[2]);
-      objBodyData.amount = amount;
-
-      objBodyData.titleAcctName = fillData({
-        justified: 'LEFT',
-        data: r.getValue(r.columns[3]),
-        reqdLength: 32,
-        fill: ' ',
-      });
-
-      objBodyData.rpsId = r.getValue(r.columns[4]);
-      objBodyData.processingDate = r.getValue(r.columns[5]);
-      objBodyData.name = r.getValue(r.columns[6]);
-      objBodyData.invoice = r.getText(r.columns[7]);
-      objBodyData.rpsName = r.getValue(r.columns[8]);
-      objBodyData.famCode = r.getValue(r.columns[9]);
-
-      arrData.push(objBodyData);
-    }
-  }
-
-  //    searchObj.run().each(function(r){
-  //
-  //        var objBodyData = {};
-  //        var bsb = r.getValue(r.columns[0]);
-  //        objBodyData.bsb = bsb.slice(0,3) + '-' + bsb.slice(3);
-  //
-  //        var accountNum = r.getValue(r.columns[1]);
-  //        if(accountNum.length > 9)
-  //        {
-  //            accountNum = accountNum.replace(/-/g, '');
-  //        }
-  //
-  //        objBodyData.accountNum = accountNum;
-  //
-  //        var amount = r.getValue(r.columns[2]);
-  //        objBodyData.amount = amount;
-  //
-  //        objBodyData.titleAcctName = fillData({
-  //            justified : 'LEFT',
-  //            data : r.getValue(r.columns[3]),
-  //            reqdLength : 32,
-  //            fill : ' '
-  //         });
-  //
-  //
-  //        objBodyData.rpsId = r.getValue(r.columns[4]);
-  //        objBodyData.processingDate = r.getValue(r.columns[5]);
-  //        objBodyData.name = r.getValue(r.columns[6]);
-  //        objBodyData.invoice = r.getText(r.columns[7]);
-  //        objBodyData.rpsName = r.getValue(r.columns[8]);
-  //
-  //        arrData.push(objBodyData);
-  //        return true;
-  //    });
-
-  var objData = {};
-  objData.body = arrData;
-  objData.totalAmount = totalAmount.toString();
-
-  return arrData;
-}
 
 function fillData(objParams) {
   var data = objParams.data ? objParams.data.toString() : '';

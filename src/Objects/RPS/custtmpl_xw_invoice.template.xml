@@ -7,9 +7,6 @@
 				<tr>
 					<td align="left">
 
-						<img style="width:300;height:120px;left:-30px;" 
-							src="${companyInformation.logoUrl}"
-						/>
 
 					</td>
 				</tr>

@@ -1,0 +1,60 @@
+<customlist scriptid="customlist_xw_statsdropdown">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>Student Status Values</name>
+  <customvalues>
+    <customvalue scriptid="val_38612_4553194_sb1_591">
+      <isinactive>F</isinactive>
+      <value>Accepted</value>
+    </customvalue>
+    <customvalue scriptid="val_38613_4553194_sb1_630">
+      <isinactive>F</isinactive>
+      <value>Waitlist</value>
+    </customvalue>
+    <customvalue scriptid="val_38614_4553194_sb1_468">
+      <isinactive>F</isinactive>
+      <value>Info</value>
+    </customvalue>
+    <customvalue scriptid="val_38615_4553194_sb1_939">
+      <isinactive>F</isinactive>
+      <value>Graduated</value>
+    </customvalue>
+    <customvalue scriptid="val_38616_4553194_sb1_635">
+      <isinactive>F</isinactive>
+      <value>Follow Up</value>
+    </customvalue>
+    <customvalue scriptid="val_38617_4553194_sb1_760">
+      <isinactive>F</isinactive>
+      <value>Cancelled</value>
+    </customvalue>
+    <customvalue scriptid="val_38618_4553194_sb1_666">
+      <isinactive>F</isinactive>
+      <value>Attending</value>
+    </customvalue>
+    <customvalue scriptid="val_38619_4553194_sb1_774">
+      <isinactive>F</isinactive>
+      <value>Sibling</value>
+    </customvalue>
+    <customvalue scriptid="val_38620_4553194_sb1_210">
+      <isinactive>F</isinactive>
+      <value>Offered</value>
+    </customvalue>
+    <customvalue scriptid="val_38621_4553194_sb1_796">
+      <isinactive>F</isinactive>
+      <value>Left</value>
+    </customvalue>
+    <customvalue scriptid="val_221602_4553194_512">
+      <isinactive>F</isinactive>
+      <value>Declined</value>
+    </customvalue>
+    <customvalue scriptid="val_38622_4553194_sb1_376">
+      <isinactive>F</isinactive>
+      <value>N/A</value>
+    </customvalue>
+    <customvalue scriptid="val_101999_t2364134_684">
+      <isinactive>F</isinactive>
+      <value>Applied</value>
+    </customvalue>
+  </customvalues>
+</customlist>

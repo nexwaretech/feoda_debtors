@@ -8,6 +8,7 @@
 define([
   '../lib_shared/moment-with-locales.min',
   './lib_rps',
+  '../lib_config/lib_config',
   'N/ui/serverWidget',
   'N/search',
   'N/config',
@@ -15,7 +16,7 @@ define([
   'N/record',
   'N/redirect',
   'N/render',
-], function (moment, lib, serverWidget, search, config, file, record, redirect, render) {
+], function (moment, lib, lib_config, serverWidget, search, config, file, record, redirect, render) {
   /**
    * Definition of the Suitelet script trigger point.
    *
@@ -132,7 +133,7 @@ define([
         'status' : lib.RPSSTAT_LIST.active,
         'schedtype' :configid,
         'bank' : pay_id,
-        'cc' : cc_id.toString(),
+        'cc' : cc_id ? cc_id.toString() : '',
         'ps' : ps,
         'config_used' : config_used,
       }
@@ -287,7 +288,7 @@ define([
     renderer.addCustomDataSource({
       alias: 'COMPANY',
       format: render.DataSource.JSON,
-      data: JSON.stringify(lib.COMPANY),
+      data: JSON.stringify(lib_config.COMPANY),
     });
 
     renderer.addCustomDataSource({
@@ -373,7 +374,7 @@ define([
     renderer.addCustomDataSource({
       alias: 'COMPANY',
       format: render.DataSource.JSON,
-      data: JSON.stringify(lib.COMPANY),
+      data: JSON.stringify(lib_config.COMPANY),
     });
 
     return renderer.renderAsString();

@@ -3,13 +3,9 @@
  * @NModuleScope SameAccount
  * Author: nexWare
  */
-define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shared/moment-with-locales.min',], function ( url, search,record, https,message, moment) {
+define(['N/format', 'N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shared/moment-with-locales.min'], function ( format, url, search,record, https,message, moment) {
 
-    const COMPANY = {
-        name : 'Weddington Academy',
-        email : 'accounts@weddingtonacademy.com.au',
-        phone : '(03) 5562 0099'
-    }
+
 
     const LIST = {
         pay_sched_type : 'customlist_xw_payscheduletype',
@@ -40,7 +36,7 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
             scriptId: 'customscript_xw_sl_intgenpaysched',
             deploymentId: 'customdeploy_xw_sl_intgenpaysched',
             params : {
-               id : 'custscript_xw_sl_pr_gentranid'
+                id : 'custscript_xw_sl_pr_gentranid'
             }
         },
         sl_gen_sched_cust : {
@@ -66,7 +62,7 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
         },
         sl_pay_process : {
             scriptId : 'customscript_xw_sl_procpayment',
-            scriptPath : './XW_CS_InvRPS.js',
+            scriptPath : './XW_CS_RPSPaymentProcessing.js',
             params : {
                 processed : 'custscript_xw_sl_pr_rps_procflval',
                 aba : 'custscript_xw_sl_pr_abafolderid'
@@ -250,14 +246,14 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
             type: listname,
             columns: [{ name: 'name' }],
         })
-        .run()
-        .each(function (r) {
-            arrList.push({
-                text: r.getValue('name'),
-                id: r.id,
+            .run()
+            .each(function (r) {
+                arrList.push({
+                    text: r.getValue('name'),
+                    id: r.id,
+                });
+                return true;
             });
-            return true;
-        });
 
         return arrList;
     }
@@ -361,7 +357,7 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
         if( obj.trandate){
             payment.setValue({
                 fieldId: 'trandate',
-                value: obj.tradate,
+                value: obj.trandate,
             });
         }
 
@@ -450,6 +446,41 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
         return pid;
     }
 
+    function createPaymentCard(objCC){
+
+        const LOG_TITLE = 'createPaymentCard';
+        var recordObj = record.create({
+            type: record.Type.PAYMENT_CARD,
+            isDynamic: true
+        });
+        recordObj.setValue({
+            fieldId: 'entity',
+            value: objCC.customer
+        });
+        recordObj.setValue({
+            fieldId: 'cardnumber',
+            value: objCC.ccno
+        });
+        recordObj.setValue({
+            fieldId: 'expirationdate',
+            value: objCC.expiredDate
+        });
+        recordObj.setValue({
+            fieldId: 'paymentmethod',
+            value: objCC.paymentmethod
+        });
+        recordObj.setValue({
+            fieldId: 'nameoncard',
+            value: objCC.ccname
+        });
+        recordObj.setValue({
+            fieldId: 'preserveonfile',
+            value: true
+        });
+        var recordId = recordObj.save({
+            ignoreMandatoryFields: false
+        });
+    }
 
     function createCustomerCreditCard(objCC){
         const LOG_TITLE = 'createCustomerCreditCard';
@@ -567,7 +598,9 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
 
         for(var i in objRPS){
             if(i == 'id') continue;
-            if(objRPS[i]){
+            if(objRPS[i] && REC_RPS[i]){
+                log.debug('SET FIELDS objRPS', REC_RPS[i] + '=='+  JSON.stringify(objRPS[i]));
+
                 rps_tpl.setValue(REC_RPS[i], objRPS[i]);
             }
         }
@@ -598,7 +631,7 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
 
         for(var i in objRPSLine){
             if(i == 'id') continue;
-            if(objRPSLine[i]){
+            if(REC_RPS_LIST[i] && objRPSLine[i]){
                 sch.setValue({
                     fieldId: REC_RPS_LIST[i],
                     value: objRPSLine[i]
@@ -625,7 +658,7 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
 
         for(var i in objPFA){
             if(i == 'id') continue;
-            if(objPFA[i]){
+            if(objPFA[i] && REC_PFA[i]){
                 pfaRec.setValue(REC_PFA[i], objPFA[i]);
             }
         }
@@ -668,8 +701,8 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
             var stName = result.getValue({ name: "name",
                 join: "file"}).replace(/[^a-zA-Z]+/g, "");
 
-                objFiles[stName] = result.getValue({ name: "url",
-                    join: "file"});
+            objFiles[stName] = result.getValue({ name: "url",
+                join: "file"});
 
             return true;
         });
@@ -701,9 +734,9 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
         var searchResultCount = folderSearchObj.runPaged().count;
         log.debug(LOG,searchResultCount);
         folderSearchObj.run().each(function(result){
-           id = result.getValue({
-               name: "internalid"
-           })
+            id = result.getValue({
+                name: "internalid"
+            })
             return false;
         });
 
@@ -744,7 +777,7 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
      * @param objParams
      * @returns
      */
-    function searchContacts(objInvoice) {
+    function searchContacts(objInvoice, bEmailStatement) {
         var LOG_TITLE = 'searchContacts';
 
         var arrDebtors = [];
@@ -764,25 +797,34 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
 
         log.debug('getContacts', 'arrDebtors: ' + arrDebtors.length + ' info:: '+JSON.stringify(arrDebtors));
 
+        var arrFilters = [
+            search.createFilter({
+                name: 'company',
+                operator: search.Operator.ANYOF,
+                values: arrDebtors,
+            }),
+            search.createFilter({
+                name: ENTITY_FIELD.isStudent,
+                operator: search.Operator.IS,
+                values: 'F',
+            }),
+            search.createFilter({
+                name: 'email',
+                operator: search.Operator.ISNOTEMPTY,
+            })
+        ];
+
+        if(bEmailStatement){
+            arrFilters.push(search.createFilter({
+                name: 'custentity_xw_receivestmt',
+                operator: search.Operator.IS,
+                values: 'T',
+            }));
+        }
         // Search for contacts for debtors of invoice
         var contactSearchObj = search.create({
             type: search.Type.CONTACT,
-            filters: [
-                search.createFilter({
-                    name: 'company',
-                    operator: search.Operator.ANYOF,
-                    values: arrDebtors,
-                }),
-                search.createFilter({
-                    name: ENTITY_FIELD.isStudent,
-                    operator: search.Operator.IS,
-                    values: 'F',
-                }),
-                search.createFilter({
-                    name: 'email',
-                    operator: search.Operator.ISNOTEMPTY,
-                }),
-            ],
+            filters: arrFilters,
             columns: [
                 search.createColumn({
                     name: 'company',
@@ -832,7 +874,9 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
             if (contacts[debtor]) {
                 log.debug('adding contact', ''+JSON.stringify(contacts[debtor]));
 
-                objInvoice[invoice].contacts = contacts[debtor];
+
+                if(!objInvoice[invoice].contacts) objInvoice[invoice].contacts = [];
+                objInvoice[invoice].contacts= contacts[debtor];
             }
         }
 
@@ -1071,6 +1115,9 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
 
     function searchRPSList(rps_id_lists, proc_date){
 
+        var dDate = ''
+        if(proc_date) dDate = format.format({type : 'date', value : proc_date})
+
         var filters = [['isinactive', 'is', 'F']];
 
         if (rps_id_lists) {
@@ -1083,10 +1130,10 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
             filters.push('AND');
             filters.push([REC_RPS_LIST.paymthd, 'anyof', '1']);
             filters.push('AND');
-            filters.push([REC_RPS_LIST.procdate, 'on', moment(proc_date).format('DD/M/Y')]);
+            filters.push([REC_RPS_LIST.procdate, 'on', dDate]);//moment(proc_date).format('DD/M/Y')]);
         }
 
-        log.debug('ON OR BEFORE', moment(proc_date).format('LLL'));
+        log.debug('ON OR BEFORE',JSON.stringify(filters));
         var cols = [
             REC_RPS_LIST.procdate,
             REC_RPS_LIST.schedamt,
@@ -1126,48 +1173,48 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
 
         var arrRPS = [];
         searched.run().each(function (rps_sched) {
-        var to_arr = {};
+            var to_arr = {};
 
-        to_arr.id = rps_sched.id;
-        cols.forEach(function (v, i) {
-            switch (i) {
-                case 0:
-                    to_arr.proc_date = rps_sched.getValue(cols[i]);
-                    break;
-                case 1:
-                    to_arr.amt = rps_sched.getValue(cols[i]);
-                    break;
-                case 2:
-                    to_arr.pay_m = rps_sched.getText(cols[i]);
-                    break;
-                case 3:
-                    to_arr.tranid = rps_sched.getValue(cols[i]);
-                    to_arr.tranText = rps_sched.getText(cols[i]);
-                    break;
-                case 4:
-                    to_arr.rpsTemplate = rps_sched.getValue(cols[i]);
-                    break;
-                case 5:
-                    to_arr.amtRemaining = rps_sched.getValue(cols[i]);
-                    break;
-                case 6:
-                    to_arr.amtPaid = rps_sched.getValue(cols[i]);
-                    break;
-                case 7:
-                    to_arr.cc_int_id = rps_sched.getValue(cols[i]);
-                    break;
-                case 8:
-                    to_arr.totalAmount = rps_sched.getValue(cols[i]);
-                    break;
-                case 9:
-                    to_arr.debtorName = rps_sched.getValue(cols[i]);
-                    break;
-                case 10:
-                    to_arr.famCode = rps_sched.getValue(cols[i]); // 08/01/2019 - lochengco - Add Fam Code
-                    break;
-                default:
-                    to_arr[v] = rps_sched.getValue(cols[i]);
-                    break;
+            to_arr.id = rps_sched.id;
+            cols.forEach(function (v, i) {
+                switch (i) {
+                    case 0:
+                        to_arr.proc_date = rps_sched.getValue(cols[i]);
+                        break;
+                    case 1:
+                        to_arr.amt = rps_sched.getValue(cols[i]);
+                        break;
+                    case 2:
+                        to_arr.pay_m = rps_sched.getText(cols[i]);
+                        break;
+                    case 3:
+                        to_arr.tranid = rps_sched.getValue(cols[i]);
+                        to_arr.tranText = rps_sched.getText(cols[i]);
+                        break;
+                    case 4:
+                        to_arr.rpsTemplate = rps_sched.getValue(cols[i]);
+                        break;
+                    case 5:
+                        to_arr.amtRemaining = rps_sched.getValue(cols[i]);
+                        break;
+                    case 6:
+                        to_arr.amtPaid = rps_sched.getValue(cols[i]);
+                        break;
+                    case 7:
+                        to_arr.cc_int_id = rps_sched.getValue(cols[i]);
+                        break;
+                    case 8:
+                        to_arr.totalAmount = rps_sched.getValue(cols[i]);
+                        break;
+                    case 9:
+                        to_arr.debtorName = rps_sched.getValue(cols[i]);
+                        break;
+                    case 10:
+                        to_arr.famCode = rps_sched.getValue(cols[i]); // 08/01/2019 - lochengco - Add Fam Code
+                        break;
+                    default:
+                        to_arr[v] = rps_sched.getValue(cols[i]);
+                        break;
                 }
             });
             arrRPS.push(to_arr);
@@ -1250,8 +1297,128 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
 
         return newDate;
     }
+
+    function searchBankPaymentInvoicesToProcess(objParams){
+
+        var fromDate = objParams.fromDate;
+        var toDate = objParams.toDate;
+
+        var operator;
+        var filterValues;
+
+        if (fromDate && toDate) {
+            operator = SEARCHMDL.Operator.WITHIN;
+            filterValues = [fromDate, toDate];
+        } else if (fromDate && !toDate) {
+            operator = SEARCHMDL.Operator.ONORAFTER;
+            filterValues = fromDate;
+        } else if (!fromDate && toDate) {
+            operator = SEARCHMDL.Operator.ONORBEFORE;
+            filterValues = toDate;
+        } else {
+            return null;
+        }
+
+        var arrFilters = [];
+        arrFilters.push(
+            SEARCHMDL.createFilter({
+                name: REC_RPS_LIST.procdate,
+                join : REC_RPS_LIST.rps,
+                operator: operator,
+                values: filterValues,
+            })
+        );
+
+
+
+        log.debug('arrFilters1', 'arrFilters: ' + JSON.stringify(arrFilters));
+
+        var ss = SAVED_SEARCH.dd_processing;
+        var searchObj = SEARCHMDL.load({
+            id: ss,
+        });
+
+        var arrData = [];
+        var totalAmount = 0;
+
+        log.debug('arrFilters2', 'arrFilters:  ' + JSON.stringify(arrFilters));
+
+
+        searchObj.filters = searchObj.filters.concat(arrFilters);
+
+        var objResultset = searchObj.run();
+        var intSearchIndex = 0;
+        var objResultSlice = null;
+        var maxSearchReturn = 1000;
+        var arrReturnSearchResults = [];
+
+        var maxResults = searchObj.maxResults || 0;
+
+        do {
+            var start = intSearchIndex;
+            var end = intSearchIndex + maxSearchReturn;
+
+            if (maxResults && maxResults <= end) {
+                end = maxResults;
+            }
+
+            objResultSlice = objResultset.getRange(start, end);
+
+            if (!objResultSlice) {
+                break;
+            }
+
+            arrReturnSearchResults = arrReturnSearchResults.concat(objResultSlice);
+            intSearchIndex = intSearchIndex + objResultSlice.length;
+
+            if (maxResults && maxResults == intSearchIndex) {
+                break;
+            }
+        } while (objResultSlice.length >= maxSearchReturn);
+
+        if (arrReturnSearchResults && arrReturnSearchResults.length > 0) {
+            for (var searchIdx = 0; searchIdx < arrReturnSearchResults.length; searchIdx++) {
+                var r = arrReturnSearchResults[searchIdx];
+                var objBodyData = {};
+                var bsb = r.getValue(r.columns[0]);
+                objBodyData.bsb = bsb.slice(0, 3) + '-' + bsb.slice(3);
+
+                var accountNum = r.getValue(r.columns[1]);
+                if (accountNum.length > 9) {
+                    accountNum = accountNum.replace(/-/g, '');
+                }
+
+                objBodyData.accountNum = accountNum;
+
+                var amount = r.getValue(r.columns[2]);
+                objBodyData.amount = amount;
+
+                objBodyData.titleAcctName = fillData({
+                    justified: 'LEFT',
+                    data: r.getValue(r.columns[3]),
+                    reqdLength: 32,
+                    fill: ' ',
+                });
+
+                objBodyData.rpsId = r.getValue(r.columns[4]);
+                objBodyData.processingDate = r.getValue(r.columns[5]);
+                objBodyData.name = r.getValue(r.columns[6]);
+                objBodyData.invoice = r.getText(r.columns[7]);
+                objBodyData.rpsName = r.getValue(r.columns[8]);
+                objBodyData.famCode = r.getValue(r.columns[9]);
+
+                arrData.push(objBodyData);
+            }
+        }
+        var objData = {};
+        objData.body = arrData;
+        objData.totalAmount = totalAmount.toString();
+        log.debug('arrData', 'arrData: ' +JSON.stringify(arrData));
+
+        return arrData;
+    }
+
     return {
-        COMPANY,
         TRANS_FIELD,
         ENTITY_FIELD,
         SCRIPTS,
@@ -1268,6 +1435,7 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
         SAVED_SEARCH,
         createPayment,
         createCustomerCreditCard,
+        createPaymentCard,
         createCustomerBankAcct,
         upsertPFA,
         upsertRPS,
@@ -1294,6 +1462,7 @@ define(['N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shar
         searchRPSList,
         searchFolderId,
         searchFileUrlinFolder,
+        searchBankPaymentInvoicesToProcess,
         recalculateOpenBalance,
         parseFloatOrZero
     };

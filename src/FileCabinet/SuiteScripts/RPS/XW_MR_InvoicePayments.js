@@ -39,13 +39,13 @@ function runScript(runtime, search, record, moment, email, render, library, libr
         var proc_date = date_provided ? new Date(date_provided) : lib.getMelbourneDateTime();
         log.audit('getRPS', 'proc_date: ' + proc_date);
 
-        var arrRPS = lib.searchRPSList(rps_id_lists , date_provided);
+        var arrRPS = lib.searchRPSList(rps_id_lists , proc_date);
         log.debug(LOG_TITLE, 'arrRPS: ' + JSON.stringify(arrRPS));
         log.debug(LOG_TITLE, '>> END <<');
 
         return arrRPS;
       } catch (ex) {
-        var errorString = ex instanceof nlobjError ? ex.getCode() + '\n' + ex.getDetails() : ex.toString();
+        var errorString = JSON.stringify(ex);
         log.error(LOG_TITLE, errorString);
       }
     },
@@ -63,25 +63,37 @@ function runScript(runtime, search, record, moment, email, render, library, libr
         var to_arr = JSON.parse(context.value);
         log.debug('DETAILS', JSON.stringify(to_arr));
 
-        var debtor = inv_id['entity'][0]['value'];
 
-        var paymentMethod = '';
+        var inv_id = lib.searchInvoice(to_arr.tranid);
+        log.debug('inv_id', JSON.stringify(inv_id));
+
+        var debtor = inv_id['entity'][0]['value'];
+        log.debug('debtor', debtor);
+
+        var paymentMethod = lib.PAYMETHOD_LIST.cc;
         if (to_arr.pay_m && to_arr.pay_m.trim() == 'Bank Account') {
           paymentMethod = lib.PAYMETHOD_LIST.bank;
         }
+        log.debug('paymentMethod', paymentMethod);
+
         var stRPSOld = '';
+
         if (inv_id[lib.TRANS_FIELD.rps_linkold].length) {
           stRPSOld = inv_id[lib.TRANS_FIELD.rps_linkold][0]['value'];
         }
+
+        log.debug('stRPSOld', stRPSOld);
+
         var objPayment = {
           fromId : debtor,
-          doc : blob.input.tranid,
-          trandate : new Date(moment(to_arr.proc_date, 'DD/MM/Y').format('LL')),
+          doc :  to_arr.tranid,
+          trandate : new Date(to_arr.proc_date),
           paymentmethod : paymentMethod,
           payment : to_arr.amt,
           rpsold : stRPSOld,
           ccid : to_arr.cc_int_id ? to_arr.cc_int_id : ''
         }
+        log.debug('objPayment', JSON.stringify(objPayment));
 
         var pid = lib.createPayment(objPayment)
 
@@ -144,7 +156,7 @@ function runScript(runtime, search, record, moment, email, render, library, libr
 
         } catch (e) {
 
-          var errorString = e instanceof nlobjError ? e.getCode() + '\n' + e.getDetails() : e.toString();
+          var errorString = JSON.stringify(ex);
           log.error('error', errorString);
 
           let objRPSLine = {
@@ -203,7 +215,7 @@ function runScript(runtime, search, record, moment, email, render, library, libr
 
         log.debug('PROCESSED', JSON.stringify(to_arr));
       } catch (ex) {
-        var errorString = ex instanceof nlobjError ? ex.getCode() + '\n' + ex.getDetails() : ex.toString();
+        var errorString = JSON.stringify(ex);
         log.error(LOG_TITLE, errorString);
       }
       log.debug(LOG_TITLE, '>> END <<');

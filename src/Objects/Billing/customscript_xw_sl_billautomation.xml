@@ -1,18 +1,19 @@
-<mapreducescript scriptid="customscript_xw_mr_newinvemlwoopb">
+<suitelet scriptid="customscript_xw_sl_billautomation">
   <description></description>
   <isinactive>F</isinactive>
-  <name>nexWare_MR | SendNewInvEMLWithoutOB</name>
+  <name>nexWare_SL | BillingAutomation</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
-  <scriptfile>[/SuiteScripts/RPS/XW_MR_SendInvoiceEmailOnDemand.js]</scriptfile>
+  <notifyuser>F</notifyuser>
+  <scriptfile>[/SuiteScripts/Billing/XW_SL_BIllingAutomation.js]</scriptfile>
   <scriptcustomfields>
-    <scriptcustomfield scriptid="custscript_xw_mr_pr_invwoopbss">
+    <scriptcustomfield scriptid="custscript_xw_sl_pr_bastuss">
       <accesslevel>2</accesslevel>
       <applyformatting>F</applyformatting>
       <checkspelling>F</checkspelling>
       <defaultchecked>F</defaultchecked>
-      <defaultselection>[scriptid=customsearch_xw_invoicewoob]</defaultselection>
+      <defaultselection>[scriptid=customsearch_xw_billingautomationstudent]</defaultselection>
       <defaultvalue></defaultvalue>
       <description></description>
       <displayheight></displayheight>
@@ -23,7 +24,7 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>Invoice Saved Search</label>
+      <label>nexWare_SL_PR | Default Students Saved Search</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>
@@ -34,39 +35,12 @@
       <setting></setting>
       <storevalue>T</storevalue>
     </scriptcustomfield>
-    <scriptcustomfield scriptid="custscript_xw_mr_pr_invintid">
+    <scriptcustomfield scriptid="custscript_xw_sl_pr_badebtss">
       <accesslevel>2</accesslevel>
       <applyformatting>F</applyformatting>
       <checkspelling>F</checkspelling>
       <defaultchecked>F</defaultchecked>
-      <defaultselection></defaultselection>
-      <defaultvalue></defaultvalue>
-      <description></description>
-      <displayheight></displayheight>
-      <displaytype>NORMAL</displaytype>
-      <displaywidth></displaywidth>
-      <dynamicdefault></dynamicdefault>
-      <fieldtype>TEXT</fieldtype>
-      <help></help>
-      <isformula>F</isformula>
-      <ismandatory>F</ismandatory>
-      <label>Invoice Internal ID</label>
-      <linktext></linktext>
-      <maxlength></maxlength>
-      <maxvalue></maxvalue>
-      <minvalue></minvalue>
-      <onparentdelete></onparentdelete>
-      <searchlevel>2</searchlevel>
-      <selectrecordtype></selectrecordtype>
-      <setting></setting>
-      <storevalue>T</storevalue>
-    </scriptcustomfield>
-    <scriptcustomfield scriptid="custscript_xw_mr_pr_invpdftpl3">
-      <accesslevel>2</accesslevel>
-      <applyformatting>F</applyformatting>
-      <checkspelling>F</checkspelling>
-      <defaultchecked>F</defaultchecked>
-      <defaultselection>[scriptid=custtmpl_xw_invoice]</defaultselection>
+      <defaultselection>[scriptid=customsearch_xw_billingautomationdebtor]</defaultselection>
       <defaultvalue></defaultvalue>
       <description></description>
       <displayheight></displayheight>
@@ -77,23 +51,23 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>nexWare_MR_PR | Invoice PDF Template</label>
+      <label>nexWare_SL_PR | Default Debtor Saved Search</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>
       <minvalue></minvalue>
       <onparentdelete>NO_ACTION</onparentdelete>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>-387</selectrecordtype>
+      <selectrecordtype>-119</selectrecordtype>
       <setting></setting>
       <storevalue>T</storevalue>
     </scriptcustomfield>
-    <scriptcustomfield scriptid="custscript_xw_mr_pr_stmtform3">
+    <scriptcustomfield scriptid="custscript_xw_sl_pr_itembinstss">
       <accesslevel>2</accesslevel>
       <applyformatting>F</applyformatting>
       <checkspelling>F</checkspelling>
       <defaultchecked>F</defaultchecked>
-      <defaultselection></defaultselection>
+      <defaultselection>[scriptid=customsearch_xw_billinginstructionitems2]</defaultselection>
       <defaultvalue></defaultvalue>
       <description></description>
       <displayheight></displayheight>
@@ -104,40 +78,34 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>nexWare_MR_PR | Scripted Statement Form</label>
+      <label>nexWare_SL_PR | Item Billing Instructions SS</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>
       <minvalue></minvalue>
       <onparentdelete>NO_ACTION</onparentdelete>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>-171</selectrecordtype>
+      <selectrecordtype>-119</selectrecordtype>
       <setting></setting>
       <storevalue>T</storevalue>
     </scriptcustomfield>
   </scriptcustomfields>
   <scriptdeployments>
-    <scriptdeployment scriptid="customdeploy_xw_mr_newinvemlwoopb">
-      <buffersize>1</buffersize>
-      <concurrencylimit>1</concurrencylimit>
-      <custscript_xw_mr_pr_invintid></custscript_xw_mr_pr_invintid>
-      <custscript_xw_mr_pr_invpdftpl3>[scriptid=custtmpl_xw_invoice]</custscript_xw_mr_pr_invpdftpl3>
-      <custscript_xw_mr_pr_invwoopbss>[scriptid=customsearch_xw_invoicewoob]</custscript_xw_mr_pr_invwoopbss>
-      <custscript_xw_mr_pr_stmtform3></custscript_xw_mr_pr_stmtform3>
+    <scriptdeployment scriptid="customdeploy_xw_sl_billautomation">
+      <allemployees>T</allemployees>
+      <allpartners>F</allpartners>
+      <allroles>T</allroles>
+      <audslctrole></audslctrole>
+      <custscript_xw_sl_pr_badebtss>[scriptid=customsearch_xw_billingautomationdebtor]</custscript_xw_sl_pr_badebtss>
+      <custscript_xw_sl_pr_bastuss>[scriptid=customsearch_xw_billingautomationstudent]</custscript_xw_sl_pr_bastuss>
+      <custscript_xw_sl_pr_itembinstss>[scriptid=customsearch_xw_billinginstructionitems2]</custscript_xw_sl_pr_itembinstss>
+      <eventtype></eventtype>
       <isdeployed>T</isdeployed>
+      <isonline>T</isonline>
       <loglevel>DEBUG</loglevel>
-      <queueallstagesatonce>T</queueallstagesatonce>
       <runasrole>ADMINISTRATOR</runasrole>
-      <status>NOTSCHEDULED</status>
-      <title>Send New Invoice Email Without Open Bal</title>
-      <yieldaftermins>60</yieldaftermins>
-      <recurrence>
-        <single>
-          <repeat></repeat>
-          <startdate>2019-01-25</startdate>
-          <starttime>06:00:00Z</starttime>
-        </single>
-      </recurrence>
+      <status>RELEASED</status>
+      <title>LITAU|Billing Automation SL</title>
     </scriptdeployment>
   </scriptdeployments>
-</mapreducescript>
+</suitelet>

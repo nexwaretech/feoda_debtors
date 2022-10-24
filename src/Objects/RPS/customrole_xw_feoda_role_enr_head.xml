@@ -126,10 +126,6 @@
       <permlevel>FULL</permlevel>
     </permission>
     <permission>
-      <permkey>LIST_CUSTJOB</permkey>
-      <permlevel>FULL</permlevel>
-    </permission>
-    <permission>
       <permkey>LIST_COMPANY</permkey>
       <permlevel>FULL</permlevel>
     </permission>
