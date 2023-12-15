@@ -3,12 +3,11 @@
         <path>~/AccountConfiguration/*</path>
     </configuration>
     <files>
-        <path>~/FileCabinet/*</path>
+        <path>~/FileCabinet/SuiteScripts/Billing_Config/*</path>
     </files>
 
     <objects>
-    <path>~/Objects/*</path>
-
+        <path>~/Objects/Billing_Config/*</path>
    </objects>
 
   <translationimports>

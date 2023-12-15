@@ -1,7 +1,7 @@
 <suitelet scriptid="customscript_xw_sl_invoice">
   <description></description>
   <isinactive>F</isinactive>
-  <name>nexWare_SL | Generate Annual Invoice</name>
+  <name>Feoda_SL | Generate Annual Invoice</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
@@ -19,7 +19,7 @@
       <loglevel>DEBUG</loglevel>
       <runasrole>ADMINISTRATOR</runasrole>
       <status>RELEASED</status>
-      <title>nexWare_SL | Generate Annual Invoice</title>
+      <title>Feoda_SL | Generate Annual Invoice</title>
     </scriptdeployment>
   </scriptdeployments>
 </suitelet>

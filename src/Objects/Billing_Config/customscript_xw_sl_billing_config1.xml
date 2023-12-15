@@ -1,14 +1,14 @@
-<suitelet scriptid="customscript_xw_sl_intgenpaysched">
+<suitelet scriptid="customscript_xw_sl_billing_config1">
   <description></description>
   <isinactive>F</isinactive>
-  <name>Feoda SL | GeneratePaymentSchedule Int</name>
+  <name>Feoda_SL | Billing Configuration1</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
   <notifyuser>F</notifyuser>
-  <scriptfile>[/SuiteScripts/RPS/XW_SL_InternalGeneratePaymentSchedule.js]</scriptfile>
+  <scriptfile>[/SuiteScripts/Billing_Config/XW_SL_Billing_Config1.js]</scriptfile>
   <scriptdeployments>
-    <scriptdeployment scriptid="customdeploy_xw_sl_intgenpaysched">
+    <scriptdeployment scriptid="customdeploy_xw_sl_billing_config1">
       <allemployees>F</allemployees>
       <allpartners>F</allpartners>
       <allroles>T</allroles>
@@ -19,7 +19,7 @@
       <loglevel>DEBUG</loglevel>
       <runasrole>ADMINISTRATOR</runasrole>
       <status>RELEASED</status>
-      <title>Feoda_SL | GeneratePaymentSchedule Int</title>
+      <title>nexWare_SL | Billing Configuration1</title>
     </scriptdeployment>
   </scriptdeployments>
 </suitelet>

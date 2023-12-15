@@ -1,7 +1,7 @@
 <mapreducescript scriptid="customscript_xw_mr_invtop">
   <description></description>
   <isinactive>F</isinactive>
-  <name>nexWare_MR | InvoicePayments</name>
+  <name>Feoda MR | InvoicePayments</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
@@ -23,7 +23,7 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>nexWare_MR_PR | Date To Process From</label>
+      <label>Feoda_MR_PR | Date To Process From</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>
@@ -50,7 +50,7 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>nexWare_MR_PR | RPS ID(Comma Delimited)</label>
+      <label>Feoda_MR_PR | RPS ID(Comma Delimited)</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>
@@ -77,7 +77,7 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>nexWare_MR_PR | RPS Payment File Admin</label>
+      <label>Feoda_MR_PR | RPS Payment File Admin</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>

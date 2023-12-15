@@ -1,7 +1,7 @@
 /**
  * @NApiVersion 2.1
  * @NModuleScope SameAccount
- * Author: nexWare
+ * Author: Feoda
  */
 define(['N/format', 'N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', '../lib_shared/moment-with-locales.min'], function ( format, url, search,record, https,message, moment) {
 

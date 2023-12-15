@@ -7,7 +7,7 @@ var MESSAGEMDL;
  *@NScriptType ClientScript
  *@NModuleScope Public
  *
- * Author: nexWare
+ * Author: Feoda
  */
 
 define(['N/ui/dialog', 'N/ui/message'], runScript);

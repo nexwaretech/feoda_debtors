@@ -2,7 +2,7 @@
  * Module Description
  *
  * Version    Date            Author           Remarks
- * 1.00       29 Dec 2017     nexWare          Initial Version
+ * 1.00       29 Dec 2017     Feoda          Initial Version
  *
  */
 
@@ -30,7 +30,7 @@ var lib;
  * @NApiVersion 2.1
  * @NScriptType Suitelet
  *
- * Author: nexWare
+ * Author: Feoda
  */
 define([
   '../lib_shared/moment-with-locales.min',

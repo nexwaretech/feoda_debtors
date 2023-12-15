@@ -1,7 +1,7 @@
 <usereventscript scriptid="customscript_xw_ue_inv">
   <description>For RPS Page Initialization</description>
   <isinactive>F</isinactive>
-  <name>nexWare_UE | RPS Invoice</name>
+  <name>Feoda UE | RPS Invoice</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>

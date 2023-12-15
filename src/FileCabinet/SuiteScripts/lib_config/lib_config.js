@@ -2,7 +2,7 @@
 /**
  * @NApiVersion 2.1
  * @NModuleScope SameAccount
- * Author: nexWare
+ * Author: Feoda
  */
 define([], function () {
         const COMPANY = {

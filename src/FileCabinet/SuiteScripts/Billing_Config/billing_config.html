@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="./billing_config.css">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <title>Billing Configuration</title>
+    <style>
+      .wrapper {
+          display: flex;
+          width: 100%;
+      }
+      #steppage_container{
+        width: 100%;
+        height: calc(100vh - 100px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper" id="wrapper">
+      <!-- Sidebar  -->
+      <nav id="sidebar">
+          <div class="sidebar-header">
+            <img src="../images_shared/logo.png" alt="header-logo" width="100%">
+          </div>
+
+          <ul class="list-group">
+            <li v-bind:class="[step == 1 ? 'list-group-item list-group-item-success' : 'list-group-item list-group-item-light']">
+              <span class="list-icon"><i class="fa fa-list"></i></span>
+              <span>Instruction</span>
+              <span class="list-pointer"></span>
+            </li>
+            <li v-bind:class="[step == 2 ? 'list-group-item list-group-item-success' : 'list-group-item list-group-item-light']">
+                <span class="list-icon"><i class="fa fa-user-tie"></i></span>
+                <span>Segmentation</span>
+                <span class="list-pointer"></span>
+            </li>
+            <li v-bind:class="[step == 3 ? 'list-group-item list-group-item-success' : 'list-group-item list-group-item-light']">
+                <span class="list-icon"><i class="fa fa-calendar-plus"></i></span>
+                <span>Scheduling</span>
+                <span class="list-pointer"></span>
+            </li>
+            <li v-bind:class="[step == 4 ? 'list-group-item list-group-item-success' : 'list-group-item list-group-item-light']">
+                <span class="list-icon"><i class="fa fa-money-check"></i></span>
+                <span>Payment</span>
+                <span class="list-pointer"></span>
+            </li>
+            <li v-bind:class="[step == 5 ? 'list-group-item list-group-item-success' : 'list-group-item list-group-item-light']">
+                <span class="list-icon"><i class="fa fa-divide"></i></span>
+                <span>Midyear</span>
+                <span class="list-pointer"></span>
+            </li>
+            <li v-bind:class="[step == 6 ? 'list-group-item list-group-item-success' : 'list-group-item list-group-item-light']">
+              <span class="list-icon"><i class="fa fa-divide"></i></span>
+              <span>Maintenance</span>
+              <span class="list-pointer"></span>
+            </li>
+          </ul>
+      </nav>
+
+      <!-- Page Content  -->
+      <div id="content">
+
+          <div class="container-fluid">
+            <div id="frameContainer">
+              <iframe :src="iframeLinks" frameborder="0" class="steppage_container" id="steppage_container"></iframe>
+            </div>
+            <div style="overflow:auto;" class="row">
+              <div class="col">
+                <div style="float:right;">
+                  <button type="button" id="prevBtn" v-on:click="previousStep" v-if="step > 1">Previous</button>
+                  <button type="button" id="nextBtn" v-on:click="nextStep">{{submitContent}}</button>
+                </div>
+              </div>              
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <script>
+      app = new Vue({
+        el: '#wrapper',
+        data: {
+          step: 0,
+          stepLinks: [],
+          showFrame: false
+        },
+        created: function () {
+          this.step = 1;
+          this.stepLinks = [
+            '/app/site/hosting/scriptlet.nl?script=customscript_xw_sl_billing_config1&deploy=1',
+            '/app/site/hosting/scriptlet.nl?script=1555&deploy=1',
+            '/app/site/hosting/scriptlet.nl?script=1563&deploy=1',
+            '/app/site/hosting/scriptlet.nl?script=1558&deploy=1',
+            '/app/site/hosting/scriptlet.nl?script=1562&deploy=1',
+            '/app/site/hosting/scriptlet.nl?script=1561&deploy=1'
+          ];
+        },
+        computed: {
+          iframeLinks: function () {
+            let link = this.stepLinks[this.step - 1];
+            console.log(link);
+            console.log(this.step);
+            return link;
+          },
+          iframeTitle: function () {
+            let title = this.stepTitle[this.step - 1];
+            console.log(this.stepTitle);
+            return title;
+          },
+          submitContent: function(){
+            if(this.step == 6) return "Submit";
+            return "Next";
+          }
+        },
+        methods: {
+          toggleNavigation: function () {
+            this.showNav = !this.showNav;
+          },
+          nextStep: function(){
+            $('#steppage_container')[0].contentWindow.document.getElementById('config_submit').click();
+            if(this.step + 1 < 7) this.step += 1;
+          },
+          previousStep: function(){
+            $('#steppage_container')[0].contentWindow.document.getElementById('config_submit').click();
+            if(this.step - 1 > 0) this.step -= 1;
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

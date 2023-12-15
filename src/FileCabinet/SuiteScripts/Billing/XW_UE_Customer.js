@@ -3,9 +3,9 @@
  * @NScriptType UserEventScript
  * @NModuleScope SameAccount
  *
- * Author: nexWare
+ * Author: Feoda
  */
-define(['N/url', './lib_customer'], function (url, lib) {
+define(['N/url', './lib_billing'], function (url, lib) {
   /**
    * Function definition to be triggered before record is loaded.
    *

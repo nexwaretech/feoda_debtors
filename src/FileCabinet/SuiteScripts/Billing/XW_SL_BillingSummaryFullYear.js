@@ -1,5 +1,5 @@
 /**
- * @NApiVersion 2.0
+ * @NApiVersion 2.1
  * @NScriptType suitelet
  */
 
@@ -17,7 +17,6 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
       if (context.request.method === 'GET') {
         var customrecord_billing_search = search.create({
           type: 'customrecord_xw_billinginst',
-          //filters: [['custrecord_xw_binstapptobinst.custrecord_xw_binstapptoinvnum', 'isempty', '']],
           columns: [
           search.createColumn({
          name: "name",
@@ -214,7 +213,7 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
         var body =
           '<html>' +
           '<head>' +
-          '<title>Weddington Academy - Billing Summary</title>' +
+          '<title>Billing Summary</title>' +
           '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">' +
           '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>' +
           '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>' +
@@ -266,7 +265,7 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
           '</b></td></td>' +
           '</table>' +
-         <!-- '<div class="float-md-right"><button type="button" class="btn btn-success" onclick="window.print()"> Print </button>     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"> Submit </button></div>' + -->
+            '<!-- <div class="float-md-right"><button type="button" class="btn btn-success" onclick="window.print()"> Print </button>     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"> Submit </button></div>-->' +
           '<div class="modal fade" id="myModal" role="dialog">' +
           '<div class="modal-dialog">' +
           '<div class="modal-content">' +

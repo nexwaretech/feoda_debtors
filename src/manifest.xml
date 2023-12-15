@@ -1,5 +1,5 @@
 <manifest projecttype="ACCOUNTCUSTOMIZATION">
-  <projectname>nexware_feoda</projectname>
+  <projectname>Feoda_Product</projectname>
   <frameworkversion>1.0</frameworkversion>
   <dependencies>
     <features>

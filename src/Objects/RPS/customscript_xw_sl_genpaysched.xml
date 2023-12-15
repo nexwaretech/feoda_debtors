@@ -1,7 +1,7 @@
 <suitelet scriptid="customscript_xw_sl_genpaysched">
   <description>Generates Recurring Payment Schedule (RPS)</description>
   <isinactive>F</isinactive>
-  <name>nexWare_SL | RPS GeneratePaymentSchedule</name>
+  <name>Feoda SL | RPS GeneratePaymentSchedule</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
@@ -24,7 +24,7 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>nexWare_SL_PR | Transaction ID</label>
+      <label>Feoda_SL_PR | Transaction ID</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>

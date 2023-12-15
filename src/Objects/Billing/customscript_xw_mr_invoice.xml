@@ -1,7 +1,7 @@
 <mapreducescript scriptid="customscript_xw_mr_invoice">
   <description></description>
   <isinactive>F</isinactive>
-  <name>nexWare_MR | Generate Annual Invoice</name>
+  <name>Feoda_MR | Generate Annual Invoice</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
@@ -129,7 +129,7 @@
       <queueallstagesatonce>T</queueallstagesatonce>
       <runasrole>ADMINISTRATOR</runasrole>
       <status>NOTSCHEDULED</status>
-      <title>nexWare_MR | Generate Annual Invoice</title>
+      <title>Feoda_MR | Generate Annual Invoice</title>
       <yieldaftermins>60</yieldaftermins>
       <recurrence>
         <single>

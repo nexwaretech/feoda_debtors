@@ -1,7 +1,7 @@
 <usereventscript scriptid="customscript_xw_ue_customer">
   <description></description>
   <isinactive>F</isinactive>
-  <name>nexWare_UE | Customer</name>
+  <name>Feoda_UE | Customer</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>

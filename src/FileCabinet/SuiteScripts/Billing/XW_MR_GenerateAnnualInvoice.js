@@ -2,7 +2,7 @@
  * @NApiVersion 2.1
  * @NScriptType MapReduceScript
  *
- * Author: nexWare
+ * Author: Feoda
  */
 var SEARCHMDL;
 var RUNTIMEMDL;

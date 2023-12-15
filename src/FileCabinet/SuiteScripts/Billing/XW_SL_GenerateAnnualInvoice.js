@@ -3,7 +3,7 @@
  * @NScriptType suitelet
  */
 
-define([ 'N/task', './lib_customer'], function(task, lib) {
+define([ 'N/task', './lib_billing'], function(task, lib) {
   function onRequest(context) {
     try {
 

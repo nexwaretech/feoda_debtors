@@ -3,9 +3,9 @@
  * @NScriptType ClientScript
  * @NModuleScope SameAccount
  *
- * Author: nexWare
+ * Author: Feoda
  */
-define(['N/currentRecord', 'N/https', 'N/ui/message', 'N/ui/dialog', './lib_customer'], function( currentRecord, https,  message, dialog, lib) {
+define(['N/currentRecord', 'N/https', 'N/ui/message', 'N/ui/dialog', './lib_billing'], function( currentRecord, https,  message, dialog, lib) {
   /**
    * Function to be executed after page is initialized.
    *

@@ -1,7 +1,7 @@
 <suitelet scriptid="customscript_xw_sl_sndmpmntinveml">
   <description></description>
   <isinactive>F</isinactive>
-  <name>nexWare_SL | SendMonthlyPaymentInvEML</name>
+  <name>Feoda SL | SendMonthlyPaymentInvEML</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
@@ -24,7 +24,7 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>nexWare_SL_PR | Data Source</label>
+      <label>Feoda_SL_PR | Data Source</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>

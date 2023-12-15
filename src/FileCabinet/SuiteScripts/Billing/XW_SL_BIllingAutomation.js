@@ -2,7 +2,7 @@
  * @NApiVersion 2.x
  * @NScriptType Suitelet
  *
- * Author: nexWare
+ * Author: Feoda
  */
 
 var SERVERWIDGETMDL;

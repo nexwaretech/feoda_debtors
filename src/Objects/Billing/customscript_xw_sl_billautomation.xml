@@ -1,7 +1,7 @@
 <suitelet scriptid="customscript_xw_sl_billautomation">
   <description></description>
   <isinactive>F</isinactive>
-  <name>nexWare_SL | BillingAutomation</name>
+  <name>Feoda_SL | BillingAutomation</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
@@ -24,7 +24,7 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>nexWare_SL_PR | Default Students Saved Search</label>
+      <label>Feoda_SL_PR | Default Students Saved Search</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>
@@ -51,7 +51,7 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>nexWare_SL_PR | Default Debtor Saved Search</label>
+      <label>Feoda_SL_PR | Default Debtor Saved Search</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>
@@ -78,7 +78,7 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>nexWare_SL_PR | Item Billing Instructions SS</label>
+      <label>Feoda_SL_PR | Item Billing Instructions SS</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>
@@ -105,7 +105,7 @@
       <loglevel>DEBUG</loglevel>
       <runasrole>ADMINISTRATOR</runasrole>
       <status>RELEASED</status>
-      <title>LITAU|Billing Automation SL</title>
+      <title>Feoda_SL | BillingAutomation</title>
     </scriptdeployment>
   </scriptdeployments>
 </suitelet>

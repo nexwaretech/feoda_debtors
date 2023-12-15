@@ -2,7 +2,7 @@
  * @NApiVersion 2.1
  * @NScriptType Suitelet
  *
- * Author: nexWare
+ * Author: Feoda
  */
 
 define(['N/task', './lib_rps'], runScript);

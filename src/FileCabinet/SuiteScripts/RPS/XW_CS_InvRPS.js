@@ -3,7 +3,7 @@
  * @NScriptType ClientScript
  * @NModuleScope SameAccount
  *
- * Author: nexWare
+ * Author: Feoda
  */
 define([ 'N/ui/dialog', 'N/record', './lib_rps'], function( dialog, record, lib) {
   /**

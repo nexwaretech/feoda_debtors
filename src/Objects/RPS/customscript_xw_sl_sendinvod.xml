@@ -1,7 +1,7 @@
 <suitelet scriptid="customscript_xw_sl_sendinvod">
   <description></description>
   <isinactive>F</isinactive>
-  <name>nexWare_SL | SendInvoiceEmailOnDemand</name>
+  <name>Feoda SL | SendInvoiceEmailOnDemand</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
@@ -19,7 +19,7 @@
       <loglevel>DEBUG</loglevel>
       <runasrole>ADMINISTRATOR</runasrole>
       <status>RELEASED</status>
-      <title>nexWare_SL | SendInvoiceEmailOnDemand</title>
+      <title>Feoda_SL | SendInvoiceEmailOnDemand</title>
     </scriptdeployment>
   </scriptdeployments>
 </suitelet>

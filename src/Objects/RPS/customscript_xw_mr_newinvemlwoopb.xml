@@ -1,7 +1,7 @@
 <mapreducescript scriptid="customscript_xw_mr_newinvemlwoopb">
   <description></description>
   <isinactive>F</isinactive>
-  <name>nexWare_MR | SendNewInvEMLWithoutOB</name>
+  <name>Feoda MR | SendNewInvEMLWithoutOB</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
@@ -77,7 +77,7 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>nexWare_MR_PR | Invoice PDF Template</label>
+      <label>Feoda_MR_PR | Invoice PDF Template</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>
@@ -104,7 +104,7 @@
       <help></help>
       <isformula>F</isformula>
       <ismandatory>F</ismandatory>
-      <label>nexWare_MR_PR | Scripted Statement Form</label>
+      <label>Feoda_MR_PR | Scripted Statement Form</label>
       <linktext></linktext>
       <maxlength></maxlength>
       <maxvalue></maxvalue>

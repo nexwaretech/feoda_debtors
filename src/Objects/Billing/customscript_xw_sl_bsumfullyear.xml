@@ -1,7 +1,7 @@
 <suitelet scriptid="customscript_xw_sl_bsumfullyear">
   <description></description>
   <isinactive>F</isinactive>
-  <name>nexWare_SL | BillingSummary-FullYear</name>
+  <name>Feoda_SL | BillingSummary-FullYear</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
@@ -19,7 +19,7 @@
       <loglevel>DEBUG</loglevel>
       <runasrole>ADMINISTRATOR</runasrole>
       <status>RELEASED</status>
-      <title>LITAU | Billing Summary</title>
+      <title>Feoda_SL | BillingSummary-FullYear</title>
     </scriptdeployment>
   </scriptdeployments>
 </suitelet>

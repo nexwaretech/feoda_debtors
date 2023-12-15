@@ -1,7 +1,7 @@
 <suitelet scriptid="customscript_xw_sl_procpayment">
   <description></description>
   <isinactive>F</isinactive>
-  <name>nexWare_SL | RPS Payment Processing</name>
+  <name>Feoda SL | RPS Payment Processing</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>

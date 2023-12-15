@@ -3,7 +3,7 @@
  * @NScriptType UserEventScript
  * @NModuleScope SameAccount
  *
- * Author: nexWare
+ * Author: Feoda
  */
 define(['N/url', './lib_rps'], function (url, lib) {
   /**

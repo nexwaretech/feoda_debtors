@@ -11,7 +11,7 @@ var lib_email;
  *@NScriptType Suitelet
  *@NModuleScope Public
  *
- * Author: nexWare
+ * Author: Feoda
  */
 define(['N/file', 'N/render', 'N/search', 'N/record', 'N/email', 'N/runtime', './lib_rps', '../lib_shared/lib_email'], runScript);
 function runScript(file, render, search, record, email, runtime, library, library_email) {
