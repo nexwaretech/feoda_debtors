@@ -1,0 +1,16 @@
+<customlist scriptid="customlist_xw_billing_engine_cat">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>Billing Engine Category</name>
+  <customvalues>
+    <customvalue scriptid="charges">
+      <isinactive>F</isinactive>
+      <value>Charges</value>
+    </customvalue>
+    <customvalue scriptid="discounts">
+      <isinactive>F</isinactive>
+      <value>Discounts</value>
+    </customvalue>
+  </customvalues>
+</customlist>

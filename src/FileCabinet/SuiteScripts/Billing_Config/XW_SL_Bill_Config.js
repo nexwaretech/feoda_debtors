@@ -2,7 +2,7 @@
  *@NApiVersion 2.1
  *@NScriptType Suitelet
  */
-define(['N/ui/serverWidget', 'N/render', 'N/file', 'N/search', 'N/record', './lib_billing_config.js'], function (serverWidget, render, file, search, record, lib) {
+define([ 'N/render', 'N/file', '../lib_shared/lib_billing_preference.js'], function ( render, file , lib_billing_preference) {
   /**
    * @param {SuiteletContext.onRequest} context
    */
@@ -22,10 +22,10 @@ define(['N/ui/serverWidget', 'N/render', 'N/file', 'N/search', 'N/record', './li
     const renderer = render.create();
     renderer.templateContent = file.load({ id: './billing_config.html' }).getContents();
 
-    let bpId = lib.getBillingPreference();
+    let bpId = lib_billing_preference.getBillingPreference();
 
     if (bpId === -1) {
-      lib.createBillingReference();
+      lib_billing_preference.createBillingReference();
     }
 
     renderer.addCustomDataSource({

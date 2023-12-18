@@ -4,6 +4,7 @@
     </configuration>
     <files>
         <path>~/FileCabinet/SuiteScripts/Billing_Config/*</path>
+        <path>~/FileCabinet/SuiteScripts/lib_shared/*</path>
     </files>
 
     <objects>

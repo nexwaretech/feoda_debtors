@@ -1,14 +1,14 @@
-<suitelet scriptid="customscript_xw_sl_billing_configuration">
-  <description></description>
+<suitelet scriptid="customscript_xw_sl_bill_config">
+  <description>Page to Set-up Billing Preference. Main Page</description>
   <isinactive>F</isinactive>
   <name>Feoda_SL | Billing Configuration</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
   <notifyuser>F</notifyuser>
-  <scriptfile>[/SuiteScripts/Billing_Config/XW_SL_Billing_Config.js]</scriptfile>
+  <scriptfile>[/SuiteScripts/Billing_Config/XW_SL_Bill_Config.js]</scriptfile>
   <scriptdeployments>
-    <scriptdeployment scriptid="customdeploy_xw_sl_billing_configuration">
+    <scriptdeployment scriptid="customdeploy_xw_sl_bill_config">
       <allemployees>F</allemployees>
       <allpartners>F</allpartners>
       <allroles>T</allroles>

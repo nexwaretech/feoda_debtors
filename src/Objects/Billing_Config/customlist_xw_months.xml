@@ -1,0 +1,56 @@
+<customlist scriptid="customlist_xw_months">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>Months</name>
+  <customvalues>
+    <customvalue scriptid="jan">
+      <isinactive>F</isinactive>
+      <value>Jan</value>
+    </customvalue>
+    <customvalue scriptid="feb">
+      <isinactive>F</isinactive>
+      <value>Feb</value>
+    </customvalue>
+    <customvalue scriptid="mar">
+      <isinactive>F</isinactive>
+      <value>Mar</value>
+    </customvalue>
+    <customvalue scriptid="apr">
+      <isinactive>F</isinactive>
+      <value>Apr</value>
+    </customvalue>
+    <customvalue scriptid="may">
+      <isinactive>F</isinactive>
+      <value>May</value>
+    </customvalue>
+    <customvalue scriptid="jun">
+      <isinactive>F</isinactive>
+      <value>Jun</value>
+    </customvalue>
+    <customvalue scriptid="jul">
+      <isinactive>F</isinactive>
+      <value>Jul</value>
+    </customvalue>
+    <customvalue scriptid="aug">
+      <isinactive>F</isinactive>
+      <value>Aug</value>
+    </customvalue>
+    <customvalue scriptid="sep">
+      <isinactive>F</isinactive>
+      <value>Sep</value>
+    </customvalue>
+    <customvalue scriptid="oct">
+      <isinactive>F</isinactive>
+      <value>Oct</value>
+    </customvalue>
+    <customvalue scriptid="nov">
+      <isinactive>F</isinactive>
+      <value>Nov</value>
+    </customvalue>
+    <customvalue scriptid="dec">
+      <isinactive>F</isinactive>
+      <value>Dec</value>
+    </customvalue>
+  </customvalues>
+</customlist>

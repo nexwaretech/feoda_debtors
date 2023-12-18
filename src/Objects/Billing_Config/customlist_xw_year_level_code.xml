@@ -1,0 +1,68 @@
+<customlist scriptid="customlist_xw_year_level_code">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>STE - Year/Level Code</name>
+  <customvalues>
+    <customvalue scriptid="y07">
+      <isinactive>F</isinactive>
+      <value>Y07</value>
+    </customvalue>
+    <customvalue scriptid="y08">
+      <isinactive>F</isinactive>
+      <value>Y08</value>
+    </customvalue>
+    <customvalue scriptid="y09">
+      <isinactive>F</isinactive>
+      <value>Y09</value>
+    </customvalue>
+    <customvalue scriptid="y10">
+      <isinactive>F</isinactive>
+      <value>Y10</value>
+    </customvalue>
+    <customvalue scriptid="y11">
+      <isinactive>F</isinactive>
+      <value>Y11</value>
+    </customvalue>
+    <customvalue scriptid="y12">
+      <isinactive>F</isinactive>
+      <value>Y12</value>
+    </customvalue>
+    <customvalue scriptid="pre_kindy">
+      <isinactive>F</isinactive>
+      <value>Pre-Kindy</value>
+    </customvalue>
+    <customvalue scriptid="y01">
+      <isinactive>F</isinactive>
+      <value>Y01</value>
+    </customvalue>
+    <customvalue scriptid="y02">
+      <isinactive>F</isinactive>
+      <value>Y02</value>
+    </customvalue>
+    <customvalue scriptid="y03">
+      <isinactive>F</isinactive>
+      <value>Y03</value>
+    </customvalue>
+    <customvalue scriptid="y04">
+      <isinactive>F</isinactive>
+      <value>Y04</value>
+    </customvalue>
+    <customvalue scriptid="y05">
+      <isinactive>F</isinactive>
+      <value>Y05</value>
+    </customvalue>
+    <customvalue scriptid="y06">
+      <isinactive>F</isinactive>
+      <value>Y06</value>
+    </customvalue>
+    <customvalue scriptid="kindergarden">
+      <isinactive>F</isinactive>
+      <value>Kindergarten</value>
+    </customvalue>
+    <customvalue scriptid="kindy">
+      <isinactive>F</isinactive>
+      <value>Kindy</value>
+    </customvalue>
+  </customvalues>
+</customlist>

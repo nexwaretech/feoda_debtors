@@ -20,7 +20,6 @@
       <feature required="true">CLASSES</feature>
       <feature required="true">LOCATIONS</feature>
       <feature required="true">ACCOUNTINGPERIODS</feature>
-      <feature required="true">DEPARTMENTS</feature>
       <feature required="true">ACCOUNTING</feature>
       <feature required="true">WORKFLOW</feature>
       <feature required="true">ITEMOPTIONS</feature>
@@ -29,11 +28,7 @@
       <feature required="true">SUBSIDIARIES</feature>
       <feature required="true">OPPORTUNITIES</feature>
       <feature required="true">RECEIVABLES</feature>
-      <feature required="true">UNITSOFMEASURE</feature>
       <feature required="true">ADVSHIPPING</feature>
-      <feature required="true">CUSTOMTRANSACTIONS</feature>
-      <feature required="true">GROSSPROFIT</feature>
-      <feature required="true">GLAUDITNUMBERING</feature>
       <feature required="true">BUSINESS</feature>
       <feature required="true">SALESORDERS</feature>
       <feature required="true">MULTICURRENCY</feature>
@@ -42,6 +37,5 @@
       <feature required="false">JOBS</feature>
       <feature required="false">ADVANCEDJOBS</feature>
     </features>
-
   </dependencies>
 </manifest>

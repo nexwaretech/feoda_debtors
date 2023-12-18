@@ -5,7 +5,6 @@
  */
 define(['N/search', 'N/record'], function ( search,record) {
 
-
     const REC_BILLING_PREFERENCE = {
         ID: "customrecord_xw_billing_pref",
         ITEMS: "custrecord_xw_bpref_items",
@@ -48,12 +47,6 @@ define(['N/search', 'N/record'], function ( search,record) {
         TERMS_DATE: "custrecord_xw_bpref_terms_date"
     }
 
-
-    /**
-     * Get billing preference for current script
-     *
-     * @returns Billing Preferene Id
-     */
     function getBillingPreference() {
 
         let bpId = '';
@@ -81,9 +74,10 @@ define(['N/search', 'N/record'], function ( search,record) {
         return bpId;
     }
 
+
     return {
-        REC_BILLING_PREFERENCE,
         getBillingPreference,
-        createBillingReference
+        createBillingReference,
+        REC_BILLING_PREFERENCE,
     };
 });

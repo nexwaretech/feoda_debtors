@@ -189,7 +189,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customrecord_xw_billingenginetype]</selectrecordtype>
+      <selectrecordtype>[scriptid=customrecord_xw_billing_engine_type]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -228,7 +228,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customrecord_xw_billingenginetype]</selectrecordtype>
+      <selectrecordtype>[scriptid=customrecord_xw_billing_engine_type]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -267,7 +267,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customrecord_xw_billinginst]</selectrecordtype>
+      <selectrecordtype>[scriptid=customrecord_xw_billing_inst]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -540,7 +540,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customrecord_ste_email_templates]</selectrecordtype>
+      <selectrecordtype>[scriptid=customrecord_xw_email_templates]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -579,7 +579,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customlist_pay_mthd_val]</selectrecordtype>
+      <selectrecordtype>[scriptid=customlist_xw_pay_mthd]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -618,7 +618,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customlist_pay_sched_type]</selectrecordtype>
+      <selectrecordtype>[scriptid=customlist_xw_pay_sched_type]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -891,7 +891,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customlist_pay_sched_type]</selectrecordtype>
+      <selectrecordtype>[scriptid=customlist_xw_pay_sched_type]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -969,7 +969,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customrecord_xw_billingenginetype]</selectrecordtype>
+      <selectrecordtype>[scriptid=customrecord_xw_billing_engine_type]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -1047,7 +1047,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customlist_ste_year_level_code]</selectrecordtype>
+      <selectrecordtype>[scriptid=customlist_xw_year_level_code]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -1086,7 +1086,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customlist_sts_drp_dwn]</selectrecordtype>
+      <selectrecordtype>[scriptid=customlist_xw_student_status]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -1164,7 +1164,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customrecord_ste_email_templates]</selectrecordtype>
+      <selectrecordtype>[scriptid=customrecord_xw_email_templates]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -1242,7 +1242,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customrecord_ste_email_templates]</selectrecordtype>
+      <selectrecordtype>[scriptid=customrecord_xw_email_templates]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -1554,7 +1554,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customrecord_xw_billingenginetype]</selectrecordtype>
+      <selectrecordtype>[scriptid=customrecord_xw_billing_engine_type]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>

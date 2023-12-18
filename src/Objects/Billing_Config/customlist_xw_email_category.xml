@@ -1,0 +1,24 @@
+<customlist scriptid="customlist_xw_email_category">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>Email Category</name>
+  <customvalues>
+    <customvalue scriptid="enrollment_cat">
+      <isinactive>F</isinactive>
+      <value>Enrolment</value>
+    </customvalue>
+    <customvalue scriptid="invoicing_cat">
+      <isinactive>F</isinactive>
+      <value>Invoicing</value>
+    </customvalue>
+    <customvalue scriptid="payments_cat">
+      <isinactive>F</isinactive>
+      <value>Payments</value>
+    </customvalue>
+    <customvalue scriptid="integration_cat">
+      <isinactive>F</isinactive>
+      <value>Integration</value>
+    </customvalue>
+  </customvalues>
+</customlist>

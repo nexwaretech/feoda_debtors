@@ -307,22 +307,6 @@ define(['N/format', 'N/url', 'N/search', 'N/record', 'N/https', 'N/ui/message', 
     }
 
 
-    function getAllResults(searchObj) {
-        try {
-            var results1 = [];
-            var pagedData1 = searchObj.runPaged();
-            pagedData1.pageRanges.forEach(function (pageRange) {
-                results1 = results1.concat(
-                    pagedData1.fetch({
-                        index: pageRange.index
-                    }).data
-                );
-            });
-            return results1;
-        } catch (e) {
-            log.error('Error getting search results', e);
-        }
-    }
 
     return {
         FREQUENCY,

@@ -562,3 +562,23 @@ hr {
         display: none;
     }
 }
+
+
+#itemtable th {
+    text-align: center;
+    border-top: none;
+}
+#itemtable td {
+    text-align: center;
+}
+#itemtable tr:nth-child(odd) {
+    background-color: #eaeaea;
+}
+#itemtable tbody {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#config_selection ul{
+    list-style-type: none;
+}

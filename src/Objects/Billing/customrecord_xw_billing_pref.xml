@@ -188,7 +188,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customrecord_xw_billingenginetype]</selectrecordtype>
+      <selectrecordtype>[scriptid=customrecord_xw_billing_engine_type]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -227,7 +227,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customrecord_xw_billingenginetype]</selectrecordtype>
+      <selectrecordtype>[scriptid=customrecord_xw_billing_engine_type]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -266,7 +266,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customrecord_xw_billinginst]</selectrecordtype>
+      <selectrecordtype>[scriptid=customrecord_xw_billing_inst]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
@@ -968,7 +968,7 @@
       <searchcomparefield></searchcomparefield>
       <searchdefault></searchdefault>
       <searchlevel>2</searchlevel>
-      <selectrecordtype>[scriptid=customrecord_xw_billingenginetype]</selectrecordtype>
+      <selectrecordtype>[scriptid=customrecord_xw_billing_engine_type]</selectrecordtype>
       <showinlist>F</showinlist>
       <sourcefilterby></sourcefilterby>
       <sourcefrom></sourcefrom>
