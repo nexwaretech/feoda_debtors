@@ -3,50 +3,50 @@
  * @NScriptType suitelet
  */
 
-define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_shared/moment-with-locales.min'], function(
-  search,
-  task,
-  log,
-  url,
-  format,
-  http,
-  moment
-) {
+define([
+  'N/search',
+  'N/task',
+  'N/log',
+  'N/url',
+  'N/format',
+  'N/http',
+  '../lib_shared/moment-with-locales.min'
+], function (search, task, log, url, format, http, moment) {
   function onRequest(context) {
     try {
       if (context.request.method === 'GET') {
         var customrecord_billing_search = search.create({
           type: 'customrecord_xw_billinginst',
           columns: [
-          search.createColumn({
-         name: "name",
-         summary: "GROUP",
-         sort: search.Sort.ASC,
-         label: "Name"
-      }),
-      search.createColumn({
-         name: "internalid",
-         summary: "GROUP",
-         label: "Internal ID"
-      }),
-      search.createColumn({
-         name: "internalid",
-         join: "CUSTRECORD_XW_BINSTAPPTOBINST",
-         summary: "COUNT",
-         label: "Internal ID"
-      }),
-      search.createColumn({
-         name: "custrecord_xw_binsttype",
-         summary: "GROUP",
-         label: "Billing Type"
-      }),
-      search.createColumn({
-         name: "baseprice",
-         join: "CUSTRECORD_XW_BINSTITEM",
-         summary: "GROUP",
-         label: "Base Price"
-      })
-          ],
+            search.createColumn({
+              name: 'name',
+              summary: 'GROUP',
+              sort: search.Sort.ASC,
+              label: 'Name'
+            }),
+            search.createColumn({
+              name: 'internalid',
+              summary: 'GROUP',
+              label: 'Internal ID'
+            }),
+            search.createColumn({
+              name: 'internalid',
+              join: 'CUSTRECORD_XW_BINSTAPPTOBINST',
+              summary: 'COUNT',
+              label: 'Internal ID'
+            }),
+            search.createColumn({
+              name: 'custrecord_xw_binsttype',
+              summary: 'GROUP',
+              label: 'Billing Type'
+            }),
+            search.createColumn({
+              name: 'baseprice',
+              join: 'CUSTRECORD_XW_BINSTITEM',
+              summary: 'GROUP',
+              label: 'Base Price'
+            })
+          ]
         });
         var searchResultCount = customrecord_billing_search.runPaged().count;
 
@@ -58,10 +58,10 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
         var tuition_subtotal = 0;
         var discount_subtotal = 0;
         var levy_subtotal = 0;
-          
-        customrecord_billing_search.run().each(function(result) {
+
+        customrecord_billing_search.run().each(function (result) {
           // .run().each has a limit of 4,000 results
-           var tuition_total = 0;
+          var tuition_total = 0;
           var tuition_group_total = 0;
           var discount_total = 0;
           var discount_group_total = 0;
@@ -73,18 +73,18 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
           var students_count = 0;
           var billingInstructionId = result.getValue(columns[1]);
           var type = result.getValue(columns[3]);
-          
-            log.debug({
-                    title: 'tuition_total',
-                    details: 'price '+price + ' billingInstructionId '+billingInstructionId,
-                  });
+
+          log.debug({
+            title: 'tuition_total',
+            details: 'price ' + price + ' billingInstructionId ' + billingInstructionId
+          });
 
           var billingInstructionAppliedToSearch = search.create({
             type: 'customrecord_xw_billinginstappliedto',
             filters: [
-             // ['custrecord_xw_binstapptostu.custentity_xw_midyearstu', 'is', 'F'],
+              // ['custrecord_xw_binstapptostu.custentity_xw_midyearstu', 'is', 'F'],
               //'AND',
-              ['custrecord_xw_binstapptobinst', 'anyof', billingInstructionId],
+              ['custrecord_xw_binstapptobinst', 'anyof', billingInstructionId]
             ],
             columns: [
               search.createColumn({
@@ -94,40 +94,38 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
               search.createColumn({
                 name: 'custrecord_xw_binstapptoinvnum',
                 label: 'Internal ID'
-              }),
-            ],
+              })
+            ]
           });
 
           var billingInstructionAppliedToSearchColumns = billingInstructionAppliedToSearch.columns;
 
           if (billingInstructionAppliedToSearch) {
-            billingInstructionAppliedToSearch.run().each(function(result) {
-              
-              
-                log.debug({
-            title: 'result',
-            details: JSON.stringify(result),
-          });
+            billingInstructionAppliedToSearch.run().each(function (result) {
+              log.debug({
+                title: 'result',
+                details: JSON.stringify(result)
+              });
               // .run().each has a limit of 4,000 results
               if (isEmpty(result.getValue(billingInstructionAppliedToSearchColumns[1]))) {
                 students_count++;
                 var percentToPay = 1;
-                  log.debug({
-            title: 'type',
-            details:type,
-          });
-               
+                log.debug({
+                  title: 'type',
+                  details: type
+                });
+
                 if (type == 4) {
                   tuition_total = percentToPay * price;
                   tuition_group_total += tuition_total;
                   tuition_subtotal += parseFloat(tuition_total);
                   log.debug({
                     title: 'tuition_total',
-                    details: tuition_total,
+                    details: tuition_total
                   });
                   log.debug({
                     title: 'tuition_subtotal',
-                    details: tuition_subtotal,
+                    details: tuition_subtotal
                   });
                 } else if (type == 1) {
                   // Discounts Fees
@@ -136,11 +134,11 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
                   discount_subtotal += parseFloat(discount_total);
                   log.debug({
                     title: 'discount_total',
-                    details: discount_total,
+                    details: discount_total
                   });
                   log.debug({
                     title: 'discount_subtotal',
-                    details: discount_subtotal,
+                    details: discount_subtotal
                   });
                 } else if (type == 2) {
                   // Levy's Fees
@@ -149,11 +147,11 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
                   levy_subtotal += parseFloat(levy_total);
                   log.debug({
                     title: 'levy_total',
-                    details: levy_total,
+                    details: levy_total
                   });
                   log.debug({
                     title: 'levy_subtotal',
-                    details: levy_subtotal,
+                    details: levy_subtotal
                   });
                 }
               }
@@ -161,10 +159,9 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
             });
           }
 
-          
           log.debug({
             title: 'students_count',
-            details: 'students_count '+students_count + ' tuition_group_total '+tuition_group_total,
+            details: 'students_count ' + students_count + ' tuition_group_total ' + tuition_group_total
           });
           if (type == 4) {
             // Student Fees
@@ -175,10 +172,10 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
               students_count +
               '</td><td class="border">$' +
               parseFloat(tuition_group_total)
-              .toFixed(2)
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ','); +
-            '</td></tr>';
+                .toFixed(2)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            +'</td></tr>';
           } else if (type == 1) {
             // Discounts
             discounts +=
@@ -188,10 +185,10 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
               students_count +
               '</td><td class="border">$' +
               parseFloat(discount_group_total)
-              .toFixed(2)
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ','); +
-            '</td></tr>';
+                .toFixed(2)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            +'</td></tr>';
           } else if (type == 2) {
             //Levy's
             levy +=
@@ -201,10 +198,10 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
               students_count +
               '</td><td class="border">$' +
               parseFloat(levy_group_total)
-              .toFixed(2)
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ','); +
-            '</td></tr>';
+                .toFixed(2)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            +'</td></tr>';
           }
 
           return true;
@@ -238,34 +235,34 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
           tuitionFees +
           '<tr class="active"><td class="border"></td><td class="border"><b>Subtotal</b></td><td class="border"><b>$' +
           tuition_subtotal
-          .toFixed(2)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
+            .toFixed(2)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
           '</b></td></td>' +
           '<tr><th>Discounts</th><th>QTY</th><th>Total</th></tr>' +
           discounts +
           '<tr class="active"><td class="border"></td><td class="border"><b>Subtotal</b></td><td class="border"><b>$' +
           discount_subtotal
-          .toFixed(2)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
+            .toFixed(2)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
           '</b></td></td>' +
           '<tr class="active"><th>Levy</th><th>QTY</th><th>Total</th></tr>' +
           levy +
           '<tr class="active"><td></td><td class="border"><b>Subtotal</b></td><td class="border"><b>$' +
           levy_subtotal
-          .toFixed(2)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
+            .toFixed(2)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
           '</b></td></td>' +
           '<tr ><td></td><td class="border active "><b>Total</b></td><td class="border active"><b>$' +
           parseFloat(levy_subtotal + discount_subtotal + tuition_subtotal)
-          .toFixed(2)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
+            .toFixed(2)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
           '</b></td></td>' +
           '</table>' +
-            '<!-- <div class="float-md-right"><button type="button" class="btn btn-success" onclick="window.print()"> Print </button>     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"> Submit </button></div>-->' +
+          '<!-- <div class="float-md-right"><button type="button" class="btn btn-success" onclick="window.print()"> Print </button>     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"> Submit </button></div>-->' +
           '<div class="modal fade" id="myModal" role="dialog">' +
           '<div class="modal-dialog">' +
           '<div class="modal-content">' +
@@ -325,7 +322,7 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
       stValue == undefined ||
       (stValue.constructor === Array && stValue.length == 0) ||
       (stValue.constructor === Object &&
-        (function(v) {
+        (function (v) {
           for (var k in v) return false;
           return true;
         })(stValue))
@@ -333,6 +330,6 @@ define(['N/search', 'N/task', 'N/log', 'N/url', 'N/format', 'N/http',  '../lib_s
   }
 
   return {
-    onRequest: onRequest,
+    onRequest: onRequest
   };
 });

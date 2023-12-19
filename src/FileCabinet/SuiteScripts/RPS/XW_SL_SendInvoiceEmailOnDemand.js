@@ -8,14 +8,13 @@
 define(['N/task', './lib_rps'], runScript);
 function runScript(task, lib) {
   return {
-    onRequest: function(context) {
+    onRequest: function (context) {
       var LOG_TITLE = 'onRequest';
       try {
-
         var invId = context.request.parameters.invId;
-        log.debug(LOG_TITLE, '>> START << '+invId);
+        log.debug(LOG_TITLE, '>> START << ' + invId);
 
-        var objParam = {}
+        var objParam = {};
         objParam[lib.SCRIPTS.mr_send_email.params.id] = invId;
         var mrTask = task.create({
           taskType: task.TaskType.MAP_REDUCE,
@@ -24,7 +23,7 @@ function runScript(task, lib) {
         });
         var mrTaskId = mrTask.submit();
 
-        log.debug(LOG_TITLE, '>> END << '+mrTaskId);
+        log.debug(LOG_TITLE, '>> END << ' + mrTaskId);
       } catch (ex) {
         var errorString = ex instanceof nlobjError ? ex.getCode() + '\n' + ex.getDetails() : ex.toString();
         log.error(LOG_TITLE, errorString);

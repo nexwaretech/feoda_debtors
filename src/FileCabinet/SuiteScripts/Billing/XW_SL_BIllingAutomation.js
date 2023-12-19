@@ -35,7 +35,7 @@ function runScript(serverWidget, render, file, search, record, runtime, task, ur
           var output = renderForm(context, sHome);
 
           context.response.write({
-            output: output,
+            output: output
           });
         } else {
           log.audit('CONTEXT', 'starting process');
@@ -47,7 +47,7 @@ function runScript(serverWidget, render, file, search, record, runtime, task, ur
         var errorString = ex instanceof nlobjError ? ex.getCode() + '\n' + ex.getDetails() : ex.toString();
         log.error(LOG_TITLE, errorString);
       }
-    },
+    }
   };
 }
 
@@ -63,15 +63,15 @@ function renderForm(context, sHome) {
 
   var arrStudents = getStudents({
     id: objParams.studentSS,
-    defaultSavedsearch: defaultStudentSS,
+    defaultSavedsearch: defaultStudentSS
   });
   var arrDebtors = getDebtors({
     id: objParams.debtorSS,
-    defaultSavedsearch: defaultDebtorSS,
+    defaultSavedsearch: defaultDebtorSS
   });
   // var arrInstructions = getInstructionList();
   var arrInstructions = getInstructionListFromItems({
-    savedsearch: itemInstructionsSS,
+    savedsearch: itemInstructionsSS
   });
 
   //sort arr instructions
@@ -129,8 +129,8 @@ function renderForm(context, sHome) {
       searches: JSON.stringify(arrSearches),
       studentstatusoptions: JSON.stringify(arrStudentStatusOptions),
       sHome: sHome,
-      data: JSON.stringify(data),
-    }),
+      data: JSON.stringify(data)
+    })
   });
 
   return renderer.renderAsString();
@@ -148,13 +148,13 @@ function processData(context) {
   }
   log.audit('processData', arrSelectedStudents);
   var objParams = {
-    custscript_xw_mr_pr_benginedt: JSON.stringify(arrSelectedStudents),
+    custscript_xw_mr_pr_benginedt: JSON.stringify(arrSelectedStudents)
   };
 
   scheduleScriptMR({
     params: objParams,
     scriptId: 'customscript_xw_mr_billautomation',
-    deploymentId: 'customdeploy_xw_mr_billautomation',
+    deploymentId: 'customdeploy_xw_mr_billautomation'
   });
 
   return context.response.write('success');
@@ -168,12 +168,12 @@ function getSavedSearches() {
     filters: [],
     columns: [
       SEARCHMDL.createColumn({
-        name: 'custrecord_xw_bessname',
+        name: 'custrecord_xw_bessname'
       }),
       SEARCHMDL.createColumn({
-        name: 'custrecord_xw_besstype',
-      }),
-    ],
+        name: 'custrecord_xw_besstype'
+      })
+    ]
   });
   searchObj.run().each(function (result) {
     var savedSearchId = result.getValue('custrecord_xw_bessname');
@@ -186,12 +186,12 @@ function getSavedSearches() {
     var objSavedSearch = {};
     objSavedSearch.search = {
       id: savedSearchId,
-      text: result.getText('custrecord_xw_bessname'),
+      text: result.getText('custrecord_xw_bessname')
     };
 
     objSavedSearch.type = {
       id: result.getValue('custrecord_xw_besstype'),
-      text: result.getText('custrecord_xw_besstype'),
+      text: result.getText('custrecord_xw_besstype')
     };
 
     arrSavedSearches.push(objSavedSearch);
@@ -215,18 +215,18 @@ function getStudentStatusOptions() {
     filters: [],
     columns: [
       SEARCHMDL.createColumn({
-        name: 'name',
+        name: 'name'
       }),
       SEARCHMDL.createColumn({
         name: 'internalid',
-        sort: SEARCHMDL.Sort.ASC,
-      }),
-    ],
+        sort: SEARCHMDL.Sort.ASC
+      })
+    ]
   });
   searchObj.run().each(function (result) {
     var objStudentStatus = {
       id: result.id,
-      text: result.getValue('name'),
+      text: result.getValue('name')
     };
 
     arrStudentStatusList.push(objStudentStatus);
@@ -243,48 +243,48 @@ function getStudents(objParams) {
   var ssId = objParams.id;
   var arrColumns = [
     SEARCHMDL.createColumn({
-      name: 'custentity_xw_stustatus',
+      name: 'custentity_xw_stustatus'
     }),
     SEARCHMDL.createColumn({
-      name: 'lastname',
+      name: 'lastname'
     }),
     SEARCHMDL.createColumn({
-      name: 'firstname',
+      name: 'firstname'
     }),
     SEARCHMDL.createColumn({
       name: 'companyname',
-      join: 'customer',
+      join: 'customer'
     }),
     SEARCHMDL.createColumn({
       name: 'custentity_xw_familycode',
-      join: 'customer',
+      join: 'customer'
     }),
     SEARCHMDL.createColumn({
       name: 'custentity_xw_currentstuyear',
-      sort: SEARCHMDL.Sort.ASC,
+      sort: SEARCHMDL.Sort.ASC
     }),
     SEARCHMDL.createColumn({
-      name: 'company',
+      name: 'company'
     }),
     SEARCHMDL.createColumn({
-      name: 'custentity_xw_startdate',
+      name: 'custentity_xw_startdate'
     }),
     SEARCHMDL.createColumn({
       name: 'custentity_xw_debtorstaff',
-      join: 'customer',
+      join: 'customer'
     }),
     SEARCHMDL.createColumn({
       name: 'custentity_xw_familyorder',
-      sort: SEARCHMDL.Sort.ASC,
+      sort: SEARCHMDL.Sort.ASC
     }),
     SEARCHMDL.createColumn({
       name: 'custrecord_xw_binstapptoperiod',
-      join: 'custrecord_xw_binstapptostu',
+      join: 'custrecord_xw_binstapptostu'
     }),
     SEARCHMDL.createColumn({
       name: 'custrecord_xw_binstapptobinst',
-      join: 'custrecord_xw_binstapptostu',
-    }),
+      join: 'custrecord_xw_binstapptostu'
+    })
   ];
 
   var contactSearchObj;
@@ -304,18 +304,18 @@ function getStudents(objParams) {
       var objStudent = {};
       objStudent.status = {
         id: result.getValue('custentity_xw_stustatus'),
-        text: result.getText('custentity_xw_stustatus'),
+        text: result.getText('custentity_xw_stustatus')
       };
       objStudent.lastname = result.getValue('lastname');
       objStudent.firstname = result.getValue('firstname');
       objStudent.debtor = result.getValue({
         name: 'companyname',
-        join: 'customer',
+        join: 'customer'
       });
       objStudent.debtorId = result.getValue('company');
       objStudent.famcode = result.getValue({
         name: 'custentity_xw_familycode',
-        join: 'customer',
+        join: 'customer'
       });
       objStudent.year = result.getText('custentity_xw_currentstuyear');
       objStudent.famorder = result.getValue('custentity_xw_familyorder');
@@ -324,41 +324,41 @@ function getStudents(objParams) {
 
       var period = result.getValue({
         name: 'custrecord_xw_binstapptoperiod',
-        join: 'custrecord_xw_binstapptostu',
+        join: 'custrecord_xw_binstapptostu'
       });
       var item = result.getValue({
         name: 'custrecord_xw_binstapptobinst',
-        join: 'custrecord_xw_binstapptostu',
+        join: 'custrecord_xw_binstapptostu'
       });
       var billingType = result.getValue({
-        name: 'custrecord_xw_binsttype',
+        name: 'custrecord_xw_binsttype'
       });
       objStudent.appliedToData = [];
       var objAppliedToData = {
         period: period,
         instruction: item,
-        billingType: billingType,
+        billingType: billingType
       };
       objStudent.appliedToData.push(objAppliedToData);
 
       objStudent.staff = result.getValue({
         name: 'custentity_xw_debtorstaff',
-        join: 'customer',
+        join: 'customer'
       });
       objStudent.id = result.id;
       objStudents[result.id] = objStudent;
     } else {
       var period = result.getValue({
         name: 'custrecord_xw_binstapptoperiod',
-        join: 'custrecord_xw_binstapptostu',
+        join: 'custrecord_xw_binstapptostu'
       });
       var item = result.getValue({
         name: 'custrecord_xw_binstapptobinst',
-        join: 'custrecord_xw_binstapptostu',
+        join: 'custrecord_xw_binstapptostu'
       });
       var objAppliedToData = {
         period: period,
-        instruction: item,
+        instruction: item
       };
       objStudents[result.id].appliedToData.push(objAppliedToData);
     }
@@ -379,14 +379,14 @@ function getDebtors(objParams) {
   var ssId = objParams.id;
   var arrColumns = [
     SEARCHMDL.createColumn({
-      name: 'custentity_xw_familycode',
+      name: 'custentity_xw_familycode'
     }),
     SEARCHMDL.createColumn({
-      name: 'companyname',
+      name: 'companyname'
     }),
     SEARCHMDL.createColumn({
-      name: 'custentity_xw_debtorstaff',
-    }),
+      name: 'custentity_xw_debtorstaff'
+    })
   ];
 
   var customerSearchObj;
@@ -421,18 +421,18 @@ function getInstructionList() {
     filters: [],
     columns: [
       SEARCHMDL.createColumn({
-        name: 'custrecord_xw_binsttype',
+        name: 'custrecord_xw_binsttype'
       }),
       SEARCHMDL.createColumn({
-        name: 'name',
-      }),
-    ],
+        name: 'name'
+      })
+    ]
   });
   customrecord_xw_billinginstSearchObj.run().each(function (result) {
     var objInstruction = {};
     objInstruction.type = {
       id: result.getValue('custrecord_xw_binsttype'),
-      text: result.getText('custrecord_xw_binsttype'),
+      text: result.getText('custrecord_xw_binsttype')
     };
     objInstruction.name = result.getValue('name');
     objInstruction.id = result.id;
@@ -457,11 +457,11 @@ function getInstructionListFromItems(objParams) {
 
   var arrColumns = [
     SEARCHMDL.createColumn({
-      name: 'custrecord_xw_binsttype',
+      name: 'custrecord_xw_binsttype'
     }),
     SEARCHMDL.createColumn({
-      name: 'itemid',
-    }),
+      name: 'itemid'
+    })
   ];
 
   var searchObj = SEARCHMDL.load(savedSearch);
@@ -469,7 +469,7 @@ function getInstructionListFromItems(objParams) {
     var objInstruction = {};
     objInstruction.type = {
       id: result.getValue('custrecord_xw_binsttype'),
-      text: result.getText('custrecord_xw_binsttype'),
+      text: result.getText('custrecord_xw_binsttype')
     };
     objInstruction.name = result.getText('custrecord_xw_binstitem');
     objInstruction.id = result.id;
@@ -488,7 +488,7 @@ function scheduleScriptMR(objParams) {
       taskType: TASKMDL.TaskType.MAP_REDUCE,
       scriptId: objParams.scriptId,
       deploymentId: objParams.deploymentId,
-      params: params,
+      params: params
     });
     mrTask.submit();
   } catch (ex) {

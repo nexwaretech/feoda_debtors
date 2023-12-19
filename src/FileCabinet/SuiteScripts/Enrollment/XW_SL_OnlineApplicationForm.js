@@ -9,9 +9,9 @@ define(['N/render', 'N/file', 'N/runtime', './XW_library'], function (render, fi
 
   var objData = {};
   objData['company'] = {
-    'name' : 'Weddington Academy',
-    'email' : 'accounts@weddingtonacademy.com.au',
-    'phone' : '(03) 5562 0099',
+    name: 'Weddington Academy',
+    email: 'accounts@weddingtonacademy.com.au',
+    phone: '(03) 5562 0099'
   };
 
   function onRequest(context) {
@@ -21,8 +21,7 @@ define(['N/render', 'N/file', 'N/runtime', './XW_library'], function (render, fi
     }
   }
 
-
   return {
-    onRequest: onRequest,
+    onRequest: onRequest
   };
 });

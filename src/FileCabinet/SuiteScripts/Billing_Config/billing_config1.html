@@ -1,35 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
       integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="./billing_config.css"
-    />
+    <link rel="stylesheet" href="${FILES.billingconfigcss}" />
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,14 +27,14 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
       integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
       crossorigin="anonymous"
-    ></script>    
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.0/js/select2.min.js"></script>
     <title>Billing Configuration: Instructions</title>
     <style>
-      .record_link{
+      .record_link {
         color: #53a451;
       }
-      .record_link:hover{
+      .record_link:hover {
         text-decoration: underline;
       }
     </style>
@@ -60,27 +45,16 @@
         <div>
           <ul class="nav nav-tabs" role="tablist" style="margin-left: 30px">
             <li class="nav-item">
-              <a
-                class="nav-link active"
-                data-toggle="tab"
-                href="#config_categories"
-                >Categories</a
-              >
+              <a class="nav-link active" data-toggle="tab" href="#config_categories">Categories</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#config_items"
-                >Items</a
-              >
+              <a class="nav-link" data-toggle="tab" href="#config_items">Items</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#config_debtors"
-                >Families</a
-              >
+              <a class="nav-link" data-toggle="tab" href="#config_debtors">Families</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#config_student"
-                >Student</a
-              >
+              <a class="nav-link" data-toggle="tab" href="#config_student">Student</a>
             </li>
           </ul>
         </div>
@@ -91,26 +65,18 @@
         <div id="config_categories" class="container-fluid tab-pane active">
           <div class="main_container">
             <div class="col text-right">
-              <a
-                class="btn btn-link add-category"
-                data-toggle="modal"
-                data-target="#balanceModal"
+              <a class="btn btn-link add-category" data-toggle="modal" data-target="#balanceModal"
                 ><i class="fa fa-plus"></i> Add Category</a
               >
             </div>
             <div class="card">
               <div class="card-header" id="headingCharge">
                 <h5 class="mb-0">
-                  <a class="btn btn-link text-success" type="button">
-                    <i class="fa fa-plus"></i> Charges
-                  </a>
+                  <a class="btn btn-link text-success" type="button"> <i class="fa fa-plus"></i> Charges </a>
                 </h5>
               </div>
               <div class="card-body">
-                <table
-                  class="table table-borderless table-striped"
-                  id="categories_charge"
-                >
+                <table class="table table-borderless table-striped" id="categories_charge">
                   <thead>
                     <tr class="table-success">
                       <th>
@@ -121,10 +87,7 @@
                             id="checkallcharge"
                             v-on:click="markAllCharges"
                             v-model="markAllChargesStat"
-                          /><label
-                            class="custom-control-label"
-                            for="checkallcharge"
-                          >Mark/Unmark All</label>
+                          /><label class="custom-control-label" for="checkallcharge">Mark/Unmark All</label>
                         </div>
                       </th>
                       <th>Categories</th>
@@ -141,10 +104,7 @@
                             name="example2"
                             :id="'cb_charge_'+index"
                             v-model="lcharge.checked"
-                          /><label
-                            class="custom-control-label"
-                            :for="'cb_charge_'+index"
-                          ></label>
+                          /><label class="custom-control-label" :for="'cb_charge_'+index"></label>
                         </div>
                       </td>
                       <td>{{lcharge.name}}</td>
@@ -157,16 +117,11 @@
             <div class="card">
               <div class="card-header" id="headingDiscounts">
                 <h5 class="mb-0">
-                  <a class="btn btn-link text-success" type="button">
-                    <i class="fa fa-minus"></i> Discounts
-                  </a>
+                  <a class="btn btn-link text-success" type="button"> <i class="fa fa-minus"></i> Discounts </a>
                 </h5>
               </div>
               <div class="card-body">
-                <table
-                  class="table table-borderless table-striped"
-                  id="categories_discount"
-                >
+                <table class="table table-borderless table-striped" id="categories_discount">
                   <thead>
                     <tr class="table-success">
                       <th>
@@ -177,10 +132,7 @@
                             id="checkalldiscount"
                             v-on:click="markAllDiscounts"
                             v-model="markAllDiscountsStat"
-                          /><label
-                            class="custom-control-label"
-                            for="checkalldiscount"
-                          >Mark/Unmark All</label>
+                          /><label class="custom-control-label" for="checkalldiscount">Mark/Unmark All</label>
                         </div>
                       </th>
                       <th>Categories</th>
@@ -197,10 +149,7 @@
                             name="example2"
                             :id="'cb_discount_'+index"
                             v-model="ldiscount.checked"
-                          /><label
-                            class="custom-control-label"
-                            :for="'cb_discount_'+index"
-                          ></label>
+                          /><label class="custom-control-label" :for="'cb_discount_'+index"></label>
                         </div>
                       </td>
                       <td>{{ldiscount.name}}</td>
@@ -226,10 +175,7 @@
                         id="checkallitem"
                         v-on:click="markAllItems"
                         v-model="markAllItemsStat"
-                      /><label
-                        class="custom-control-label"
-                        for="checkallitem"
-                      >Mark/Unmark All</label>
+                      /><label class="custom-control-label" for="checkallitem">Mark/Unmark All</label>
                     </div>
                   </th>
                   <th>Items</th>
@@ -246,13 +192,12 @@
                         class="custom-control-input"
                         :id="'cb_item_'+index"
                         v-model="litem.checked"
-                      /><label
-                        class="custom-control-label"
-                        :for="'cb_item_'+index"
-                      ></label>
+                      /><label class="custom-control-label" :for="'cb_item_'+index"></label>
                     </div>
                   </td>
-                  <td><a :href="litem.link" target="_blank" class="record_link">{{litem.item}}</a></td>
+                  <td>
+                    <a :href="litem.link" target="_blank" class="record_link">{{litem.item}}</a>
+                  </td>
                   <td>{{litem.description}}</td>
                   <td>{{litem.price}}</td>
                 </tr>
@@ -269,12 +214,10 @@
                 <select
                   class="selectpicker form-control input-xs big-form-control"
                   id="filter_debtor_family_code"
-                  v-on:change= "filterDebtors"
+                  v-on:change="filterDebtors"
                 >
                   <option value="select_all">Select All</option>
-                  <option v-for="fcode in familyCodes" :value="fcode">
-                    {{fcode}}
-                  </option>
+                  <option v-for="fcode in familyCodes" :value="fcode">{{fcode}}</option>
                 </select>
               </div>
               <div class="col">
@@ -282,12 +225,10 @@
                 <select
                   class="selectpicker form-control input-xs big-form-control"
                   v-model="filterFamilyStatus"
-                  v-on:change= "filterDebtors"
+                  v-on:change="filterDebtors"
                 >
                   <option value="">All</option>
-                  <option v-for="fstatus in familyStatus" :value="fstatus.id">
-                    {{fstatus.text}}
-                  </option>
+                  <option v-for="fstatus in familyStatus" :value="fstatus.id">{{fstatus.text}}</option>
                 </select>
               </div>
             </div>
@@ -302,10 +243,7 @@
                         id="checkalldebtor"
                         v-on:click="markAllDebtors"
                         v-model="markAllDebtorsStat"
-                      /><label
-                        class="custom-control-label"
-                        for="checkalldebtor"
-                      >Mark/Unmark All</label>
+                      /><label class="custom-control-label" for="checkalldebtor">Mark/Unmark All</label>
                     </div>
                   </th>
                   <th>Name</th>
@@ -325,13 +263,12 @@
                         :id="'cb_debtor_'+index"
                         v-model="debtor.checked"
                         v-on:change="changeDebtor"
-                      /><label
-                        class="custom-control-label"
-                        :for="'cb_debtor_'+index"
-                      ></label>
+                      /><label class="custom-control-label" :for="'cb_debtor_'+index"></label>
                     </div>
                   </td>
-                  <td><a :href="debtor.link" target="_blank" class="record_link">{{debtor.name}}</a></td>
+                  <td>
+                    <a :href="debtor.link" target="_blank" class="record_link">{{debtor.name}}</a>
+                  </td>
                   <td>{{debtor.familycode}}</td>
                   <td>{{debtor.dateCreated}}</td>
                   <td>{{debtor.familyStatusText}}</td>
@@ -349,22 +286,21 @@
                 <select
                   class="selectpicker form-control input-xs big-form-control"
                   v-model="filterStudentYear"
-                  v-on:change= "filterStudents"
+                  v-on:change="filterStudents"
                 >
                   <option value="">All</option>
-                  <option v-for="syear in studentYears" :value="syear">
-                    {{syear}}
-                  </option>
+                  <option v-for="syear in studentYears" :value="syear">{{syear}}</option>
                 </select>
               </div>
               <div class="student-family-code col-md-3">
                 <label class="bold">Family Code:</label>
-                <select id="filter_student_family_code" class="selectpicker form-control input-xs big-form-control"
-                v-on:change= "filterStudents">
+                <select
+                  id="filter_student_family_code"
+                  class="selectpicker form-control input-xs big-form-control"
+                  v-on:change="filterStudents"
+                >
                   <option value="select_all">Select All</option>
-                  <option v-for="fcode in familyCodes" :value="fcode">
-                    {{fcode}}
-                  </option>
+                  <option v-for="fcode in familyCodes" :value="fcode">{{fcode}}</option>
                 </select>
               </div>
             </div>
@@ -379,10 +315,7 @@
                         id="checkallstudent"
                         v-on:click="markAllStudents"
                         v-model="markAllStudentsStat"
-                      /><label
-                        class="custom-control-label"
-                        for="checkallstudent"
-                      >Mark/Unmark All</label>
+                      /><label class="custom-control-label" for="checkallstudent">Mark/Unmark All</label>
                     </div>
                   </th>
                   <th>Name</th>
@@ -407,13 +340,14 @@
                         :id="'cb_student_'+index"
                         v-model="student.checked"
                         v-on:change="changeStudent"
-                      /><label
-                        class="custom-control-label"
-                        :for="'cb_student_'+index"
-                      ></label>
+                      /><label class="custom-control-label" :for="'cb_student_'+index"></label>
                     </div>
                   </td>
-                  <td><a :href="student.link" target="_blank" class="record_link">{{student.firstname}} {{student.lastname}}</a></td>
+                  <td>
+                    <a :href="student.link" target="_blank" class="record_link"
+                      >{{student.firstname}} {{student.lastname}}</a
+                    >
+                  </td>
                   <td>{{student.company}}</td>
                   <td>{{student.firstname}}</td>
                   <td>{{student.lastname}}</td>
@@ -439,15 +373,8 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                  Add New Balance
-                </h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
+                <h5 class="modal-title" id="exampleModalLabel">Add New Balance</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -456,12 +383,7 @@
                   <option value="0">Charge</option>
                   <option value="1">Discounts</option></select
                 ><br />
-                <input
-                  type="text"
-                  id="cat_text"
-                  class="form-control big-form-control"
-                  placeholder="Categories"
-                /><br />
+                <input type="text" id="cat_text" class="form-control big-form-control" placeholder="Categories" /><br />
                 <textarea
                   rows="4"
                   cols="50"
@@ -473,20 +395,8 @@
                 <div class="message-box"></div>
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn close-btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  class="btn save-btn btn-primary"
-                  v-on:click="addCategory"
-                >
-                  Save changes
-                </button>
+                <button type="button" class="btn close-btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn save-btn btn-primary" v-on:click="addCategory">Save changes</button>
               </div>
             </div>
           </div>
@@ -572,7 +482,7 @@
             width: '100%',
             selectionCssClass: 'selectpicker form-control input-xs multi-select-big-form-control'
           });
-          
+
           $('#filter_student_family_code').on('select2:select', function (e) {
               var filterStudentFamily = e.params.data.id;
               console.log('student family', filterStudentFamily);

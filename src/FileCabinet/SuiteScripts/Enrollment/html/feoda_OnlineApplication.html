@@ -1,12 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Bootstrap CSS -->
     <link
@@ -16,20 +13,14 @@
       crossorigin="anonymous"
     />
 
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
       integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
       crossorigin="anonymous"
     />
-    <script
-      defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
-    ></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <title>Weddington Academy</title>
@@ -68,10 +59,7 @@
         <div class="container-fluid header-wrapper shadow p-3 bg-white">
           <div class="row">
             <div class="col-lg logo item-center">
-              <img
-                      src="../../images_shared/logo-company.png" ,
-                      alt="header-logo"
-              />
+              <img src="../../images_shared/logo-company.png" , alt="header-logo" />
             </div>
             <div class="col-lg title item-center">
               <div>
@@ -82,22 +70,14 @@
               <div>
                 <h3>CONTACT US</h3>
                 <div class="email flex">
-                  <img
-                    src="../../images_shared/icon-email.png"
-                    alt="email-icon"
-                  />
+                  <img src="../../images_shared/icon-email.png" alt="email-icon" />
                   <p>
                     email us at
-                    <a href="mailto:accounts@weddingtonacademy.com.au"
-                      >accounts@weddingtonacademy.com.au</a
-                    >
+                    <a href="mailto:accounts@weddingtonacademy.com.au">accounts@weddingtonacademy.com.au</a>
                   </p>
                 </div>
                 <div class="phone flex">
-                  <img
-                    src="../../images_shared/icon-phone.png"
-                    alt="phone-icon"
-                  />
+                  <img src="../../images_shared/icon-phone.png" alt="phone-icon" />
                   <p>(03) 5562 0099</p>
                 </div>
               </div>
@@ -134,18 +114,12 @@
                 <li class="StepProgress-item start-item is-done">
                   <div class="item-wrapper">
                     <div class="icon">
-                      <img
-                        src="../../images_shared/1.start_button_white.png"
-                        alt="Start Icon"
-                      />
+                      <img src="../../images_shared/1.start_button_white.png" alt="Start Icon" />
                     </div>
                     <strong>START</strong>
                   </div>
                 </li>
-                <li
-                  class="status-line is-done"
-                  v-bind:class="[currentStep == 1 ? 'radius-btm-right' : '']"
-                >
+                <li class="status-line is-done" v-bind:class="[currentStep == 1 ? 'radius-btm-right' : '']">
                   <div class="line"></div>
                 </li>
                 <li
@@ -284,11 +258,7 @@
             </div>
           </div>
           <div class="col-lg-9 shadow radius-22 page-content-wrapper">
-            <div
-              class="page-content"
-              id="parents_guardians"
-              v-show="currentStep==1"
-            >
+            <div class="page-content" id="parents_guardians" v-show="currentStep==1">
               <div class="title-section">
                 <div class="title-wrapper">
                   <div class="title">
@@ -305,21 +275,13 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputFirstName">First Name:</label>
-                      <input
-                        type="text"
-                        class="form-control col-md-8"
-                        id="exampleInputFirstName"
-                      />
+                      <input type="text" class="form-control col-md-8" id="exampleInputFirstName" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputSurName">SurName:</label>
-                      <input
-                        type="text"
-                        class="form-control col-md-8"
-                        id="exampleInputSurName"
-                      />
+                      <input type="text" class="form-control col-md-8" id="exampleInputSurName" />
                     </div>
                   </div>
                 </div>
@@ -328,20 +290,13 @@
                     <label for="basic-email">Email:</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1"
-                          ><i class="far fa-envelope"></i
-                        ></span>
+                        <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
                       </div>
-                      <input
-                        type="text"
-                        class="form-control"
-                        aria-label="Email"
-                        aria-describedby="basic-addon1"
-                      />
+                      <input type="text" class="form-control" aria-label="Email" aria-describedby="basic-addon1" />
                     </div>
                     <p>
-                      Please ensure your email address is correct, as we will
-                      email your application details to you upon completion.
+                      Please ensure your email address is correct, as we will email your application details to you upon
+                      completion.
                     </p>
                   </div>
                 </div>
@@ -349,34 +304,21 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputMoble">Work Phone:</label>
-                      <input
-                        type="text"
-                        class="form-control col-md-8"
-                        id="exampleInputMoble"
-                      />
+                      <input type="text" class="form-control col-md-8" id="exampleInputMoble" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputHomePhone">Mobile Phone:</label>
-                      <input
-                        type="text"
-                        class="form-control col-md-8"
-                        id="exampleInputHomePhone"
-                      />
+                      <input type="text" class="form-control col-md-8" id="exampleInputHomePhone" />
                     </div>
                   </div>
                 </div>
                 <div class="row mb-5" style="margin-bottom: 1.5rem !important">
                   <div class="col-md-6">
-                    <label for="relationship_to_student"
-                      >Relationship To Student:</label
-                    >
+                    <label for="relationship_to_student">Relationship To Student:</label>
                     <div class="form-group custom-select-box">
-                      <select
-                        class="form-control col-md-8"
-                        id="relationship_to_student"
-                      >
+                      <select class="form-control col-md-8" id="relationship_to_student">
                         <option>-- Select --</option>
                         <option>Mother</option>
                         <option>Father</option>
@@ -389,35 +331,20 @@
               </div>
               <div class="row">
                 <div class="form-group form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="parent_acknowledgement"
-                  />
+                  <input type="checkbox" class="form-check-input" id="parent_acknowledgement" />
                   <label class="form-check-label" for="parent_acknowledgement">
-                    I acknowledge that all legal guardians and carers for the
-                    student have been entered into this application
+                    I acknowledge that all legal guardians and carers for the student have been entered into this
+                    application
                   </label>
                 </div>
               </div>
               <div class="button-wrapper">
-                <div
-                  class="add-parent-button"
-                  style="margin-bottom: 20px; margin-top: 5px"
-                >
-                  <button
-                    type="button"
-                    class="btn btn-custom-secondary"
-                    v-on:click="addGuardian()"
-                  >
+                <div class="add-parent-button" style="margin-bottom: 20px; margin-top: 5px">
+                  <button type="button" class="btn btn-custom-secondary" v-on:click="addGuardian()">
                     + Add another Parent/Guardian
                   </button>
                 </div>
-                <button
-                  type="button"
-                  class="btn btn-success submit-btn shadow"
-                  v-on:click="gotoNextStep()"
-                >
+                <button type="button" class="btn btn-success submit-btn shadow" v-on:click="gotoNextStep()">
                   Save & Continue
                 </button>
               </div>
@@ -437,21 +364,13 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputFirstName">Family Name:</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="exampleInputFirstName"
-                      />
+                      <input type="text" class="form-control" id="exampleInputFirstName" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputSurName">Home Phone:</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="exampleInputSurName"
-                      />
+                      <input type="text" class="form-control" id="exampleInputSurName" />
                     </div>
                   </div>
                 </div>
@@ -460,9 +379,7 @@
                     <label for="basic-url">Home Address:</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" id="family_home_addr"
-                          ><i class="fa fa-home"></i
-                        ></span>
+                        <span class="input-group-text" id="family_home_addr"><i class="fa fa-home"></i></span>
                       </div>
                       <input
                         type="text"
@@ -475,9 +392,7 @@
                 </div>
                 <div class="row mb-5">
                   <div class="col-md-6">
-                    <label for="preferred_communication"
-                      >Preferred Form of Communication:</label
-                    >
+                    <label for="preferred_communication">Preferred Form of Communication:</label>
                     <div class="form-group custom-select-box">
                       <select class="form-control" id="preferred_communication">
                         <option>-- Select --</option>
@@ -507,11 +422,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="sibling_name">Name:</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="sibling_name"
-                        />
+                        <input type="text" class="form-control" id="sibling_name" />
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -519,10 +430,7 @@
                         <label for="sibling_dob">DOB</label>
                         <div class="input-group">
                           <div class="input-group-prepend">
-                            <span
-                              class="input-group-text"
-                              id="sibling_dob_addon_1"
-                            >
+                            <span class="input-group-text" id="sibling_dob_addon_1">
                               <i class="far fa-calendar"></i>
                             </span>
                           </div>
@@ -536,7 +444,7 @@
                         </div>
                         <script type="text/javascript">
                           $(function () {
-                            $("#sibling_dob_1").datepicker();
+                            $('#sibling_dob_1').datepicker();
                           });
                         </script>
                       </div>
@@ -544,11 +452,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="sibling_year_level">Year Level</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="sibling_year_level"
-                        />
+                        <input type="text" class="form-control" id="sibling_year_level" />
                       </div>
                     </div>
                   </div>
@@ -556,11 +460,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="sibling_name">Name:</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="sibling_name"
-                        />
+                        <input type="text" class="form-control" id="sibling_name" />
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -568,10 +468,7 @@
                         <label for="sibling_dob">DOB</label>
                         <div class="input-group">
                           <div class="input-group-prepend">
-                            <span
-                              class="input-group-text"
-                              id="sibling_dob_addon_2"
-                            >
+                            <span class="input-group-text" id="sibling_dob_addon_2">
                               <i class="far fa-calendar"></i>
                             </span>
                           </div>
@@ -585,7 +482,7 @@
                         </div>
                         <script type="text/javascript">
                           $(function () {
-                            $("#sibling_dob_2").datepicker();
+                            $('#sibling_dob_2').datepicker();
                           });
                         </script>
                       </div>
@@ -593,11 +490,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="sibling_year_level">Year Level</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="sibling_year_level"
-                        />
+                        <input type="text" class="form-control" id="sibling_year_level" />
                       </div>
                     </div>
                   </div>
@@ -605,11 +498,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="sibling_name">Name:</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="sibling_name"
-                        />
+                        <input type="text" class="form-control" id="sibling_name" />
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -617,10 +506,7 @@
                         <label for="sibling_dob">DOB</label>
                         <div class="input-group">
                           <div class="input-group-prepend">
-                            <span
-                              class="input-group-text"
-                              id="sibling_dob_addon_3"
-                            >
+                            <span class="input-group-text" id="sibling_dob_addon_3">
                               <i class="far fa-calendar"></i>
                             </span>
                           </div>
@@ -634,7 +520,7 @@
                         </div>
                         <script type="text/javascript">
                           $(function () {
-                            $("#sibling_dob_3").datepicker();
+                            $('#sibling_dob_3').datepicker();
                           });
                         </script>
                       </div>
@@ -642,26 +528,15 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="sibling_year_level">Year Level</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="sibling_year_level"
-                        />
+                        <input type="text" class="form-control" id="sibling_year_level" />
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row mb-5" style="margin-bottom: 1.5rem !important">
                   <div class="col-md-12">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="court_orders"
-                      v-model="courtOrders"
-                    />
-                    <label class="form-check-label" for="court_orders">
-                      Court Orders
-                    </label>
+                    <input type="checkbox" class="form-check-input" id="court_orders" v-model="courtOrders" />
+                    <label class="form-check-label" for="court_orders"> Court Orders </label>
                   </div>
                 </div>
                 <div class="button-wrapper">
@@ -688,10 +563,7 @@
               <div class="title-section">
                 <div class="title-wrapper">
                   <div class="title">
-                    <i
-                      class="fas fa-graduation-cap"
-                      style="font-size: 20px"
-                    ></i>
+                    <i class="fas fa-graduation-cap" style="font-size: 20px"></i>
                     <p>Student</p>
                   </div>
                 </div>
@@ -701,31 +573,19 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputFirstName">First Name:</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="exampleInputFirstName"
-                      />
+                      <input type="text" class="form-control" id="exampleInputFirstName" />
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputSurName">Middle Name:</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="exampleInputSurName"
-                      />
+                      <input type="text" class="form-control" id="exampleInputSurName" />
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleInputSurName">Surname:</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="exampleInputSurName"
-                      />
+                      <input type="text" class="form-control" id="exampleInputSurName" />
                     </div>
                   </div>
                 </div>
@@ -748,7 +608,7 @@
                     </div>
                     <script type="text/javascript">
                       $(function () {
-                        $(".datepicker").datepicker();
+                        $('.datepicker').datepicker();
                       });
                     </script>
                   </div>
@@ -775,9 +635,7 @@
                 </div>
                 <div class="row mb-4">
                   <div class="col-md-6">
-                    <label for="student_country_origin"
-                      >Country of Origin</label
-                    >
+                    <label for="student_country_origin">Country of Origin</label>
                     <div class="form-group custom-select-box">
                       <select class="form-control" id="student_country_origin">
                         <option>-- Select --</option>
@@ -789,9 +647,7 @@
                 </div>
                 <div class="row mb-4">
                   <div class="col-md-6">
-                    <label for="student_cur_prev_school"
-                      >Current or Previous School</label
-                    >
+                    <label for="student_cur_prev_school">Current or Previous School</label>
                     <div class="form-group custom-select-box">
                       <select class="form-control" id="student_cur_prev_school">
                         <option>-- Select --</option>
@@ -801,9 +657,7 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <label for="student_curr_year_level"
-                      >Current Year Level</label
-                    >
+                    <label for="student_curr_year_level">Current Year Level</label>
                     <div class="form-group custom-select-box">
                       <select class="form-control" id="student_curr_year_level">
                         <option>-- Select --</option>
@@ -868,10 +722,7 @@
                       id="student_specific_needs"
                       v-model="studentHasSpecific"
                     />
-                    <label
-                      class="form-check-label"
-                      for="student_specific_needs"
-                    >
+                    <label class="form-check-label" for="student_specific_needs">
                       Does your child have any specifical needs?
                     </label>
                   </div>
@@ -887,31 +738,16 @@
                 </div>
                 <div class="row mb-4">
                   <div class="form-group form-check mb-2">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="parent_acknowledgement"
-                    />
-                    <label
-                      class="form-check-label"
-                      for="parent_acknowledgement"
-                    >
-                      I/We acknowledge that Agent Fees/Commission is not payable
-                      for students on visas i.e. local enrolments
+                    <input type="checkbox" class="form-check-input" id="parent_acknowledgement" />
+                    <label class="form-check-label" for="parent_acknowledgement">
+                      I/We acknowledge that Agent Fees/Commission is not payable for students on visas i.e. local
+                      enrolments
                     </label>
                   </div>
                   <div class="form-group form-check mb-2">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="parent_acknowledgement"
-                    />
-                    <label
-                      class="form-check-label"
-                      for="parent_acknowledgement"
-                    >
-                      I/We acknowledge that Agent Fees/Commission is only
-                      payable for International Students on 500<br />
+                    <input type="checkbox" class="form-check-input" id="parent_acknowledgement" />
+                    <label class="form-check-label" for="parent_acknowledgement">
+                      I/We acknowledge that Agent Fees/Commission is only payable for International Students on 500<br />
                       visas to Mentone Grammar Registered Education Agents
                     </label>
                   </div>
@@ -936,11 +772,7 @@
                 </div>
               </div>
             </div>
-            <div
-              class="page-content"
-              id="parents_guardians"
-              v-show="currentStep==4"
-            >
+            <div class="page-content" id="parents_guardians" v-show="currentStep==4">
               <div class="title-section">
                 <div class="title-wrapper">
                   <div class="title">
@@ -952,32 +784,23 @@
               <div class="main-content">
                 <div class="row mb-4">
                   <div class="file-drag-and-drop">
-                    <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Drop
-                    files Here&nbsp;&nbsp;&nbsp;&nbsp;-- OR
+                    <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Drop files Here&nbsp;&nbsp;&nbsp;&nbsp;-- OR
                     --&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button class="btn btn-success">
-                      <i class="fas fa-file-upload"></i>&nbsp;&nbsp;Select File
-                    </button>
+                    <button class="btn btn-success"><i class="fas fa-file-upload"></i>&nbsp;&nbsp;Select File</button>
                   </div>
                 </div>
                 <div class="row mb-4">
                   <div class="file-drag-and-drop">
-                    <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Drop
-                    files Here&nbsp;&nbsp;&nbsp;&nbsp;-- OR
+                    <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Drop files Here&nbsp;&nbsp;&nbsp;&nbsp;-- OR
                     --&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button class="btn btn-success">
-                      <i class="fas fa-file-upload"></i>&nbsp;&nbsp;Select File
-                    </button>
+                    <button class="btn btn-success"><i class="fas fa-file-upload"></i>&nbsp;&nbsp;Select File</button>
                   </div>
                 </div>
                 <div class="row mb-4">
                   <div class="file-drag-and-drop">
-                    <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Drop
-                    files Here&nbsp;&nbsp;&nbsp;&nbsp;-- OR
+                    <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Drop files Here&nbsp;&nbsp;&nbsp;&nbsp;-- OR
                     --&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button class="btn btn-success">
-                      <i class="fas fa-file-upload"></i>&nbsp;&nbsp;Select File
-                    </button>
+                    <button class="btn btn-success"><i class="fas fa-file-upload"></i>&nbsp;&nbsp;Select File</button>
                   </div>
                 </div>
                 <div class="button-wrapper">
@@ -1000,137 +823,103 @@
                 </div>
               </div>
             </div>
-            <div
-              class="page-content"
-              id="parents_guardians"
-              v-show="currentStep==5"
-            >
+            <div class="page-content" id="parents_guardians" v-show="currentStep==5">
               <div class="title-section">
                 <div class="title-wrapper">
                   <div class="title">
-                    <i
-                      class="fas fa-file-signature"
-                      style="font-size: 20px"
-                    ></i>
+                    <i class="fas fa-file-signature" style="font-size: 20px"></i>
                     <p>Terms & Conditions</p>
                   </div>
                 </div>
               </div>
               <div class="main-content">
                 <div class="row mb-4">
-                  <h3 style="font-size: 14px">
-                    Parent and Student Agreement and Declaration
-                  </h3>
+                  <h3 style="font-size: 14px">Parent and Student Agreement and Declaration</h3>
                   <table class="mt-2 mb-4" style="font-size: 12px">
                     <tr>
                       <td colspan="2">
-                        I understand and agree to the following if accepted to
-                        be a part of Weddington Academy:
+                        I understand and agree to the following if accepted to be a part of Weddington Academy:
                       </td>
                     </tr>
                     <tr>
                       <td>1.</td>
                       <td>
-                        Supportive of all Policies and Guidelines of the Academy
-                        including those relating to uniform, and agree to
-                        support the school’s Pastoral Care Policy
+                        Supportive of all Policies and Guidelines of the Academy including those relating to uniform,
+                        and agree to support the school’s Pastoral Care Policy
                       </td>
                     </tr>
                     <tr>
                       <td>2.</td>
                       <td>
-                        To participate in the Religious Education Program of the
-                        Academy which will include, classes and Masses, Academy
-                        Social Justice Program, Academy religious celebrations,
-                        parish activities and retreats. Agree that camps,
-                        activities and retreats, where relevant to the
-                        particular year group, form an integral part of the
-                        Academy curriculum and are compulsory for all students
-                        and hereby give permission for the attending student to
-                        participate in such activities.
+                        To participate in the Religious Education Program of the Academy which will include, classes and
+                        Masses, Academy Social Justice Program, Academy religious celebrations, parish activities and
+                        retreats. Agree that camps, activities and retreats, where relevant to the particular year
+                        group, form an integral part of the Academy curriculum and are compulsory for all students and
+                        hereby give permission for the attending student to participate in such activities.
                       </td>
                     </tr>
                     <tr>
                       <td>3.</td>
                       <td>
-                        Payment of educational fees to Weddington Academy each
-                        year the student is enrolled at the Academy. If
-                        financial hardship occurs, the Academy will be contacted
-                        via the Academy Business Manager, to discuss alternative
-                        payment arrangements. Ten school weeks’ notice of
-                        withdrawal of a student from the Academy is required.
-                        Upon withdrawal, families will remain liable for a
-                        weekly pro-rata portion of all fees up to the withdrawal
-                        date or a date ten weeks after notice is given whichever
-                        is the latest. Notice of withdrawal must be made in
-                        writing to the Principal.
+                        Payment of educational fees to Weddington Academy each year the student is enrolled at the
+                        Academy. If financial hardship occurs, the Academy will be contacted via the Academy Business
+                        Manager, to discuss alternative payment arrangements. Ten school weeks’ notice of withdrawal of
+                        a student from the Academy is required. Upon withdrawal, families will remain liable for a
+                        weekly pro-rata portion of all fees up to the withdrawal date or a date ten weeks after notice
+                        is given whichever is the latest. Notice of withdrawal must be made in writing to the Principal.
                       </td>
                     </tr>
                     <tr>
                       <td>4.</td>
                       <td>
-                        Give permission for the school authorities to authorise
-                        any medical steps which may become necessary as the
-                        result of any accident occurring at the Academy or at
-                        functions/excursions organised by the Academy if contact
-                        cannot be made with nominated emergency contacts before
-                        any such treatment is deemed necessary by proper medical
-                        authorities.
+                        Give permission for the school authorities to authorise any medical steps which may become
+                        necessary as the result of any accident occurring at the Academy or at functions/excursions
+                        organised by the Academy if contact cannot be made with nominated emergency contacts before any
+                        such treatment is deemed necessary by proper medical authorities.
                       </td>
                     </tr>
                     <tr>
                       <td>5.</td>
                       <td>
-                        Give permission for Weddington Academy to contact the
-                        current school attended by the student and release
-                        personal and/or sensitive information for funding and
-                        educational purposes, and understand that this
-                        information will enable Weddington Academy to monitor
-                        and guide the students’ progress more effectively.
+                        Give permission for Weddington Academy to contact the current school attended by the student and
+                        release personal and/or sensitive information for funding and educational purposes, and
+                        understand that this information will enable Weddington Academy to monitor and guide the
+                        students’ progress more effectively.
                       </td>
                     </tr>
                     <tr>
                       <td>6.</td>
                       <td>
-                        The information collected in this application to enrol
-                        at Weddington Academy will be used to enable the Academy
-                        to discharge its duty of care.
+                        The information collected in this application to enrol at Weddington Academy will be used to
+                        enable the Academy to discharge its duty of care.
                       </td>
                     </tr>
                     <tr>
                       <td>7.</td>
                       <td>
-                        This application is not considered complete (and
-                        accepted), until all documentation requested has been
-                        received correctly by the Enrolments Office.
+                        This application is not considered complete (and accepted), until all documentation requested
+                        has been received correctly by the Enrolments Office.
                       </td>
                     </tr>
                     <tr>
                       <td>8.</td>
                       <td>
-                        For this enrolment process to be finalised, an
-                        ‘Acceptance of Offer of Enrolment Agreement’ will need
-                        to be signed should this application be successful.
+                        For this enrolment process to be finalised, an ‘Acceptance of Offer of Enrolment Agreement’ will
+                        need to be signed should this application be successful.
                       </td>
                     </tr>
                     <tr>
                       <td colspan="2">
-                        Parents and students should read the information and
-                        policies set out by the Academy prior to agreeing to the
-                        terms and conditions.
+                        Parents and students should read the information and policies set out by the Academy prior to
+                        agreeing to the terms and conditions.
                       </td>
                     </tr>
                   </table>
                   <div class="row mb-5">
                     <div class="col-md-12">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        id="agree_terms"
-                      />
+                      <input type="checkbox" class="form-check-input" id="agree_terms" />
                       <label class="form-check-label" for="agree_terms">
-                        I/We agree to the above terms and conditions of this
-                        application.
+                        I/We agree to the above terms and conditions of this application.
                       </label>
                     </div>
                   </div>
@@ -1155,18 +944,11 @@
                 </div>
               </div>
             </div>
-            <div
-              class="page-content"
-              id="parents_guardians"
-              v-show="currentStep==6"
-            >
+            <div class="page-content" id="parents_guardians" v-show="currentStep==6">
               <div class="title-section">
                 <div class="title-wrapper">
                   <div class="title">
-                    <i
-                      class="fas fa-money-check-alt"
-                      style="font-size: 20px"
-                    ></i>
+                    <i class="fas fa-money-check-alt" style="font-size: 20px"></i>
                     <p>Payment</p>
                   </div>
                 </div>
@@ -1177,26 +959,14 @@
                     <h5 class="col-md-3">Card Type:</h5>
                     <div class="col-md-9 card-type-radio">
                       <label class="align-center">
-                        <input
-                          type="radio"
-                          name="card-type"
-                          v-model="cc_type"
-                          id="card-type-master"
-                          value="4"
-                        />
+                        <input type="radio" name="card-type" v-model="cc_type" id="card-type-master" value="4" />
                         <img
                           src="https://tstdrv2525617.app.netsuite.com/core/media/media.nl?id=5814&c=TSTDRV2525617&h=yzhiBWMdDwPPaDuomKouKw4GZ2rGQP2--J6mK5__gJHwuSRR"
                         />
                       </label>
 
                       <label class="align-center">
-                        <input
-                          type="radio"
-                          name="card-type"
-                          v-model="cc_type"
-                          id="card-type-visa"
-                          value="5"
-                        />
+                        <input type="radio" name="card-type" v-model="cc_type" id="card-type-visa" value="5" />
                         <img
                           src="https://tstdrv2525617.app.netsuite.com/core/media/media.nl?id=5815&c=TSTDRV2525617&h=BA1aYuxkQ10MZN3OdUqvIPVlrvnTZ_KiJtHhtPDwNyPTGxFJ"
                         />
@@ -1253,9 +1023,7 @@
 
                         <select v-model="cc_exp_year">
                           <option value="">YYYY</option>
-                          <option v-for="y in cc_years" v-bind:value="y">
-                            {{ y }}
-                          </option>
+                          <option v-for="y in cc_years" v-bind:value="y">{{ y }}</option>
                         </select>
                       </div>
                     </div>
@@ -1291,18 +1059,13 @@
         <div class="modal-content">
           <div class="modal-header">
             <h4>Thank you!</h4>
-            <button type="button" class="close" data-dismiss="modal">
-              &times;
-            </button>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-            Your application has been successfully submitted. We will send you a
-            confirmation email shortly"
+            Your application has been successfully submitted. We will send you a confirmation email shortly"
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">
-              OK
-            </button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
           </div>
         </div>
       </div>
@@ -1327,19 +1090,19 @@
   </script> -->
   <script>
     app = new Vue({
-      el: "#feoda_online_application",
+      el: '#feoda_online_application',
       data: {
-        currentStep: "",
+        currentStep: '',
         guardians: 1,
         haveAnotherSibling: false,
         studentHasSpecific: false,
         courtOrders: false,
         cc_years: [],
-        cc_exp_year: "",
-        cc_exp_month: "",
-        cc_no: "",
-        cc_name: "",
-        cc_type: "4",
+        cc_exp_year: '',
+        cc_exp_month: '',
+        cc_no: '',
+        cc_name: '',
+        cc_type: '4'
       },
       created: function () {
         this.currentStep = 1;
@@ -1353,7 +1116,7 @@
       computed: {
         completedPercentage: function () {
           return Math.ceil(((this.currentStep - 1) / 6) * 100);
-        },
+        }
       },
       methods: {
         gotoNextStep: function () {
@@ -1365,8 +1128,8 @@
         submitForm: function () {},
         addGuardian: function () {
           this.guardians += 1;
-        },
-      },
+        }
+      }
     });
   </script>
 </html>

@@ -1,54 +1,67 @@
 <customlist scriptid="customlist_xw_months">
   <description></description>
   <isinactive>F</isinactive>
+  <ismatrixoption>F</ismatrixoption>
   <isordered>T</isordered>
   <name>Months</name>
   <customvalues>
-    <customvalue scriptid="jan">
+    <customvalue scriptid="1jan">
+      <abbreviation>J</abbreviation>
       <isinactive>F</isinactive>
       <value>Jan</value>
     </customvalue>
-    <customvalue scriptid="feb">
+    <customvalue scriptid="2feb">
+      <abbreviation>F</abbreviation>
       <isinactive>F</isinactive>
       <value>Feb</value>
     </customvalue>
-    <customvalue scriptid="mar">
+    <customvalue scriptid="3mar">
+      <abbreviation>M</abbreviation>
       <isinactive>F</isinactive>
       <value>Mar</value>
     </customvalue>
-    <customvalue scriptid="apr">
+    <customvalue scriptid="4apr">
+      <abbreviation>A</abbreviation>
       <isinactive>F</isinactive>
       <value>Apr</value>
     </customvalue>
-    <customvalue scriptid="may">
+    <customvalue scriptid="5may">
+      <abbreviation>M</abbreviation>
       <isinactive>F</isinactive>
       <value>May</value>
     </customvalue>
-    <customvalue scriptid="jun">
+    <customvalue scriptid="6jun">
+      <abbreviation>J</abbreviation>
       <isinactive>F</isinactive>
       <value>Jun</value>
     </customvalue>
-    <customvalue scriptid="jul">
+    <customvalue scriptid="7jul">
+      <abbreviation>J</abbreviation>
       <isinactive>F</isinactive>
       <value>Jul</value>
     </customvalue>
-    <customvalue scriptid="aug">
+    <customvalue scriptid="8aug">
+      <abbreviation>A</abbreviation>
       <isinactive>F</isinactive>
       <value>Aug</value>
     </customvalue>
-    <customvalue scriptid="sep">
+    <customvalue scriptid="9sep">
+      <abbreviation>S</abbreviation>
       <isinactive>F</isinactive>
       <value>Sep</value>
     </customvalue>
-    <customvalue scriptid="oct">
+    <customvalue scriptid="10oct">
+      <abbreviation>O</abbreviation>
       <isinactive>F</isinactive>
       <value>Oct</value>
     </customvalue>
-    <customvalue scriptid="nov">
+    <customvalue scriptid="11nov">
+      <abbreviation>N</abbreviation>
       <isinactive>F</isinactive>
       <value>Nov</value>
     </customvalue>
-    <customvalue scriptid="dec">
+    <customvalue scriptid="12dec">
+      <abbreviation>D</abbreviation>
       <isinactive>F</isinactive>
       <value>Dec</value>
     </customvalue>

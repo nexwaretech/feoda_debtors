@@ -12,7 +12,16 @@ var RUNTIMEMDL;
 var RENDERMDL;
 var FORMATMDL;
 
-define(['N/record', 'N/search', 'N/email', 'N/runtime', 'N/render', 'N/format', './lib_rps', '../lib_shared/lib_email'], runScript);
+define([
+  'N/record',
+  'N/search',
+  'N/email',
+  'N/runtime',
+  'N/render',
+  'N/format',
+  './lib_rps',
+  '../lib_shared/lib_email'
+], runScript);
 function runScript(record, search, email, runtime, render, format, lib, lib_email) {
   RECORDMDL = record;
   SEARCHMDL = search;
@@ -29,17 +38,20 @@ function runScript(record, search, email, runtime, render, format, lib, lib_emai
         var script = runtime.getCurrentScript();
         var invId = script.getParameter(lib.SCRIPTS.mr_send_email.params.id);
         var invTmpl = script.getParameter(lib.SCRIPTS.mr_send_email.params.tmpl);
-        log.debug(LOG_TITLE, '>> invId <<'+invId);
+        log.debug(LOG_TITLE, '>> invId <<' + invId);
 
         var arrInvoices = [];
-        if(invId){
+        if (invId) {
           arrInvoices.push(invId);
         }
 
-        var objInvoice = lib.searchInvoices({tmpl : invTmpl, invlist : arrInvoices});
+        var objInvoice = lib.searchInvoices({
+          tmpl: invTmpl,
+          invlist: arrInvoices
+        });
 
         if (objInvoice) {
-          log.debug(LOG_TITLE, 'Processing number of invoices: ' +  JSON.stringify(objInvoice));
+          log.debug(LOG_TITLE, 'Processing number of invoices: ' + JSON.stringify(objInvoice));
         } else {
           log.debug(LOG_TITLE, 'No Invoices found');
         }
@@ -66,7 +78,7 @@ function runScript(record, search, email, runtime, render, format, lib, lib_emai
           return;
         }
 
-        log.debug(LOG_TITLE, 'pdfTemplate'+ pdfTemplate + ' transactionForm'+transactionForm);
+        log.debug(LOG_TITLE, 'pdfTemplate' + pdfTemplate + ' transactionForm' + transactionForm);
 
         var objEmailTemplate = lib_email.getEmailTemplate(script.id);
 
@@ -81,21 +93,20 @@ function runScript(record, search, email, runtime, render, format, lib, lib_emai
         var objInvoices = {};
         objInvoices[context.key] = JSON.parse(context.value);
         objInvoices = lib.searchContacts(objInvoices, true);
- log.debug(LOG_TITLE, 'objInvoices '+ JSON.stringify(objInvoices));
+        log.debug(LOG_TITLE, 'objInvoices ' + JSON.stringify(objInvoices));
 
-        for (let invoice in objInvoices)
-        {
+        for (let invoice in objInvoices) {
           log.debug(LOG_TITLE, 'Processing invoice ' + invoice);
           try {
             var objInvoice = objInvoices[invoice]; // UNUSED.
 
             var suiteletLink = objInvoice.suiteletLink;
             var hrefLink =
-                '<a href=' +
-                suiteletLink +
-                ' onClick="window.open(\'' +
-                suiteletLink +
-                "','RPS','resizable,height=768,width=1024'); return false;\">Click here to setup schedule for the attached invoice</a>";
+              '<a href=' +
+              suiteletLink +
+              ' onClick="window.open(\'' +
+              suiteletLink +
+              "','RPS','resizable,height=768,width=1024'); return false;\">Click here to setup schedule for the attached invoice</a>";
 
             var objData = {};
             objData.hrefLink = hrefLink;
@@ -106,17 +117,17 @@ function runScript(record, search, email, runtime, render, format, lib, lib_emai
 
             var recInv = RECORDMDL.load({
               type: 'invoice',
-              id: invoice,
+              id: invoice
             });
 
             var statementDate = FORMATMDL.format({
               value: new Date(),
-              type: FORMATMDL.Type.DATE,
+              type: FORMATMDL.Type.DATE
             });
             var d = new Date(new Date().getFullYear(), 0, 1);
             var startDate = FORMATMDL.format({
               value: d,
-              type: FORMATMDL.Type.DATE,
+              type: FORMATMDL.Type.DATE
             });
 
             log.debug(LOG_TITLE, 'new Date: ' + new Date().toString());
@@ -129,7 +140,7 @@ function runScript(record, search, email, runtime, render, format, lib, lib_emai
             renderer.addCustomDataSource({
               format: RENDERMDL.DataSource.OBJECT,
               alias: 'DATA',
-              data: objData,
+              data: objData
             });
 
             var relatedRecords = {};
@@ -142,11 +153,11 @@ function runScript(record, search, email, runtime, render, format, lib, lib_emai
               var newRenderer = RENDERMDL.create();
               newRenderer.addRecord({
                 templateName: 'record',
-                record: recInv,
+                record: recInv
               });
 
               newRenderer.setTemplateById({
-                id: pdfTemplate,
+                id: pdfTemplate
               });
               log.debug(LOG_TITLE, 'pdfTemplate: ' + pdfTemplate);
 
@@ -157,20 +168,19 @@ function runScript(record, search, email, runtime, render, format, lib, lib_emai
               newRenderer.addCustomDataSource({
                 format: render.DataSource.OBJECT,
                 alias: 'DATA',
-                data: objRenderData,
+                data: objRenderData
               });
 
               var newTransactionFile = newRenderer.renderAsPdf();
               newTransactionFile.name = 'Invoice_' + tranid + '.pdf';
               log.debug(LOG_TITLE, 'newTransactionFile: ' + newTransactionFile);
 
-
               var statementFile = RENDERMDL.statement({
                 entityId: parseInt(debtor, 10),
                 startDate: startDate,
                 statementDate: statementDate,
                 printMode: RENDERMDL.PrintMode.HTML,
-                formId: parseInt(transactionForm),
+                formId: parseInt(transactionForm)
               });
 
               var fileContent = statementFile.getContents();
@@ -178,7 +188,7 @@ function runScript(record, search, email, runtime, render, format, lib, lib_emai
               fileContent = fileContent.replace('</html>', '</pdf>');
               fileContent = fileContent.replace('{contactName}', objContact.name);
               var newConvertedStatementFile = RENDERMDL.xmlToPdf({
-                xmlString: fileContent,
+                xmlString: fileContent
               });
               newConvertedStatementFile.name = debtorName + '.pdf';
 
@@ -194,7 +204,7 @@ function runScript(record, search, email, runtime, render, format, lib, lib_emai
                   subject: subject,
                   body: renderer.renderAsString(),
                   relatedRecords: relatedRecords,
-                  attachments: [newConvertedStatementFile, newTransactionFile],
+                  attachments: [newConvertedStatementFile, newTransactionFile]
                 });
               } else {
                 log.debug(LOG_TITLE, 'No email addresses found');
@@ -206,11 +216,10 @@ function runScript(record, search, email, runtime, render, format, lib, lib_emai
           }
         }
       } catch (ex) {
-
         log.error(LOG_TITLE, JSON.stringify(ex));
       }
 
       log.debug(LOG_TITLE, '>> END <<');
-    },
+    }
   };
 }

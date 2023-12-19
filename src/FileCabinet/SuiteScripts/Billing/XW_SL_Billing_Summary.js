@@ -2,7 +2,15 @@
  *@NApiVersion 2.1
  *@NScriptType Suitelet
  */
-define(['N/render', 'N/file', 'N/record', 'N/search', 'N/url', 'N/task', './lib_billing'], function (render, file, record, search, url, task, lib) {
+define(['N/render', 'N/file', 'N/record', 'N/search', 'N/url', 'N/task', './lib_billing'], function (
+  render,
+  file,
+  record,
+  search,
+  url,
+  task,
+  lib
+) {
   /**
    * @param {SuiteletContext.onRequest} context
    */
@@ -10,15 +18,11 @@ define(['N/render', 'N/file', 'N/record', 'N/search', 'N/url', 'N/task', './lib_
     if (context.request.method === 'GET') {
       try {
         const renderer = render.create();
-        renderer.templateContent = file
-          .load('./billing_summary_main.html')
-          .getContents();
+        renderer.templateContent = file.load('./billing_summary_main.html').getContents();
 
         const debtorData = lib.getDebtors();
 
         const instAppliedObj = lib.getBillingInstructionsAppliedTo();
-
-
 
         const emailTemplates = getEmailTemplates();
         const employees = getEmployees();
@@ -55,7 +59,6 @@ define(['N/render', 'N/file', 'N/record', 'N/search', 'N/url', 'N/task', './lib_
           { id: 'NOTSCHEDULED', name: 'Not Scheduled' },
           { id: 'SCHEDULED', name: 'Scheduled' }
         ];
-
 
         if (action == 'save') {
           const bpId = GetBillingPref();
@@ -105,26 +108,22 @@ define(['N/render', 'N/file', 'N/record', 'N/search', 'N/url', 'N/task', './lib_
     }
   }
 
-
-
   function getItemsInfo(items) {
     let itemObj = {};
 
     const itemSearchObj = search.create({
       type: 'item',
-      filters:
-        [['internalid', 'anyof', items]],
-      columns:
-        [
-          search.createColumn({
-            name: 'itemid',
-            sort: search.Sort.ASC
-          }),
-          'displayname',
-          'salesdescription',
-          'type',
-          'baseprice'
-        ]
+      filters: [['internalid', 'anyof', items]],
+      columns: [
+        search.createColumn({
+          name: 'itemid',
+          sort: search.Sort.ASC
+        }),
+        'displayname',
+        'salesdescription',
+        'type',
+        'baseprice'
+      ]
     });
     itemSearchObj.run().each(function (result) {
       // .run().each has a limit of 4,000 results
@@ -136,7 +135,7 @@ define(['N/render', 'N/file', 'N/record', 'N/search', 'N/url', 'N/task', './lib_
 
   function getBillingPref() {
     const customrecord_xw_billing_prefSearchObj = search.create({
-      type: "customrecord_xw_billing_pref",
+      type: 'customrecord_xw_billing_pref',
       filters: [],
       columns: ['custrecord_xw_bpref_debtors']
     });
@@ -149,7 +148,7 @@ define(['N/render', 'N/file', 'N/record', 'N/search', 'N/url', 'N/task', './lib_
 
     customrecord_xw_billing_prefSearchObj.run().each(function (result) {
       // .run().each has a limit of 4,000 results
-      debtors = result.getValue('custrecord_xw_bpref_debtors')
+      debtors = result.getValue('custrecord_xw_bpref_debtors');
       return false;
     });
     return debtors;
@@ -157,16 +156,14 @@ define(['N/render', 'N/file', 'N/record', 'N/search', 'N/url', 'N/task', './lib_
 
   function getEmailTemplates() {
     const customrecord_xw_emailtplsSearchObj = search.create({
-      type: "customrecord_xw_emailtpls",
-      filters:
-        [],
-      columns:
-        [
-          search.createColumn({
-            name: "name",
-            sort: search.Sort.ASC
-          })
-        ]
+      type: 'customrecord_xw_emailtpls',
+      filters: [],
+      columns: [
+        search.createColumn({
+          name: 'name',
+          sort: search.Sort.ASC
+        })
+      ]
     });
 
     let emailTemplates = [];
@@ -183,19 +180,15 @@ define(['N/render', 'N/file', 'N/record', 'N/search', 'N/url', 'N/task', './lib_
 
   function getEmployees() {
     const employeeSearchObj = search.create({
-      type: "employee",
-      filters:
-        [
-          ["isinactive", "is", "F"]
-        ],
-      columns:
-        [
-          search.createColumn({
-            name: "entityid",
-            sort: search.Sort.ASC
-          }),
-          "email"
-        ]
+      type: 'employee',
+      filters: [['isinactive', 'is', 'F']],
+      columns: [
+        search.createColumn({
+          name: 'entityid',
+          sort: search.Sort.ASC
+        }),
+        'email'
+      ]
     });
 
     let employees = [];
@@ -204,7 +197,7 @@ define(['N/render', 'N/file', 'N/record', 'N/search', 'N/url', 'N/task', './lib_
       employees.push({
         id: result.id,
         name: result.getValue('entityid')
-      })
+      });
       return true;
     });
 

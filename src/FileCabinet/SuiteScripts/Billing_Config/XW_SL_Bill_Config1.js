@@ -2,9 +2,18 @@
  *@NApiVersion 2.1
  *@NScriptType Suitelet
  */
-define(['N/render', 'N/file', 'N/record', "../lib_shared/lib_billing_engine.js",
-  '../lib_shared/lib_billing_preference.js', '../lib_shared/lib_contact.js', '../lib_shared/lib_item.js',
-  '../lib_shared/lib_const.js', '../lib_shared/lib_customer.js'], function (
+define([
+  'N/render',
+  'N/file',
+  'N/record',
+  '../lib_shared/lib_billing_engine.js',
+  '../lib_shared/lib_billing_preference.js',
+  '../lib_shared/lib_contact.js',
+  '../lib_shared/lib_item.js',
+  '../lib_shared/lib_const.js',
+  '../lib_shared/lib_customer.js',
+  '../lib_shared/lib_utils.js'
+], function (
   render,
   file,
   record,
@@ -13,7 +22,8 @@ define(['N/render', 'N/file', 'N/record', "../lib_shared/lib_billing_engine.js",
   lib_contact,
   lib_item,
   lib_const,
-  lib_customer
+  lib_customer,
+  lib_utils
 ) {
   /**
    * @param {SuiteletContext.onRequest} context
@@ -29,9 +39,7 @@ define(['N/render', 'N/file', 'N/record', "../lib_shared/lib_billing_engine.js",
     if (context.request.method === 'GET') {
       try {
         const renderer = render.create();
-        renderer.templateContent = file
-          .load('./billing_config1.html')
-          .getContents();
+        renderer.templateContent = file.load('./billing_config1.html').getContents();
 
         const itemData = lib_item.getStudentFeeItems();
         const studentData = lib_contact.getAttendingStudentContacts();
@@ -63,6 +71,21 @@ define(['N/render', 'N/file', 'N/record', "../lib_shared/lib_billing_engine.js",
           format: render.DataSource.JSON,
           data: JSON.stringify(formData)
         });
+
+        const objImages = lib_utils.searchFileUrlinFolder('images_shared');
+        renderer.addCustomDataSource({
+          alias: 'IMAGES',
+          format: render.DataSource.JSON,
+          data: JSON.stringify(objImages)
+        });
+
+        const objFiles = lib_utils.searchFileUrlinFolder('files_shared');
+        renderer.addCustomDataSource({
+          alias: 'FILES',
+          format: render.DataSource.JSON,
+          data: JSON.stringify(objFiles)
+        });
+
         return context.response.write({
           output: renderer.renderAsString()
         });
@@ -87,7 +110,7 @@ define(['N/render', 'N/file', 'N/record', "../lib_shared/lib_billing_engine.js",
           value: selectedData.students
         });
         bpRec.setValue({
-          fieldId:  lib_billing_preference.REC_BILLING_PREFERENCE.DEBTORS,
+          fieldId: lib_billing_preference.REC_BILLING_PREFERENCE.DEBTORS,
           value: selectedData.debtors
         });
 
@@ -98,7 +121,11 @@ define(['N/render', 'N/file', 'N/record', "../lib_shared/lib_billing_engine.js",
               if (selectedCharges[i].id) {
                 charges.push(selectedCharges[i].id);
               } else {
-                const chargeId = lib_billing_engine.createBillingEngineType(selectedCharges[i].name, selectedCharges[i].description, lib_const.LIST_BILLING_ENGINE_CATEGORY.CHARGE);
+                const chargeId = lib_billing_engine.createBillingEngineType(
+                  selectedCharges[i].name,
+                  selectedCharges[i].description,
+                  lib_const.LIST_BILLING_ENGINE_CATEGORY.CHARGE
+                );
                 charges.push(chargeId);
               }
             }
@@ -112,7 +139,11 @@ define(['N/render', 'N/file', 'N/record', "../lib_shared/lib_billing_engine.js",
               if (selectedDiscounts[i].id) {
                 discounts.push(selectedDiscounts[i].id);
               } else {
-                const discountId = lib_billing_engine.createBillingEngineType(selectedCharges[i].name, selectedCharges[i].description, lib_const.LIST_BILLING_ENGINE_CATEGORY.DISCOUNT);
+                const discountId = lib_billing_engine.createBillingEngineType(
+                  selectedCharges[i].name,
+                  selectedCharges[i].description,
+                  lib_const.LIST_BILLING_ENGINE_CATEGORY.DISCOUNT
+                );
                 discounts.push(discountId);
               }
             }
@@ -130,12 +161,10 @@ define(['N/render', 'N/file', 'N/record', "../lib_shared/lib_billing_engine.js",
 
         const bpIdUpdated = bpRec.save();
 
-        log.audit('bpIdUpdated',bpIdUpdated);
+        log.audit('bpRecUpdatedId1', bpIdUpdated);
       }
-
     }
   }
-
 
   return {
     onRequest: onRequest

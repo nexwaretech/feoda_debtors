@@ -3,14 +3,13 @@
  * @NScriptType suitelet
  */
 
-define([ 'N/task', './lib_billing'], function(task, lib) {
+define(['N/task', './lib_billing'], function (task, lib) {
   function onRequest(context) {
     try {
-
       var id = context.request.parameters.id;
       log.audit('id', id);
 
-      var mrTask = task.create({taskType: task.TaskType.MAP_REDUCE});
+      var mrTask = task.create({ taskType: task.TaskType.MAP_REDUCE });
       mrTask.scriptId = lib.SCRIPTS.mr_gen_inv.scriptId;
       mrTask.deploymentId = lib.SCRIPTS.mr_gen_inv.deploymentId;
 
@@ -28,8 +27,7 @@ define([ 'N/task', './lib_billing'], function(task, lib) {
     }
   }
 
-
   return {
-    onRequest: onRequest,
+    onRequest: onRequest
   };
 });

@@ -16,7 +16,7 @@ function runScript(dialog, message) {
   MESSAGEMDL = message;
 
   return {
-    pageInit: function(context) {
+    pageInit: function (context) {
       CURRENTRECORD = context.currentRecord;
       var lineCount = CURRENTRECORD.getLineCount('custpage_rps_transaction');
       var numOfTransactions = 0;
@@ -68,7 +68,7 @@ function runScript(dialog, message) {
       });
     },
 
-    fieldChanged: function(context) {
+    fieldChanged: function (context) {
       console.log('fieldChanged: ' + JSON.stringify(context));
       if (context.fieldId == 'custpage_processed_date_from' || context.fieldId == 'custpage_processed_date_to') {
         var currentRecord = context.currentRecord;
@@ -118,7 +118,7 @@ function runScript(dialog, message) {
       }
     },
 
-    saveRecord: function(context) {
+    saveRecord: function (context) {
       var currentRecord = context.currentRecord;
       var lineCount = currentRecord.getLineCount('custpage_rps_transaction');
       var hasSelected = false;
@@ -164,7 +164,7 @@ function runScript(dialog, message) {
       return hasSelected;
     },
 
-    markAll: function() {
+    markAll: function () {
       CURRENTRECORD.setValue({
         fieldId: 'custpage_action',
         value: 'markAll'
@@ -173,7 +173,7 @@ function runScript(dialog, message) {
       window.document.forms[0].submit();
     },
 
-    unmarkAll: function() {
+    unmarkAll: function () {
       CURRENTRECORD.setValue({
         fieldId: 'custpage_action',
         value: 'unmarkAll'

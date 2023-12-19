@@ -1,7 +1,7 @@
 <suitelet scriptid="customscript_xw_sl_bill_config2">
   <description>Page to Set-up Billing Preference. Segmentation</description>
   <isinactive>F</isinactive>
-  <name>nexWare_SL | Billing Configuration2</name>
+  <name>Feoda_SL | Billing Configuration2</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>

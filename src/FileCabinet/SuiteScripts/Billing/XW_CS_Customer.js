@@ -5,7 +5,13 @@
  *
  * Author: Feoda
  */
-define(['N/currentRecord', 'N/https', 'N/ui/message', 'N/ui/dialog', './lib_billing'], function( currentRecord, https,  message, dialog, lib) {
+define(['N/currentRecord', 'N/https', 'N/ui/message', 'N/ui/dialog', './lib_billing'], function (
+  currentRecord,
+  https,
+  message,
+  dialog,
+  lib
+) {
   /**
    * Function to be executed after page is initialized.
    *
@@ -15,8 +21,7 @@ define(['N/currentRecord', 'N/https', 'N/ui/message', 'N/ui/dialog', './lib_bill
    *
    * @since 2015.2
    */
-  function pageInit(scriptContext) {
-  }
+  function pageInit(scriptContext) {}
 
   /**
    * Function to be executed when field is changed.
@@ -140,10 +145,9 @@ define(['N/currentRecord', 'N/https', 'N/ui/message', 'N/ui/dialog', './lib_bill
   }
 
   function redir_gen_inv() {
-
     var recordId = currentRecord.get().id;
 
-    var slURL = lib.generateInvoiceLink({id : recordId});
+    var slURL = lib.generateInvoiceLink({ id: recordId });
 
     var objMessages = {
       please_wait: {
@@ -152,8 +156,8 @@ define(['N/currentRecord', 'N/https', 'N/ui/message', 'N/ui/dialog', './lib_bill
         type: message.Type.INFORMATION,
         button: {
           label: 'OK',
-          value: true,
-        },
+          value: true
+        }
       },
       success: {
         title: 'Notification',
@@ -161,8 +165,8 @@ define(['N/currentRecord', 'N/https', 'N/ui/message', 'N/ui/dialog', './lib_bill
         type: message.Type.CONFIRMATION,
         button: {
           label: 'OK',
-          value: true,
-        },
+          value: true
+        }
       },
       failed: {
         title: 'Notification',
@@ -170,9 +174,9 @@ define(['N/currentRecord', 'N/https', 'N/ui/message', 'N/ui/dialog', './lib_bill
         type: message.Type.ERROR,
         button: {
           label: 'OK',
-          value: true,
-        },
-      },
+          value: true
+        }
+      }
     };
 
     var objMsgPleaseWaitHolder = {};
@@ -188,33 +192,27 @@ define(['N/currentRecord', 'N/https', 'N/ui/message', 'N/ui/dialog', './lib_bill
     objMsgPleaseWaitHolder.show();
 
     dialog
-        .create(objMessages.please_wait)
-        .then(function (result) {})
-        .catch(function (reason) {});
-
+      .create(objMessages.please_wait)
+      .then(function (result) {})
+      .catch(function (reason) {});
 
     https.post
-        .promise({
-          url: slURL,
-          body: {
-            id: recordId
-          },
-        })
-        .then(function (response) {
-          objMsgPleaseWaitHolder.hide(); // PW
+      .promise({
+        url: slURL,
+        body: {
+          id: recordId
+        }
+      })
+      .then(function (response) {
+        objMsgPleaseWaitHolder.hide(); // PW
 
-
-          objMsgSuccessHolder.show(); // S
-
-        })
-        .catch(function onRejected(reason) {
-          log.debug('testing', 'reason = ' + reason);
-          objMsgFailedHolder.show(); // F
-        });
-
-
+        objMsgSuccessHolder.show(); // S
+      })
+      .catch(function onRejected(reason) {
+        log.debug('testing', 'reason = ' + reason);
+        objMsgFailedHolder.show(); // F
+      });
   }
-
 
   return {
     pageInit: pageInit,

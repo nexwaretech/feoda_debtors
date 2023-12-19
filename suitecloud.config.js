@@ -1,4 +1,4 @@
 module.exports = {
-    defaultProjectFolder: "src",
-    commands: {}
+  defaultProjectFolder: 'src',
+  commands: {}
 };

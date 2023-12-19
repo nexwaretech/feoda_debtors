@@ -36,6 +36,7 @@
       <feature required="true">SFA</feature>
       <feature required="false">JOBS</feature>
       <feature required="false">ADVANCEDJOBS</feature>
+      <feature required="false">MATRIXITEMS</feature>
     </features>
   </dependencies>
 </manifest>

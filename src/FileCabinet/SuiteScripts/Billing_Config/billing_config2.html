@@ -1,40 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/css/bootstrap-multiselect.css"
     />
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css"
     />
-    <link
-      rel="stylesheet"
-      href="./billing_config.css"
-    />
+    <link rel="stylesheet" href="${FILES.billingconfigcss}" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/js/bootstrap-multiselect.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Billing Configuration: Segmentation</title>
@@ -43,7 +32,8 @@
         margin-top: 2rem;
         margin-bottom: 2rem;
       }
-      .table th, .table td{
+      .table th,
+      .table td {
         vertical-align: middle !important;
       }
     </style>
@@ -51,16 +41,12 @@
   <body>
     <div class="container-fluid" id="nsform">
       <!-- Nav tabs -->
-      <ul class="nav nav-tabs" style="width: 460px;" role="tablist">
+      <ul class="nav nav-tabs" style="width: 460px" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#config_selection"
-            >Selection</a
-          >
+          <a class="nav-link active" data-toggle="tab" href="#config_selection">Selection</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#config_exception"
-            >Exception</a
-          >
+          <a class="nav-link" data-toggle="tab" href="#config_exception">Exception</a>
         </li>
       </ul>
 
@@ -82,10 +68,7 @@
                           :id="'cb_cat_all_'+index"
                           v-on:click="markAllCategory(category.id)"
                           :ref="category.id"
-                        /><label
-                          class="custom-control-label"
-                          :for="'cb_cat_all_'+index"
-                        >Mark/Unmark All</label>
+                        /><label class="custom-control-label" :for="'cb_cat_all_'+index">Mark/Unmark All</label>
                       </div>
                     </th>
                     <th>Item</th>
@@ -97,13 +80,24 @@
                   <tr v-for="(instruction, index) in displayedInstructions">
                     <td v-if="instruction.type.id == category.id">
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" :id="'cb_instruction_'+index" name="example14" v-model="instruction.checked">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          :id="'cb_instruction_'+index"
+                          name="example14"
+                          v-model="instruction.checked"
+                        />
                         <label class="custom-control-label" :for="'cb_instruction_'+index"></label>
                       </div>
                     </td>
                     <td v-if="instruction.type.id == category.id">{{instruction.name}}</td>
                     <td v-if="instruction.type.id == category.id">
-                      <select class="form-control multiselect-year" multiple="multiple" :id="'cb_instruction_years_'+index" v-model="instruction.years">
+                      <select
+                        class="form-control multiselect-year"
+                        multiple="multiple"
+                        :id="'cb_instruction_years_'+index"
+                        v-model="instruction.years"
+                      >
                         <template v-for="year in displayedYears">
                           <option :value="year.id">{{year.name}}</option>
                         </template>
@@ -134,20 +128,14 @@
             <tbody>
               <tr>
                 <td>
-                  <select
-                  class="form-control input-xs big-form-control"
-                  id="family_code"
-                  v-model="selectedFamilyCode"
-                  >
+                  <select class="form-control input-xs big-form-control" id="family_code" v-model="selectedFamilyCode">
                     <option value="">--None--</option>
-                    <option v-for="fcode in familyCodes" :value="fcode">
-                      {{fcode}}
-                    </option>
+                    <option v-for="fcode in familyCodes" :value="fcode">{{fcode}}</option>
                   </select>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="isdebtor" v-model="selectedIsDebtor" >
+                    <input type="checkbox" class="custom-control-input" id="isdebtor" v-model="selectedIsDebtor" />
                     <label class="custom-control-label" for="isdebtor"></label>
                   </div>
                 </td>
@@ -167,13 +155,25 @@
                 <td>
                   <select class="form-control big-form-control" v-model="selectedCurrentYears">
                     <option value="">--None--</option>
-                    <option v-for="fyear in currentYears" :value="fyear.id" :selected="fyear.id == selectedCurrentYears">{{fyear.name}}</option>
+                    <option
+                      v-for="fyear in currentYears"
+                      :value="fyear.id"
+                      :selected="fyear.id == selectedCurrentYears"
+                    >
+                      {{fyear.name}}
+                    </option>
                   </select>
                 </td>
                 <td>
                   <select class="form-control big-form-control" v-model="selectedStuStatus">
                     <option value="">--None--</option>
-                    <option v-for="fstatus in stuStatus" :value="fstatus.id" :selected="fstatus.id == selectedStuStatus">{{fstatus.name}}</option>
+                    <option
+                      v-for="fstatus in stuStatus"
+                      :value="fstatus.id"
+                      :selected="fstatus.id == selectedStuStatus"
+                    >
+                      {{fstatus.name}}
+                    </option>
                   </select>
                 </td>
               </tr>
@@ -187,21 +187,20 @@
       $(function () {
         $('.multiselect-year').multiselect({
           includeSelectAllOption: true,
-          allSelectedText: 'Select All',
+          allSelectedText: 'Select All'
         });
       });
       function makeid(length) {
-          var result           = '';
-          var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-          var charactersLength = characters.length;
-          for ( var i = 0; i < length; i++ ) {
-            result += characters.charAt(Math.floor(Math.random() * 
-      charactersLength));
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
         return result;
       }
     </script>
-    
+
     <script>
 
       var app = new Vue({
@@ -367,23 +366,23 @@
             if (this == null) {
               throw new TypeError('"this" is null or not defined');
             }
-    
+
             var o = Object(this);
-    
+
             // 2. Let len be ? ToLength(? Get(O, "length")).
             var len = o.length >>> 0;
-    
+
             // 3. If IsCallable(predicate) is false, throw a TypeError exception.
             if (typeof predicate !== "function") {
               throw new TypeError("predicate must be a function");
             }
-    
+
             // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
             var thisArg = arguments[1];
-    
+
             // 5. Let k be 0.
             var k = 0;
-    
+
             // 6. Repeat, while k < len
             while (k < len) {
               // a. Let Pk be ! ToString(k).
@@ -397,7 +396,7 @@
               // e. Increase k by 1.
               k++;
             }
-    
+
             // 7. Return -1.
             return -1;
           },

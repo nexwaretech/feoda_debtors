@@ -1,63 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-            rel="stylesheet" />
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+      integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://tstdrv2525617.app.netsuite.com/core/media/media.nl?id=8738&c=TSTDRV2525617&h=Fi6_nTzjJxrqWwEjvcIYNPp6frEQBMKCrsaFsrtyVckB8icA&_xt=.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+      integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+      crossorigin="anonymous"
+    ></script>
+    <title>Billing Summary</title>
+    <style>
+      #steppage_container {
+        width: 100%;
+        height: calc(100vh - 100px);
+      }
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
-            integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
-            crossorigin="anonymous" />
-        <link rel="stylesheet"
-            href="https://tstdrv2525617.app.netsuite.com/core/media/media.nl?id=8738&c=TSTDRV2525617&h=Fi6_nTzjJxrqWwEjvcIYNPp6frEQBMKCrsaFsrtyVckB8icA&_xt=.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
-            integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
-            crossorigin="anonymous"></script>
-        <title>Billing Summary</title>
-        <style>
-            #steppage_container {
-                width: 100%;
-                height: calc(100vh - 100px);
-            }
+      .record_link {
+        color: #53a451;
+      }
 
-            .record_link {
-                color: #53a451;
-            }
+      .record_link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
 
-            .record_link:hover {
-                text-decoration: underline;
-            }
-        </style>
-    </head>
-
-    <body>
-        <div class="container-fluid" id="configForm1">
-            <div class="row justify-content-between my-5 vertical-center">
-                <div class="col-6">
-                    <div class="col" style="padding-left: 0px;">
-                        <ul class="nav nav-tabs" role="tablist" style="margin-top: 0px; max-width: 600px;">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#config_items">Fees</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#config_debtors">Debtors</a>
-                            </li>
-                            <!-- <li class="nav-item">
+  <body>
+    <div class="container-fluid" id="configForm1">
+      <div class="row justify-content-between my-5 vertical-center">
+        <div class="col-6">
+          <div class="col" style="padding-left: 0px">
+            <ul class="nav nav-tabs" role="tablist" style="margin-top: 0px; max-width: 600px">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#config_items">Fees</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#config_debtors">Debtors</a>
+              </li>
+              <!-- <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#config_mid_year"
                   >Mid Year</a
                 >
@@ -69,123 +72,132 @@
                                 <a class="nav-link" data-toggle="tab" href="#config_history">History</a>
                             </li>
 -->
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="col-6 vertical-center">
-                    <div class="row">
-                        <div class="col-4" style="display: inline-flex;align-items: center;">
-                            <label for="period" class="big-bold pr-3">Period:</label>
-                            <select class="form-control big-form-control" v-model="period">
-                                <option value="2021">2021</option>
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                            </select>
-                        </div>
-                        <div class="col-6" style="display: inline-flex;align-items: center;">
-                            <label for="period" class="big-bold pr-3">School</label>
-                            <select class="form-control big-form-control" v-model="period">
-                                <option value="9">Ballarat</option>
-                                <option value="23">Colac</option>
-                                <option value="33">Hamilton</option>
-                                <option value="38">Horsham</option>
-                            </select>
-                        </div>
-                        <div class="col-2">
-                            <button class="btn btn-danger execute" v-on:click="savedata()">Execute</button>
-                        </div>
-                    </div>
-                </div>
+            </ul>
+          </div>
+        </div>
+        <div class="col-6 vertical-center">
+          <div class="row">
+            <div class="col-4" style="display: inline-flex; align-items: center">
+              <label for="period" class="big-bold pr-3">Period:</label>
+              <select class="form-control big-form-control" v-model="period">
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+              </select>
             </div>
+            <div class="col-6" style="display: inline-flex; align-items: center">
+              <label for="period" class="big-bold pr-3">School</label>
+              <select class="form-control big-form-control" v-model="period">
+                <option value="9">Ballarat</option>
+                <option value="23">Colac</option>
+                <option value="33">Hamilton</option>
+                <option value="38">Horsham</option>
+              </select>
+            </div>
+            <div class="col-2">
+              <button class="btn btn-danger execute" v-on:click="savedata()">Execute</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div id="config_items" class="main_container container-fluid tab-pane active">
-                    <br />
-                    <div id="frameContainer">
-                        <iframe
-                            src="https://tstdrv2668278.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=1502&deploy=1&compid=TSTDRV2668278&h=27040a07b9c0ac7675cd"
-                            frameborder="0" class="steppage_container" id="steppage_container"></iframe>
-                    </div>
-                </div>
-                <div id="config_debtors" class="main_container container-fluid tab-pane fade">
-                    <br />
-                    <div class="row form-group">
-                        <div class="col">
-                            <label class="bold">Family Code:</label>
-                            <select class="selectpicker form-control input-xs big-form-control"
-                                v-model="filterFamilyCode" v-on:change="filterDebtors">
-                                <option value="">All</option>
-                                <option v-for="fcode in familyCodes" :value="fcode">
-                                    {{fcode}}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label class="bold">Family Status:</label>
-                            <select class="selectpicker form-control input-xs big-form-control"
-                                v-model="filterFamilyStatus" v-on:change="filterDebtors">
-                                <option value="">All</option>
-                                <option v-for="fstatus in familyStatus" :value="fstatus.id">
-                                    {{fstatus.text}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <table class="table table-borderless table-striped">
-                        <thead>
-                            <tr class="table-success">
-                                <th>Include</th>
-                                <th>Name</th>
-                                <th>Family Code</th>
-                                <th>Total</th>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div id="config_items" class="main_container container-fluid tab-pane active">
+          <br />
+          <div id="frameContainer">
+            <iframe
+              src="https://tstdrv2668278.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=1502&deploy=1&compid=TSTDRV2668278&h=27040a07b9c0ac7675cd"
+              frameborder="0"
+              class="steppage_container"
+              id="steppage_container"
+            ></iframe>
+          </div>
+        </div>
+        <div id="config_debtors" class="main_container container-fluid tab-pane fade">
+          <br />
+          <div class="row form-group">
+            <div class="col">
+              <label class="bold">Family Code:</label>
+              <select
+                class="selectpicker form-control input-xs big-form-control"
+                v-model="filterFamilyCode"
+                v-on:change="filterDebtors"
+              >
+                <option value="">All</option>
+                <option v-for="fcode in familyCodes" :value="fcode">{{fcode}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="bold">Family Status:</label>
+              <select
+                class="selectpicker form-control input-xs big-form-control"
+                v-model="filterFamilyStatus"
+                v-on:change="filterDebtors"
+              >
+                <option value="">All</option>
+                <option v-for="fstatus in familyStatus" :value="fstatus.id">{{fstatus.text}}</option>
+              </select>
+            </div>
+          </div>
+          <table class="table table-borderless table-striped">
+            <thead>
+              <tr class="table-success">
+                <th>Include</th>
+                <th>Name</th>
+                <th>Family Code</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template v-for="(instApp, index) in displayedInstApplied">
+                <tr
+                  v-bind:key="index"
+                  data-toggle="collapse"
+                  aria-expanded="false"
+                  :data-target="'#inv' + instApp.debtorId"
+                >
+                  <td><input type="checkbox" v-model="instApp.selected" /></td>
+                  <td>
+                    <a :href="instApp.debtorLink" target="_blank" class="record_link">{{instApp.debtor}}</a>
+                  </td>
+                  <td>{{instApp.familyCode}}</td>
+                  <td>{{instApp.total}}</td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <div :id="'inv' + instApp.debtorId" class="collapse" role="tabpanel" data-parent="#config_debtors">
+                      <div class="card-body remove-top-bottom-padding">
+                        <table class="table table-borderless table-striped sub-table">
+                          <thead>
+                            <tr class="">
+                              <th>Student</th>
+                              <th>Description</th>
+                              <th>Amount</th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <template v-for="(instApp, index) in displayedInstApplied">
-                                <tr v-bind:key="index" data-toggle="collapse" aria-expanded="false"
-                                    :data-target="'#inv' + instApp.debtorId">
-                                    <td><input type="checkbox" v-model="instApp.selected" /></td>
-                                    <td><a :href="instApp.debtorLink" target="_blank"
-                                            class="record_link">{{instApp.debtor}}</a></td>
-                                    <td>{{instApp.familyCode}}</td>
-                                    <td>{{instApp.total}}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4">
-                                        <div :id="'inv' + instApp.debtorId" class="collapse" role="tabpanel"
-                                            data-parent="#config_debtors">
-                                            <div class="card-body remove-top-bottom-padding">
-                                                <table class="table table-borderless table-striped sub-table">
-                                                    <thead>
-                                                        <tr class="">
-                                                            <th>Student</th>
-                                                            <th>Description</th>
-                                                            <th>Amount</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr v-for="stulist in instApp.students.list">
-                                                            <td><a :href="instApp.students.link" target="_blank"
-                                                                    class="record_link">{{instApp.students.name}}</a>
-                                                            </td>
-                                                            <td>{{stulist.item}}</td>
-                                                            <td>{{stulist.amount}}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </template>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- <div id="config_mid_year" class="main_container container-fluid tab-pane fade">
+                          </thead>
+                          <tbody>
+                            <tr v-for="stulist in instApp.students.list">
+                              <td>
+                                <a :href="instApp.students.link" target="_blank" class="record_link"
+                                  >{{instApp.students.name}}</a
+                                >
+                              </td>
+                              <td>{{stulist.item}}</td>
+                              <td>{{stulist.amount}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+        <!-- <div id="config_mid_year" class="main_container container-fluid tab-pane fade">
           <br />
           <table class="table table-borderless table-striped">
             <thead>
@@ -336,213 +348,211 @@
             </tbody>
           </table>
         </div> -->
-                <div id="config_scheduling" class="main_container container-fluid tab-pane fade"><br>
-                    <div class="row mb-2">
-                        <div class="col-md-6">
-                            <label class="big-bold">Standard</label>
-                            <div class="row mb-2">
-                                <div class="col-12">
-                                    <label for="executeAuthor" class="big-bold">Author:</label>
-                                    <select class="form-control big-form-control" v-model="executeAuthor">
-                                        <option v-for="emp in employees" :value="emp.id">
-                                            {{emp.name}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-12">
-                                    <label for="executeTemplate" class="big-bold">Use Template:</label>
-                                    <select class="form-control big-form-control" v-model="executeTemplate">
-                                        <option v-for="tpl in emailTpls" :value="tpl.id"
-                                            :selected="executeTemplate == tpl.id">
-                                            {{tpl.name}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="executeTemplate" class="big-bold">Reminder:</label>
-                            <div class="row  mb-2">
-                                <div class="col-12">
-                                    <label for="reminderAuthor" class="big-bold">Author:</label>
-                                    <select class="form-control big-form-control" v-model="reminderAuthor">
-                                        <option v-for="emp in employees" :value="emp.id">
-                                            {{emp.name}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-12">
-                                    <label for="reminderTemplate" class="big-bold">Use Template:</label>
-                                    <select class="form-control big-form-control" v-model="reminderTemplate">
-                                        <option v-for="tpl in emailTpls" :value="tpl.id"
-                                            :selected="reminderTemplate == tpl.id">
-                                            {{tpl.name}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="reminder_in_addon" class="big-bold">Reminder in Days:</label>
-                                    <input type="text" class="form-control big-form-control" v-model="reminderInAddon"
-                                        style="width:200px;" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div id="config_scheduling" class="main_container container-fluid tab-pane fade">
+          <br />
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <label class="big-bold">Standard</label>
+              <div class="row mb-2">
+                <div class="col-12">
+                  <label for="executeAuthor" class="big-bold">Author:</label>
+                  <select class="form-control big-form-control" v-model="executeAuthor">
+                    <option v-for="emp in employees" :value="emp.id">{{emp.name}}</option>
+                  </select>
                 </div>
-                <div id="config_history" class="main_container container-fluid tab-pane fade">
-                    <table class="table table-borderless table-striped sub-table">
-                        <thead>
-                            <tr class="">
-                                <th>Name</th>
-                                <th>Date Created</th>
-                                <th>File Processed</th>
-                                <th>Process Date</th>
-                                <th>Status Summary</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>IZ0000001</td>
-                                <td>01/11/2021 2:04 PM</td>
-                                <td>Processed</td>
-                                <td>05/01/2018</td>
-                                <td>
-                                    <p>Total Transaction $6,500,000</p>
-                                    <p>Credit Card $2,500,000</p>
-                                    <p>Direct Debit $4,000,000</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>IZ0000002</td>
-                                <td>01/11/2021 2:04 PM</td>
-                                <td>Processed</td>
-                                <td>05/01/2019</td>
-                                <td>
-                                    <p>Total Transaction $5,500,000</p>
-                                    <p>Credit Card $1,500,000</p>
-                                    <p>Direct Debit $4,000,000</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>IZ0000003</td>
-                                <td>01/11/2021 2:04 PM</td>
-                                <td>Processed</td>
-                                <td>05/01/2020</td>
-                                <td>
-                                    <p>Total Transaction $2,500,000</p>
-                                    <p>Credit Card $1,500,000</p>
-                                    <p>Direct Debit $1,000,000</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+              </div>
+              <div class="row mb-2">
+                <div class="col-12">
+                  <label for="executeTemplate" class="big-bold">Use Template:</label>
+                  <select class="form-control big-form-control" v-model="executeTemplate">
+                    <option v-for="tpl in emailTpls" :value="tpl.id" :selected="executeTemplate == tpl.id">
+                      {{tpl.name}}
+                    </option>
+                  </select>
                 </div>
+              </div>
             </div>
+            <div class="col-md-6">
+              <label for="executeTemplate" class="big-bold">Reminder:</label>
+              <div class="row mb-2">
+                <div class="col-12">
+                  <label for="reminderAuthor" class="big-bold">Author:</label>
+                  <select class="form-control big-form-control" v-model="reminderAuthor">
+                    <option v-for="emp in employees" :value="emp.id">{{emp.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-12">
+                  <label for="reminderTemplate" class="big-bold">Use Template:</label>
+                  <select class="form-control big-form-control" v-model="reminderTemplate">
+                    <option v-for="tpl in emailTpls" :value="tpl.id" :selected="reminderTemplate == tpl.id">
+                      {{tpl.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <label for="reminder_in_addon" class="big-bold">Reminder in Days:</label>
+                  <input
+                    type="text"
+                    class="form-control big-form-control"
+                    v-model="reminderInAddon"
+                    style="width: 200px"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <script>
-            var app = new Vue({
-                el: '#configForm1',
-                data: {
-                    debtors: ${ formData.debtors },
-                instApplied: ${ formData.instApplied },
-                displayedInstApplied: ${ formData.instApplied },
-                familyCodes: ${ formData.familyCodes },
-                familyStatus: ${ formData.familyStatus },
-                filterFamilyCode: '',
-                filterFamilyStatus: '',
-                startTime: '',
-                reminderTemplate: '',
-                executeTemplate: '',
-                executeAuthor: '',
-                reminderAuthor: '',
-                reminderInAddon: '',
-                period: '2022',
-                frequency: ${ formdata.frequency },
-                employees: ${ formdata.employees },
-                emailTpls: ${ formdata.emailTemplates }
-        },
-            mounted(){
-                $("#sche_start_date").datepicker({ autoclose: true, format: 'dd/mm/yyyy' });
-                $("#sche_end_date").datepicker({ autoclose: true, format: 'dd/mm/yyyy' });
-            },
-            methods: {
-                filterDebtors: function() {
-                    var vueObj = this;
-                    this.displayedInstApplied = this.instApplied.filter((debtor) => {
-                        var isCodeFilter = false, isStatusFilter = false;
-                        if (vueObj.filterFamilyCode) {
-                            if (debtor.familyCode == vueObj.filterFamilyCode) {
-                                isCodeFilter = true;
-                            } else {
-                                isCodeFilter = false;
-                            }
-                        } else {
-                            isCodeFilter = true;
-                        }
+        <div id="config_history" class="main_container container-fluid tab-pane fade">
+          <table class="table table-borderless table-striped sub-table">
+            <thead>
+              <tr class="">
+                <th>Name</th>
+                <th>Date Created</th>
+                <th>File Processed</th>
+                <th>Process Date</th>
+                <th>Status Summary</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>IZ0000001</td>
+                <td>01/11/2021 2:04 PM</td>
+                <td>Processed</td>
+                <td>05/01/2018</td>
+                <td>
+                  <p>Total Transaction $6,500,000</p>
+                  <p>Credit Card $2,500,000</p>
+                  <p>Direct Debit $4,000,000</p>
+                </td>
+              </tr>
+              <tr>
+                <td>IZ0000002</td>
+                <td>01/11/2021 2:04 PM</td>
+                <td>Processed</td>
+                <td>05/01/2019</td>
+                <td>
+                  <p>Total Transaction $5,500,000</p>
+                  <p>Credit Card $1,500,000</p>
+                  <p>Direct Debit $4,000,000</p>
+                </td>
+              </tr>
+              <tr>
+                <td>IZ0000003</td>
+                <td>01/11/2021 2:04 PM</td>
+                <td>Processed</td>
+                <td>05/01/2020</td>
+                <td>
+                  <p>Total Transaction $2,500,000</p>
+                  <p>Credit Card $1,500,000</p>
+                  <p>Direct Debit $1,000,000</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script>
+                  var app = new Vue({
+                      el: '#configForm1',
+                      data: {
+                          debtors: ${ formData.debtors },
+                      instApplied: ${ formData.instApplied },
+                      displayedInstApplied: ${ formData.instApplied },
+                      familyCodes: ${ formData.familyCodes },
+                      familyStatus: ${ formData.familyStatus },
+                      filterFamilyCode: '',
+                      filterFamilyStatus: '',
+                      startTime: '',
+                      reminderTemplate: '',
+                      executeTemplate: '',
+                      executeAuthor: '',
+                      reminderAuthor: '',
+                      reminderInAddon: '',
+                      period: '2022',
+                      frequency: ${ formdata.frequency },
+                      employees: ${ formdata.employees },
+                      emailTpls: ${ formdata.emailTemplates }
+              },
+                  mounted(){
+                      $("#sche_start_date").datepicker({ autoclose: true, format: 'dd/mm/yyyy' });
+                      $("#sche_end_date").datepicker({ autoclose: true, format: 'dd/mm/yyyy' });
+                  },
+                  methods: {
+                      filterDebtors: function() {
+                          var vueObj = this;
+                          this.displayedInstApplied = this.instApplied.filter((debtor) => {
+                              var isCodeFilter = false, isStatusFilter = false;
+                              if (vueObj.filterFamilyCode) {
+                                  if (debtor.familyCode == vueObj.filterFamilyCode) {
+                                      isCodeFilter = true;
+                                  } else {
+                                      isCodeFilter = false;
+                                  }
+                              } else {
+                                  isCodeFilter = true;
+                              }
 
-                        if (vueObj.filterFamilyStatus) {
-                            if (debtor.familyStatus == vueObj.filterFamilyStatus) {
-                                isStatusFilter = true;
-                            } else {
-                                isStatusFilter = false;
-                            }
-                        } else {
-                            isStatusFilter = true;
-                        }
-                        return isCodeFilter && isStatusFilter;
-                    });
-                },
-                savedata: function() {
+                              if (vueObj.filterFamilyStatus) {
+                                  if (debtor.familyStatus == vueObj.filterFamilyStatus) {
+                                      isStatusFilter = true;
+                                  } else {
+                                      isStatusFilter = false;
+                                  }
+                              } else {
+                                  isStatusFilter = true;
+                              }
+                              return isCodeFilter && isStatusFilter;
+                          });
+                      },
+                      savedata: function() {
 
-                    alert("Your request has been processed. You will receive a notification when the Invoices are ready.");
-                   /*
-                    var selData = {
-                        reminderTemplate: this.reminderTemplate,
-                        executeTemplate: this.executeTemplate,
-                        executeAuthor: this.executeAuthor,
-                        reminderAuthor: this.reminderAuthor,
-                        reminderInAddon: this.reminderInAddon,
-                        period: this.period
-                    };
-                    console.log('seldata', selData);
+                          alert("Your request has been processed. You will receive a notification when the Invoices are ready.");
+                         /*
+                          var selData = {
+                              reminderTemplate: this.reminderTemplate,
+                              executeTemplate: this.executeTemplate,
+                              executeAuthor: this.executeAuthor,
+                              reminderAuthor: this.reminderAuthor,
+                              reminderInAddon: this.reminderInAddon,
+                              period: this.period
+                          };
+                          console.log('seldata', selData);
 
-                    var formData = new FormData();
-                    formData.append('action', "save");
-                    formData.append('selecteddata', JSON.stringify(selData));
+                          var formData = new FormData();
+                          formData.append('action', "save");
+                          formData.append('selecteddata', JSON.stringify(selData));
 
-                    $.ajax({
-                        url: window.location,
-                        type: 'POST',
-                        data: formData,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function (data) {
-                            var response = JSON.parse(data);
-                            console.log(response);
-                            if (response.result == 'success') {
-                                alert('Thank you. Your form was successfully submitted');
-                                parent.window.close();
-                            } else {
-                                alert('Error while submitting your form. Please contact to support');
-                            }
-                        },
-                        error: function (error) {
-                            console.log(error);
-                            alert('Error while submitting your form. Please contact to support');
-                        }
-                    });
-*/
-                }
-            }
-      });
-        </script>
-    </body>
-
+                          $.ajax({
+                              url: window.location,
+                              type: 'POST',
+                              data: formData,
+                              cache: false,
+                              contentType: false,
+                              processData: false,
+                              success: function (data) {
+                                  var response = JSON.parse(data);
+                                  console.log(response);
+                                  if (response.result == 'success') {
+                                      alert('Thank you. Your form was successfully submitted');
+                                      parent.window.close();
+                                  } else {
+                                      alert('Error while submitting your form. Please contact to support');
+                                  }
+                              },
+                              error: function (error) {
+                                  console.log(error);
+                                  alert('Error while submitting your form. Please contact to support');
+                              }
+                          });
+      */
+                      }
+                  }
+            });
+    </script>
+  </body>
 </html>

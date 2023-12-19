@@ -16,24 +16,19 @@ define(['N/url', './lib_billing'], function (url, lib) {
    * @Since 2015.2
    */
   function beforeLoad(scriptContext) {
-
-
     if (scriptContext.type == 'view') {
       var form = scriptContext.form;
 
       form.addButton({
         id: 'custpage_gen_inv_button',
         label: 'Generate Invoice',
-        functionName: 'redir_gen_inv',
+        functionName: 'redir_gen_inv'
       });
       scriptContext.form.clientScriptModulePath = lib.SCRIPTS.cs_inv_rps.scriptPath;
-
     }
-
-
   }
 
   return {
-    beforeLoad: beforeLoad,
+    beforeLoad: beforeLoad
   };
 });

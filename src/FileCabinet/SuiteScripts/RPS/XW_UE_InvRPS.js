@@ -16,10 +16,7 @@ define(['N/url', './lib_rps'], function (url, lib) {
    * @Since 2015.2
    */
   function beforeLoad(scriptContext) {
-
-
     if (scriptContext.type == 'view') {
-
       scriptContext.form.clientScriptModulePath = lib.SCRIPTS.cs_inv_rps.scriptPath;
 
       var form = scriptContext.form;
@@ -33,12 +30,11 @@ define(['N/url', './lib_rps'], function (url, lib) {
       form.addButton({
         id: 'custpage_calc_open_bal_button',
         label: 'Calculate Opening Balance',
-        functionName: 'recalcOpenBal(' + newRecord.id + ',' + rps + ',' + debtor + ',' + amountRemaining + ')',
+        functionName: 'recalcOpenBal(' + newRecord.id + ',' + rps + ',' + debtor + ',' + amountRemaining + ')'
       });
 
-
       let objParam = {
-        id : newRecord.id
+        id: newRecord.id
       };
       var stRPSURL = lib.generateRPSCustomerLink(objParam);
       newRecord.setValue(lib.TRANS_FIELD.customer_link, stRPSURL);
@@ -46,16 +42,14 @@ define(['N/url', './lib_rps'], function (url, lib) {
       form.addButton({
         id: 'custpage_gen_link_button',
         label: 'Generate Schedule',
-        functionName: 'redirGenPay(' + newRecord.id + ')',
+        functionName: 'redirGenPay(' + newRecord.id + ')'
       });
-
 
       form.addButton({
         id: 'custpage_send_rps_email_button',
         label: 'Send RPS Email',
-        functionName: 'sendInvoice(' + newRecord.id + ')',
+        functionName: 'sendInvoice(' + newRecord.id + ')'
       });
-
     }
 
     if (scriptContext.type == 'view' || scriptContext.type == 'edit') {
@@ -66,13 +60,13 @@ define(['N/url', './lib_rps'], function (url, lib) {
       if (openingBalance != 0) {
         var rpsLink = form.getField(lib.TRANS_FIELD.customer_link);
         rpsLink.updateDisplayType({
-           displayType: 'hidden',
-         });
+          displayType: 'hidden'
+        });
       }
     }
   }
 
-  function beforeSubmit (context) {
+  function beforeSubmit(context) {
     var LOG_TITLE = 'beforeSubmit';
     log.debug(LOG_TITLE, '>> START <<');
     try {
@@ -84,12 +78,12 @@ define(['N/url', './lib_rps'], function (url, lib) {
       var debtor = rec.getValue('entity');
 
       var openBalance = lib.searchOpeningBalance({
-        debtor: debtor,
+        debtor: debtor
       });
 
       rec.setValue({
         fieldId: lib.TRANS_FIELD.opening_balance,
-        value: openBalance,
+        value: openBalance
       });
     } catch (ex) {
       var errorString = ex instanceof nlobjError ? ex.getCode() + '\n' + ex.getDetails() : ex.toString();
@@ -97,7 +91,6 @@ define(['N/url', './lib_rps'], function (url, lib) {
     }
     log.debug(LOG_TITLE, '>> End <<');
   }
-
 
   return {
     beforeLoad,

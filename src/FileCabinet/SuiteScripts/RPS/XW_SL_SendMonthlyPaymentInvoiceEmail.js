@@ -13,7 +13,16 @@ var lib_email;
  *
  * Author: Feoda
  */
-define(['N/file', 'N/render', 'N/search', 'N/record', 'N/email', 'N/runtime', './lib_rps', '../lib_shared/lib_email'], runScript);
+define([
+  'N/file',
+  'N/render',
+  'N/search',
+  'N/record',
+  'N/email',
+  'N/runtime',
+  './lib_rps',
+  '../lib_shared/lib_email'
+], runScript);
 function runScript(file, render, search, record, email, runtime, library, library_email) {
   FILEMDL = file;
   RENDERMDL = render;
@@ -31,7 +40,7 @@ function runScript(file, render, search, record, email, runtime, library, librar
       try {
         sendEmail({
           debtor_id: context.request.parameters.debtor,
-          request: context.request,
+          request: context.request
         });
       } catch (ex) {
         var errorString = ex instanceof nlobjError ? ex.getCode() + '\n' + ex.getDetails() : ex.toString();
@@ -39,13 +48,11 @@ function runScript(file, render, search, record, email, runtime, library, librar
       }
 
       log.debug(LOG_TITLE, '>> End <<');
-    },
+    }
   };
 }
 
 function sendEmail(objParams) {
-
-
   var LOG_TITLE = 'sendEmail';
 
   var script = RUNTIMEMDL.getCurrentScript();
@@ -58,7 +65,7 @@ function sendEmail(objParams) {
 
   var debtorRec = RECORDMDL.load({
     type: 'customer',
-    id: objParams.debtor_id,
+    id: objParams.debtor_id
   });
 
   var emailAd = [];
@@ -68,7 +75,7 @@ function sendEmail(objParams) {
   }
 
   var contacts = lib.searchEmailSyncContact({
-    debtor_id: objParams.debtor_id,
+    debtor_id: objParams.debtor_id
   });
   emailAd = emailAd.concat(contacts);
 
@@ -95,7 +102,7 @@ function sendEmail(objParams) {
       }
 
       return data_source;
-    })(objParams.request.body),
+    })(objParams.request.body)
   });
 
   var author = objEmailTemplate.author;
@@ -113,10 +120,6 @@ function sendEmail(objParams) {
     recipients: emailAd,
     subject: subject,
     body: body,
-    relatedRecords: relatedRecords,
+    relatedRecords: relatedRecords
   });
-
 }
-
-
-

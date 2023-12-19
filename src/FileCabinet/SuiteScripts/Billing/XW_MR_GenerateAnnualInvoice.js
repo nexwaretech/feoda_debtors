@@ -7,28 +7,27 @@
 var SEARCHMDL;
 var RUNTIMEMDL;
 
-define(['N/search', 'N/runtime', 'N/record',  '../lib_shared/moment-with-locales.min', 'N/format'], runScript);
+define(['N/search', 'N/runtime', 'N/record', '../lib_shared/moment-with-locales.min', 'N/format'], runScript);
 function runScript(search, runtime, record, moment, format) {
   SEARCHMDL = search;
   RUNTIMEMDL = runtime;
-  
-  function getDebtorList(){
-     var arrDebtors = [];
-     var customrecord_xw_billinginstappliedtoSearchObj = search.create({
-      type: "customrecord_xw_billinginstappliedto",
-      filters:
-      [
-        ["custrecord_xw_binstapptoinvnum","anyof","@NONE@"]
-      ],
-      columns:
-      [
-        search.createColumn({name: "custrecord_xw_binstapptodebt", label: "Debtor"})
+
+  function getDebtorList() {
+    var arrDebtors = [];
+    var customrecord_xw_billinginstappliedtoSearchObj = search.create({
+      type: 'customrecord_xw_billinginstappliedto',
+      filters: [['custrecord_xw_binstapptoinvnum', 'anyof', '@NONE@']],
+      columns: [
+        search.createColumn({
+          name: 'custrecord_xw_binstapptodebt',
+          label: 'Debtor'
+        })
       ]
     });
     var searchResultCount = customrecord_xw_billinginstappliedtoSearchObj.runPaged().count;
-    log.debug("customrecord_xw_billinginstappliedtoSearchObj result count",searchResultCount);
-    customrecord_xw_billinginstappliedtoSearchObj.run().each(function(result){
-      arrDebtors.push(result.getValue("custrecord_xw_binstapptodebt"));
+    log.debug('customrecord_xw_billinginstappliedtoSearchObj result count', searchResultCount);
+    customrecord_xw_billinginstappliedtoSearchObj.run().each(function (result) {
+      arrDebtors.push(result.getValue('custrecord_xw_binstapptodebt'));
       return true;
     });
     return arrDebtors;
@@ -41,35 +40,33 @@ function runScript(search, runtime, record, moment, format) {
         var script = runtime.getCurrentScript();
         var students = script.getParameter('custscript_xw_mr_pr_myearstu');
         var debtor = script.getParameter('custscript_xw_mr_pr_debtor');
-		log.audit('test', 'students: ' +students);
-        log.audit('test', 'debtor: ' +debtor);
+        log.audit('test', 'students: ' + students);
+        log.audit('test', 'debtor: ' + debtor);
 
         var arrDebtors = [];
         if (students) {
           var arrStudents = students.split(',');
           arrDebtors = getDebtorOfStudents({
-            students: arrStudents,
+            students: arrStudents
           });
         }
-        if(debtor){
-           arrDebtors.push(debtor);
+        if (debtor) {
+          arrDebtors.push(debtor);
         } else {
-          arrDebtors =  getDebtorList();
+          arrDebtors = getDebtorList();
         }
         log.audit('test', 'arrDebtors: ' + JSON.stringify(arrDebtors));
         var arrBillingInstructions = getBillingInstructions();
         log.audit('test', 'arrBillingInstructions: ' + JSON.stringify(arrBillingInstructions));
         var objDebtors = getAppliedTo({
           instructions: arrBillingInstructions,
-          debtors: arrDebtors,
+          debtors: arrDebtors
         });
 
         log.audit('test', 'objDebtors: ' + JSON.stringify(objDebtors));
         log.debug(LOG_TITLE, '>> END <<');
-        
+
         //add all items
-        
-        
 
         return objDebtors;
       } catch (ex) {
@@ -98,17 +95,17 @@ function runScript(search, runtime, record, moment, format) {
 
         var invoiceRec = record.create({
           type: 'invoice',
-          isDynamic: true,
+          isDynamic: true
         });
 
         invoiceRec.setValue({
           fieldId: 'entity',
-          value: context.key,
+          value: context.key
         });
 
         invoiceRec.setValue({
           fieldId: 'customform',
-          value: invoiceForm,
+          value: invoiceForm
         });
         var instructionIds = [];
 
@@ -120,21 +117,18 @@ function runScript(search, runtime, record, moment, format) {
         var lineCount = 0;
         var school_days = 0;
 
-        
-       
         for (var index = 0; index < arrLines.length; index++) {
           var objLine = arrLines[index];
-		   log.audit('test', 'objLine: ' + JSON.stringify(objLine));
+          log.audit('test', 'objLine: ' + JSON.stringify(objLine));
           log.audit('test', 'arrStudents: ' + arrStudents);
           if (arrStudents.indexOf(objLine.student) >= 0 || !objLine.student || arrStudents.length == 0) {
             invoiceRec.selectNewLine('item');
             invoiceRec.setCurrentSublistValue({
               sublistId: 'item',
               fieldId: 'custcol_xw_student',
-              value: objLine.student,
+              value: objLine.student
             });
 
-            
             /*
             var startDate = search.lookupFields({
               type: 'contact',
@@ -159,7 +153,7 @@ function runScript(search, runtime, record, moment, format) {
             invoiceRec.setCurrentSublistValue({
               sublistId: 'item',
               fieldId: 'custcol_xw_instruction_id',
-              value: objLine.instructionId,
+              value: objLine.instructionId
             });
 
             instructionIds.push(objLine.instructionId);
@@ -167,7 +161,7 @@ function runScript(search, runtime, record, moment, format) {
             invoiceRec.setCurrentSublistValue({
               sublistId: 'item',
               fieldId: 'item',
-              value: objLine.item,
+              value: objLine.item
             });
 
             // if (arrStudents.length > 0 && feesType ==
@@ -175,14 +169,14 @@ function runScript(search, runtime, record, moment, format) {
             if (arrStudents.length > 0) {
               var rate = invoiceRec.getCurrentSublistValue({
                 sublistId: 'item',
-                fieldId: 'rate',
+                fieldId: 'rate'
               });
               var currRate = rate * percentToPay;
 
               invoiceRec.setCurrentSublistValue({
                 sublistId: 'item',
                 fieldId: 'rate',
-                value: currRate.toFixed(2),
+                value: currRate.toFixed(2)
               });
 
               // set mid year students checkbox to false
@@ -190,8 +184,8 @@ function runScript(search, runtime, record, moment, format) {
                 type: 'contact',
                 id: objLine.student,
                 values: {
-                  custentity_xw_midyearstu: false,
-                },
+                  custentity_xw_midyearstu: false
+                }
               });
             }
             instructionListToBeDeleted.push(objLine.instructionId);
@@ -204,17 +198,17 @@ function runScript(search, runtime, record, moment, format) {
         if (lineCount > 0) {
           invoiceRec.setValue({
             fieldId: 'custbody_xw_invschooldays',
-            value: parseInt(school_days),
+            value: parseInt(school_days)
           });
-          var invoiceId = invoiceRec.save({ignoreMandatoryFields: true });
+          var invoiceId = invoiceRec.save({ ignoreMandatoryFields: true });
           log.audit(LOG_TITLE, 'Invoice created ' + invoiceId);
           for (var k = 0; k < instructionIds.length; k++) {
             var billingInstrutionAppliedTo = record.submitFields({
               type: 'customrecord_xw_billinginstappliedto',
               id: instructionIds[k],
               values: {
-                custrecord_xw_binstapptoinvnum: invoiceId,
-              },
+                custrecord_xw_binstapptoinvnum: invoiceId
+              }
             });
           }
 
@@ -234,7 +228,7 @@ function runScript(search, runtime, record, moment, format) {
         log.error(LOG_TITLE, errorString);
       }
       log.debug(LOG_TITLE, '>> END <<');
-    },
+    }
   };
 }
 
@@ -252,9 +246,9 @@ function getDebtorOfStudents(objParams) {
     filters: [['internalid', 'anyof', students]],
     columns: [
       SEARCHMDL.createColumn({
-        name: 'company',
-      }),
-    ],
+        name: 'company'
+      })
+    ]
   });
   contactSearchObj.run().each(function (result) {
     var debtorId = result.getValue('company');
@@ -321,24 +315,24 @@ function getAppliedTo(objParams) {
   var today = new Date();
   var year = today.getFullYear() + 1;
 
-   //All is - include toall invoices.
-   //Staff is if 'Debtor staff' is set to true on debtor record then inlcude in invoice
-  
+  //All is - include toall invoices.
+  //Staff is if 'Debtor staff' is set to true on debtor record then inlcude in invoice
+
   arrFilters.push(
     SEARCHMDL.createFilter({
       name: 'custrecord_xw_binstapptoperiod',
       operator: 'equalto',
-      values: year,
+      values: year
     })
   );
   arrFilters.push(
     SEARCHMDL.createFilter({
       name: 'custrecord_xw_binstapptoinvnum',
       operator: 'anyof',
-      values: "@NONE@",
+      values: '@NONE@'
     })
   );
-  
+
   // arrFilters.push(
   //   SEARCHMDL.createFilter({
   //     name: 'custrecord_xw_binstapptobinst',
@@ -350,20 +344,20 @@ function getAppliedTo(objParams) {
   if (arrDebtors.length > 0) {
     arrFilters.push(
       SEARCHMDL.createFilter({
-         name: 'custrecord_xw_binstapptodebt',
-         operator: 'anyof',
-          values: arrDebtors,
-        })
-      );
+        name: 'custrecord_xw_binstapptodebt',
+        operator: 'anyof',
+        values: arrDebtors
+      })
+    );
   }
-  
+
   log.debug('arrFilters', JSON.stringify(arrFilters));
   var searchObj = SEARCHMDL.create({
     type: 'customrecord_xw_billinginstappliedto',
     filters: arrFilters,
     columns: [
       SEARCHMDL.createColumn({
-        name: 'custrecord_xw_binstapptodebt',
+        name: 'custrecord_xw_binstapptodebt'
       }),
       /*
        SEARCHMDL.createColumn({
@@ -372,23 +366,23 @@ function getAppliedTo(objParams) {
       }),
       */
       SEARCHMDL.createColumn({
-        name: 'custrecord_xw_binstapptostu',
+        name: 'custrecord_xw_binstapptostu'
       }),
       SEARCHMDL.createColumn({
-        name: 'custrecord_xw_binstapptobinst',
+        name: 'custrecord_xw_binstapptobinst'
       }),
       SEARCHMDL.createColumn({
         name: 'custrecord_xw_binstitem',
-        join: 'custrecord_xw_binstapptobinst',
+        join: 'custrecord_xw_binstapptobinst'
       }),
       SEARCHMDL.createColumn({
         name: 'custrecord_xw_binsttype',
-        join: 'custrecord_xw_binstapptobinst',
+        join: 'custrecord_xw_binstapptobinst'
       }),
       SEARCHMDL.createColumn({
-        name: 'custrecord_xw_binstapptoinvnum',
-      }),
-    ],
+        name: 'custrecord_xw_binstapptoinvnum'
+      })
+    ]
   });
 
   searchObj.run().each(function (result) {
@@ -399,12 +393,12 @@ function getAppliedTo(objParams) {
       var student = result.getValue('custrecord_xw_binstapptostu');
       var item = result.getValue({
         name: 'custrecord_xw_binstitem',
-        join: 'custrecord_xw_binstapptobinst',
+        join: 'custrecord_xw_binstapptobinst'
       });
 
       var type = result.getValue({
         name: 'custrecord_xw_binsttype',
-        join: 'custrecord_xw_binstapptobinst',
+        join: 'custrecord_xw_binstapptobinst'
       });
 
       /*
@@ -427,11 +421,11 @@ function getAppliedTo(objParams) {
         student: student,
         item: item,
         type: type,
-        instructionId: id,
+        instructionId: id
         //debtorStaff : debtorStaff
       });
     }
-    
+
     log.debug('objDebtors', JSON.stringify(objDebtors));
     /*
     var itemAdd = searchBillingInstructionAllAndStaff();
@@ -469,37 +463,44 @@ function getAppliedTo(objParams) {
   return objDebtors;
 }
 
-function searchBillingInstructionAllAndStaff(){
+function searchBillingInstructionAllAndStaff() {
   var item = {};
   var customrecord_xw_billinginstSearchObj = SEARCHMDL.create({
-   type: "customrecord_xw_billinginst",
-   filters:
-   [
-      ["custrecord_xw_binstyear","anyof", ["13","14"]] //all staff
-   ],
-   columns:
-   [
-      SEARCHMDL.createColumn({name: "internalid", label: "Id"}),
-      SEARCHMDL.createColumn({name: 'custrecord_xw_binsttype', label : 'type'}),
-      SEARCHMDL.createColumn({name: "custrecord_xw_binstitem", label: "Item"}),
-      SEARCHMDL.createColumn({name: "custrecord_xw_binstyear", label: "Year"})
-   ]
-});
-var searchResultCount = customrecord_xw_billinginstSearchObj.runPaged().count;
-log.debug("customrecord_xw_billinginstSearchObj result count",searchResultCount);
-  
-customrecord_xw_billinginstSearchObj.run().each(function(result){
-  var stId = result.getValue( "internalid");
-   var stItem = result.getValue( "custrecord_xw_binstitem");
-   var stType =result.getValue("custrecord_xw_binsttype");
-   var stStaff = result.getValue( "custrecord_xw_binstyear");
-   var btaff = false;
-   if(stStaff == 14) btaff = true;
-   item[stId] = {item : stItem, staff : btaff, type: stType};
-   return true;
-});
-  log.debug("item result count",JSON.stringify(item));
-return item;
+    type: 'customrecord_xw_billinginst',
+    filters: [
+      ['custrecord_xw_binstyear', 'anyof', ['13', '14']] //all staff
+    ],
+    columns: [
+      SEARCHMDL.createColumn({ name: 'internalid', label: 'Id' }),
+      SEARCHMDL.createColumn({
+        name: 'custrecord_xw_binsttype',
+        label: 'type'
+      }),
+      SEARCHMDL.createColumn({
+        name: 'custrecord_xw_binstitem',
+        label: 'Item'
+      }),
+      SEARCHMDL.createColumn({
+        name: 'custrecord_xw_binstyear',
+        label: 'Year'
+      })
+    ]
+  });
+  var searchResultCount = customrecord_xw_billinginstSearchObj.runPaged().count;
+  log.debug('customrecord_xw_billinginstSearchObj result count', searchResultCount);
+
+  customrecord_xw_billinginstSearchObj.run().each(function (result) {
+    var stId = result.getValue('internalid');
+    var stItem = result.getValue('custrecord_xw_binstitem');
+    var stType = result.getValue('custrecord_xw_binsttype');
+    var stStaff = result.getValue('custrecord_xw_binstyear');
+    var btaff = false;
+    if (stStaff == 14) btaff = true;
+    item[stId] = { item: stItem, staff: btaff, type: stType };
+    return true;
+  });
+  log.debug('item result count', JSON.stringify(item));
+  return item;
 }
 
 function isEmpty(stValue) {

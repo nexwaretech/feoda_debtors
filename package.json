@@ -1,0 +1,13 @@
+{
+  "name": "@feoda/netsuite.template.repo",
+  "version": "1.0.0",
+  "description": "This is a template repository for netsuite",
+  "license": "UNLICENSED",
+  "sideEffects": false,
+  "scripts": {
+    "pretty": "yarn prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "3.1.1"
+  }
+}

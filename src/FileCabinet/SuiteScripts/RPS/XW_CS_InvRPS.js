@@ -5,7 +5,7 @@
  *
  * Author: Feoda
  */
-define([ 'N/ui/dialog', 'N/record', './lib_rps'], function( dialog, record, lib) {
+define(['N/ui/dialog', 'N/record', './lib_rps'], function (dialog, record, lib) {
   /**
    * Function to be executed after page is initialized.
    *
@@ -15,8 +15,7 @@ define([ 'N/ui/dialog', 'N/record', './lib_rps'], function( dialog, record, lib)
    *
    * @since 2015.2
    */
-  function pageInit(scriptContext) {
-  }
+  function pageInit(scriptContext) {}
 
   /**
    * Function to be executed when field is changed.
@@ -141,17 +140,16 @@ define([ 'N/ui/dialog', 'N/record', './lib_rps'], function( dialog, record, lib)
 
   function redirGenPay(id) {
     let objParam = {
-      id : id
+      id: id
     };
     window.location = lib.generateRPSInternalLink(objParam);
   }
 
   function sendInvoice(id) {
-
     let objDetails = {};
     objDetails.title = 'Processing';
     objDetails.message = 'Sending Invoice Email';
-    objDetails.url =  lib.generateRPSSendEmailLink();
+    objDetails.url = lib.generateRPSSendEmailLink();
     objDetails.param = {
       invId: id
     };
@@ -163,7 +161,7 @@ define([ 'N/ui/dialog', 'N/record', './lib_rps'], function( dialog, record, lib)
     if (rps) {
       dialog.alert({
         title: 'Warning',
-        message: 'Cannot recalculate because RPS Template already added',
+        message: 'Cannot recalculate because RPS Template already added'
       });
       return;
     }
@@ -172,7 +170,7 @@ define([ 'N/ui/dialog', 'N/record', './lib_rps'], function( dialog, record, lib)
 
     dialog.alert({
       title: 'Processing',
-      message: 'Opening Balance is being calculated',
+      message: 'Opening Balance is being calculated'
     });
 
     var objParam = {};
@@ -180,7 +178,7 @@ define([ 'N/ui/dialog', 'N/record', './lib_rps'], function( dialog, record, lib)
     record.submitFields({
       type: 'invoice',
       id: id,
-      values: objParam,
+      values: objParam
     });
 
     window.ischanged = false;

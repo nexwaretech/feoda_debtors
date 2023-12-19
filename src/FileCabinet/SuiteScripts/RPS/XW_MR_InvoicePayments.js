@@ -16,7 +16,16 @@ var lib_email;
 
 var PAYMETHOD_EFT = '7';
 
-define(['N/runtime', 'N/search', 'N/record', '../lib_shared/moment-with-locales.min', 'N/email', 'N/render', './lib_rps', '../lib_shared/lib_email'], runScript);
+define([
+  'N/runtime',
+  'N/search',
+  'N/record',
+  '../lib_shared/moment-with-locales.min',
+  'N/email',
+  'N/render',
+  './lib_rps',
+  '../lib_shared/lib_email'
+], runScript);
 function runScript(runtime, search, record, moment, email, render, library, library_email) {
   RUNTIMEMDL = runtime;
   SEARCHMDL = search;
@@ -39,7 +48,7 @@ function runScript(runtime, search, record, moment, email, render, library, libr
         var proc_date = date_provided ? new Date(date_provided) : lib.getMelbourneDateTime();
         log.audit('getRPS', 'proc_date: ' + proc_date);
 
-        var arrRPS = lib.searchRPSList(rps_id_lists , proc_date);
+        var arrRPS = lib.searchRPSList(rps_id_lists, proc_date);
         log.debug(LOG_TITLE, 'arrRPS: ' + JSON.stringify(arrRPS));
         log.debug(LOG_TITLE, '>> END <<');
 
@@ -51,7 +60,6 @@ function runScript(runtime, search, record, moment, email, render, library, libr
     },
 
     map: function (context) {
-
       var LOG_TITLE = 'maps';
       log.debug(LOG_TITLE, '>> START <<');
       var isSuccessful = false;
@@ -62,7 +70,6 @@ function runScript(runtime, search, record, moment, email, render, library, libr
       try {
         var to_arr = JSON.parse(context.value);
         log.debug('DETAILS', JSON.stringify(to_arr));
-
 
         var inv_id = lib.searchInvoice(to_arr.tranid);
         log.debug('inv_id', JSON.stringify(inv_id));
@@ -85,25 +92,24 @@ function runScript(runtime, search, record, moment, email, render, library, libr
         log.debug('stRPSOld', stRPSOld);
 
         var objPayment = {
-          fromId : debtor,
-          doc :  to_arr.tranid,
-          trandate : new Date(to_arr.proc_date),
-          paymentmethod : paymentMethod,
-          payment : to_arr.amt,
-          rpsold : stRPSOld,
-          ccid : to_arr.cc_int_id ? to_arr.cc_int_id : ''
-        }
+          fromId: debtor,
+          doc: to_arr.tranid,
+          trandate: new Date(to_arr.proc_date),
+          paymentmethod: paymentMethod,
+          payment: to_arr.amt,
+          rpsold: stRPSOld,
+          ccid: to_arr.cc_int_id ? to_arr.cc_int_id : ''
+        };
         log.debug('objPayment', JSON.stringify(objPayment));
 
-        var pid = lib.createPayment(objPayment)
+        var pid = lib.createPayment(objPayment);
 
         try {
-
           isSuccessful = true;
 
           var payment = record.load({
             type: record.Type.CUSTOMER_PAYMENT,
-            id: pid,
+            id: pid
           });
           var apply_count = payment.getLineCount('apply');
 
@@ -117,7 +123,7 @@ function runScript(runtime, search, record, moment, email, render, library, libr
           log.debug('INV', JSON.stringify(inv_list));
 
           var appliedAmt = payment.getValue('applied');
-          var pnrefnum = payment.getValue({ fieldId: 'pnrefnum' })
+          var pnrefnum = payment.getValue({ fieldId: 'pnrefnum' });
           var rsp = JSON.parse(payment.getValue({ fieldId: 'response' }));
 
           var ewayReason = '';
@@ -127,14 +133,14 @@ function runScript(runtime, search, record, moment, email, render, library, libr
           }
 
           let objRPSLine = {
-            id : to_arr.id,
+            id: to_arr.id,
             pymntno: pid,
-            appliedto:  Object.keys(inv_list),
+            appliedto: Object.keys(inv_list),
             status: lib.RPSSTATLINE_LIST.procesed,
-            fileadmin : (payAdminId && rps_id_lists) ? payAdminId : '',
-            ewaystat : (to_arr.pay_m.trim() != 'Bank Account') ? lib.EWAY_STAT.success : '',
-            ewayref : (to_arr.pay_m.trim() != 'Bank Account') ? pnrefnum : '',
-            ewarreason : ewayReason
+            fileadmin: payAdminId && rps_id_lists ? payAdminId : '',
+            ewaystat: to_arr.pay_m.trim() != 'Bank Account' ? lib.EWAY_STAT.success : '',
+            ewayref: to_arr.pay_m.trim() != 'Bank Account' ? pnrefnum : '',
+            ewarreason: ewayReason
           };
 
           lib.upsertRPSLine(objRPSLine);
@@ -147,22 +153,20 @@ function runScript(runtime, search, record, moment, email, render, library, libr
           appliedAmt = isNaN(parseFloat(appliedAmt)) ? 0 : parseFloat(appliedAmt);
 
           var objRPS = {
-            id : to_arr.rpsTemplate,
-            amtpaid :  (currAmtPaid + appliedAmt).toFixed(2),
-            amtrem : (amtRemaining - appliedAmt).toFixed(2),
-          }
+            id: to_arr.rpsTemplate,
+            amtpaid: (currAmtPaid + appliedAmt).toFixed(2),
+            amtrem: (amtRemaining - appliedAmt).toFixed(2)
+          };
 
           lib.upsertRPS(objRPS);
-
         } catch (e) {
-
           var errorString = JSON.stringify(ex);
           log.error('error', errorString);
 
           let objRPSLine = {
-            ewaystat : (to_arr.pay_m.trim() != 'Bank Account') ? lib.EWAY_STAT.error : '',
-            ewarreason : lib.getCCErrorCode(e),
-            status : lib.RPSSTATLINE_LIST.procesed,
+            ewaystat: to_arr.pay_m.trim() != 'Bank Account' ? lib.EWAY_STAT.error : '',
+            ewarreason: lib.getCCErrorCode(e),
+            status: lib.RPSSTATLINE_LIST.procesed
           };
 
           lib.upsertRPSLine(objRPSLine);
@@ -174,7 +178,7 @@ function runScript(runtime, search, record, moment, email, render, library, libr
             var subject = objEmailTemplate.subject;
 
             var contacts = lib.searchArrContacts({
-              debtor: debtor,
+              debtor: debtor
             });
 
             for (const element of contacts) {
@@ -186,7 +190,7 @@ function runScript(runtime, search, record, moment, email, render, library, libr
                 invoice: to_arr.tranText,
                 firstname: objContact.firstname,
                 rpsDate: to_arr.proc_date,
-                famCode: to_arr.famCode,
+                famCode: to_arr.famCode
               };
 
               var renderer = RENDERMDL.create();
@@ -194,7 +198,7 @@ function runScript(runtime, search, record, moment, email, render, library, libr
               renderer.addCustomDataSource({
                 format: RENDERMDL.DataSource.OBJECT,
                 alias: 'DATA',
-                data: objData,
+                data: objData
               });
 
               var relatedRecords = {};
@@ -206,11 +210,10 @@ function runScript(runtime, search, record, moment, email, render, library, libr
                 recipients: objContact.email,
                 subject: subject,
                 body: renderer.renderAsString(),
-                relatedRecords: relatedRecords,
+                relatedRecords: relatedRecords
               });
             }
           }
-
         }
 
         log.debug('PROCESSED', JSON.stringify(to_arr));
@@ -223,7 +226,6 @@ function runScript(runtime, search, record, moment, email, render, library, libr
     },
 
     summarize: function (context) {
-
       var script = runtime.getCurrentScript();
       var payAdminId = script.getParameter(lib.SCRIPTS.mr_invoice_payment.params.payfile);
 
@@ -243,17 +245,11 @@ function runScript(runtime, search, record, moment, email, render, library, libr
         }
 
         var objPFA = {
-          procstatus :stat,
-          sum : 'Transactions: ' + successTransCount
-        }
+          procstatus: stat,
+          sum: 'Transactions: ' + successTransCount
+        };
         lib.upsertPFA(objPFA);
       }
-    },
+    }
   };
 }
-
-
-
-
-
-

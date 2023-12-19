@@ -2,7 +2,7 @@
   <description></description>
   <isinactive>F</isinactive>
   <isordered>T</isordered>
-  <name>STE - Year/Level Code</name>
+  <name>Year/Level Code</name>
   <customvalues>
     <customvalue scriptid="y07">
       <isinactive>F</isinactive>
