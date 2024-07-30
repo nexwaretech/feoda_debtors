@@ -1,0 +1,35 @@
+<suitelet scriptid="customscript_fd_sl_procpayment">
+  <description></description>
+  <isinactive>F</isinactive>
+  <name>FD | SL RPS Payment Processing</name>
+  <notifyadmins>F</notifyadmins>
+  <notifyemails></notifyemails>
+  <notifyowner>T</notifyowner>
+  <notifyuser>F</notifyuser>
+  <scriptfile>[/SuiteScripts/RPS/FD_SL_RPSPaymentProcessing.js]</scriptfile>
+  <scriptdeployments>
+    <scriptdeployment scriptid="customdeploy_fd_sl_procpayment">
+      <allemployees>T</allemployees>
+      <allpartners>F</allpartners>
+      <allroles>T</allroles>
+      <audslctrole></audslctrole>
+      <eventtype></eventtype>
+      <isdeployed>T</isdeployed>
+      <isonline>F</isonline>
+      <loglevel>DEBUG</loglevel>
+      <runasrole>ADMINISTRATOR</runasrole>
+      <status>RELEASED</status>
+      <title>FD | SL RPS Payment Processing</title>
+      <links>
+        <link>
+          <linkcategory>BASICTRANSACTIONSCUSTOMERS</linkcategory>
+          <linklabel>RPS Payment Processing</linklabel>
+        </link>
+        <link>
+          <linkcategory>ACCOUNTCENTERCUSTOMERSCUSTOM</linkcategory>
+          <linklabel>RPS Payment Processing</linklabel>
+        </link>
+      </links>
+    </scriptdeployment>
+  </scriptdeployments>
+</suitelet>

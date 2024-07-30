@@ -1,0 +1,24 @@
+<customlist scriptid="customlist_fd_email_category">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Email Category</name>
+  <customvalues>
+    <customvalue scriptid="fd_ec_enrollment">
+      <isinactive>F</isinactive>
+      <value>Enrolment</value>
+    </customvalue>
+    <customvalue scriptid="fd_ec_invoicing">
+      <isinactive>F</isinactive>
+      <value>Invoicing</value>
+    </customvalue>
+    <customvalue scriptid="fd_ec_payments">
+      <isinactive>F</isinactive>
+      <value>Payments</value>
+    </customvalue>
+    <customvalue scriptid="fd_ec_integration">
+      <isinactive>F</isinactive>
+      <value>Integration</value>
+    </customvalue>
+  </customvalues>
+</customlist>

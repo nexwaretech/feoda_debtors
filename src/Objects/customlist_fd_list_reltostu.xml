@@ -1,0 +1,20 @@
+<customlist scriptid="customlist_fd_list_reltostu">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Relationship to Student</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_rsl_mother">
+      <isinactive>F</isinactive>
+      <value>Mother</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_rsl_father">
+      <isinactive>F</isinactive>
+      <value>Father</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_rsl_guardian">
+      <isinactive>F</isinactive>
+      <value>Guardian</value>
+    </customvalue>
+  </customvalues>
+</customlist>

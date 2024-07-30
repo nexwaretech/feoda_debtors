@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_fd_statement" standard="STDTMPLEMPTY">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>STATEMENT</printtype>
+  <title>FD | Statement PDF/HTML Template</title>
+  <trantype>CUSTINVC</trantype>
+</advancedpdftemplate>

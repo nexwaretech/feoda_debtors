@@ -3,62 +3,64 @@
  * @NModuleScope SameAccount
  * Author: Feoda
  */
-define(['N/url', 'N/search', 'N/record', 'N/https', '../lib_shared/moment-with-locales.min',], function ( url, search,record, https, moment) {
+define([
+  "N/url",
+  "N/search",
+  "N/record",
+  "N/https",
+  "../lib_shared/moment-with-locales.min",
+], function (url, search, record, https, moment) {
+  const REC_EMAIL = {
+    id: "customrecord_fd_email_templates",
+    script: "custrecord_fd_emltplscripttype",
+    author: "custrecord_fd_emltplauthor",
+    body: "custrecord_fd_emltplbody",
+    subject: "custrecord_fd_emltplsubject",
+    current: "custrecord_fd_emltplcurrent",
+  };
 
+  /**
+   * Get email template for current script
+   *
+   * @returns Email template object
+   */
+  function getEmailTemplate(scriptId) {
+    var LOG_TITLE = "getEmailTemplate";
+    var objEmailTemplate = null;
 
-    const REC_EMAIL = {
-        id : 'customrecord_xw_emailtpls',
-        script : 'custrecord_xw_emltplscripttype',
-        author : 'custrecord_xw_emltplauthor',
-        body : 'custrecord_xw_emltplbody',
-        subject  : 'custrecord_xw_emltplsubject',
-        current : 'custrecord_xw_emltplcurrent'
-    }
+    var searchResults = search.create({
+      type: REC_EMAIL.id,
+      filters: [[`${REC_EMAIL.script}.scriptid`, "is", scriptId]],
+      columns: [
+        REC_EMAIL.author,
+        REC_EMAIL.body,
+        REC_EMAIL.subject,
+        REC_EMAIL.current,
+      ],
+    });
 
-    /**
-     * Get email template for current script
-     *
-     * @returns Email template object
-     */
-    function getEmailTemplate(scriptId) {
+    log.debug(LOG_TITLE, "searchResults" + JSON.stringify(searchResults));
 
-        var LOG_TITLE = 'getEmailTemplate';
-        var objEmailTemplate = null;
+    searchResults.run().each(function (result) {
+      var isCurrent = result.getValue(REC_EMAIL.current);
 
-        var searchResults = search.create({
-            type: REC_EMAIL.id,
-            filters: [[`${REC_EMAIL.script}.scriptid`, 'is', scriptId]],
-            columns: [
-                REC_EMAIL.author,
-                REC_EMAIL.body,
-                REC_EMAIL.subject,
-                REC_EMAIL.current,
-            ],
-        });
+      if (isCurrent || !objEmailTemplate) {
+        objEmailTemplate = {};
 
-        log.debug(LOG_TITLE, 'searchResults'+ JSON.stringify(searchResults));
+        objEmailTemplate.author = result.getValue(REC_EMAIL.author);
+        objEmailTemplate.body = result.getValue(REC_EMAIL.body);
+        objEmailTemplate.subject = result.getValue(REC_EMAIL.subject);
+      }
 
-        searchResults.run().each(function (result) {
-            var isCurrent = result.getValue(REC_EMAIL.current);
+      return true;
+    });
 
-            if (isCurrent || !objEmailTemplate) {
-                objEmailTemplate = {};
+    log.debug(LOG_TITLE, "objEmailTemplate" + JSON.stringify(objEmailTemplate));
 
-                objEmailTemplate.author = result.getValue(REC_EMAIL.author);
-                objEmailTemplate.body = result.getValue(REC_EMAIL.body);
-                objEmailTemplate.subject = result.getValue(REC_EMAIL.subject);
-            }
+    return objEmailTemplate;
+  }
 
-            return true;
-        });
-
-        log.debug(LOG_TITLE, 'objEmailTemplate'+ JSON.stringify(objEmailTemplate));
-
-        return objEmailTemplate;
-    }
-
-
-    return {
-        getEmailTemplate
-    };
+  return {
+    getEmailTemplate,
+  };
 });

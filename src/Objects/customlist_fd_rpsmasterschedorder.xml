@@ -1,0 +1,28 @@
+<customlist scriptid="customlist_fd_rpsmasterschedorder">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Order Schedule - Month</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_oms_first">
+      <isinactive>F</isinactive>
+      <value>first</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_oms_second">
+      <isinactive>F</isinactive>
+      <value>second</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_oms_third">
+      <isinactive>F</isinactive>
+      <value>third</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_oms_fourth">
+      <isinactive>F</isinactive>
+      <value>fourth</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_oms_last">
+      <isinactive>F</isinactive>
+      <value>last</value>
+    </customvalue>
+  </customvalues>
+</customlist>

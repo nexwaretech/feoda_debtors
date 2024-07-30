@@ -1,0 +1,16 @@
+<customlist scriptid="customlist_fd_billingenginesrchtypes">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Billing Engine Search</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_best_student">
+      <isinactive>F</isinactive>
+      <value>Student</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_best_debtor">
+      <isinactive>F</isinactive>
+      <value>Debtor</value>
+    </customvalue>
+  </customvalues>
+</customlist>

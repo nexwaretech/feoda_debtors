@@ -1,0 +1,24 @@
+<customlist scriptid="customlist_fd_activestats">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Inactive/Active List</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_ial_inactive">
+      <isinactive>F</isinactive>
+      <value>Inactive</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ial_active">
+      <isinactive>F</isinactive>
+      <value>Active</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ial_completed">
+      <isinactive>F</isinactive>
+      <value>Completed</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ial_cancelled">
+      <isinactive>F</isinactive>
+      <value>Cancelled</value>
+    </customvalue>
+  </customvalues>
+</customlist>

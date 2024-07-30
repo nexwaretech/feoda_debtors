@@ -1,0 +1,16 @@
+<customlist scriptid="customlist_fd_all_staff">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | All Staff</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_as_all">
+      <isinactive>F</isinactive>
+      <value>All</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_as_staff">
+      <isinactive>F</isinactive>
+      <value>Staff</value>
+    </customvalue>
+  </customvalues>
+</customlist>

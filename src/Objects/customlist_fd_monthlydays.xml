@@ -1,0 +1,36 @@
+<customlist scriptid="customlist_fd_monthlydays">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | List of days (MS-M)</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_ld_sunday">
+      <isinactive>F</isinactive>
+      <value>Sunday</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ld_monday">
+      <isinactive>F</isinactive>
+      <value>Monday</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ld_tuesday">
+      <isinactive>F</isinactive>
+      <value>Tuesday</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ld_wednesday">
+      <isinactive>F</isinactive>
+      <value>Wednesday</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ld_thursday">
+      <isinactive>F</isinactive>
+      <value>Thursday</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ld_friday">
+      <isinactive>F</isinactive>
+      <value>Friday</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ld_saturday">
+      <isinactive>F</isinactive>
+      <value>Saturday</value>
+    </customvalue>
+  </customvalues>
+</customlist>

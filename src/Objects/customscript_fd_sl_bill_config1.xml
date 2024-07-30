@@ -1,0 +1,25 @@
+<suitelet scriptid="customscript_fd_sl_bill_config1">
+  <description>Page to Set-up Billing Preference. Instruction Tab</description>
+  <isinactive>F</isinactive>
+  <name>FD | SL Billing Configuration1</name>
+  <notifyadmins>F</notifyadmins>
+  <notifyemails></notifyemails>
+  <notifyowner>T</notifyowner>
+  <notifyuser>F</notifyuser>
+  <scriptfile>[/SuiteScripts/Billing/FD_SL_Bill_Config1.js]</scriptfile>
+  <scriptdeployments>
+    <scriptdeployment scriptid="customdeploy_fd_sl_bill_config1">
+      <allemployees>F</allemployees>
+      <allpartners>F</allpartners>
+      <allroles>T</allroles>
+      <audslctrole></audslctrole>
+      <eventtype></eventtype>
+      <isdeployed>T</isdeployed>
+      <isonline>F</isonline>
+      <loglevel>DEBUG</loglevel>
+      <runasrole>ADMINISTRATOR</runasrole>
+      <status>RELEASED</status>
+      <title>FD | SL Billing Configuration1</title>
+    </scriptdeployment>
+  </scriptdeployments>
+</suitelet>

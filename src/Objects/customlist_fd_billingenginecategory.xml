@@ -1,0 +1,16 @@
+<customlist scriptid="customlist_fd_billingenginecategory">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Billing Engine Category</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_bec_charges">
+      <isinactive>F</isinactive>
+      <value>Charges</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_bec_discounts">
+      <isinactive>F</isinactive>
+      <value>Discounts</value>
+    </customvalue>
+  </customvalues>
+</customlist>

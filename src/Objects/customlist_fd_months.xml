@@ -1,0 +1,56 @@
+<customlist scriptid="customlist_fd_months">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Months</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_mo_jan">
+      <isinactive>F</isinactive>
+      <value>Jan</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_mo_feb">
+      <isinactive>F</isinactive>
+      <value>Feb</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_mo_mar">
+      <isinactive>F</isinactive>
+      <value>Mar</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_mo_apr">
+      <isinactive>F</isinactive>
+      <value>Apr</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_mo_may">
+      <isinactive>F</isinactive>
+      <value>May</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_mo_jun">
+      <isinactive>F</isinactive>
+      <value>Jun</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_mo_jul">
+      <isinactive>F</isinactive>
+      <value>Jul</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_mo_aug">
+      <isinactive>F</isinactive>
+      <value>Aug</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_mo_sep">
+      <isinactive>F</isinactive>
+      <value>Sep</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_mo_oct">
+      <isinactive>F</isinactive>
+      <value>Oct</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_mo_nov">
+      <isinactive>F</isinactive>
+      <value>Nov</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_mo_dec">
+      <isinactive>F</isinactive>
+      <value>Dec</value>
+    </customvalue>
+  </customvalues>
+</customlist>

@@ -1,0 +1,68 @@
+<customlist scriptid="customlist_fd_year_level_code">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Year/Level Code</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_ylc_y07">
+      <isinactive>F</isinactive>
+      <value>Y07</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_y08">
+      <isinactive>F</isinactive>
+      <value>Y08</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_y09">
+      <isinactive>F</isinactive>
+      <value>Y09</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_y10">
+      <isinactive>F</isinactive>
+      <value>Y10</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_y11">
+      <isinactive>F</isinactive>
+      <value>Y11</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_y12">
+      <isinactive>F</isinactive>
+      <value>Y12</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_pre_kindy">
+      <isinactive>F</isinactive>
+      <value>Pre-Kindy</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_y01">
+      <isinactive>F</isinactive>
+      <value>Y01</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_y02">
+      <isinactive>F</isinactive>
+      <value>Y02</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_y03">
+      <isinactive>F</isinactive>
+      <value>Y03</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_y04">
+      <isinactive>F</isinactive>
+      <value>Y04</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_y05">
+      <isinactive>F</isinactive>
+      <value>Y05</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_y06">
+      <isinactive>F</isinactive>
+      <value>Y06</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_kindergarden">
+      <isinactive>F</isinactive>
+      <value>Kindergarten</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ylc_kindy">
+      <isinactive>F</isinactive>
+      <value>Kindy</value>
+    </customvalue>
+  </customvalues>
+</customlist>

@@ -1,0 +1,40 @@
+<customlist scriptid="customlist_fd_list_occpgrp">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Occupation Group</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_og_it">
+      <isinactive>F</isinactive>
+      <value>IT</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_og_finance">
+      <isinactive>F</isinactive>
+      <value>Finance</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_og_marketing">
+      <isinactive>F</isinactive>
+      <value>Marketing</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_og_gr1">
+      <isinactive>F</isinactive>
+      <value>GROUP1 - Senior management in large business organisation, government administration and degence and qualified professionals</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_og_gr2">
+      <isinactive>F</isinactive>
+      <value>GROUP2 - Other business managers, arts/media/sportspersons and associate professionals</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_og_gr3">
+      <isinactive>F</isinactive>
+      <value>GROUP3 - Tradesmen/women, clerks and skilled office, sales and service staff</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_og_gr4">
+      <isinactive>F</isinactive>
+      <value>GROUP4 - Machine operators, hospitality staff, assistants, labourers and related workers</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_og_gr8">
+      <isinactive>F</isinactive>
+      <value>GROUP8 - Not in paid work in last 12 months</value>
+    </customvalue>
+  </customvalues>
+</customlist>

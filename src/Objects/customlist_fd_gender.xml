@@ -1,0 +1,16 @@
+<customlist scriptid="customlist_fd_gender">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Gender List</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_gl_male">
+      <isinactive>F</isinactive>
+      <value>M</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_gl_female">
+      <isinactive>F</isinactive>
+      <value>F</value>
+    </customvalue>
+  </customvalues>
+</customlist>

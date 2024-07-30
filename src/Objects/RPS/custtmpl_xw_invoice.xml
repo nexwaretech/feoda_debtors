@@ -1,9 +1,0 @@
-<advancedpdftemplate scriptid="custtmpl_xw_invoice" standard="STDTMPLCUSTINVC">
-  <description></description>
-  <displaysourcecode>T</displaysourcecode>
-  <isinactive>F</isinactive>
-  <preferred>F</preferred>
-  <printtype>TRANSACTION</printtype>
-  <title>XW Invoice PDF/HTML Template</title>
-  <trantype>CUSTINVC</trantype>
-</advancedpdftemplate>

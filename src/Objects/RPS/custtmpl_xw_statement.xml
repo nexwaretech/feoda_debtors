@@ -1,9 +1,0 @@
-<advancedpdftemplate scriptid="custtmpl_xw_statement" standard="STDTMPLEMPTY">
-  <description></description>
-  <displaysourcecode>T</displaysourcecode>
-  <isinactive>F</isinactive>
-  <preferred>F</preferred>
-  <printtype>STATEMENT</printtype>
-  <title>XW Statement PDF/HTML Template</title>
-  <trantype>CUSTINVC</trantype>
-</advancedpdftemplate>

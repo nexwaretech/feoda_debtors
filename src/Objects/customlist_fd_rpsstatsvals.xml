@@ -1,0 +1,16 @@
+<customlist scriptid="customlist_fd_rpsstatsvals">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | RPS Status values</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_rsv_inactive">
+      <isinactive>F</isinactive>
+      <value>Inactive</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_rsv_active">
+      <isinactive>F</isinactive>
+      <value>Active</value>
+    </customvalue>
+  </customvalues>
+</customlist>

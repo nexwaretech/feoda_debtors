@@ -1,0 +1,5 @@
+<subtab scriptid="custtab_fd_trans_recurrence">
+  <parent></parent>
+  <tabtype>TRANSACTION</tabtype>
+  <title>Recurring Payment Schedule</title>
+</subtab>

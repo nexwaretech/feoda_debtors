@@ -1,0 +1,28 @@
+<customlist scriptid="customlist_fd_pay_sched_type">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Payment Schedule Type</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_pst_weekly">
+      <isinactive>F</isinactive>
+      <value>Weekly</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_pst_fortnigtly">
+      <isinactive>F</isinactive>
+      <value>Fortnightly</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_pst_monthly">
+      <isinactive>F</isinactive>
+      <value>Monthly</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_pst_yearly">
+      <isinactive>F</isinactive>
+      <value>Yearly</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_pst_term">
+      <isinactive>F</isinactive>
+      <value>Term Payment</value>
+    </customvalue>
+  </customvalues>
+</customlist>

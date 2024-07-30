@@ -1,0 +1,16 @@
+<customlist scriptid="customlist_fd_all_none">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | All None</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_an_all">
+      <isinactive>F</isinactive>
+      <value>All</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_an_none">
+      <isinactive>F</isinactive>
+      <value>None</value>
+    </customvalue>
+  </customvalues>
+</customlist>

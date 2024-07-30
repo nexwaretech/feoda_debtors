@@ -1,0 +1,55 @@
+<suitelet scriptid="customscript_fd_sl_genpaysched">
+  <description>Generates Recurring Payment Schedule (RPS)</description>
+  <isinactive>F</isinactive>
+  <name>FD | SL RPS GeneratePaymentSchedule</name>
+  <notifyadmins>F</notifyadmins>
+  <notifyemails></notifyemails>
+  <notifyowner>T</notifyowner>
+  <notifyuser>F</notifyuser>
+  <scriptfile>[/SuiteScripts/RPS/FD_SL_GeneratePaymentSchedule.js]</scriptfile>
+  <scriptcustomfields>
+    <scriptcustomfield scriptid="custscript_fd_sl_pr_gentranid">
+      <accesslevel>2</accesslevel>
+      <applyformatting>F</applyformatting>
+      <checkspelling>F</checkspelling>
+      <defaultchecked>F</defaultchecked>
+      <defaultselection></defaultselection>
+      <defaultvalue></defaultvalue>
+      <description></description>
+      <displayheight></displayheight>
+      <displaytype>NORMAL</displaytype>
+      <displaywidth></displaywidth>
+      <dynamicdefault></dynamicdefault>
+      <fieldtype>SELECT</fieldtype>
+      <help></help>
+      <isformula>F</isformula>
+      <ismandatory>F</ismandatory>
+      <label>Transaction ID</label>
+      <linktext></linktext>
+      <maxlength></maxlength>
+      <maxvalue></maxvalue>
+      <minvalue></minvalue>
+      <onparentdelete>SET_NULL</onparentdelete>
+      <searchlevel>2</searchlevel>
+      <selectrecordtype>-30</selectrecordtype>
+      <setting></setting>
+      <storevalue>T</storevalue>
+    </scriptcustomfield>
+  </scriptcustomfields>
+  <scriptdeployments>
+    <scriptdeployment scriptid="customdeploy_fd_sl_genpaysched">
+      <allemployees>T</allemployees>
+      <allpartners>T</allpartners>
+      <allroles>T</allroles>
+      <audslctrole></audslctrole>
+      <custscript_fd_sl_pr_gentranid></custscript_fd_sl_pr_gentranid>
+      <eventtype></eventtype>
+      <isdeployed>T</isdeployed>
+      <isonline>T</isonline>
+      <loglevel>DEBUG</loglevel>
+      <runasrole>ADMINISTRATOR</runasrole>
+      <status>RELEASED</status>
+      <title>FD | SL RPS GeneratePaymentSchedule</title>
+    </scriptdeployment>
+  </scriptdeployments>
+</suitelet>

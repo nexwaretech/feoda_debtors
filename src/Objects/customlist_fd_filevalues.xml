@@ -1,0 +1,24 @@
+<customlist scriptid="customlist_fd_filevalues">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | File Values</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_fv_processed">
+      <isinactive>F</isinactive>
+      <value>Processed</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_fv_notprocessed">
+      <isinactive>F</isinactive>
+      <value>Not Processed</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_fv_processing">
+      <isinactive>F</isinactive>
+      <value>Processing</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_fv_cancelled">
+      <isinactive>F</isinactive>
+      <value>Cancelled</value>
+    </customvalue>
+  </customvalues>
+</customlist>

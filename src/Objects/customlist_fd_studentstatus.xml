@@ -1,0 +1,60 @@
+<customlist scriptid="customlist_fd_studentstatus">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Student Status Values</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_ss_accepted">
+      <isinactive>F</isinactive>
+      <value>Accepted</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ss_waitlist">
+      <isinactive>F</isinactive>
+      <value>Waitlist</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ss_info">
+      <isinactive>F</isinactive>
+      <value>Info</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ss_graduated">
+      <isinactive>F</isinactive>
+      <value>Graduated</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ss_followup">
+      <isinactive>F</isinactive>
+      <value>Follow Up</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ss_cancelled">
+      <isinactive>F</isinactive>
+      <value>Cancelled</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ss_attending">
+      <isinactive>F</isinactive>
+      <value>Attending</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ss_sibling">
+      <isinactive>F</isinactive>
+      <value>Sibling</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ss_offered">
+      <isinactive>F</isinactive>
+      <value>Offered</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ss_left">
+      <isinactive>F</isinactive>
+      <value>Left</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ss_declined">
+      <isinactive>F</isinactive>
+      <value>Declined</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ss_na">
+      <isinactive>F</isinactive>
+      <value>N/A</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_ss_applied">
+      <isinactive>F</isinactive>
+      <value>Applied</value>
+    </customvalue>
+  </customvalues>
+</customlist>

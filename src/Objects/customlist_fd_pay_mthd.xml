@@ -1,0 +1,16 @@
+<customlist scriptid="customlist_fd_pay_mthd">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Payment Method Values</name>
+  <customvalues>
+    <customvalue scriptid="val_pm_credit_card">
+      <isinactive>F</isinactive>
+      <value>Credit Card</value>
+    </customvalue>
+    <customvalue scriptid="val_pm_bank_account">
+      <isinactive>F</isinactive>
+      <value>Bank Account </value>
+    </customvalue>
+  </customvalues>
+</customlist>

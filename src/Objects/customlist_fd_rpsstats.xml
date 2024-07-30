@@ -1,0 +1,20 @@
+<customlist scriptid="customlist_fd_rpsstats">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | RPS Status List</name>
+  <customvalues>
+    <customvalue scriptid="val_fd_rsl_pending">
+      <isinactive>F</isinactive>
+      <value>Pending</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_rsl_processed">
+      <isinactive>F</isinactive>
+      <value>Processed</value>
+    </customvalue>
+    <customvalue scriptid="val_fd_rsl_cancelled">
+      <isinactive>F</isinactive>
+      <value>Cancelled</value>
+    </customvalue>
+  </customvalues>
+</customlist>

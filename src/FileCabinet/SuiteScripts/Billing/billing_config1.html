@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+      integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="./billing_config.css"
+    />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+      integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+      crossorigin="anonymous"
+    ></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.0/js/select2.min.js"></script>
+    <title>Billing Configuration: Instructions</title>
+    <style>
+      .record_link{
+        color: #53a451;
+      }
+      .record_link:hover{
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-between vertical-center">
+        <div>
+          <ul class="nav nav-tabs" role="tablist" style="margin-left: 30px">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                data-toggle="tab"
+                href="#config_categories"
+                >Categories</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#config_items"
+                >Items</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#config_debtors"
+                >Families</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#config_student"
+                >Student</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tab panes -->
+      <div class="tab-content" id="configForm1">
+        <div id="config_categories" class="container-fluid tab-pane active">
+          <div class="main_container">
+            <div class="col text-right">
+              <a
+                class="btn btn-link add-category"
+                data-toggle="modal"
+                data-target="#balanceModal"
+                ><i class="fa fa-plus"></i> Add Category</a
+              >
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingCharge">
+                <h5 class="mb-0">
+                  <a class="btn btn-link text-success" type="button">
+                    <i class="fa fa-plus"></i> Charges
+                  </a>
+                </h5>
+              </div>
+              <div class="card-body">
+                <table
+                  class="table table-borderless table-striped"
+                  id="categories_charge"
+                >
+                  <thead>
+                    <tr class="table-success">
+                      <th>
+                        <div class="custom-control custom-checkbox">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="checkallcharge"
+                            v-on:click="markAllCharges"
+                            v-model="markAllChargesStat"
+                          /><label
+                            class="custom-control-label"
+                            for="checkallcharge"
+                          >Mark/Unmark All</label>
+                        </div>
+                      </th>
+                      <th>Categories</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(lcharge, index) in displayedCharges">
+                      <td>
+                        <div class="custom-control custom-checkbox">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input checkCharge"
+                            name="example2"
+                            :id="'cb_charge_'+index"
+                            v-model="lcharge.checked"
+                          /><label
+                            class="custom-control-label"
+                            :for="'cb_charge_'+index"
+                          ></label>
+                        </div>
+                      </td>
+                      <td>{{lcharge.name}}</td>
+                      <td>{{lcharge.description}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingDiscounts">
+                <h5 class="mb-0">
+                  <a class="btn btn-link text-success" type="button">
+                    <i class="fa fa-minus"></i> Discounts
+                  </a>
+                </h5>
+              </div>
+              <div class="card-body">
+                <table
+                  class="table table-borderless table-striped"
+                  id="categories_discount"
+                >
+                  <thead>
+                    <tr class="table-success">
+                      <th>
+                        <div class="custom-control custom-checkbox">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="checkalldiscount"
+                            v-on:click="markAllDiscounts"
+                            v-model="markAllDiscountsStat"
+                          /><label
+                            class="custom-control-label"
+                            for="checkalldiscount"
+                          >Mark/Unmark All</label>
+                        </div>
+                      </th>
+                      <th>Categories</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(ldiscount, index) in displayedDiscounts">
+                      <td>
+                        <div class="custom-control custom-checkbox">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            name="example2"
+                            :id="'cb_discount_'+index"
+                            v-model="ldiscount.checked"
+                          /><label
+                            class="custom-control-label"
+                            :for="'cb_discount_'+index"
+                          ></label>
+                        </div>
+                      </td>
+                      <td>{{ldiscount.name}}</td>
+                      <td>{{ldiscount.description}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="config_items" class="container-fluid tab-pane fade">
+          <div class="main_container">
+            <br />
+            <table class="table table-borderless table-striped">
+              <thead>
+                <tr class="table-success">
+                  <th>
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="checkallitem"
+                        v-on:click="markAllItems"
+                        v-model="markAllItemsStat"
+                      /><label
+                        class="custom-control-label"
+                        for="checkallitem"
+                      >Mark/Unmark All</label>
+                    </div>
+                  </th>
+                  <th>Items</th>
+                  <th>Description</th>
+                  <th>Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(litem, index) in displayedItems">
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        :id="'cb_item_'+index"
+                        v-model="litem.checked"
+                      /><label
+                        class="custom-control-label"
+                        :for="'cb_item_'+index"
+                      ></label>
+                    </div>
+                  </td>
+                  <td><a :href="litem.link" target="_blank" class="record_link">{{litem.item}}</a></td>
+                  <td>{{litem.description}}</td>
+                  <td>{{litem.price}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="config_debtors" class="container-fluid tab-pane fade">
+          <div class="main_container">
+            <br />
+            <div class="row form-group">
+              <div class="col">
+                <label class="bold">Family Code:</label>
+                <select
+                  class="selectpicker form-control input-xs big-form-control"
+                  id="filter_debtor_family_code"
+                  v-on:change= "filterDebtors"
+                >
+                  <option value="select_all">Select All</option>
+                  <option v-for="fcode in familyCodes" :value="fcode">
+                    {{fcode}}
+                  </option>
+                </select>
+              </div>
+              <div class="col">
+                <label class="bold">Family Status:</label>
+                <select
+                  class="selectpicker form-control input-xs big-form-control"
+                  v-model="filterFamilyStatus"
+                  v-on:change= "filterDebtors"
+                >
+                  <option value="">All</option>
+                  <option v-for="fstatus in familyStatus" :value="fstatus.id">
+                    {{fstatus.text}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <table class="table table-borderless table-striped">
+              <thead>
+                <tr class="table-success">
+                  <th>
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="checkalldebtor"
+                        v-on:click="markAllDebtors"
+                        v-model="markAllDebtorsStat"
+                      /><label
+                        class="custom-control-label"
+                        for="checkalldebtor"
+                      >Mark/Unmark All</label>
+                    </div>
+                  </th>
+                  <th>Name</th>
+                  <th>Family Code</th>
+                  <th>Date Created</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(debtor, index) in displayedDebtors">
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        name="example1"
+                        :id="'cb_debtor_'+index"
+                        v-model="debtor.checked"
+                        v-on:change="changeDebtor"
+                      /><label
+                        class="custom-control-label"
+                        :for="'cb_debtor_'+index"
+                      ></label>
+                    </div>
+                  </td>
+                  <td><a :href="debtor.link" target="_blank" class="record_link">{{debtor.name}}</a></td>
+                  <td>{{debtor.familycode}}</td>
+                  <td>{{debtor.dateCreated}}</td>
+                  <td>{{debtor.familyStatusText}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="config_student" class="container-fluid tab-pane fade">
+          <div class="main_container">
+            <br />
+            <div class="form-group student-group">
+              <div class="student-year col-md-3">
+                <label class="bold">Student Year:</label>
+                <select
+                  class="selectpicker form-control input-xs big-form-control"
+                  v-model="filterStudentYear"
+                  v-on:change= "filterStudents"
+                >
+                  <option value="">All</option>
+                  <option v-for="syear in studentYears" :value="syear">
+                    {{syear}}
+                  </option>
+                </select>
+              </div>
+              <div class="student-family-code col-md-3">
+                <label class="bold">Family Code:</label>
+                <select id="filter_student_family_code" class="selectpicker form-control input-xs big-form-control"
+                v-on:change= "filterStudents">
+                  <option value="select_all">Select All</option>
+                  <option v-for="fcode in familyCodes" :value="fcode">
+                    {{fcode}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <table class="table table-borderless table-striped">
+              <thead>
+                <tr class="table-success">
+                  <th>
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="checkallstudent"
+                        v-on:click="markAllStudents"
+                        v-model="markAllStudentsStat"
+                      /><label
+                        class="custom-control-label"
+                        for="checkallstudent"
+                      >Mark/Unmark All</label>
+                    </div>
+                  </th>
+                  <th>Name</th>
+                  <th>Family</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Date Created</th>
+                  <th>Status</th>
+                  <th>Year</th>
+                  <th>Family Code</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(student, index) in displayedStudents">
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="customCheck11"
+                        name="example11"
+                        :id="'cb_student_'+index"
+                        v-model="student.checked"
+                        v-on:change="changeStudent"
+                      /><label
+                        class="custom-control-label"
+                        :for="'cb_student_'+index"
+                      ></label>
+                    </div>
+                  </td>
+                  <td><a :href="student.link" target="_blank" class="record_link">{{student.firstname}} {{student.lastname}}</a></td>
+                  <td>{{student.company}}</td>
+                  <td>{{student.firstname}}</td>
+                  <td>{{student.lastname}}</td>
+                  <td>{{student.dateCreated}}</td>
+                  <td>{{student.status}}</td>
+                  <td>{{student.year}}</td>
+                  <td>{{student.familycode}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <button id="config_submit" v-on:click="savedata()" class="d-none">Submit</button>
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="balanceModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Add New Balance
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <select class="form-control big-form-control" id="payment-type">
+                  <option value="0">Charge</option>
+                  <option value="1">Discounts</option></select
+                ><br />
+                <input
+                  type="text"
+                  id="cat_text"
+                  class="form-control big-form-control"
+                  placeholder="Categories"
+                /><br />
+                <textarea
+                  rows="4"
+                  cols="50"
+                  id="desc_text"
+                  class="form-control big-form-control"
+                  placeholder="Descriptions"
+                ></textarea
+                ><br />
+                <div class="message-box"></div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn close-btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn save-btn btn-primary"
+                  v-on:click="addCategory"
+                >
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        let d = inputFormat
+        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/')
+      }
+
+      let app = new Vue({
+        el: '#configForm1',
+        data: {
+          items: ${formData.items},
+          students: ${formData.students},
+          studentYears: ${formData.studentYears},
+          studentStatuses: ${formData.studentStatuses},
+          debtors: ${formData.debtors},
+          charges: ${formData.categories.charges},
+          discounts: ${formData.categories.discounts},
+          familyCodes: ${formData.familyCodes},
+          familyStatus: ${formData.familyStatus},
+          displayedDebtors: [],
+          displayedStudents: [],
+          displayedItems: [],
+          tempItems: ${formData.tempData.items},
+          tempStudents: ${formData.tempData.students},
+          tempDebtors: ${formData.tempData.debtors},
+          tempCharges: ${formData.tempData.charges},
+          tempDiscounts: ${formData.tempData.discounts},
+          displayedDiscounts: [],
+          displayedCharges: [],
+          markAllChargesStat: true,
+          markAllDiscountsStat: true,
+          markAllStudentsStat: true,
+          markAllDebtorsStat: true,
+          markAllItemsStat: true,
+          filterFamilyStatus: '',
+          filterStudentYear: '',
+          filterStudentStatus: ''
+        },
+        created() {
+        },
+        mounted(){
+          let vueobj = this;
+
+          $('#filter_debtor_family_code').select2({
+            width: '100%',
+            selectionCssClass: 'selectpicker form-control input-xs multi-select-big-form-control'
+          });
+
+          $('#filter_debtor_family_code').on('select2:select', function (e) {
+            let filterFamilyCode = e.params.data.id;
+            vueobj.displayedDebtors = vueobj.debtors.filter((debtor) => {
+              let isCodeFilter = false, isStatusFilter = false;
+              if(filterFamilyCode != "select_all"){
+                if(debtor.familycode == filterFamilyCode) {
+                  isCodeFilter = true;
+                } else{
+                  isCodeFilter = false;
+                }
+              } else {
+                isCodeFilter = true;
+              }
+
+              if(vueobj.filterFamilyStatus){
+                if(debtor.familyStatus == vueobj.filterFamilyStatus) {
+                  isStatusFilter = true;
+                } else{
+                  isStatusFilter = false;
+                }
+              } else {
+                isStatusFilter = true;
+              }
+              return isCodeFilter && isStatusFilter;
+            });
+          });
+
+          $('#filter_student_family_code').select2({
+            width: '100%',
+            selectionCssClass: 'selectpicker form-control input-xs multi-select-big-form-control'
+          });
+          
+          $('#filter_student_family_code').on('select2:select', function (e) {
+              let filterStudentFamily = e.params.data.id;
+              console.log('student family', filterStudentFamily);
+              vueobj.displayedStudents = vueobj.students.filter((student) => {
+                let isYearFilter = false, isFamilyFilter = false;
+                if(vueobj.filterStudentYear){
+                  if(student.year == vueobj.filterStudentYear) {
+                    isYearFilter = true;
+                  } else{
+                    isYearFilter = false;
+                  }
+                } else {
+                  isYearFilter = true;
+                }
+
+                if(filterStudentFamily != "select_all"){
+                  if(student.familycode == filterStudentFamily) {
+                    isFamilyFilter = true;
+                  } else{
+                    isFamilyFilter = false;
+                  }
+                } else {
+                  isFamilyFilter = true;
+                }
+                return isYearFilter && isFamilyFilter;
+              });
+
+              let selectedStudentCnt = 0;
+
+              for (let i = 0; i < vueobj.displayedStudents.length; i++) {
+                if(vueobj.displayedStudents[i].checked) selectedStudentCnt++;
+              }
+
+              if(selectedStudentCnt == 0) {
+                vueobj.displayedDebtors = vueobj.debtors;
+              } else{
+                vueobj.displayedDebtors = [];
+
+                for(let i = 0; i < vueobj.displayedStudents.length; i++){
+                  let newDebtors = [];
+                  newDebtors = vueobj.debtors.filter(debtor => debtor.id == this.displayedStudents[i].companyId);
+                  vueobj.displayedDebtors = vueobj.displayedDebtors.concat(newDebtors);
+                }
+              }
+          });
+
+          this.displayedStudents = this.tempStudents && this.tempStudents.length ? this.students.map(function(element){
+            let retObj = {
+              ...element
+            };
+            if(vueobj.tempStudents.indexOf(element.id) > -1){
+              retObj.checked = true;
+            }
+            return retObj;
+          }) : [];
+          this.displayedDebtors = this.tempDebtors && this.tempDebtors.length ? this.debtors.map(function(element){
+            let retObj = {
+              ...element
+            };
+            if(vueobj.tempDebtors.indexOf(element.id) > -1){
+              retObj.checked = true;
+            }
+            return retObj;
+          }) : [];
+          this.displayedCharges = this.tempCharges && this.tempCharges.length ? this.charges.map(function(element){
+            let retObj = {
+              ...element
+            };
+            if(vueobj.tempCharges.indexOf(element.id) > -1){
+              retObj.checked = true;
+            }
+            return retObj;
+          }): [];
+          this.displayedDiscounts = this.tempDiscounts && this.tempDiscounts.length ? this.discounts.map(function(element){
+            let retObj = {
+              ...element
+            };
+            if(vueobj.tempDiscounts.indexOf(element.id) > -1){
+              retObj.checked = true;
+            }
+            return retObj;
+          }) : [];
+          this.displayedItems = this.tempItems && this.tempItems.length ? this.items.map(function(element){
+            let retObj = {
+              ...element
+            };
+            if(vueobj.tempItems.indexOf(element.id) > -1){
+              retObj.checked = true;
+            }
+            return retObj;
+          }) : [];
+
+          if(this.displayedCharges.length === 0){
+            this.displayedCharges = this.charges;
+            for(let i = 0; i < this.displayedCharges.length; i++){
+              this.displayedCharges[i].checked = true;
+            }
+          }
+
+          if(this.displayedDiscounts.length === 0){
+            this.displayedDiscounts = this.discounts;
+            for(let i = 0; i < this.displayedDiscounts.length; i++){
+              this.displayedDiscounts[i].checked = true;
+            }
+          }
+
+          if(this.displayedItems.length === 0){
+            this.displayedItems = this.items;
+            for(let i = 0; i < this.displayedItems.length; i++){
+              this.displayedItems[i].checked = true;
+            }
+          }
+
+          if(this.displayedDebtors.length === 0){
+            this.displayedDebtors = this.debtors;
+            for(let i = 0; i < this.displayedDebtors.length; i++){
+              this.displayedDebtors[i].checked = true;
+            }
+          }
+
+          if(this.displayedStudents.length === 0){
+            this.displayedStudents = this.students;
+            for(let i = 0; i < this.displayedStudents.length; i++){
+              this.displayedStudents[i].checked = true;
+            }
+          }
+        },
+        computed: {
+          isCheckedCharge: function(){
+            console.log(e);
+            const index = this.displayCharges.findIndex((element) => element.id == chargeid);
+            if(index > -1) return true;
+            return false;
+          }
+        },
+        methods:{
+          addCategory: function(){
+            console.log("add category");
+            if( $("#cat_text").val()==""){
+              $('#cat_text').focus();
+              $('.message-box').show();
+              $('.message-box').text('Please Input Categories.');
+              setTimeout(function() {
+                $('.message-box').hide('slow');
+                $('.message-box').text('');
+              }, 1000);
+              return;
+            }
+            if( $("#desc_text").val()==""){
+              $('.message-box').show();
+              $('#desc_text').focus();
+              $('.message-box').text('Please Input Descriptions.');
+              setTimeout(function() {
+                $('.message-box').hide('slow');
+                $('.message-box').text('');
+              }, 1000);
+              return;
+            }
+            let cat_text = $("#cat_text").val();
+            let desc_text = $("#desc_text").val();
+            if ($('#payment-type').val()=='0'){
+              this.displayedCharges.push({
+                id: '',
+                name: cat_text,
+                description: desc_text,
+                checked: true
+              });
+              $("#cat_text").val('');
+              $("#desc_text").val('');
+              $('#balanceModal').modal('hide');
+
+            }
+            if ($('#payment-type').val()=='1'){
+              this.displayedDiscounts.push({
+                id: '',
+                name: cat_text,
+                description: desc_text,
+                checked: true
+              });
+              $("#cat_text").val('');
+              $("#desc_text").val('');
+              $('#balanceModal').modal('hide');
+            }
+          },
+          filterDebtors: function(){
+            let filterFamilyCode = $("#filter_debtor_family_code").val();
+            this.displayedDebtors = this.debtors.filter((debtor) => {
+              let isCodeFilter = false, isStatusFilter = false;
+              if(filterFamilyCode != "select_all"){
+                if(debtor.familycode == filterFamilyCode) {
+                  isCodeFilter = true;
+                } else{
+                  isCodeFilter = false;
+                }
+              } else {
+                isCodeFilter = true;
+              }
+
+              if(this.filterFamilyStatus){
+                if(debtor.familyStatus == this.filterFamilyStatus) {
+                  isStatusFilter = true;
+                } else{
+                  isStatusFilter = false;
+                }
+              } else {
+                isStatusFilter = true;
+              }
+              return isCodeFilter && isStatusFilter;
+            });
+          },
+          filterStudents: function(){
+            let filterStudentFamily = $("#filter_student_family_code").val();
+            this.displayedStudents = this.students.filter((student) => {
+              let isYearFilter = false, isFamilyFilter = false;
+              if(this.filterStudentYear){
+                if(student.year == this.filterStudentYear) {
+                  isYearFilter = true;
+                } else{
+                  isYearFilter = false;
+                }
+              } else {
+                isYearFilter = true;
+              }
+
+              if(filterStudentFamily != "select_all"){
+                if(student.familycode == filterStudentFamily) {
+                  isFamilyFilter = true;
+                } else{
+                  isFamilyFilter = false;
+                }
+              } else {
+                isFamilyFilter = true;
+              }
+              return isYearFilter && isFamilyFilter;
+            });
+
+            let selectedStudentCnt = 0;
+
+            for (let i = 0; i < this.displayedStudents.length; i++) {
+              if(this.displayedStudents[i].checked) selectedStudentCnt++;
+            }
+
+            if(selectedStudentCnt == 0) {
+              this.displayedDebtors = this.debtors;
+            } else{
+              this.displayedDebtors = [];
+
+              for(let i = 0; i < this.displayedStudents.length; i++){
+                let newDebtors = [];
+                newDebtors = this.debtors.filter(debtor => debtor.id == this.displayedStudents[i].companyId);
+                this.displayedDebtors = this.displayedDebtors.concat(newDebtors);
+              }
+            }
+          },
+          markAllCharges: function () {
+            this.markAllChargesStat = !this.markAllChargesStat;
+            for (let i = 0; i < this.displayedCharges.length; i++) {
+              this.displayedCharges[i].checked = this.markAllChargesStat;
+            }
+          },
+          markAllDiscounts: function () {
+            this.markAllDiscountsStat = !this.markAllDiscountsStat;
+            for (let i = 0; i < this.displayedDiscounts.length; i++) {
+              this.displayedDiscounts[i].checked = this.markAllDiscountsStat;
+            }
+          },
+          markAllItems: function () {
+            this.markAllItemsStat = !this.markAllItemsStat;
+            for (let i = 0; i < this.displayedItems.length; i++) {
+              this.displayedItems[i].checked = this.markAllItemsStat;
+            }
+          },
+          markAllStudents: function () {
+            this.markAllStudentsStat = !this.markAllStudentsStat;
+            for (let i = 0; i < this.displayedStudents.length; i++) {
+              this.displayedStudents[i].checked = this.markAllStudentsStat;
+            }
+          },
+          markAllDebtors: function () {
+            let selectedDebtorCnt = 0;
+
+            this.markAllDebtorsStat = !this.markAllDebtorsStat;
+            for (let i = 0; i < this.displayedDebtors.length; i++) {
+              this.displayedDebtors[i].checked = this.markAllDebtorsStat;
+              if(this.displayedDebtors[i].checked) selectedDebtorCnt++;
+            }
+
+            if(selectedDebtorCnt == 0) {
+              this.displayedStudents = this.students;
+            } else{
+              this.displayedStudents = [];
+
+              for(let i = 0; i < this.displayedDebtors.length; i++){
+                let newStudents = [];
+                newStudents = this.students.filter(student => student.companyId == this.displayedDebtors[i].id);
+                this.displayedStudents = this.displayedStudents.concat(newStudents);
+              }
+            }
+          },
+          changeDebtor: function(e){
+            let selectedDebtorCnt = 0;
+
+            for (let i = 0; i < this.displayedDebtors.length; i++) {
+              if(this.displayedDebtors[i].checked) selectedDebtorCnt++;
+            }
+
+            if(selectedDebtorCnt == 0) {
+              this.displayedStudents = this.students;
+            } else{
+              this.displayedStudents = [];
+
+              for(let i = 0; i < this.displayedDebtors.length; i++){
+                let newStudents = [];
+                newStudents = this.students.filter(student => student.companyId == this.displayedDebtors[i].id);
+                this.displayedStudents = this.displayedStudents.concat(newStudents);
+              }
+            }
+          },
+          changeStudent: function(e){
+            let selectedStudentCnt = 0;
+
+            for (let i = 0; i < this.displayedStudents.length; i++) {
+              if(this.displayedStudents[i].checked) selectedStudentCnt++;
+            }
+
+            if(selectedStudentCnt == 0) {
+              this.displayedDebtors = this.debtors;
+            } else{
+              this.displayedDebtors = [];
+
+              for(let i = 0; i < this.displayedStudents.length; i++){
+                let newDebtors = [];
+                newDebtors = this.debtors.filter(debtor => debtor.id == this.displayedStudents[i].companyId);
+                this.displayedDebtors = this.displayedDebtors.concat(newDebtors);
+              }
+            }
+          },
+          savedata: function(){
+            console.log("savedata");
+            let checkedStudents = [], checkedDebtors = [], checkedItems = [], checkedCharges = [], checkedDiscounts = [];
+            for(let i = 0; i < this.displayedStudents.length; i++){
+              if(this.displayedStudents[i].checked) checkedStudents.push(this.displayedStudents[i].id);
+            }
+            for(let i = 0; i < this.displayedDebtors.length; i++){
+              if(this.displayedDebtors[i].checked) checkedDebtors.push(this.displayedDebtors[i].id);
+            }
+            for(let i = 0; i < this.displayedItems.length; i++){
+              if(this.displayedItems[i].checked) checkedItems.push(this.displayedItems[i].id);
+            }
+            for(let i = 0; i < this.displayedCharges.length; i++){
+              if(this.displayedCharges[i].checked) checkedCharges.push(this.displayedCharges[i].id);
+            }
+            for(let i = 0; i < this.displayedDiscounts.length; i++){
+              if(this.displayedDiscounts[i].checked) checkedDiscounts.push(this.displayedDiscounts[i].id);
+            }
+            let selData = {
+              items: checkedItems,
+              students: checkedStudents,
+              debtors: checkedDebtors,
+              charges: this.displayedCharges,
+              discounts: this.displayedDiscounts
+            }
+            console.log(selData);
+            let formData = new FormData();
+            formData.append('action', "save");
+            formData.append('selecteddata', JSON.stringify(selData));
+
+            $.ajax({
+              url : window.location,
+              type : 'POST',
+              data : formData,
+              cache : false,
+              contentType : false,
+              processData : false,
+              success : function(data)
+              {
+              }
+            });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
