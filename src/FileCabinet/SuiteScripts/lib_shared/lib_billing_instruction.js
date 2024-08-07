@@ -5,17 +5,9 @@
  */
 define([
   "N/search",
-  "N/record",
-  "./lib_const.js",
   "./lib_billing_engine.js",
   "./lib_billing_preference.js",
-], function (
-  search,
-  record,
-  lib_const,
-  lib_billing_engine,
-  lib_billing_preference
-) {
+], function (search, lib_billing_engine, lib_billing_preference) {
   const REC_BILLING_INSTRUCTION = {
     ID: "customrecord_fd_billing_inst",
     BILLING_TYPE: "custrecord_fd_binsttype",
@@ -58,17 +50,17 @@ define([
       filters.push([REC_BILLING_INSTRUCTION.ITEM, "anyof", filterItems]);
     }
 
-    var searchObj = SEARCHMDL.create({
+    var searchObj = search.create({
       type: REC_BILLING_INSTRUCTION.ID,
       filters: filters,
       columns: [
-        SEARCHMDL.createColumn({
+        search.createColumn({
           name: lib_billing_engine.REC_BILLING_ENGINE_TYPE.CATEGORY,
           join: REC_BILLING_INSTRUCTION.BILLING_TYPE,
         }),
-        SEARCHMDL.createColumn({
+        search.createColumn({
           name: "name",
-          sort: SEARCHMDL.Sort.ASC,
+          sort: search.Sort.ASC,
         }),
         REC_BILLING_INSTRUCTION.BILLING_TYPE,
         REC_BILLING_INSTRUCTION.ITEM,

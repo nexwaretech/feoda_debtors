@@ -5,9 +5,11 @@
     <files>
         <path>~/FileCabinet/SuiteScripts/*</path>
     </files>
+    <!--
     <objects>
-        <path>~/Objects/*</path>
+        <path>~/Objects/custitem_fd_is_stu_fee.xml</path>
    </objects>
+   -->
   <translationimports>
       <path>~/Translations/*</path>
   </translationimports>

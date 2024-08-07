@@ -9,7 +9,8 @@ define([
   "N/render",
   "N/file",
   "../lib_shared/lib_billing_preference.js",
-], function (render, file, lib_billing_preference) {
+  "../lib_shared/lib_files.js",
+], function (render, file, lib_billing_preference, lib_files) {
   /**
    * @param {SuiteletContext.onRequest} context
    */
@@ -27,14 +28,8 @@ define([
   function renderDashboard(context) {
     const renderer = render.create();
     renderer.templateContent = file
-      .load({ id: "./billing_config.html" })
+      .load({ id: "./files_billing/billing_config.html" })
       .getContents();
-
-    let bpId = lib_billing_preference.getBillingPreference();
-
-    if (bpId === -1) {
-      lib_billing_preference.createBillingReference();
-    }
 
     renderer.addCustomDataSource({
       alias: "formData",
@@ -42,6 +37,20 @@ define([
       data: JSON.stringify({
         accepted: false,
       }),
+    });
+
+    let objImages = lib_files.searchFileUrlinFolder("images_shared");
+    renderer.addCustomDataSource({
+      alias: "IMAGES",
+      format: render.DataSource.JSON,
+      data: JSON.stringify(objImages),
+    });
+
+    let objCSS = lib_files.searchFileUrlinFolder("files_billing");
+    renderer.addCustomDataSource({
+      alias: "FILES",
+      format: render.DataSource.JSON,
+      data: JSON.stringify(objCSS),
     });
 
     return context.response.write({

@@ -21,7 +21,7 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="./billing_config.css">
+    <link rel="stylesheet" href="${FILES.billingconfigcss}" />
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
@@ -29,23 +29,14 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <title>Billing Configuration</title>
-    <style>
-      .wrapper {
-          display: flex;
-          width: 100%;
-      }
-      #steppage_container{
-        width: 100%;
-        height: calc(100vh - 100px);
-      }
-    </style>
+
   </head>
   <body>
     <div class="wrapper" id="wrapper">
       <!-- Sidebar  -->
       <nav id="sidebar">
           <div class="sidebar-header">
-            <img src="../images_shared/logo.png" alt="header-logo" width="100%">
+            <img src="${IMAGES['logocompanypng']}" alt="header-logo" width="100%">
           </div>
 
           <ul class="list-group">
@@ -121,12 +112,12 @@
         created: function () {
           this.step = 1;
           this.stepLinks = [
-            '/app/site/hosting/scriptlet.nl?script=customscript_fd_sl_billing_config1&deploy=1',
-            '/app/site/hosting/scriptlet.nl?script=1555&deploy=1',
-            '/app/site/hosting/scriptlet.nl?script=1563&deploy=1',
-            '/app/site/hosting/scriptlet.nl?script=1558&deploy=1',
-            '/app/site/hosting/scriptlet.nl?script=1562&deploy=1',
-            '/app/site/hosting/scriptlet.nl?script=1561&deploy=1'
+            '/app/site/hosting/scriptlet.nl?script=customscript_fd_sl_bill_config1&deploy=1',
+            '/app/site/hosting/scriptlet.nl?script=customscript_fd_sl_bill_config2&deploy=1',
+            '/app/site/hosting/scriptlet.nl?script=customscript_fd_sl_bill_config3&deploy=1',
+            '/app/site/hosting/scriptlet.nl?script=customscript_fd_sl_bill_config4&deploy=1',
+            '/app/site/hosting/scriptlet.nl?script=customscript_fd_sl_bill_config5&deploy=1',
+            '/app/site/hosting/scriptlet.nl?script=customscript_fd_sl_bill_config6&deploy=1'
           ];
         },
         computed: {

@@ -3,9 +3,10 @@
  * @NModuleScope SameAccount
  * Author: Feoda
  */
-define(["N/search", "N/record", "./lib_utils.js"], function (
+define(["N/search", "N/record", "N/url", "./lib_utils.js"], function (
   search,
   record,
+  url,
   lib_utils
 ) {
   const REC_ITEM = {

@@ -582,3 +582,21 @@ hr {
 #config_selection ul{
     list-style-type: none;
 }
+
+.record_link {
+    color: #53a451;
+}
+
+.record_link:hover {
+    text-decoration: underline;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#steppage_container {
+    width: 100%;
+    height: calc(100vh - 100px);
+}

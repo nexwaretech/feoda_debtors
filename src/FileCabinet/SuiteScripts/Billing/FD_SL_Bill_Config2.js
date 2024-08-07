@@ -10,16 +10,22 @@ define([
   "N/render",
   "N/file",
   "N/record",
+  "N/url",
   "../lib_shared/lib_billing_preference.js",
   "../lib_shared/lib_utils.js",
   "../lib_shared/lib_billing_instruction.js",
+  "../lib_shared/lib_files.js",
+  "../lib_shared/lib_customer.js",
 ], function (
   render,
   file,
   record,
+  url,
   lib_billing_preference,
   lib_utils,
-  lib_billing_instruction
+  lib_billing_instruction,
+  lib_files,
+  lib_customer
 ) {
   /**
    * @param {SuiteletContext.onRequest} context
@@ -107,7 +113,9 @@ define([
 
   function renderForm(bpRec, sHome) {
     let renderer = render.create();
-    let template = file.load("./billing_config2.html").getContents();
+    let template = file
+      .load("./files_billing/billing_config2.html")
+      .getContents();
     renderer.templateContent = template;
 
     let instructionObj =
@@ -115,7 +123,7 @@ define([
     let arrInstructions = instructionObj.arrInstructions;
     let arrCategories = instructionObj.arrCategories;
 
-    const debtorData = lib.getDebtorCustomers();
+    const debtorData = lib_customer.getDebtorCustomers();
 
     if (arrInstructions) {
       for (let j = 1; j < arrInstructions.length; j++) {
@@ -147,7 +155,7 @@ define([
         lib_billing_preference.REC_BILLING_PREFERENCE.FAMILY_CODE
       ),
       isDebtor: bpRec.getValue(
-        lib_billing_preference.REC_BILLING_PREFERENCE.FAMILY_CODE
+        lib_billing_preference.REC_BILLING_PREFERENCE.IS_DEBTOR
       ),
       currentYear: bpRec.getValue(
         lib_billing_preference.REC_BILLING_PREFERENCE.STUDENT_CURYEAR
@@ -157,12 +165,19 @@ define([
       ),
     };
 
-    let currentYears = lib_utils.getList(lib.LIST_ID.YEAR_LVL_CODE);
-    let stuStatus = lib_utils.getList(lib.LIST_ID.STUDENT_STATUS);
+    let currentYears = lib_utils.getList(lib_utils.LIST_ID.YEAR_LVL_CODE);
+    let stuStatus = lib_utils.getList(lib_utils.LIST_ID.STUDENT_STATUS);
+
+    let objCSS = lib_files.searchFileUrlinFolder("files_billing");
+    renderer.addCustomDataSource({
+      alias: "FILES",
+      format: render.DataSource.JSON,
+      data: JSON.stringify(objCSS),
+    });
 
     renderer.addCustomDataSource({
       alias: "formdata",
-      format: RENDERMDL.DataSource.JSON,
+      format: render.DataSource.JSON,
       data: JSON.stringify({
         instructions: JSON.stringify(arrInstructions),
         categories: JSON.stringify(arrCategories),

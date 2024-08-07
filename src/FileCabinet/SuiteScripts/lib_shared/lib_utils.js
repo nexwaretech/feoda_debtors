@@ -10,6 +10,7 @@ define(["N/search"], function (search) {
   };
 
   return {
+    LIST_ID,
     getAllResults: function (searchObj) {
       try {
         var results1 = [];

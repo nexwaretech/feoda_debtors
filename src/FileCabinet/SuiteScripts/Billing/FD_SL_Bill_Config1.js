@@ -15,6 +15,7 @@ define([
   "../lib_shared/lib_item.js",
   "../lib_shared/lib_const.js",
   "../lib_shared/lib_customer.js",
+  "../lib_shared/lib_files.js",
 ], function (
   render,
   file,
@@ -24,13 +25,19 @@ define([
   lib_contact,
   lib_item,
   lib_const,
-  lib_customer
+  lib_customer,
+  lib_files
 ) {
   /**
    * @param {SuiteletContext.onRequest} context
    */
   function onRequest(context) {
-    const bpId = lib_billing_preference.getBillingPreference();
+    let bpId = lib_billing_preference.getBillingPreference();
+    log.debug("bpId", bpId);
+
+    if (!bpId) {
+      bpId = lib_billing_preference.createBillingReference();
+    }
 
     let bpRec = record.load({
       type: lib_billing_preference.REC_BILLING_PREFERENCE.ID,
@@ -92,6 +99,14 @@ define([
           format: render.DataSource.JSON,
           data: JSON.stringify(formData),
         });
+
+        let objCSS = lib_files.searchFileUrlinFolder("files_billing");
+        renderer.addCustomDataSource({
+          alias: "FILES",
+          format: render.DataSource.JSON,
+          data: JSON.stringify(objCSS),
+        });
+
         return context.response.write({
           output: renderer.renderAsString(),
         });

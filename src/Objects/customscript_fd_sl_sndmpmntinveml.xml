@@ -1,7 +1,7 @@
 <suitelet scriptid="customscript_fd_sl_sndmpmntinveml">
   <description></description>
   <isinactive>F</isinactive>
-  <name>FD SL | SendMonthlyPaymentInvEML</name>
+  <name>FD | SL SendMonthlyPaymentInvEML</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>
