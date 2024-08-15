@@ -25,6 +25,8 @@ define(["N/search", "N/record"], function (search, record) {
     USE_EXISTING: "custrecord_fd_bpref_use_existing",
     IS_VOLUNTARY: "custrecord_fd_bpref_is_voluntary",
     VOLUN_AMT: "custrecord_fd_bpref_volun_amt",
+    MIDYEAR_START: "custrecord_fd_bpref_midyear_start",
+    MIDYEAR_END: "custrecord_fd_bpref_midyear_end",
     MIDYEAR_FREQ: "custrecord_fd_bpref_midyear_freq",
     DIV_VAL: "custrecord_fd_bpref_divisible_val",
     MIDYEAR_CHARGES: "custrecord_fd_bpref_midyear_charges",
@@ -44,6 +46,7 @@ define(["N/search", "N/record"], function (search, record) {
     DISC_ITEM: "custrecord_fd_bpref_disc_item",
     APPLIES_TO: "custrecord_fd_bpref_applies_to",
     TERMS_DATE: "custrecord_fd_bpref_terms_date",
+    
   };
 
   function getBillingPreference() {
