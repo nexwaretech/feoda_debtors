@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://4553194.app.netsuite.com/core/media/media.nl?id=671858&c=4553194&h=cICSLFK01RGcN_yAYTui_LmFvhYSZMT0m6MIm2HuJqJMleH8&_xt=.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+      integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+      crossorigin="anonymous"
+    />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+      integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+      crossorigin="anonymous"
+    ></script>
+    <title>Subscription Agreement</title>
+    </head>
+  <body>
+    <div class="container-fluid" id="rps">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist" style="width: 300px;">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#config_prorata">Prorata</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content main_container">
+        <div id="config_prorata" class="container-fluid tab-pane active"><br>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <label for="periodStart" class="big-bold">Start Date:</label>
+              <select class="form-control big-form-control" v-model="startPeriod" v-on:change="changeMonths(0)">
+                <option v-for="mon in startMonths" :value="mon.id">{{mon.name}}</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="periodEnd" class="big-bold">End Date:</label>
+              <select class="form-control big-form-control" v-model="endPeriod" v-on:change="changeMonths(1)">
+                <option v-for="mon in endMonths" :value="mon.id">{{mon.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-2" style="margin-top: 30px;">
+            <div class="col-sm-12">
+              <label class="big-bold">Frequency:</label>
+              <div class="vertical-center checkbox-buttons">
+                <template v-for="(psche, index) in displayedSchedule">
+                  <input type="checkbox" class="hidden" name="cb1" :id="'ATS'+index" :value="psche.id" v-model="selectedFreq"><label :for="'ATS'+index">{{psche.name}}</label>
+                </template>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2" style="margin-top: 30px;">
+            <div class="col-md-2 col-xs-4">
+              <input class="form-control form-control-sm" value="40"/>
+            </div>
+            <div class="col-md-2 col-xs-4">
+              <input class="form-control form-control-sm" value="24"/>
+            </div>
+            <div class="col-md-2 col-xs-4">
+              <input class="form-control form-control-sm" value="12"/>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <label class="big-bold">Divisible Value:</label>
+              <select class="form-control big-form-control" id="divisible_value" v-model="selectedDivValue">
+                <option disabled>Select Value</option>
+                <option v-for="divVal in displayedDivisible" :value="divVal">{{divVal}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="card" style="margin-top: 30px;">
+            <div class="card-header remove-padding-left-right" id="headingCharge">
+              <h5 class="mb-0">
+                <a class="btn btn-link text-success remove-padding-left-right bold">
+                  <i class="fa fa-plus"></i> Charges
+                </a>
+              </h5>
+            </div>
+            <div class="card-body remove-padding-left-right">
+              <table
+                  class="table table-borderless table-striped"
+                  id="categories_charge"
+                >
+                  <thead>
+                    <tr class="table-success">
+                      <th>
+                        <div class="custom-control custom-checkbox">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="checkallcharge"
+                            v-on:click="markAllCharges"
+                            v-model="markAllChargesStat"
+                          /><label
+                            class="custom-control-label"
+                            for="checkallcharge"
+                          >Mark/Unmark All</label>
+                        </div>
+                      </th>
+                      <th>Categories</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(lcharge, index) in displayedCharges">
+                      <td>
+                        <div class="custom-control custom-checkbox">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input checkCharge"
+                            name="example2"
+                            :id="'cb_charge_'+index"
+                            v-model="lcharge.checked"
+                          /><label
+                            class="custom-control-label"
+                            :for="'cb_charge_'+index"
+                          ></label>
+                        </div>
+                      </td>
+                      <td>{{lcharge.name}}</td>
+                      <td>{{lcharge.description}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+        <button id="config_submit" v-on:click="savedata()" >Submit</button>
+      </div>
+    </div>
+    <script>
+      app = new Vue({
+        el: '#rps',
+        data: {
+          pay_method: '1',
+          displayedSchedule: ${formdata.pymtSchedule},
+          selectedFreq: ${formdata.tempData.freq},
+          pymtSchedule: ${formdata.pymtSchedule},
+          charges: ${formdata.categories.charges},
+          displayedCharges: [],
+          displayedDivisible: ['9', '10', '11'],
+          divValue: '${formdata.tempData.divValue}',
+          selectedDivValue: '${formdata.tempData.divValue}',
+          startPeriod: '${formdata.tempData.startPeriod}',
+          endPeriod: '${formdata.tempData.endPeriod}',
+          startMonths: ${formdata.months},
+          endMonths: ${formdata.months},
+          months: ${formdata.months},
+          markAllChargesStat: true,
+          tempCharges: ${formdata.tempData.charges}
+        },
+        mounted(){
+          // this.startPeriod= this.tempData.midyear.startPeriod : '';
+          // this.endPeriod= this.tempData.midyear && this.tempData.midyear.endPeriod ? this.tempData.midyear.endPeriod : '';
+          // this.selectedFreq= this.tempData.midyear && this.tempData.midyear.freq ? this.tempData.midyear.freq : [];
+          // this.divValue= this.tempData.midyear && this.tempData.midyear.divValue ? this.tempData.midyear.divValue : '';
+          // console.log('div val', this.divValue);
+
+          var vueObj = this;
+          this.displayedCharges = this.charges.map(function(element){
+            var retObj = {
+              ...element
+            };
+            if(vueObj.tempCharges.indexOf(element.id) > -1){
+              retObj.checked = true;
+            }
+            return retObj;
+          });
+        },
+        methods:
+        {
+          changeMonths: function(state){
+            if(!state){
+              if(this.startPeriod) this.endMonths = this.months.filter(mon => mon.id >= Number(this.startPeriod));
+            } else{
+              if(this.endPeriod) this.startMonths = this.months.filter(mon => mon.id <= Number(this.endPeriod));
+            }
+          },
+          markAllCharges: function () {
+            this.markAllChargesStat = !this.markAllChargesStat;
+            for (let i = 0; i < this.displayedCharges.length; i++) {
+              this.displayedCharges[i].checked = this.markAllChargesStat;
+            }
+          },
+          savedata: function(){  
+            var selectedCharges = [];
+            for(var index = 0; index < this.displayedCharges.length; index++)
+            {
+              var cb = document.getElementById('cb_charge_'+index);
+
+              if(cb.checked){
+                selectedCharges.push(this.displayedCharges[index].id);
+              }
+            }
+            var selData = {
+              freq: this.selectedFreq,
+              startPeriod: this.startPeriod,
+              endPeriod: this.endPeriod,
+              charges: selectedCharges,
+              divValue: this.selectedDivValue
+            };
+            console.log('seldata', selData);
+  
+            var formData = new FormData();
+            formData.append('action', "save");
+            formData.append('selecteddata', JSON.stringify(selData));
+  
+            $.ajax({
+              url : window.location,
+              type : 'POST',
+              data : formData,
+              cache : false,
+              contentType : false,
+              processData : false,
+              success : function(data)
+              {
+              }
+            });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

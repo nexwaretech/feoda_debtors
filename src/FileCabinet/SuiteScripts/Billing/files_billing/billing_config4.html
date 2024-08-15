@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+      integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://4553194.app.netsuite.com/core/media/media.nl?id=671858&c=4553194&h=cICSLFK01RGcN_yAYTui_LmFvhYSZMT0m6MIm2HuJqJMleH8&_xt=.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://4553194.app.netsuite.com/core/media/media.nl?id=671859&c=4553194&h=HNEZkeWE9n8n6HZT2AzrrakKfUkLyRrq4ffEjLulHMgsbIE8&_xt=.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+      integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://4553194.app.netsuite.com/core/media/media.nl?id=671860&c=4553194&h=Tbh7zflNzUBOxWXQA0OmA_n2s8K3b8H35ZFEAjq_WVA8VbFJ&_xt=.js"></script>
+    <title>Subscription Agreement</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid main_container" id="rps">
+      <div class="row" style="margin-top: 30px;">
+        <div class="col-sm-8" >
+          <label for="periodStart" class="big-bold">Payment Method:</label>
+          <div class="vertical-center checkbox-buttons">
+            <template v-for="(pymt, index) in displayedPayments">
+              <input type="checkbox" class="hidden" name="pymt" :id="'pymt_'+index" :value="pymt.id" v-model="selectedPayments" v-on:change='changePaymentMethod'><label :for="'pymt_'+index">{{pymt.name}}</label>
+            </template>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 30px;">
+        <div v-if="pay_method == '1'" class="col-sm-4">
+          <label for="periodStart" class="big-bold">Card Options:</label>
+          <template v-for="(pmethod, index) in pymtMethods">
+            <div class="form-check" style="margin-top: 15px;">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" :id="'pmethod_'+index" name="pmethod" :value="pmethod.id" v-model="selectedCardOptions"><label class="custom-control-label" :for="'pmethod_'+index"><img
+                :src="pmethod.url"
+              /></label>
+              </div>
+            </div>
+          </template>
+          <div class="form-check" style="margin-top: 15px;">
+            <div class="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="existing_user"
+                v-model="useExisting"
+              /><label
+                class="custom-control-label"
+                for="existing_user"
+              >Use Existing</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 30px;">
+        <div class="col-md-12">
+          <label class="big-bold">Payment Schedule:</label>
+          <div class="vertical-center checkbox-buttons">
+            <template v-for="(psche, index) in displayedSchedule">
+              <input type="checkbox" class="hidden" name="cb1" :id="'ATS'+index" :value="psche.id" v-model="selectedSchedule" v-on:change='changePaymentSchedule'><label :for="'ATS'+index">{{psche.name}}</label>
+            </template>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 30px;">
+        <div class="col-md-2 col-xs-4">
+          <input class="form-control form-control-sm" value="40"/>
+        </div>
+        <div class="col-md-2 col-xs-4">
+          <input class="form-control form-control-sm" value="24"/>
+        </div>
+        <div class="col-md-2 col-xs-4">
+          <input class="form-control form-control-sm" value="12"/>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 30px;">
+        <div class="col-md-12">
+          <div class="vertical-center checkbox-buttons">
+            <input type="checkbox" class="hidden" name="cb1" id="ATS4" value="4" v-model="selectedSchedule" v-on:change='changePaymentSchedule'><label for="ATS4">Pay In Full</label>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 30px;" v-if="pay_in_full == '1'">
+        <div class="col-sm-4">
+          <label class="big-bold">Discount %:</label>
+          <input type="number" min="0" max="100" step="0.01" class="form-control big-form-control" v-model="discPerc" >
+        </div>
+        <div class="col-sm-4">
+          <label class="big-bold">Discount Item:</label>
+          <select class="form-control big-form-control" v-model="discItem">
+            <option>Select</option>
+            <option v-for="itemDisc in discItems" :value="itemDisc.id">{{itemDisc.name}}</option>
+          </select>
+        </div>
+        <div class="col-sm-4">
+          <label class="big-bold">Applies To:</label>
+          <select class="form-control big-form-control" v-model="appliesTo">
+            <option>Select</option>
+            <option v-for="charge in charges" :value="charge.id">{{charge.name}}</option>
+          </select>
+        </div>
+      </div>
+      <hr/>
+      <div class="row" style="margin-top: 30px;">
+        <div class="col-md-6">
+          <div class="custom-control custom-checkbox voluntary">
+            <input type="checkbox" class="custom-control-input" id="voluntary" v-model="isVoluntary" ><label for="voluntary"  class="custom-control-label big-bold">Voluntary Contribution</label>
+          </div> 
+        </div>  
+      </div>
+      <div class="row" v-if="isVoluntary">
+        <div class="col-md-5">
+          <div class="form-group custom-input-group form-inline" >
+            <label for="execute_date_addon">Amount:&nbsp;&nbsp;</label>
+            <input type="number" class="form-control big-form-control" v-model="volunAmt"/>
+          </div>
+        </div>
+      </div>
+      <button id="config_submit" v-on:click="savedata()" class="d-none">Submit</button>
+    </div>
+  <script>
+    app = new Vue({
+      el: '#rps',
+      data: {
+        pay_method: '',
+        pay_in_full: '',
+        displayedPayments: ${formdata.payments},
+        displayedCardOptions: ${formdata.pymtMethods},
+        displayedSchedule: ${formdata.pymtSchedule},
+        selectedPayments: ${formdata.tempData.selectedPayments},
+        selectedCardOptions: ${formdata.tempData.selectedCardOptions},
+        selectedSchedule: ${formdata.tempData.selectedSchedule},
+        useExisting: ${formdata.tempData.useExisting},
+        isVoluntary: ${formdata.tempData.isVoluntary},
+        volunAmt: '${formdata.tempData.volunAmt}',
+        discPerc: '${formdata.tempData.discPerc}',
+        discItem: '${formdata.tempData.discItem}',
+        appliesTo: '${formdata.tempData.appliesTo}',
+        pymtMethods: ${formdata.pymtMethods},
+        pymtSchedule: ${formdata.pymtSchedule},
+        payments: ${formdata.payments},
+        charges: ${formdata.categories.charges},
+        discItems: ${formdata.discItems}
+      },
+      created(){
+        // this.selectedPayments= this.paymentOptions?this.paymentOptions: [];
+        // this.selectedCardOptions= this.tempData.payments.cardOptions;
+        // this.selectedSchedule= this.tempData.payments.schedule;
+        // this.useExisting= this.tempData.payments.useExisting;
+        // this.isVoluntary= this.tempData.payments.isVoluntary;
+        // this.volunAmt= this.tempData.payments.volunAmt;
+        this.pay_method = this.selectedPayments.includes("1")? "1": "2";
+        this.pay_in_full = this.selectedSchedule.includes("4")? "1": "2";
+      },
+      methods:
+      {
+        changePaymentMethod: function(){
+          this.pay_method = this.selectedPayments.includes("1")? "1": "2";
+        },
+
+        changePaymentSchedule: function(){
+          this.pay_in_full = this.selectedSchedule.includes("4")? "1": "2";
+        },
+        
+        savedata: function(){
+
+          var selData = {
+            paymentOptions: this.selectedPayments,
+            cardOptions: this.selectedCardOptions,
+            schedule: this.selectedSchedule,
+            useExisting: this.useExisting,
+            isVoluntary: this.isVoluntary,
+            volunAmt: this.volunAmt,
+            discPerc: this.discPerc,
+            discItem: this.discItem,
+            appliesTo: this.appliesTo
+          };
+          console.log('seldata', selData);
+
+          var formData = new FormData();
+          formData.append('action', "save");
+          formData.append('selecteddata', JSON.stringify(selData));
+
+          $.ajax({
+            url : window.location,
+            type : 'POST',
+            data : formData,
+            cache : false,
+            contentType : false,
+            processData : false,
+            success : function(data)
+            {
+            }
+          });
+        }
+      }
+    });
+  </script>
+  </body>
+</html>

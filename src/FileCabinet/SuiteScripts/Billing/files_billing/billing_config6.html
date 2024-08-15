@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://4553194.app.netsuite.com/core/media/media.nl?id=671858&c=4553194&h=cICSLFK01RGcN_yAYTui_LmFvhYSZMT0m6MIm2HuJqJMleH8&_xt=.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+      integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+      crossorigin="anonymous"
+    />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+      integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+      crossorigin="anonymous"
+    ></script>
+    <title>Subscription Agreement</title>
+    </head>
+  <body>
+    <div class="container-fluid" id="rps">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist" style="width: 300px;">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#config_maintenance">Maintenance</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content main_container">
+        <div id="config_maintenance" class="container-fluid tab-pane active"><br>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <label for="periodStart" class="big-bold">Remove Billing Instructions Applied:</label>
+              <select class="form-control big-form-control" id="duration">
+                <option value="3">3 Months</option>
+                <option value="6">6 Months</option>
+                <option value="12">12 Months</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="periodStart" class="big-bold">Remove RPS Recurrence:</label>
+              <select class="form-control big-form-control" id="rpsduration">
+                <option value="3">3 Months</option>
+                <option value="6">6 Months</option>
+                <option value="12">12 Months</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button id="config_submit" onclick="savedata()" class="d-none">Submit</button>
+    </div>
+    <script>
+      function savedata(){
+        var formData = new FormData();
+
+        formData.append('duration', $("#duration").val());
+        formData.append('rpsduration', $("#rpsduration").val());
+
+        $.ajax({
+          url: window.location,
+          type: 'POST',
+          data: formData,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function (data) {
+            var response = JSON.parse(data);
+            console.log(response);
+            if (response.result == 'success') {
+              alert('Thank you. Your form was successfully submitted');
+              parent.window.close();
+            } else {
+              alert('Error while submitting your form. Please contact to support');
+            }
+          },
+          error: function(error) {
+            console.log(error);
+            alert('Error while submitting your form. Please contact to support');
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
