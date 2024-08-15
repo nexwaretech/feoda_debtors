@@ -60,7 +60,31 @@ define([
     return objEmailTemplate;
   }
 
+  function getEmailTemplates() {
+    const customrecord_fd_emailtplsSearchObj = search.create({
+        type: REC_EMAIL.id,
+        filters: [],
+        columns: [
+        search.createColumn({
+            name: "name",
+            sort: search.Sort.ASC,
+        }),
+        ],
+    });
+
+    let emailTemplates = [];
+    customrecord_fd_emailtplsSearchObj.run().each(function (result) {
+        emailTemplates.push({
+          id: result.id,
+          name: result.getValue("name"),
+        });
+        return true;
+    });
+    return emailTemplates;
+}
+
   return {
     getEmailTemplate,
+    getEmailTemplates
   };
 });

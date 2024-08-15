@@ -70,7 +70,37 @@ define(["N/search", "N/record", "N/url", "./lib_utils.js"], function (
     return itemList;
   }
 
+  function getDiscountItems() {
+    let discItems = [];
+    const discountitemSearchObj = search.create({
+      type: "discountitem",
+      filters:
+        [
+          ["type", "anyof", "Discount"],
+          "AND",
+          ["isinactive", "is", "F"]
+        ],
+      columns:
+        [
+          search.createColumn({
+            name: "itemid",
+            sort: search.Sort.ASC
+          })
+        ]
+    });
+    discountitemSearchObj.run().each(function (result) {
+      // .run().each has a limit of 4,000 results
+      discItems.push({
+        id: result.id,
+        name: result.getValue("itemid")
+      })
+      return true;
+    });
+    return discItems;
+  }
+
   return {
     getStudentFeeItems,
+    getDiscountItems
   };
 });
