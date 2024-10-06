@@ -1,284 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link
-      rel="stylesheet"
-      href="https://4553194.app.netsuite.com/core/media/media.nl?id=671858&c=4553194&h=cICSLFK01RGcN_yAYTui_LmFvhYSZMT0m6MIm2HuJqJMleH8&_xt=.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
-      integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
-      crossorigin="anonymous"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
-      integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
-      crossorigin="anonymous"
-    ></script>
-    <title>Subscription Agreement</title>
-    <style>
-      
-    </style>
-  </head>
-  <body>
-    <div class="container-fluid" id="nsform">
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs" role="tablist" style="width: 460px;">
-        <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#config_periods">Periods</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#config_aging_balance">Aging Balance</a>
-        </li>
-      </ul>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <div id="config_periods" class="main_container container-fluid tab-pane active"><br>
-          <div class="row mb-2">
-            <div class="col-md-6">
-              <label for="periodStart" class="big-bold">Period Start:</label>
-              <select class="form-control big-form-control" v-model="startPeriod" v-on:change="changeMonths(0)">
-                <option v-for="mon in startMonths" :value="mon.id">{{mon.name}}</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="periodEnd" class="big-bold">Period End:</label>
-              <select class="form-control big-form-control" v-model="endPeriod" v-on:change="changeMonths(1)">
-                <option v-for="mon in endMonths" :value="mon.id">{{mon.name}}</option>
-              </select>
-            </div>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="${FILES.billingconfigcss}" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+    integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+    crossorigin="anonymous" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+    integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+    crossorigin="anonymous"></script>
+  <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"></script>
+  <title>Billing Configuration: Scheduling</title>
+</head>
+
+<body>
+  <div class="container-fluid" id="nsform">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" style="width: 460px;">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#config_periods">Periods</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#config_aging_balance">Aging Balance</a>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div id="config_periods" class="main_container container-fluid tab-pane active"><br>
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <label for="periodStart" class="big-bold">Period Start:</label>
+            <select class="form-control big-form-control" v-model="startPeriod" v-on:change="changeMonths(0)">
+              <option v-for="mon in startMonths" :value="mon.id">{{mon.name}}</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="periodEnd" class="big-bold">Period End:</label>
+            <select class="form-control big-form-control" v-model="endPeriod" v-on:change="changeMonths(1)">
+              <option v-for="mon in endMonths" :value="mon.id">{{mon.name}}</option>
+            </select>
           </div>
         </div>
-
-        <div id="config_aging_balance" class="main_container container-fluid tab-pane fade"><br>
-          <div class="row mb-2">
-            <div class="form-check col-md-6 exclude_include" style="margin-top: 15px; display: flex;">
-              <div class="custom-control custom-radio vertical-center">
-                <input type="radio" class="custom-control-input" id="include" value="include" v-model="isBatch">
-                <label class="custom-control-label big-bold" for="include">Include in Batch</label>
-              </div>
-              <div class="custom-control custom-radio vertical-center" style="margin-left: 20px;">
-                <input type="radio" class="custom-control-input" id="exclude" value="exclude" v-model="isBatch">
-                <label class="custom-control-label big-bold" for="exclude">Exclude in Batch</label>
-              </div>
-            </div>
-          </div>
-          <div class="row mb-2" style="margin-top: 15px;" v-if="isBatch == 'include'">
-            <div class="col-md-6">
-              <label class="big-bold">Amount:</label>
-              <div class="row">
-                <div class="col" style="width: 50%">
-                  <input type="number" class="form-control form-control-sm big-form-control" style="width: 200px;" v-model="batchFromAmt">
-                </div>
-                <label class="vertical-center">&nbsp;&nbsp;To&nbsp;&nbsp;</label>
-                <div class="col" style="width: 50%">
-                  <input type="number" class="form-control form-control-sm big-form-control" style="width: 200px;" v-model="batchToAmt">
-                </div>
-              </div>
-            </div>
-            
-          </div>
-          <div class="row mb-2" style="margin-top:30px;">
-            <div class="col-md-6">
-              <label class="big-bold">Payment Options:</label>
-              <div class="row" style="margin-left:0px;">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="payOptions" v-model="isPayInFull"><label class="custom-control-label" for="payOptions">Pay In Full</label>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-          <div class="row mb-2" style="margin-top: 30px;">
-            <div class="col-md-6">
-              <label class="big-bold">Alternative Message:</label>
-              <select class="form-control big-form-control" v-model="template">
-                <option v-for="tpl in emailTpls" :value="tpl.id" :selected="template == tpl.id">
-                  {{tpl.name}}
-                </option>
-              </select>
-            </div>
-          </div>
-          
-        </div>
-        
-        <button id="config_submit" v-on:click="savedata()" class="d-none">Submit</button>
       </div>
+
+      <div id="config_aging_balance" class="main_container container-fluid tab-pane fade"><br>
+        <div class="row mb-2">
+          <div class="form-check col-md-6 exclude_include" style="margin-top: 15px; display: flex;">
+            <div class="custom-control custom-radio vertical-center">
+              <input type="radio" class="custom-control-input" id="include" value="include" v-model="isBatch">
+              <label class="custom-control-label big-bold" for="include">Include in Batch</label>
+            </div>
+            <div class="custom-control custom-radio vertical-center" style="margin-left: 20px;">
+              <input type="radio" class="custom-control-input" id="exclude" value="exclude" v-model="isBatch">
+              <label class="custom-control-label big-bold" for="exclude">Exclude in Batch</label>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-2" style="margin-top: 15px;" v-if="isBatch == 'include'">
+          <div class="col-md-6">
+            <label class="big-bold">Amount:</label>
+            <div class="row">
+              <div class="col" style="width: 50%">
+                <input type="number" class="form-control form-control-sm big-form-control" style="width: 200px;"
+                  v-model="batchFromAmt">
+              </div>
+              <label class="vertical-center">&nbsp;&nbsp;To&nbsp;&nbsp;</label>
+              <div class="col" style="width: 50%">
+                <input type="number" class="form-control form-control-sm big-form-control" style="width: 200px;"
+                  v-model="batchToAmt">
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="row mb-2" style="margin-top:30px;">
+          <div class="col-md-6">
+            <label class="big-bold">Payment Options:</label>
+            <div class="row" style="margin-left:0px;">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="payOptions" v-model="isPayInFull"><label
+                  class="custom-control-label" for="payOptions">Pay In Full</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="row mb-2" style="margin-top: 30px;">
+          <div class="col-md-6">
+            <label class="big-bold">Alternative Message:</label>
+            <select class="form-control big-form-control" v-model="template">
+              <option v-for="tpl in emailTpls" :value="tpl.id" :selected="template == tpl.id">
+                {{tpl.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <button id="config_submit" v-on:click="savedata()" class="d-none">Submit</button>
     </div>
-    <script>
+  </div>
+  <script>
 
-      var app = new Vue({
-        el: '#nsform',
-        data: {
-          processed: false,
-          check_all_student: false,
-          tempStartPeriod: '${formdata.tempData.startPeriod}',
-          tempEndPeriod: '${formdata.tempData.endPeriod}',
-          tempIsBatch: '${formdata.tempData.isBatch}',
-          tempBatchFromAmt: '${formdata.tempData.batchFromAmt}',
-          tempBatchToAmt: '${formdata.tempData.batchToAmt}',
-          tempIsPayInFull: ${formdata.tempData.isPayInFull},
-          tempTemplate: '${formdata.tempData.template}',
-          startPeriod: '',
-          endPeriod: '',
-          isBatch: '',
-          batchFromAmt: '',
-          batchToAmt: '',
-          isPayInFull: false,
-          template: '',
-          startMonths: ${formdata.months},
-          endMonths: ${formdata.months},
-          months: ${formdata.months},
-          emailTpls: ${formdata.emailTemplates}
+    var app = new Vue({
+      el: '#nsform',
+      data: {
+        processed: false,
+        check_all_student: false,
+        tempStartPeriod: '${formdata.tempData.startPeriod}',
+        tempEndPeriod: '${formdata.tempData.endPeriod}',
+        tempIsBatch: '${formdata.tempData.isBatch}',
+        tempBatchFromAmt: '${formdata.tempData.batchFromAmt}',
+        tempBatchToAmt: '${formdata.tempData.batchToAmt}',
+        tempIsPayInFull: ${ formdata.tempData.isPayInFull },
+      tempTemplate: '${formdata.tempData.template}',
+      startPeriod: '',
+      endPeriod: '',
+      isBatch: '',
+      batchFromAmt: '',
+      batchToAmt: '',
+      isPayInFull: false,
+      template: '',
+      startMonths: ${ formdata.months },
+      endMonths: ${ formdata.months },
+      months: ${ formdata.months },
+      emailTpls: ${ formdata.emailTemplates }
         },
-        created(){
-        },
-        mounted(){
-          this.startPeriod= this.tempStartPeriod ? this.tempStartPeriod : '1';
-          this.endPeriod= this.tempEndPeriod ? this.tempEndPeriod : '3';
-          this.isBatch= this.tempIsBatch;
-          this.batchFromAmt= this.tempBatchFromAmt ? this.tempBatchFromAmt : '';
-          this.batchToAmt= this.tempBatchToAmt ? this.tempBatchToAmt : '';
-          this.isPayInFull= this.tempIsPayInFull;
-          this.template= this.tempTemplate ? this.tempTemplate : '';
-        },
-        methods:
-        {
-          changeMonths: function(state){
-            if(!state){
-              if(this.startPeriod) this.endMonths = this.months.filter(mon => mon.id >= Number(this.startPeriod));
-            } else{
-              if(this.endPeriod) this.startMonths = this.months.filter(mon => mon.id <= Number(this.endPeriod));
-            }
-          },
-
-          savedata: function(){
-
-            var selData = {
-              startPeriod: this.startPeriod,
-              endPeriod: this.endPeriod,
-              isBatch: this.isBatch,
-              batchFromAmt: this.batchFromAmt,
-              batchToAmt: this.batchToAmt,
-              isPayInFull: this.isPayInFull,
-              template: this.template,
-            };
-            var formData = new FormData();
-            formData.append('action', "save");
-            formData.append('selecteddata', JSON.stringify(selData));
-
-            $.ajax({
-              url : window.location,
-              type : 'POST',
-              data : formData,
-              cache : false,
-              contentType : false,
-              processData : false,
-              success : function(data)
-              {
-              }
-            });
-          }
+    created(){
+    },
+    mounted(){
+      this.startPeriod = this.tempStartPeriod ? this.tempStartPeriod : '1';
+      this.endPeriod = this.tempEndPeriod ? this.tempEndPeriod : '3';
+      this.isBatch = this.tempIsBatch;
+      this.batchFromAmt = this.tempBatchFromAmt ? this.tempBatchFromAmt : '';
+      this.batchToAmt = this.tempBatchToAmt ? this.tempBatchToAmt : '';
+      this.isPayInFull = this.tempIsPayInFull;
+      this.template = this.tempTemplate ? this.tempTemplate : '';
+    },
+    methods:
+    {
+      changeMonths: function(state) {
+        if (!state) {
+          if (this.startPeriod) this.endMonths = this.months.filter(mon => mon.id >= Number(this.startPeriod));
+        } else {
+          if (this.endPeriod) this.startMonths = this.months.filter(mon => mon.id <= Number(this.endPeriod));
         }
+      },
+
+      savedata: function() {
+
+        var selData = {
+          startPeriod: this.startPeriod,
+          endPeriod: this.endPeriod,
+          isBatch: this.isBatch,
+          batchFromAmt: this.batchFromAmt,
+          batchToAmt: this.batchToAmt,
+          isPayInFull: this.isPayInFull,
+          template: this.template,
+        };
+        var formData = new FormData();
+        formData.append('action', "save");
+        formData.append('selecteddata', JSON.stringify(selData));
+
+        $.ajax({
+          url: window.location,
+          type: 'POST',
+          data: formData,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function (data) {
+          }
+        });
+      }
+    }
       });
-      if (!Array.prototype.includes) {
-        Object.defineProperty(Array.prototype, 'includes', {
-          value: function (searchElement, fromIndex) {
-            if (this == null) {
-              throw new TypeError('"this" is null or not defined');
-            }
-            var o = Object(this);
-            var len = o.length >>> 0;
+    if (!Array.prototype.includes) {
+      Object.defineProperty(Array.prototype, 'includes', {
+        value: function (searchElement, fromIndex) {
+          if (this == null) {
+            throw new TypeError('"this" is null or not defined');
+          }
+          var o = Object(this);
+          var len = o.length >>> 0;
 
-            if (len === 0) {
-              return false;
-            }
-
-            var n = fromIndex | 0;
-            var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
-
-            function sameValueZero(x, y) {
-              return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
-            }
-
-            while (k < len) {
-              if (sameValueZero(o[k], searchElement)) {
-                return true;
-              }
-              k++;
-            }
+          if (len === 0) {
             return false;
-          },
-        });
-      }
-      if (!Array.prototype.findIndex) {
-        Object.defineProperty(Array.prototype, "findIndex", {
-          value: function (predicate) {
-            // 1. Let O be ? ToObject(this value).
-            if (this == null) {
-              throw new TypeError('"this" is null or not defined');
+          }
+
+          var n = fromIndex | 0;
+          var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+
+          function sameValueZero(x, y) {
+            return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
+          }
+
+          while (k < len) {
+            if (sameValueZero(o[k], searchElement)) {
+              return true;
             }
-    
-            var o = Object(this);
-    
-            // 2. Let len be ? ToLength(? Get(O, "length")).
-            var len = o.length >>> 0;
-    
-            // 3. If IsCallable(predicate) is false, throw a TypeError exception.
-            if (typeof predicate !== "function") {
-              throw new TypeError("predicate must be a function");
+            k++;
+          }
+          return false;
+        },
+      });
+    }
+    if (!Array.prototype.findIndex) {
+      Object.defineProperty(Array.prototype, "findIndex", {
+        value: function (predicate) {
+          // 1. Let O be ? ToObject(this value).
+          if (this == null) {
+            throw new TypeError('"this" is null or not defined');
+          }
+
+          var o = Object(this);
+
+          // 2. Let len be ? ToLength(? Get(O, "length")).
+          var len = o.length >>> 0;
+
+          // 3. If IsCallable(predicate) is false, throw a TypeError exception.
+          if (typeof predicate !== "function") {
+            throw new TypeError("predicate must be a function");
+          }
+
+          // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
+          var thisArg = arguments[1];
+
+          // 5. Let k be 0.
+          var k = 0;
+
+          // 6. Repeat, while k < len
+          while (k < len) {
+            // a. Let Pk be ! ToString(k).
+            // b. Let kValue be ? Get(O, Pk).
+            // c. Let testResult be ToBoolean(? Call(predicate, T, « kValue, k, O »)).
+            // d. If testResult is true, return k.
+            var kValue = o[k];
+            if (predicate.call(thisArg, kValue, k, o)) {
+              return k;
             }
-    
-            // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
-            var thisArg = arguments[1];
-    
-            // 5. Let k be 0.
-            var k = 0;
-    
-            // 6. Repeat, while k < len
-            while (k < len) {
-              // a. Let Pk be ! ToString(k).
-              // b. Let kValue be ? Get(O, Pk).
-              // c. Let testResult be ToBoolean(? Call(predicate, T, « kValue, k, O »)).
-              // d. If testResult is true, return k.
-              var kValue = o[k];
-              if (predicate.call(thisArg, kValue, k, o)) {
-                return k;
-              }
-              // e. Increase k by 1.
-              k++;
-            }
-    
-            // 7. Return -1.
-            return -1;
-          },
-          configurable: true,
-          writable: true,
-        });
-      }
-    </script>
-  </body>
+            // e. Increase k by 1.
+            k++;
+          }
+
+          // 7. Return -1.
+          return -1;
+        },
+        configurable: true,
+        writable: true,
+      });
+    }
+  </script>
+</body>
+
 </html>

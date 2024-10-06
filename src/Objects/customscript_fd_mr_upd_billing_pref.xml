@@ -1,0 +1,29 @@
+<mapreducescript scriptid="customscript_fd_mr_upd_billing_pref">
+  <description></description>
+  <isinactive>F</isinactive>
+  <name>FD | MR Update Billing Preference</name>
+  <notifyadmins>F</notifyadmins>
+  <notifyemails></notifyemails>
+  <notifyowner>T</notifyowner>
+  <scriptfile>[/SuiteScripts/Billing/FD_MR_Update_Billing_Pref.js]</scriptfile>
+  <scriptdeployments>
+    <scriptdeployment scriptid="customdeploy_fd_mr_upd_billing_pref">
+      <buffersize>1</buffersize>
+      <concurrencylimit>2</concurrencylimit>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <queueallstagesatonce>T</queueallstagesatonce>
+      <runasrole>ADMINISTRATOR</runasrole>
+      <status>NOTSCHEDULED</status>
+      <title>FD | MR Update Billing Preference</title>
+      <yieldaftermins>60</yieldaftermins>
+      <recurrence>
+        <single>
+          <repeat></repeat>
+          <startdate>2022-01-27</startdate>
+          <starttime>07:00:00Z</starttime>
+        </single>
+      </recurrence>
+    </scriptdeployment>
+  </scriptdeployments>
+</mapreducescript>

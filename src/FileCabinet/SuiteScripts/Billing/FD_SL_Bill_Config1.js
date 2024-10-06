@@ -48,7 +48,7 @@ define([
       try {
         const renderer = render.create();
         renderer.templateContent = file
-          .load("./billing_config1.html")
+          .load("./files_billing/billing_config1.html")
           .getContents();
 
         const itemData = lib_item.getStudentFeeItems();

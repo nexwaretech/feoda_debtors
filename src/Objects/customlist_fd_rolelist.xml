@@ -1,0 +1,28 @@
+<customlist scriptid="customlist_fd_rolelist">
+  <description></description>
+  <isinactive>F</isinactive>
+  <isordered>T</isordered>
+  <name>FD | Role List</name>
+  <customvalues>
+    <customvalue scriptid="val_38604_4553194_sb1_884">
+      <isinactive>F</isinactive>
+      <value>Father</value>
+    </customvalue>
+    <customvalue scriptid="val_38605_4553194_sb1_652">
+      <isinactive>F</isinactive>
+      <value>Mother</value>
+    </customvalue>
+    <customvalue scriptid="val_38827_4553194_sb1_518">
+      <isinactive>F</isinactive>
+      <value>Guardian</value>
+    </customvalue>
+    <customvalue scriptid="val_38899_4553194_sb1_137">
+      <isinactive>F</isinactive>
+      <value>Stepfather</value>
+    </customvalue>
+    <customvalue scriptid="val_38899_4553194_sb1_130">
+      <isinactive>F</isinactive>
+      <value>Stepmother</value>
+    </customvalue>
+  </customvalues>
+</customlist>

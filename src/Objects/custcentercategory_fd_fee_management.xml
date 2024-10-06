@@ -1,0 +1,37 @@
+<centercategory scriptid="custcentercategory_fd_fee_management">
+  <center>BASIC</center>
+  <centertab>[scriptid=custcentertab_fd_debtorscentre]</centertab>
+  <label>Fee Billing Management</label>
+  <links>
+    <link>
+      <linklabel>1. Configure &amp; Apply Instructions</linklabel>
+      <linkobject>[scriptid=customscript_fd_sl_bill_config.customdeploy_fd_sl_bill_config]</linkobject>
+      <linktasktype>SCRIPT</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+    <link>
+      <linklabel>2. Review Summary &amp; Invoice</linklabel>
+      <linkobject>[scriptid=customscript_fd_sl_billing_summary.customdeploy_fd_sl_billing_summary]</linkobject>
+      <linktasktype>SCRIPT</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+    <link>
+      <linklabel>3. Update Opening Balances</linklabel>
+      <linkobject>[scriptid=customscript_fd_sl_opening_balance.customdeploy_fd_sl_opening_balance]</linkobject>
+      <linktasktype>SCRIPT</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+    <link>
+      <linklabel>4. Email Debtors (General)</linklabel>
+      <linkobject>[scriptid=customscript_fd_sl_send_invoice_email.customdeploy_send_email_wo_open_bal]</linkobject>
+      <linktasktype>SCRIPT</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+    <link>
+      <linklabel>5. Email Debtors (Reminder)</linklabel>
+      <linkobject>[scriptid=customscript_fd_sl_send_inv_eml_rem.customdeploy_fd_sl_send_inv_eml_rem]</linkobject>
+      <linktasktype>SCRIPT</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+  </links>
+</centercategory>

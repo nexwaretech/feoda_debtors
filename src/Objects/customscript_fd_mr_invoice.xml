@@ -120,7 +120,7 @@
     <scriptdeployment scriptid="customdeploy_fd_mr_invoice">
       <buffersize>1</buffersize>
       <concurrencylimit>1</concurrencylimit>
-      <custscript_fd_mr_pr_binstructss></custscript_fd_mr_pr_binstructss>
+      <custscript_fd_mr_pr_binstructss>[scriptid=customsearch_fd_billing_instruction_inv]</custscript_fd_mr_pr_binstructss>
       <custscript_fd_mr_pr_debtor></custscript_fd_mr_pr_debtor>
       <custscript_fd_mr_pr_faminvform>[scriptid=custform_fd_invoice]</custscript_fd_mr_pr_faminvform>
       <custscript_fd_mr_pr_myearstu></custscript_fd_mr_pr_myearstu>

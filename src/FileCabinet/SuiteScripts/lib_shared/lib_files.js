@@ -3,7 +3,7 @@
  * @NModuleScope SameAccount
  * Author: Feoda
  */
-define(["N/search", "N/record"], function (search) {
+define(["N/search", "N/runtime"], function (search, runtime) {
   function searchFileUrlinFolder(foldername) {
     let LOG = "searchFileUrlinFolder";
     let objFiles = {};
@@ -26,12 +26,14 @@ define(["N/search", "N/record"], function (search) {
     });
     let searchResultCount = folderSearchObj.runPaged().count;
     log.debug(LOG, searchResultCount);
+    const accountId = runtime.accountId.replace("_", "-");
     folderSearchObj.run().each(function (result) {
       let stName = result
         .getValue({ name: "name", join: "file" })
         .replace(/[^a-zA-Z]+/g, "");
 
-      objFiles[stName] = result.getValue({ name: "url", join: "file" });
+      objFiles[stName] =
+        `https://${accountId}.app.netsuite.com${result.getValue({ name: "url", join: "file" })}`;
 
       return true;
     });

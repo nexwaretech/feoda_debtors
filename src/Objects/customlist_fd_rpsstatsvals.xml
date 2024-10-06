@@ -1,16 +1,24 @@
 <customlist scriptid="customlist_fd_rpsstatsvals">
   <description></description>
   <isinactive>F</isinactive>
+  <ismatrixoption>F</ismatrixoption>
   <isordered>T</isordered>
   <name>FD | RPS Status values</name>
   <customvalues>
-    <customvalue scriptid="val_fd_rsv_inactive">
+    <customvalue scriptid="val_fd_rsv_pending">
+      <abbreviation>I</abbreviation>
       <isinactive>F</isinactive>
-      <value>Inactive</value>
+      <value>Pending</value>
     </customvalue>
-    <customvalue scriptid="val_fd_rsv_active">
+    <customvalue scriptid="val_fd_rsv_accepted">
+      <abbreviation>A</abbreviation>
       <isinactive>F</isinactive>
-      <value>Active</value>
+      <value>Accepted</value>
+    </customvalue>
+    <customvalue scriptid="_val_fd_rsv_declined">
+      <abbreviation>D</abbreviation>
+      <isinactive>F</isinactive>
+      <value>Declined</value>
     </customvalue>
   </customvalues>
 </customlist>

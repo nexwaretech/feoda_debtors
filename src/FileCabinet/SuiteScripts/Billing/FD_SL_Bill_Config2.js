@@ -175,6 +175,7 @@ define([
       data: JSON.stringify(objCSS),
     });
 
+    log.debug("arrCategories", JSON.stringify(arrCategories));
     renderer.addCustomDataSource({
       alias: "formdata",
       format: render.DataSource.JSON,

@@ -1,0 +1,39 @@
+<centercategory scriptid="custcentercategory_fd_payments">
+  <center>BASIC</center>
+  <centertab>[scriptid=custcentertab_fd_debtorscentre]</centertab>
+  <label>Processing &amp; Payment Information</label>
+  <links>
+    <link>
+      <linkid>EDIT_TRAN_CUSTINVC</linkid>
+      <linklabel>Invoice Debtors</linklabel>
+      <shortlist>F</shortlist>
+    </link>
+    <link>
+      <linkid>EDIT_TRAN_CUSTPYMT</linkid>
+      <linklabel>Accept Debtor Payments</linklabel>
+      <shortlist>F</shortlist>
+    </link>
+    <link>
+      <linkid>EDIT_TRAN_CUSTCRED</linkid>
+      <linklabel>Credit Memo</linklabel>
+      <shortlist>F</shortlist>
+    </link>
+    <link>
+      <linkid>TRAN_PRINT</linkid>
+      <linklabel>Print statements</linklabel>
+      <shortlist>F</shortlist>
+    </link>
+    <link>
+      <linklabel>Payment Dishonour</linklabel>
+      <linkobject>[scriptid=customtransaction_fd_paymntdishonor]</linkobject>
+      <linktasktype>LIST</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+    <link>
+      <linklabel>RPS Payment Processing</linklabel>
+      <linkobject>[scriptid=customscript_fd_sl_procpayment.customdeploy_fd_sl_procpayment]</linkobject>
+      <linktasktype>SCRIPT</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+  </links>
+</centercategory>
