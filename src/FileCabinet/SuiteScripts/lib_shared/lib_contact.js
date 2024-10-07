@@ -105,7 +105,143 @@ define([
     };
   }
 
+  function getInvoiceDebtorContacts(objParams) {
+    const LOG_TITLE = "getInvoiceDebtorContacts";
+    const objInvoice = objParams.objInvoice;
+    const arrDebtors = [];
+
+    for (const invoice in objInvoice) {
+      const debtor = objInvoice[invoice].debtor;
+
+      if (!arrDebtors.includes(debtor)) {
+        arrDebtors.push(debtor);
+      }
+    }
+
+    if (arrDebtors.length === 0) {
+      log.debug(LOG_TITLE, "No debtors found");
+      return null;
+    }
+
+    log.debug("getContacts", "arrDebtors: " + arrDebtors.length);
+
+    // Search for contacts for debtors of invoice
+    const contactSearchObj = search.create({
+      type: search.Type.CONTACT,
+      filters: [
+        search.createFilter({
+          name: "company",
+          operator: search.Operator.ANYOF,
+          values: arrDebtors,
+        }),
+        search.createFilter({
+          name: lib_entity.REC_ENTITY.IS_STUDENT,
+          operator: search.Operator.IS,
+          values: "F",
+        }),
+        search.createFilter({
+          name: "email",
+          operator: search.Operator.ISNOTEMPTY,
+        }),
+      ],
+      columns: [
+        search.createColumn({ name: "company" }),
+        search.createColumn({ name: "email" }),
+        search.createColumn({ name: "firstname" }),
+        search.createColumn({ name: "lastname" }),
+      ],
+    });
+
+    const contacts = {};
+    contactSearchObj.run().each(function (r) {
+      const debtor = r.getValue("company");
+      const id = r.id;
+
+      if (!contacts[debtor]) {
+        contacts[debtor] = [];
+      }
+      const firstName = r.getValue("firstname");
+      const lastName = r.getValue("lastname");
+
+      const objContact = {
+        id: id,
+        email: r.getValue("email"),
+        name: `${firstName} ${lastName}`,
+      };
+
+      contacts[debtor].push(objContact);
+
+      return true;
+    });
+
+    objInvoice[invoice].contacts = contacts;
+
+    return objInvoice;
+  }
+
+  function getStudents(bInst, students) {
+    const stuData = [];
+    const contactSearchObj = search.create({
+      type: "contact",
+      filters: [["internalid", "anyof", students]],
+      columns: [
+        "company",
+        lib_entity.REC_ENTITY.CURR_STUDENT_YEAR,
+        lib_entity.REC_ENTITY.FAMILY_ORDER,
+        search.createColumn({
+          name: lib_entity.REC_ENTITY.DEBTOR_STAFF,
+          join: "parentCustomer",
+        }),
+      ],
+    });
+    contactSearchObj.run().each(function (result) {
+      stuData.push({
+        id: result.id,
+        company: result.getValue("company"),
+        curyear: result.getValue(lib_entity.REC_ENTITY.CURR_STUDENT_YEAR),
+        isDebtor: result.getValue({
+          name: lib_entity.REC_ENTITY.DEBTOR_STAFF,
+          join: "parentCustomer",
+        }),
+        familyOrder: result.getValue(lib_entity.REC_ENTITY.FAMILY_ORDER),
+        bInst: bInst,
+      });
+      return true;
+    });
+
+    log.debug("stuData", JSON.stringify(stuData));
+    return stuData;
+  }
+
+  function getDebtorOfStudents(objParams) {
+    let arrDebtors = [];
+    let students = objParams.students;
+    let contactSearchObj = search.create({
+      type: "contact",
+      filters: [["internalid", "anyof", students]],
+      columns: [
+        search.createColumn({
+          name: "company",
+        }),
+      ],
+    });
+    contactSearchObj.run().each(function (result) {
+      let debtorId = result.getValue("company");
+      if (arrDebtors.indexOf(debtorId) < 0) {
+        arrDebtors.push(debtorId);
+      }
+      return true;
+    });
+
+    log.debug("arrDebtors", arrDebtors);
+
+    return arrDebtors;
+  }
+
   return {
+    getStudents,
+    getDebtorOfStudents,
+    getInvoiceDebtorContacts,
     getAttendingStudentContacts,
   };
 });

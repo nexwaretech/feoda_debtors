@@ -46,7 +46,6 @@ define(["N/search", "N/record"], function (search, record) {
     DISC_ITEM: "custrecord_fd_bpref_disc_item",
     APPLIES_TO: "custrecord_fd_bpref_applies_to",
     TERMS_DATE: "custrecord_fd_bpref_terms_date",
-    
   };
 
   function getBillingPreference() {
@@ -75,7 +74,37 @@ define(["N/search", "N/record"], function (search, record) {
     return bpId;
   }
 
+  function getBillingPreferenceDetails() {
+    const customrecord_xw_billing_prefSearchObj = search.create({
+      type: REC_BILLING_PREFERENCE.ID,
+      filters: [],
+      columns: [REC_BILLING_PREFERENCE.DEBTORS],
+    });
+
+    var searchResultCount =
+      customrecord_xw_billing_prefSearchObj.runPaged().count;
+
+    if (searchResultCount === 0) return -1;
+
+    let debtors, items, instructions, bpId;
+
+    customrecord_xw_billing_prefSearchObj.run().each(function (result) {
+      debtors = result.getValue(REC_BILLING_PREFERENCE.DEBTORS);
+      instructions = result.getValue(REC_BILLING_PREFERENCE.INSTRUCTIONS);
+      items = result.getValue(REC_BILLING_PREFERENCE.ITEMS);
+      bpId = result.id;
+      return false;
+    });
+    return {
+      id: bpId,
+      debtors: debtors ? debtors.split(",") : [],
+      items: items ? items.split(",") : [],
+      instructions: instructions ? instructions.split(",") : [],
+    };
+  }
+
   return {
+    getBillingPreferenceDetails,
     getBillingPreference,
     createBillingReference,
     REC_BILLING_PREFERENCE,

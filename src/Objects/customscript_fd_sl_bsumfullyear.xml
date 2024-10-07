@@ -1,7 +1,7 @@
 <suitelet scriptid="customscript_fd_sl_bsumfullyear">
   <description></description>
   <isinactive>F</isinactive>
-  <name>FD | BillingSummary-FullYear</name>
+  <name>FD | SL BillingSummary-FullYear</name>
   <notifyadmins>F</notifyadmins>
   <notifyemails></notifyemails>
   <notifyowner>T</notifyowner>

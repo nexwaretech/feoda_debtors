@@ -1,0 +1,19 @@
+<centercategory scriptid="custcentercategory_fd_rps_bal">
+  <center>BASIC</center>
+  <centertab>[scriptid=custcentertab_fd_debtorscentre]</centertab>
+  <label>Debtors - RPS Balance</label>
+  <links>
+    <link>
+      <linklabel></linklabel>
+      <linkobject>[scriptid=customsearch_fd_debtor_rps_balanace]</linkobject>
+      <linktasktype>SRCH_RSLT</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+     <link>
+      <linklabel>Debtors Staff</linklabel>
+      <linkobject>[scriptid=customsearch_fd_debtor_staff]</linkobject>
+      <linktasktype>SRCH_RSLT</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+  </links>
+</centercategory>

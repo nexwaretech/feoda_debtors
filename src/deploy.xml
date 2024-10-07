@@ -2,14 +2,39 @@
     <configuration>
         <path>~/AccountConfiguration/*</path>
     </configuration>
+    
     <files>
-        <path>~/FileCabinet/SuiteScripts/*</path>
-    </files>
     <!--
+        <path>~/FileCabinet/SuiteScripts/lib_shared/*</path>
+        <path>~/FileCabinet/SuiteScripts/Billing/*</path>
+        <path>~/FileCabinet/SuiteScripts/RPS/*</path>-->     
+        <path>~/FileCabinet/SuiteScripts/RPS/FD_SL_RPSPaymentProcessing.js</path>
+    </files>
+  
     <objects>
-        <path>~/Objects/custitem_fd_is_stu_fee.xml</path>
+        <path>~/Objects/customscript_fd_sl_procpayment.xml</path>
+        <path>~/Objects/custcentercategory_fd_dishonours.xml</path>
+        <path>~/Objects/custcentercategory_fd_rps_view.xml</path>
+        <path>~/Objects/custcentercategory_fd_no_rps.xml</path>
+        <path>~/Objects/custcentercategory_fd_rps_bal.xml</path>
+        <path>~/Objects/custcentercategory_fd_payments.xml</path>
+            <!--
+        <path>~/Objects/customlist_fd_rolelist.xml</path>
+        <path>~/Objects/custentity_fd_role.xml</path>
+        <path>~/Objects/customscript_fd_mr_upd_billing_pref.xml</path>
+        <path>~/Objects/customscript_fd_sl_bill_config.xml</path>
+        <path>~/Objects/customscript_fd_sl_billing_summary.xml</path>
+        <path>~/Objects/customscript_fd_sl_opening_balance.xml</path>
+        <path>~/Objects/customscript_fd_mr_inv_email_open_bal.xml</path>
+        <path>~/Objects/customscript_fd_mr_inv_email_wo_open_bal.xml</path>
+        <path>~/Objects/customscript_fd_sl_send_invoice_email.xml</path>
+        <path>~/Objects/customscript_fd_mr_inv_email_wo_open_rem.xml</path>
+        <path>~/Objects/customscript_fd_sl_send_inv_eml_rem.xml</path>
+        <path>~/Objects/custcentertab_fd_debtorscentre.xml</path>
+        <path>~/Objects/custcentercategory_fd_fee_management.xml</path>
+        -->
    </objects>
-   -->
+   
   <translationimports>
       <path>~/Translations/*</path>
   </translationimports>

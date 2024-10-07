@@ -1,5 +1,5 @@
 <transactionForm scriptid="custform_fd_invoice" standard="STANDARDSERVICEINVOICE">
-  <name>XW Invoice Form</name>
+  <name>FD Invoice Form</name>
   <recordType>INVOICE</recordType>
   <inactive>F</inactive>
   <preferred>T</preferred>
@@ -87,6 +87,15 @@
           <label>Posting Period</label>
           <visible>T</visible>
           <mandatory>T</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>ASOFDATE</id>
+          <label>As-Of Date</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
@@ -234,6 +243,36 @@
         </field>
       </fields>
     </fieldGroup>
+    <fieldGroup scriptid="salesinformation">
+      <label>Sales Information</label>
+      <visible>T</visible>
+      <showTitle>T</showTitle>
+      <singleColumn>F</singleColumn>
+      <fields position="MIDDLE">
+        <field>
+          <id>EXCLUDECOMMISSION</id>
+          <label>Exclude Commissions</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+          <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
+        </field>
+      </fields>
+    </fieldGroup>
+    <fieldGroup scriptid="classification">
+      <label>Classification</label>
+      <visible>T</visible>
+      <showTitle>T</showTitle>
+      <singleColumn>F</singleColumn>
+    </fieldGroup>
+    <fieldGroup scriptid="intercompanymanagement">
+      <label>Intercompany Management</label>
+      <visible>T</visible>
+      <showTitle>T</showTitle>
+      <singleColumn>F</singleColumn>
+    </fieldGroup>
     <defaultFieldGroup>
       <fields position="MIDDLE">
         <field>
@@ -335,6 +374,15 @@
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
+        <field>
+          <id>[scriptid=custbody_fd_stmt_desc]</id>
+          <label>Statement Description</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
       </fields>
     </defaultFieldGroup>
   </mainFields>
@@ -378,6 +426,11 @@
               <id>ITEM</id>
               <label>Item</label>
               <visible>T</visible>
+            </column>
+            <column>
+              <id>DISPLAYNAME</id>
+              <label>Display Name</label>
+              <visible>F</visible>
             </column>
             <column>
               <id>QUANTITYREMAINING</id>
@@ -425,6 +478,11 @@
               <visible>T</visible>
             </column>
             <column>
+              <id>SERIALNUMBERS</id>
+              <label>Serial/Lot Numbers</label>
+              <visible>T</visible>
+            </column>
+            <column>
               <id>AMOUNT</id>
               <label>Amount</label>
               <visible>T</visible>
@@ -465,8 +523,23 @@
               <visible>F</visible>
             </column>
             <column>
+              <id>REVRECSCHEDULE</id>
+              <label>Rev. Rec. Schedule</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>REVRECSTARTDATE</id>
+              <label>Rev. Rec. Start Date</label>
+              <visible>T</visible>
+            </column>
+            <column>
               <id>DEPARTMENT</id>
               <label>Department</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>TERMINMONTHS</id>
+              <label>Rev. Term In Months</label>
               <visible>F</visible>
             </column>
             <column>
@@ -485,13 +558,28 @@
               <visible>F</visible>
             </column>
             <column>
+              <id>REVRECENDDATE</id>
+              <label>Rev. Rec. End Date</label>
+              <visible>T</visible>
+            </column>
+            <column>
               <id>PERCENTCOMPLETE</id>
               <label>% Complete</label>
               <visible>F</visible>
             </column>
             <column>
+              <id>DEFERREVREC</id>
+              <label>Hold Revenue Recognition</label>
+              <visible>F</visible>
+            </column>
+            <column>
               <id>CURRENTPERCENT</id>
               <label>Current %</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>CATCHUPPERIOD</id>
+              <label>Catch Up Period</label>
               <visible>F</visible>
             </column>
             <column>
@@ -509,7 +597,6 @@
               <label>PST</label>
               <visible>T</visible>
             </column>
-
             <column>
               <id>FREEGIFTPROMOTION</id>
               <label>Free Gift Promotion</label>
@@ -565,7 +652,45 @@
               <label>GL Audit Numbering Sequence</label>
               <visible>F</visible>
             </column>
+            <column>
+              <id>AMOUNTRECOGNIZED</id>
+              <label>Amount Recognized</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>CHARGETYPE</id>
+              <label>Charge Type</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>CHARGES</id>
+              <label>Charges</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_fd_student]</id>
+              <label>Student</label>
+              <visible>T</visible>
+            </column>
           </columns>
+        </subList>
+        <subList>
+          <id>ITEMCOST</id>
+          <label>Billable Items</label>
+          <visible>T</visible>
+          <neverEmpty>F</neverEmpty>
+        </subList>
+        <subList>
+          <id>EXPCOST</id>
+          <label>Billable Expenses</label>
+          <visible>T</visible>
+          <neverEmpty>F</neverEmpty>
+        </subList>
+        <subList>
+          <id>TIME</id>
+          <label>Billable Time</label>
+          <visible>T</visible>
+          <neverEmpty>F</neverEmpty>
         </subList>
       </subItems>
     </tab>
@@ -670,6 +795,24 @@
               <columnBreak>F</columnBreak>
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
+            <field>
+              <id>SHIPPINGCOST</id>
+              <label>Shipping Cost</label>
+              <visible>F</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>HANDLINGCOST</id>
+              <label>Handling Cost</label>
+              <visible>F</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
           </fields>
         </fieldGroup>
         <fieldGroup scriptid="shippingaddress">
@@ -767,6 +910,62 @@
           <visible>T</visible>
           <showTitle>T</showTitle>
           <singleColumn>T</singleColumn>
+          <fields position="MIDDLE">
+            <field>
+              <id>REVENUESTATUS</id>
+              <label>Revenue Status</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>RECOGNIZEDREVENUE</id>
+              <label>Recognized Revenue</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>DEFERREDREVENUE</id>
+              <label>Deferred Revenue</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>REVRECSCHEDULE</id>
+              <label>Rev. Rec. Schedule</label>
+              <visible>F</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>REVRECSTARTDATE</id>
+              <label>Rev. Rec. Start Date</label>
+              <visible>F</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>REVRECENDDATE</id>
+              <label>Rev. Rec. End Date</label>
+              <visible>F</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+          </fields>
         </fieldGroup>
         <fieldGroup scriptid="grossprofit">
           <label>Gross Profit</label>
@@ -1030,6 +1229,15 @@
       <subItems/>
     </tab>
     <tab>
+      <id>CHARGES</id>
+      <label>Charges</label>
+      <visible>T</visible>
+      <fieldGroups>
+        <defaultFieldGroup/>
+      </fieldGroups>
+      <subItems/>
+    </tab>
+    <tab>
       <id>TRANSACTIONBILLING</id>
       <label>Billing</label>
       <visible>T</visible>
@@ -1095,12 +1303,16 @@
             </field>
           </fields>
         </fieldGroup>
+        <defaultFieldGroup/>
       </fieldGroups>
       <subItems>
         <subTab>
           <id>TRANSACTIONPAYMENT</id>
           <label>Payment</label>
           <visible>T</visible>
+          <fieldGroups>
+            <defaultFieldGroup/>
+          </fieldGroups>
           <subLists/>
         </subTab>
       </subItems>
@@ -1138,6 +1350,19 @@
       <label>Custom</label>
       <visible>F</visible>
       <fieldGroups>
+        <defaultFieldGroup>
+          <fields position="MIDDLE">
+            <field>
+              <id>[scriptid=custbody_fd_invschooldays]</id>
+              <label>School Days</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+          </fields>
+        </defaultFieldGroup>
       </fieldGroups>
       <subItems/>
     </tab>
@@ -1315,15 +1540,11 @@
   </totalBox>
   <linkedForms>
     <linkedForm>
-      <type>INVOICE_ESTIMATE_TRANSACTION</type>
-      <form>USE_DEFAULT</form>
-    </linkedForm>
-    <linkedForm>
       <type>INVOICE_CREDIT_MEMO_TRANSACTION</type>
       <form>USE_DEFAULT</form>
     </linkedForm>
     <linkedForm>
-      <type>INVOICE_RETURN_AUTHORIZATION_TRANSACTION</type>
+      <type>INVOICE_ESTIMATE_TRANSACTION</type>
       <form>USE_DEFAULT</form>
     </linkedForm>
   </linkedForms>
@@ -1377,11 +1598,11 @@
       <preferred>F</preferred>
     </role>
     <role>
-      <id>[scriptid=customrole_fd_feoda_role_principal]</id>
+      <id>[scriptid=customrole_fd_feoda_role_admin]</id>
       <preferred>F</preferred>
     </role>
     <role>
-      <id>[scriptid=customrole_fd_feoda_role_admin]</id>
+      <id>[scriptid=customrole_fd_feoda_role_principal]</id>
       <preferred>F</preferred>
     </role>
     <role>
@@ -1392,5 +1613,47 @@
       <id>NETSUITE_SUPPORT_CENTER</id>
       <preferred>F</preferred>
     </role>
+    <role>
+      <id>PRODUCT_MANAGER</id>
+      <preferred>F</preferred>
+    </role>
+    <role>
+      <id>CUSTOMROLE42</id>
+      <preferred>F</preferred>
+    </role>
+    <role>
+      <id>CUSTOMROLE43</id>
+      <preferred>F</preferred>
+    </role>
   </roles>
+  <preferences>
+    <preference>
+      <id>BILLABLEGROUPING</id>
+      <value>F</value>
+    </preference>
+    <preference>
+      <id>BILLABLESUBTOTALS</id>
+      <value>F</value>
+    </preference>
+    <preference>
+      <id>COMBINEEXPENSEINVOICEITEMS</id>
+      <value>F</value>
+    </preference>
+    <preference>
+      <id>COMBINEINVOICEITEMS</id>
+      <value>F</value>
+    </preference>
+    <preference>
+      <id>COMBINETIMEITEMS</id>
+      <value>T</value>
+    </preference>
+    <preference>
+      <id>GROUPEXPENSESBYEMPLOYEE</id>
+      <value>F</value>
+    </preference>
+    <preference>
+      <id>GROUPTIMEBYEMPLOYEE</id>
+      <value>F</value>
+    </preference>
+  </preferences>
 </transactionForm>

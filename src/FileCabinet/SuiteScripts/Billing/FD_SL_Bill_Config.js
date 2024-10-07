@@ -5,12 +5,11 @@
  *
  * Author: Feoda
  */
-define([
-  "N/render",
-  "N/file",
-  "../lib_shared/lib_billing_preference.js",
-  "../lib_shared/lib_files.js",
-], function (render, file, lib_billing_preference, lib_files) {
+define(["N/render", "N/file", "../lib_shared/lib_files.js"], function (
+  render,
+  file,
+  lib_files
+) {
   /**
    * @param {SuiteletContext.onRequest} context
    */

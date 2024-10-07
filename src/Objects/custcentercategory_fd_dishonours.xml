@@ -1,0 +1,19 @@
+<centercategory scriptid="custcentercategory_fd_dishonours">
+  <center>BASIC</center>
+  <centertab>[scriptid=custcentertab_fd_debtorscentre]</centertab>
+  <label>Debtors - Dishonors</label>
+  <links>
+    <link>
+      <linklabel>Payment Dishonours - Bank Account</linklabel>
+      <linkobject>[scriptid=customsearch_fd_payment_dishonour_bank]</linkobject>
+      <linktasktype>SRCH_RSLT</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+    <link>
+      <linklabel>Payment Dishonours - Credit Card</linklabel>
+      <linkobject>[scriptid=customsearch_fd_payment_dishonour_cc]</linkobject>
+      <linktasktype>SRCH_RSLT</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+  </links>
+</centercategory>

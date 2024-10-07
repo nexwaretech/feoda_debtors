@@ -1,0 +1,25 @@
+<centercategory scriptid="custcentercategory_fd_rps_view">
+  <center>BASIC</center>
+  <centertab>[scriptid=custcentertab_fd_debtorscentre]</centertab>
+  <label>Debtors - RPS View</label>
+  <links>
+    <link>
+      <linklabel>RPS View</linklabel>
+      <linkobject>[scriptid=customsearch_fd_rps_view]</linkobject>
+      <linktasktype>SRCH_RSLT</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+    <link>
+      <linklabel>Last Payment</linklabel>
+      <linkobject>[scriptid=customsearch_fd_last_payment]</linkobject>
+      <linktasktype>SRCH_RSLT</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+    <link>
+      <linklabel>Debtors Staff</linklabel>
+      <linkobject>[scriptid=customsearch_fd_debtor_staff]</linkobject>
+      <linktasktype>SRCH_RSLT</linktasktype>
+      <shortlist>F</shortlist>
+    </link>
+  </links>
+</centercategory>

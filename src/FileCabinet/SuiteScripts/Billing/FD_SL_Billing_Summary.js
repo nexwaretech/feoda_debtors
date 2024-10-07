@@ -9,11 +9,29 @@ define([
   "N/render",
   "N/file",
   "N/record",
-  "N/search",
-  "N/url",
   "N/task",
-  "./lib_billing",
-], function (render, file, record, search, url, task, lib) {
+  "../lib_shared/lib_email",
+  "../lib_shared/lib_employee",
+  "../lib_shared/lib_entity",
+  "../lib_shared/lib_const",
+  "../lib_shared/lib_billing_preference",
+  "../lib_shared/lib_billing_instruction",
+  "../lib_shared/lib_billing_instruction_appliedto",
+  "../lib_shared/lib_files.js",
+], function (
+  render,
+  file,
+  record,
+  task,
+  lib_email,
+  lib_employee,
+  lib_entity,
+  lib_const,
+  lib_billing_preference,
+  lib_billing_instruction,
+  lib_billing_instruction_appliedto,
+  lib_files
+) {
   /**
    * @param {SuiteletContext.onRequest} context
    */
@@ -22,31 +40,44 @@ define([
       try {
         const renderer = render.create();
         renderer.templateContent = file
-          .load("./billing_summary_main.html")
+          .load("./files_billing/billing_summary_main.html")
           .getContents();
 
-        const debtorData = lib.getDebtors();
+        const debtorData = lib_entity.getDebtors();
 
-        const instAppliedObj = lib.getBillingInstructionsAppliedTo();
+        const instAppliedObj =
+          lib_billing_instruction_appliedto.getBillingInstructionsAppliedTo();
+        const summaryInfo =
+          lib_billing_instruction.getBillingInstructionSummary();
 
-        const emailTemplates = getEmailTemplates();
-        const employees = getEmployees();
+        const emailTemplates = lib_email.getEmailTemplates();
+        const employees = lib_employee.getEmployees();
 
         const formData = {
           debtors: JSON.stringify(debtorData),
           instApplied: JSON.stringify(instAppliedObj.instApplied),
           familyCodes: JSON.stringify(instAppliedObj.familyCodes),
           familyStatus: JSON.stringify(instAppliedObj.familyStatus),
-          times: JSON.stringify(times),
-          frequency: JSON.stringify(frequency),
+          times: JSON.stringify(lib_const.TIMES),
+          frequency: JSON.stringify(lib_const.FREQUENCY),
           emailTemplates: JSON.stringify(emailTemplates),
           employees: JSON.stringify(employees),
+          total: summaryInfo.total,
+          binst: JSON.stringify(summaryInfo.binst),
         };
         renderer.addCustomDataSource({
           alias: "formData",
           format: render.DataSource.JSON,
           data: JSON.stringify(formData),
         });
+
+        let objCSS = lib_files.searchFileUrlinFolder("files_billing");
+        renderer.addCustomDataSource({
+          alias: "FILES",
+          format: render.DataSource.JSON,
+          data: JSON.stringify(objCSS),
+        });
+
         return context.response.write({
           output: renderer.renderAsString(),
         });
@@ -68,43 +99,49 @@ define([
         ];
 
         if (action == "save") {
-          const bpId = GetBillingPref();
+          const bpId = lib_billing_preference.getBillingPreference();
           let bpRec = record.load({
-            type: "customrecord_fd_billing_pref",
+            type: lib_billing_preference.REC_BILLING_PREFERENCE.ID,
             id: bpId,
           });
           bpRec.setValue({
-            fieldId: "custrecord_fd_bpref_sum_sche_auth",
+            fieldId:
+              lib_billing_preference.REC_BILLING_PREFERENCE.SUM_SCHE_AUTH,
             value: selectedData.executeAuthor,
           });
           bpRec.setValue({
-            fieldId: "custrecord_fd_bpref_sum_sche_tpl",
+            fieldId: lib_billing_preference.REC_BILLING_PREFERENCE.SUM_SCHE_TPL,
             value: selectedData.executeTemplate,
           });
           bpRec.setValue({
-            fieldId: "custrecord_fd_bpref_sum_rem_sche_auth",
+            fieldId:
+              lib_billing_preference.REC_BILLING_PREFERENCE.SUM_REM_SCHE_AUTH,
             value: selectedData.reminderAuthor,
           });
           bpRec.setValue({
-            fieldId: "custrecord_fd_bpref_sum_rem_sche_tpl",
+            fieldId:
+              lib_billing_preference.REC_BILLING_PREFERENCE.SUM_REM_SCHE_TPL,
             value: selectedData.reminderTemplate,
           });
           bpRec.setValue({
-            fieldId: "custrecord_fd_bpref_sum_rem_sche_days",
+            fieldId:
+              lib_billing_preference.REC_BILLING_PREFERENCE.SUM_REM_SCHE_DAYS,
             value: selectedData.reminderInAddon,
           });
           bpRec.setValue({
-            fieldId: "custrecord_fd_bpref_sum_sche_period",
+            fieldId:
+              lib_billing_preference.REC_BILLING_PREFERENCE.SUM_SCHE_PERIOD,
             value: selectedData.period,
           });
 
           bpRec.save();
           const mrTask = task.create({
             taskType: task.TaskType.MAP_REDUCE,
-            deploymentId: "customdeploy_fd_mr_geninv",
-            scriptId: "customscript_fd_mr_geninv",
+            deploymentId: "customdeploy_fd_mr_invoice",
+            scriptId: "customscript_fd_mr_invoice",
           });
           let mrTaskId = mrTask.submit();
+          log.debug("mrTaskId", mrTaskId);
         }
       } catch (error) {
         log.debug({
@@ -115,104 +152,7 @@ define([
     }
   }
 
-  function getItemsInfo(items) {
-    let itemObj = {};
-
-    const itemSearchObj = search.create({
-      type: "item",
-      filters: [["internalid", "anyof", items]],
-      columns: [
-        search.createColumn({
-          name: "itemid",
-          sort: search.Sort.ASC,
-        }),
-        "displayname",
-        "salesdescription",
-        "type",
-        "baseprice",
-      ],
-    });
-    itemSearchObj.run().each(function (result) {
-      // .run().each has a limit of 4,000 results
-      itemObj[result.id] = result.getValue("baseprice");
-      return true;
-    });
-    return itemObj;
-  }
-
-  function getBillingPref() {
-    const customrecord_fd_billing_prefSearchObj = search.create({
-      type: "customrecord_fd_billing_pref",
-      filters: [],
-      columns: ["custrecord_fd_bpref_debtors"],
-    });
-
-    let searchResultCount =
-      customrecord_fd_billing_prefSearchObj.runPaged().count;
-
-    if (searchResultCount === 0) return -1;
-
-    let debtors;
-
-    customrecord_fd_billing_prefSearchObj.run().each(function (result) {
-      // .run().each has a limit of 4,000 results
-      debtors = result.getValue("custrecord_fd_bpref_debtors");
-      return false;
-    });
-    return debtors;
-  }
-
-  function getEmailTemplates() {
-    const customrecord_fd_emailtplsSearchObj = search.create({
-      type: "customrecord_fd_emailtpls",
-      filters: [],
-      columns: [
-        search.createColumn({
-          name: "name",
-          sort: search.Sort.ASC,
-        }),
-      ],
-    });
-
-    let emailTemplates = [];
-    customrecord_fd_emailtplsSearchObj.run().each(function (result) {
-      // .run().each has a limit of 4,000 results
-      emailTemplates.push({
-        id: result.id,
-        name: result.getValue("name"),
-      });
-      return true;
-    });
-    return emailTemplates;
-  }
-
-  function getEmployees() {
-    const employeeSearchObj = search.create({
-      type: "employee",
-      filters: [["isinactive", "is", "F"]],
-      columns: [
-        search.createColumn({
-          name: "entityid",
-          sort: search.Sort.ASC,
-        }),
-        "email",
-      ],
-    });
-
-    let employees = [];
-    employeeSearchObj.run().each(function (result) {
-      // .run().each has a limit of 4,000 results
-      employees.push({
-        id: result.id,
-        name: result.getValue("entityid"),
-      });
-      return true;
-    });
-
-    return employees;
-  }
-
   return {
-    onRequest: onRequest,
+    onRequest,
   };
 });

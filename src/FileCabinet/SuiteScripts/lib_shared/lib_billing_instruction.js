@@ -7,7 +7,8 @@ define([
   "N/search",
   "./lib_billing_engine.js",
   "./lib_billing_preference.js",
-], function (search, lib_billing_engine, lib_billing_preference) {
+  "./lib_utils",
+], function (search, lib_billing_engine, lib_billing_preference, lib_utils) {
   const REC_BILLING_INSTRUCTION = {
     ID: "customrecord_fd_billing_inst",
     BILLING_TYPE: "custrecord_fd_binsttype",
@@ -17,6 +18,121 @@ define([
     FAMILY: "custrecord_fd_binst_family",
     FAMILY_ORDER: "custrecord_fd_binst_family_order",
   };
+
+  function getBillingInstructionSummary() {
+    let bpInfo = lib_billing_preference.getBillingPreferenceDetails();
+    let filterInst = bpInfo.instructions;
+    let today = new Date();
+    const year = today.getFullYear();
+
+    let filters = [
+      [
+        "custrecord_fd_binstapptobinst.custrecord_fd_binstapptoperiod",
+        "equalto",
+        year,
+      ],
+    ];
+
+    if (filterInst && filterInst.length > 0) {
+      filters.push("AND");
+      filters.push(["internalid", "anyof", filterInst]);
+    }
+
+    let binst = [];
+    var customrecord_billing_search = search.create({
+      type: REC_BILLING_INSTRUCTION.ID,
+      filters: filters,
+      columns: [
+        search.createColumn({
+          name: "name",
+          summary: "group",
+        }),
+        search.createColumn({
+          name: "internalid",
+          summary: "group",
+        }),
+        search.createColumn({
+          name: "internalid",
+          join: "CUSTRECORD_FD_BINSTAPPTOBINST",
+          summary: "count",
+        }),
+        search.createColumn({
+          name: REC_BILLING_INSTRUCTION.BILLING_TYPE,
+          summary: "group",
+        }),
+        search.createColumn({
+          name: "baseprice",
+          join: REC_BILLING_INSTRUCTION.ITEM,
+          summary: "group",
+        }),
+        search.createColumn({
+          name: "internalid",
+          join: REC_BILLING_INSTRUCTION.BILLING_TYPE,
+          summary: "GROUP",
+          sort: search.Sort.ASC,
+        }),
+        search.createColumn({
+          name: "name",
+          summary: "GROUP",
+          sort: search.Sort.ASC,
+        }),
+      ],
+    });
+
+    var columns = customrecord_billing_search.columns;
+    var total = 0;
+
+    customrecord_billing_search.run().each(function (result) {
+      var price = result.getValue(columns[4]);
+      var name = result.getValue(columns[0]);
+      var billingInstructionId = result.getValue(columns[1]);
+      var type = result.getValue(columns[3]);
+      var qty = result.getValue(columns[2]);
+
+      var binstIndex = binst.findIndex((inst) => inst.type.id == type);
+      if (binstIndex == -1) {
+        binst.push({
+          type: {
+            id: type,
+            name: result.getText(columns[3]),
+          },
+          list: [
+            {
+              id: billingInstructionId,
+              name: name,
+              qty: qty,
+              price: price,
+              amount: lib_utils.formatNumber(qty * price),
+            },
+          ],
+        });
+      } else {
+        binst[binstIndex].list.push({
+          id: billingInstructionId,
+          name: name,
+          qty: qty,
+          price: price,
+          amount: lib_utils.formatNumber(qty * price),
+        });
+      }
+
+      return true;
+    });
+
+    for (let i = 0; i < binst.length; i++) {
+      let subtotal = 0;
+      for (let j = 0; j < binst[i].list.length; j++) {
+        subtotal += binst[i].list[j].qty * binst[i].list[j].price;
+      }
+      binst[i].subtotal = lib_utils.formatNumber(subtotal);
+      total += subtotal;
+    }
+
+    return {
+      binst: binst,
+      total: lib_utils.formatNumber(total),
+    };
+  }
 
   function getInstructionListFromItems(rec) {
     var arrInstructions = [],
@@ -30,7 +146,7 @@ define([
     );
     var filterBillingEngineType = filterCharges.concat(filterDiscounts);
     var filterItems = rec.getValue(
-      lib_billing_preference.REC_BILLING_PREFERENCE.CHARGES
+      lib_billing_preference.REC_BILLING_PREFERENCE.ITEMS
     );
 
     var filters = [];
@@ -49,6 +165,8 @@ define([
       filters.push("AND");
       filters.push([REC_BILLING_INSTRUCTION.ITEM, "anyof", filterItems]);
     }
+
+    log.debug("filters", JSON.stringify(filters));
 
     var searchObj = search.create({
       type: REC_BILLING_INSTRUCTION.ID,
@@ -71,6 +189,7 @@ define([
     });
 
     searchObj.run().each(function (result) {
+      log.debug("result", JSON.stringify(result));
       var objInstruction = {};
       if (
         arrCategories.findIndex(
@@ -119,8 +238,24 @@ define([
     };
   }
 
+  function getBillingInstructions(instructionsSS) {
+    let arrBillInst = [];
+
+    let billingInstSSObj = SEARCHMDL.load(instructionsSS);
+
+    billingInstSSObj.run().each(function (result) {
+      arrBillInst.push(result.id);
+      return true;
+    });
+
+    log.debug("getBillingInstructions", JSON.stringify(arrBillInst));
+    return arrBillInst;
+  }
+
   return {
     REC_BILLING_INSTRUCTION,
+    getBillingInstructions,
+    getBillingInstructionSummary,
     getInstructionListFromItems,
   };
 });

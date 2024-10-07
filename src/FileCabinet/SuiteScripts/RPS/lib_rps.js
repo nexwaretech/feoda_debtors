@@ -35,7 +35,7 @@ define([
   };
   const SCRIPTS = {
     cs_inv_rps: {
-      scriptPath: "./FD_FD_InvRPS.js",
+      scriptPath: "./FD_CS_InvRPS.js",
     },
     sl_gen_sched: {
       scriptId: "customscript_fd_sl_intgenpaysched",
@@ -1291,13 +1291,13 @@ define([
     let filterValues;
 
     if (fromDate && toDate) {
-      operator = SEARCHMDL.Operator.WITHIN;
+      operator = search.Operator.WITHIN;
       filterValues = [fromDate, toDate];
     } else if (fromDate && !toDate) {
-      operator = SEARCHMDL.Operator.ONORAFTER;
+      operator = search.Operator.ONORAFTER;
       filterValues = fromDate;
     } else if (!fromDate && toDate) {
-      operator = SEARCHMDL.Operator.ONORBEFORE;
+      operator = search.Operator.ONORBEFORE;
       filterValues = toDate;
     } else {
       return null;
@@ -1305,7 +1305,7 @@ define([
 
     let arrFilters = [];
     arrFilters.push(
-      SEARCHMDL.createFilter({
+      search.createFilter({
         name: REC_RPS_LIST.procdate,
         join: REC_RPS_LIST.rps,
         operator: operator,
@@ -1316,7 +1316,7 @@ define([
     log.debug("arrFilters1", "arrFilters: " + JSON.stringify(arrFilters));
 
     let ss = SAVED_SEARCH.dd_processing;
-    let searchObj = SEARCHMDL.load({
+    let searchObj = search.load({
       id: ss,
     });
 

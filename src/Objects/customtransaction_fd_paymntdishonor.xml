@@ -1,0 +1,37 @@
+<customtransactiontype scriptid="customtransaction_fd_paymntdishonor">
+  <cancloseorder>F</cancloseorder>
+  <iscredit>T</iscredit>
+  <isposting>F</isposting>
+  <isvoidable>F</isvoidable>
+  <name>Payment Dishonour</name>
+  <showstatus>T</showstatus>
+  <transactionstyle>BASIC</transactionstyle>
+  <segments>
+    <departmentposition>NONE</departmentposition>
+    <locationposition>NONE</locationposition>
+  </segments>
+  <statuses>
+    <status scriptid="status_10030_4553194_775">
+      <description>Pending Approval</description>
+      <id>A</id>
+      <isposting>F</isposting>
+    </status>
+    <status scriptid="status_10031_4553194_526">
+      <description>Approved</description>
+      <id>B</id>
+      <isposting>T</isposting>
+    </status>
+    <status scriptid="status_10032_4553194_278">
+      <description>Rejected</description>
+      <id>C</id>
+      <isposting>F</isposting>
+    </status>
+  </statuses>
+  <links>
+    <link>
+      <linkcategory>BASICTRANSACTIONSCUSTOMERS</linkcategory>
+      <linklabel>Payment Dishonour</linklabel>
+      <linktasktype>LIST</linktasktype>
+    </link>
+  </links>
+</customtransactiontype>

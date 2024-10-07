@@ -39,6 +39,27 @@
       <feature required="false">WEBSERVICES</feature>
       <feature required="false">JOBS</feature>
       <feature required="false">CUSTOMSEGMENTS</feature>
+      <feature required="true">REVENUERECOGNITION</feature>
+      <feature required="true">PARTNEREMPLOYEECOMMISSN</feature>
+      <feature required="true">CHARGEBASEDBILLING</feature>
+      <feature required="true">BILLSCOSTS</feature>
     </features>
+    <objects>
+      <object>customtransaction_fd_paymntdishonor</object>
+      <object>customsearch_fd_debtor_staff</object>
+      <object>customsearch_fd_debtors_with_no_rps_1000</object>
+      <object>customsearch_fd_debtor_rps_balanace</object>
+      <object>customsearch_fd_rps_view</object>
+      <object>custcentertab_fd_debtorscentre</object>
+      <object>customsearch_fd_payment_dishonour_bank</object>
+      <object>customsearch_fd_payment_dishonour_cc</object>
+      <object>customsearch_fd_last_payment</object>
+      <object>customsearch_fd_invoice_wo_open_bal_rem</object>
+      <object>customsearch_fd_invoice_wo_open_bal</object>
+      <object>customsearch_fd_billing_instruction_inv</object>
+      <object>custform_fd_invoice</object>
+      <object>custtmpl_fd_invoice</object>
+      <object>customsearch_fd_invoice_w_open_bal_w_rps</object>
+    </objects>
   </dependencies>
 </manifest>
